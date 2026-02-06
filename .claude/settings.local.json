@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Read(//d/projects/manga/web-manga/**)",
+      "Bash(wc:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}
