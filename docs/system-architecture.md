@@ -2,60 +2,58 @@
 
 ## Architecture Overview
 
-Web-Manga is built as a **Single Page Application (SPA)** using React, providing a fast, responsive reading experience. The architecture emphasizes modularity, type safety, and performance.
+Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux Toolkit, and React Router, providing a fast, responsive reading experience. The architecture emphasizes modularity, type safety, performance, and component reusability.
+
+**Status:** Phase 1 Foundation complete with UI framework established. Phase 2 will expand component library and state management.
 
 ---
 
 ## High-Level Architecture Diagram
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Browser (Client)                      │
-├─────────────────────────────────────────────────────────┤
-│                                                           │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │           React SPA (Vite Build)                 │   │
-│  │                                                   │   │
-│  │  ┌─────────────────────────────────────────┐    │   │
-│  │  │     UI Layer (React Components)         │    │   │
-│  │  │  ┌──────────────────────────────────┐  │    │   │
-│  │  │  │ Pages (Home, Reader, Library)    │  │    │   │
-│  │  │  │ Components (MangaCard, Header)   │  │    │   │
-│  │  │  └──────────────────────────────────┘  │    │   │
-│  │  └─────────────────────────────────────────┘    │   │
-│  │                      ↓                          │   │
-│  │  ┌─────────────────────────────────────────┐   │   │
-│  │  │    Hooks & State Management             │   │   │
-│  │  │  - React Hooks (useState, useEffect)    │   │   │
-│  │  │  - Custom hooks (useManga, etc.)        │   │   │
-│  │  │  - Context API (if needed)              │   │   │
-│  │  └─────────────────────────────────────────┘   │   │
-│  │                      ↓                          │   │
-│  │  ┌─────────────────────────────────────────┐   │   │
-│  │  │    Service Layer                        │   │   │
-│  │  │  - API services                         │   │   │
-│  │  │  - Storage services                     │   │   │
-│  │  │  - Business logic                       │   │   │
-│  │  └─────────────────────────────────────────┘   │   │
-│  │                      ↓                          │   │
-│  │  ┌─────────────────────────────────────────┐   │   │
-│  │  │    Data Layer                           │   │   │
-│  │  │  - API calls (fetch/axios)              │   │   │
-│  │  │  - Local storage                        │   │   │
-│  │  │  - Session storage                      │   │   │
-│  │  └─────────────────────────────────────────┘   │   │
+┌────────────────────────────────────────────────────────┐
+│              Browser (Client SPA)                       │
+├────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │          React 19 + Router (Vite)               │  │
+│  │                                                   │  │
+│  │  ┌────────────────────────────────────────┐    │  │
+│  │  │    UI Components (170 LOC)             │    │  │
+│  │  │  ├─ Layout (Navbar + Outlet)           │    │  │
+│  │  │  ├─ Navigation (SearchBar, Menus)      │    │  │
+│  │  │  └─ Pages (HomePage with genres)       │    │  │
+│  │  └────────────────────────────────────────┘    │  │
+│  │                    ↓                            │  │
+│  │  ┌────────────────────────────────────────┐   │  │
+│  │  │    Redux Toolkit Store                 │   │  │
+│  │  │  ├─ State management                   │   │  │
+│  │  │  ├─ useAppDispatch / useAppSelector    │   │  │
+│  │  │  └─ Slices (to be implemented)         │   │  │
+│  │  └────────────────────────────────────────┘   │  │
+│  │                    ↓                            │  │
+│  │  ┌────────────────────────────────────────┐   │  │
+│  │  │    Service Layer (planned)             │   │  │
+│  │  │  ├─ API services                       │   │  │
+│  │  │  └─ Storage services                   │   │  │
+│  │  └────────────────────────────────────────┘   │  │
+│  │                    ↓                            │  │
+│  │  ┌────────────────────────────────────────┐   │  │
+│  │  │    Data Layer                          │   │  │
+│  │  │  ├─ Fetch API (planned)                │   │  │
+│  │  │  ├─ localStorage                       │   │  │
+│  │  │  └─ Session cache                      │   │  │
+│  │  └────────────────────────────────────────┘   │  │
 │  └──────────────────────────────────────────────────┘  │
-│                                                           │
-└─────────────────────────────────────────────────────────┘
-                          ↓
-                ┌──────────────────────┐
-                │   Backend APIs       │
-                │ (to be integrated)   │
-                │                      │
-                │ - Manga data         │
-                │ - User auth          │
-                │ - Bookmarks/history  │
-                └──────────────────────┘
+│                                                          │
+└────────────────────────────────────────────────────────┘
+                        ↓ (API calls)
+        ┌──────────────────────────────┐
+        │    Backend APIs (planned)     │
+        │  - Manga data                 │
+        │  - User authentication        │
+        │  - Bookmarks & history        │
+        └──────────────────────────────┘
 ```
 
 ---
@@ -66,26 +64,28 @@ Web-Manga is built as a **Single Page Application (SPA)** using React, providing
 
 **Responsibility:** Render UI and handle user interactions
 
-**Components:**
-- **Pages:** Full-screen view containers
-  - HomePage
-  - MangaDetailPage
-  - ReaderPage
-  - LibraryPage
+**Current Components (Phase 1):**
+- **Pages:**
+  - `HomePage.tsx` (37 LOC) - Displays 12 genres in 2-column grid
 
-- **Components:** Reusable UI building blocks
-  - MangaCard
-  - ChapterList
-  - Header/Navigation
-  - ErrorBoundary
+- **Layout:**
+  - `Layout.tsx` (16 LOC) - Main wrapper with React Router Outlet
+  - `Navbar.tsx` (40 LOC) - Fixed navbar with logo, search, menu, user profile
 
-- **Layouts:** Container components
-  - MainLayout
-  - ReaderLayout
+- **Navigation:**
+  - `SearchBar.tsx` (47 LOC) - Search input with icon
+  - `GenreDropdown.tsx` (85 LOC) - Genre selector with hover/click behavior
+  - `UserMenu.tsx` (28 LOC) - User profile dropdown
+
+**Planned Components (Phase 2+):**
+- Common components: Button, Card, Input, Modal, Badge
+- Manga components: MangaCard, MangaGrid, MangaFilter
+- Reader components: PageViewer, ChapterNav, ReadingControls
+- Shared: ErrorBoundary, LoadingSpinner, Toast
 
 **Technology:** React 19 functional components with hooks
 
-**State Management:** React hooks (useState, useContext, useReducer)
+**Styling:** CSS Modules pattern with BEM naming
 
 ```typescript
 // Component Hierarchy Example
@@ -109,35 +109,35 @@ Web-Manga is built as a **Single Page Application (SPA)** using React, providing
 
 **Responsibility:** Manage application state and side effects
 
-**Approach:** React Hooks + Context API (initial), optional Redux/Zustand for scale
+**Current Approach:** Redux Toolkit (configured, not yet active)
 
-**Current State:**
-- Local component state (useState)
-- Side effects (useEffect)
-- Custom hooks for shared logic
+**Configuration:**
+- Redux store configured at `src/store/index.ts`
+- Typed hooks exported from `src/store/hooks.ts`
+  - `useAppDispatch` - Typed dispatch hook
+  - `useAppSelector` - Typed selector hook
 
-**Future Enhancements:**
-- Global state management (Redux/Zustand)
-- Authentication context
-- Theme/preferences context
+**State Slices (Planned):**
+- `mangaSlice` - Manga catalog, current manga, chapters
+- `authSlice` - User authentication, profile, permissions
+- `uiSlice` - Theme, modal states, sidebar visibility
+- `readingSlice` - Reading history, bookmarks, progress
 
+**Pattern Example:**
 ```typescript
-// Example: Custom hook managing state
-function useManga(id: string) {
-  const [manga, setManga] = useState<Manga | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+// Store setup (done)
+export const store = configureStore({ reducer: {} })
 
-  useEffect(() => {
-    fetchManga(id)
-      .then(setManga)
-      .catch(setError)
-      .finally(() => setLoading(false))
-  }, [id])
-
-  return { manga, loading, error }
-}
+// Hook usage (ready for components)
+const dispatch = useAppDispatch()
+const mangaList = useAppSelector(state => state.manga.list)
 ```
+
+**Phase 2 Tasks:**
+- Create Redux slices for core features
+- Implement thunk middleware for API calls
+- Add Redux DevTools integration
+- Create async actions for data fetching
 
 ### 3. Service Layer
 
@@ -289,19 +289,37 @@ TypeScript Check (tsc -b)
 
 ## Routing Architecture
 
-### Planned Routing Structure
+### Current Routing (Phase 1)
+```
+/                      → HomePage (12 genre grid)
+```
+
+**Implementation:** React Router v7.13.0 (integrated in App.tsx)
+
+```typescript
+<BrowserRouter>
+  <Routes>
+    <Route element={<Layout />}>
+      <Route path="/" element={<HomePage />} />
+      {/* Future routes here */}
+    </Route>
+  </Routes>
+</BrowserRouter>
+```
+
+### Planned Routing (Phase 2-4)
 ```
 /                      → HomePage (browse manga)
 /manga/:id             → MangaDetailPage (info, chapters)
 /read/:id/:chapter     → ReaderPage (chapter viewer)
 /library               → LibraryPage (user's manga)
+/search                → SearchResultsPage
 /settings              → SettingsPage (preferences)
 /login                 → LoginPage (authentication)
+/register              → RegisterPage
 /profile               → ProfilePage (user profile)
 /404                   → NotFoundPage
 ```
-
-**Implementation:** React Router v6+ (to be integrated)
 
 ---
 
@@ -554,19 +572,51 @@ Bug fixes/patches
 
 ---
 
+## Design System (Phase 1)
+
+### Color Palette
+**Deep Ocean Blue Theme** with high contrast for readability:
+```
+Primary Background:  #0F172A (slate-900)
+Secondary BG:        #1E293B (slate-800)
+Tertiary BG:         #334155 (slate-700)
+Primary Accent:      #0EA5E9 (sky-500)
+Secondary Accent:    #38BDF8 (sky-400)
+Primary Text:        #F8FAFC (slate-50)
+Secondary Text:      #94A3B8 (slate-400)
+```
+
+### Typography
+- **Display Font:** Righteous (Bold, distinctive)
+- **Body Font:** Poppins (Readable, modern)
+- Imported from Google Fonts in `src/styles/global.css`
+
+### CSS Variables
+Defined in `src/styles/variables.css` for easy theming:
+```css
+:root {
+  --bg-primary, --bg-secondary, --bg-tertiary,
+  --accent-primary, --accent-secondary,
+  --text-primary, --text-secondary
+}
+```
+
+---
+
 ## Next Architecture Phases
 
-### Phase 2: Enhancement
-- Add routing (React Router)
-- Implement state management (Redux/Zustand)
-- API integration foundation
-- Component library completion
+### Phase 2: Component Library & State
+- Expand component library (Button, Card, Modal, Form components)
+- Implement Redux slices for state management
+- Add theme switching (dark/light mode)
+- Create API service layer
+- Set up unit tests
 
 ### Phase 3: Features
 - Manga browsing with filters
-- Reading experience optimization
-- User authentication
-- Bookmark/history system
+- Search functionality
+- Reading experience foundation
+- User authentication scaffolding
 
 ### Phase 4: Scale
 - Performance optimization

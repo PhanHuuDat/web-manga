@@ -4,7 +4,12 @@
       "Bash(find:*)",
       "Read(//d/projects/manga/web-manga/**)",
       "Bash(wc:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(python:*)",
+      "Bash(dir:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run lint:*)",
+      "Bash(node:*)"
     ]
   }
 }

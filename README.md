@@ -2,8 +2,9 @@
 
 A modern, responsive web application for discovering, reading, and managing manga using React and TypeScript.
 
-**Status:** Phase 1 - Foundation (In Progress)
-**Version:** 0.0.0
+**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress
+**Version:** 0.1.0
+**Last Updated:** 2026-02-06
 
 ---
 
@@ -53,24 +54,48 @@ npm run lint       # Check code quality
 
 ```
 web-manga/
-├── src/                        # Application source code
-│   ├── components/            # Reusable React components (future)
-│   ├── pages/                 # Page-level components (future)
-│   ├── services/              # API & business logic (future)
-│   ├── types/                 # TypeScript interfaces (future)
-│   ├── utils/                 # Utility functions (future)
-│   ├── App.tsx                # Root component
-│   ├── main.tsx               # React entry point
-│   └── index.css              # Global styles
+├── src/                        # Application source code (~800 LOC)
+│   ├── components/            # Reusable React components (170 LOC)
+│   │   ├── layout/           # Layout components
+│   │   │   ├── Layout.tsx    # Main layout wrapper (16 LOC)
+│   │   │   └── Navbar.tsx    # Fixed navigation bar (40 LOC)
+│   │   └── navigation/       # Navigation controls
+│   │       ├── SearchBar.tsx # Search input (47 LOC)
+│   │       ├── UserMenu.tsx  # User dropdown (28 LOC)
+│   │       └── GenreDropdown.tsx # Genre selector (85 LOC)
+│   │
+│   ├── pages/                 # Page-level components (107 LOC)
+│   │   └── HomePage.tsx       # Manga discovery grid (37 LOC)
+│   │
+│   ├── store/                 # Redux state management
+│   │   ├── index.ts          # Store configuration
+│   │   └── hooks.ts          # Typed hooks
+│   │
+│   ├── types/                 # TypeScript interfaces (39 LOC)
+│   │   ├── genre-types.ts
+│   │   └── navigation-types.ts
+│   │
+│   ├── constants/             # Application constants (16 LOC)
+│   │   └── genres.ts
+│   │
+│   ├── styles/                # Global styles (203 LOC)
+│   │   ├── reset.css
+│   │   ├── variables.css
+│   │   ├── global.css
+│   │   └── App.css
+│   │
+│   ├── App.tsx                # Root component (19 LOC)
+│   └── main.tsx               # React entry point (10 LOC)
 │
 ├── public/                     # Static assets
 ├── docs/                       # Project documentation
-│   ├── project-overview-pdr.md      # Project requirements
-│   ├── code-standards.md            # Coding conventions
-│   ├── system-architecture.md       # Technical design
-│   ├── codebase-summary.md          # File structure overview
-│   └── project-roadmap.md           # Development timeline
+│   ├── project-overview-pdr.md      # Project vision & requirements
+│   ├── code-standards.md            # Coding conventions & patterns
+│   ├── system-architecture.md       # Technical architecture
+│   ├── codebase-summary.md          # File structure & organization
+│   └── project-roadmap.md           # Development phases & timeline
 │
+├── plans/                      # Implementation plans & reports
 ├── vite.config.ts             # Vite configuration
 ├── tsconfig.json              # TypeScript configuration
 ├── eslint.config.js           # ESLint rules
@@ -134,35 +159,47 @@ Comprehensive documentation is available in the `./docs` directory:
 
 ---
 
-## Project Phases
+## Project Status
 
-### Phase 1: Foundation (Current)
+### Phase 1: Foundation & UI Framework (COMPLETE)
 - [x] Development environment setup
 - [x] TypeScript & ESLint configuration
-- [x] Project documentation
-- [ ] README completion
+- [x] UI foundation with 6 components (170 LOC)
+- [x] Navigation system (navbar, search, menus)
+- [x] Homepage with 12 genre grid
+- [x] React Router v7 integration
+- [x] Redux store configuration
+- [x] Design system (colors, typography)
+- [x] Project documentation complete
+- [x] README updated
+- [x] All code passes TypeScript strict mode
+- [x] Responsive design (mobile-first)
 
-### Phase 2: Core Components
-- [ ] Reusable component library
-- [ ] Layout system & theme
+### Phase 2: Component Library & State Management (In Progress)
+- [ ] Reusable components (Button, Card, Modal, Form)
+- [ ] Redux slices (manga, auth, ui, reading)
+- [ ] Theme switching (dark/light mode)
+- [ ] API service foundation
+- [ ] Unit tests for components
 
-### Phase 3: Manga Discovery
-- [ ] Manga catalog browsing
-- [ ] Search & filtering
+### Phase 3: Manga Discovery (Pending)
+- [ ] Manga catalog browsing with filters
+- [ ] Search functionality
+- [ ] Detail pages
 
-### Phase 4: Reading Experience
+### Phase 4: Reading Experience (Pending)
 - [ ] Chapter reader interface
-- [ ] Progress tracking
+- [ ] Progress tracking & bookmarks
 
-### Phase 5: User Features
+### Phase 5: User Features (Pending)
 - [ ] Authentication system
 - [ ] User library management
 
-### Phase 6: Advanced Features
+### Phase 6: Advanced Features (Pending)
 - [ ] Community features
-- [ ] Mobile optimization
+- [ ] PWA & mobile optimization
 
-See `./docs/project-roadmap.md` for detailed timeline and objectives.
+See `./docs/project-roadmap.md` for detailed timeline and roadmap.
 
 ---
 
@@ -315,9 +352,27 @@ TBD
 
 ## Version History
 
-| Version | Date | Status |
-|---------|------|--------|
-| 0.0.0 | 2026-02-06 | Initial setup |
+| Version | Date | Status | Highlights |
+|---------|------|--------|-----------|
+| 0.1.0 | 2026-02-06 | Phase 1 Complete | UI foundation, routing, design system |
+| 0.0.0 | Initial | Initial setup | Development environment |
+
+---
+
+## What's New in v0.1.0
+
+**Phase 1 Complete!** The UI foundation is now ready:
+- **Navigation System:** Fixed navbar with logo, search bar, genre dropdown, user menu
+- **Homepage:** Displays 12 genres in a responsive 2-column grid
+- **Design System:** Deep Ocean Blue theme with Righteous & Poppins fonts
+- **Responsive:** Mobile-first design that adapts to all screen sizes
+- **Accessible:** Focus states, ARIA labels, keyboard navigation
+- **Tech Stack:** React 19 + Redux Toolkit + React Router v7
+- **Documentation:** Comprehensive guides for architecture, standards, and roadmap
+
+**Next (Phase 2):** Component library, Redux slices, theme switching
+
+See `./docs/project-roadmap.md` for Phase 2 details.
 
 ---
 

@@ -4,9 +4,10 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~110 (template phase)
+**Current Lines of Code:** ~800 (UI foundation phase)
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
+**Status:** Phase 1 (Foundation) - UI foundation complete, routing & state management active
 
 ---
 
@@ -15,12 +16,43 @@ Web-Manga is a React + TypeScript + Vite single-page application for reading and
 ```
 web-manga/
 ├── src/                          # Application source code
-│   ├── main.tsx                  # React root entry point (10 lines)
-│   ├── App.tsx                   # Main App component (35 lines)
-│   ├── App.css                   # App component styles (42 lines)
-│   ├── index.css                 # Global styles (68 lines)
-│   └── assets/
-│       └── react.svg             # React logo asset
+│   ├── components/               # Reusable React components
+│   │   ├── layout/
+│   │   │   ├── Layout.tsx        # Main layout wrapper (16 LOC)
+│   │   │   ├── Layout.css        # Layout styles (18 LOC)
+│   │   │   ├── Navbar.tsx        # Fixed navigation bar (40 LOC)
+│   │   │   └── Navbar.css        # Navbar styles (73 LOC)
+│   │   └── navigation/
+│   │       ├── SearchBar.tsx     # Search input component (47 LOC)
+│   │       ├── SearchBar.css     # SearchBar styles (48 LOC)
+│   │       ├── UserMenu.tsx      # User profile menu (28 LOC)
+│   │       ├── UserMenu.css      # UserMenu styles (24 LOC)
+│   │       ├── GenreDropdown.tsx # Genre filter dropdown (85 LOC)
+│   │       └── GenreDropdown.css # GenreDropdown styles (98 LOC)
+│   │
+│   ├── pages/                    # Page-level components
+│   │   ├── HomePage.tsx          # Landing page with genres (37 LOC)
+│   │   └── HomePage.css          # HomePage styles (70 LOC)
+│   │
+│   ├── types/                    # TypeScript interfaces
+│   │   ├── genre-types.ts        # Genre interface (20 LOC)
+│   │   └── navigation-types.ts   # Component props types (19 LOC)
+│   │
+│   ├── constants/                # Application constants
+│   │   └── genres.ts             # 12 genre definitions (16 LOC)
+│   │
+│   ├── store/                    # Redux store setup
+│   │   ├── index.ts              # Store configuration
+│   │   └── hooks.ts              # Typed useAppDispatch & useAppSelector
+│   │
+│   ├── styles/                   # Global and shared styles
+│   │   ├── reset.css             # Browser normalization (51 LOC)
+│   │   ├── variables.css         # CSS design tokens (86 LOC)
+│   │   ├── global.css            # Global imports & fonts (66 LOC)
+│   │   └── App.css               # App wrapper styles
+│   │
+│   ├── main.tsx                  # React entry point (10 LOC)
+│   └── App.tsx                   # Root component with routing (19 LOC)
 │
 ├── public/                        # Static assets served as-is
 │   └── vite.svg                  # Vite logo
@@ -64,25 +96,34 @@ web-manga/
 - Renders App component with StrictMode
 - Imports global styles
 
-#### `src/App.tsx` (35 lines)
-- Main App component (template counter demo)
-- Uses React hooks (useState)
-- Renders Vite + React logos and demo UI
-- Will be replaced with actual manga app logic
+#### `src/App.tsx` (19 lines)
+- Root component with React Router setup
+- Uses Layout wrapper with Outlet
+- Configures main routes (/ → HomePage)
+- Responsive design with fixed navbar
 
-### Styling
+### Styling System
 
-#### `src/index.css` (68 lines)
-- Global styles and CSS variables
-- Root element styling
-- Reset and baseline styles
-- Color definitions for light theme
+#### Design System Colors (Deep Ocean Blue Theme)
+```css
+--bg-primary: #0F172A (slate-900)
+--bg-secondary: #1E293B (slate-800)
+--bg-tertiary: #334155 (slate-700)
+--accent-primary: #0EA5E9 (sky-500)
+--accent-secondary: #38BDF8 (sky-400)
+--text-primary: #F8FAFC (slate-50)
+--text-secondary: #94A3B8 (slate-400)
+```
 
-#### `src/App.css` (42 lines)
-- Component-specific styles
-- Logo animations
-- Card and button styling
-- Responsive media queries
+#### Typography
+- **Display:** Righteous (Google Fonts) - Bold, distinctive headings
+- **Body:** Poppins (Google Fonts) - Readable, modern content
+
+#### Style Files
+- **`src/styles/reset.css`** - Browser normalization (51 LOC)
+- **`src/styles/variables.css`** - CSS design tokens & colors (86 LOC)
+- **`src/styles/global.css`** - Global imports, fonts, base styles (66 LOC)
+- **Component styles** - Scoped CSS files alongside components (BEM naming)
 
 ### Configuration Files
 
@@ -119,8 +160,11 @@ web-manga/
 ### Runtime Dependencies
 ```json
 {
-  "react": "^19.2.0",           // UI framework
-  "react-dom": "^19.2.0"        // DOM rendering
+  "react": "^19.2.0",              // UI framework
+  "react-dom": "^19.2.0",          // DOM rendering
+  "react-redux": "^9.2.0",         // Redux integration
+  "@reduxjs/toolkit": "^2.11.2",   // Redux state management
+  "react-router-dom": "^7.13.0"    // Client-side routing
 }
 ```
 
@@ -144,75 +188,61 @@ web-manga/
 
 ---
 
-## Code Organization Plans
+## Code Organization (Current State)
 
-### Planned Structure (Post-Template Cleanup)
+### Implemented Structure (Phase 1)
 
 ```
 src/
-├── components/                  # Reusable UI components
-│   ├── common/                 # Shared components
-│   │   ├── Header.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Navigation.tsx
-│   │   └── ErrorBoundary.tsx
-│   ├── manga/                  # Manga-specific components
-│   │   ├── MangaCard.tsx
-│   │   ├── MangaGrid.tsx
-│   │   └── MangaFilter.tsx
-│   └── reader/                 # Reader interface components
-│       ├── PageViewer.tsx
-│       ├── ChapterNav.tsx
-│       └── ReadingControls.tsx
+├── components/                  # Reusable UI components (170 LOC)
+│   ├── layout/                 # Layout system
+│   │   ├── Layout.tsx          # Main layout wrapper
+│   │   ├── Layout.css
+│   │   ├── Navbar.tsx          # Fixed navigation bar
+│   │   └── Navbar.css
+│   └── navigation/             # Navigation controls
+│       ├── SearchBar.tsx       # Search input
+│       ├── SearchBar.css
+│       ├── UserMenu.tsx        # User profile dropdown
+│       ├── UserMenu.css
+│       ├── GenreDropdown.tsx   # Genre selector
+│       └── GenreDropdown.css
 │
-├── pages/                       # Page-level components
-│   ├── HomePage.tsx
-│   ├── MangaDetailPage.tsx
-│   ├── ReaderPage.tsx
-│   ├── LibraryPage.tsx
-│   └── NotFoundPage.tsx
+├── pages/                       # Page-level components (107 LOC)
+│   ├── HomePage.tsx            # Manga discovery grid
+│   └── HomePage.css
 │
-├── services/                    # API and business logic
-│   ├── api/
-│   │   ├── manga-service.ts
-│   │   ├── auth-service.ts
-│   │   └── user-service.ts
-│   └── storage/
-│       ├── local-storage.ts
-│       └── session-storage.ts
+├── types/                       # TypeScript interfaces (39 LOC)
+│   ├── genre-types.ts
+│   └── navigation-types.ts
 │
-├── hooks/                       # Custom React hooks
-│   ├── use-manga.ts
-│   ├── use-auth.ts
-│   ├── use-local-storage.ts
-│   └── use-reading-progress.ts
+├── constants/                   # Application constants (16 LOC)
+│   └── genres.ts
 │
-├── types/                       # TypeScript interfaces
-│   ├── manga.ts
-│   ├── user.ts
-│   ├── api.ts
-│   └── ui.ts
+├── store/                       # Redux store setup
+│   ├── index.ts                # Store configuration
+│   └── hooks.ts                # Typed hooks
 │
-├── utils/                       # Utility functions
-│   ├── constants.ts
-│   ├── format.ts
-│   ├── validation.ts
-│   └── date-utils.ts
-│
-├── styles/                      # Global and shared styles
-│   ├── globals.css
+├── styles/                      # Global styles (203 LOC)
+│   ├── reset.css
 │   ├── variables.css
-│   └── theme.css
+│   ├── global.css
+│   └── App.css
 │
-├── assets/                      # Images, icons, fonts
-│   ├── icons/
-│   ├── images/
-│   └── fonts/
-│
-├── App.tsx                      # Root component
-├── main.tsx                     # Entry point
-└── index.css                    # Root styles
+├── App.tsx                      # Root component (19 LOC)
+└── main.tsx                     # Entry point (10 LOC)
 ```
+
+### Planned Structure (Phase 2+)
+
+Future additions:
+- `src/components/common/` - Shared components (Button, Card, etc.)
+- `src/components/manga/` - Manga-specific components
+- `src/components/reader/` - Reader interface
+- `src/services/` - API & business logic
+- `src/hooks/` - Custom React hooks
+- `src/utils/` - Utility functions
+- `src/assets/` - Images, icons, fonts
 
 ---
 
@@ -310,25 +340,40 @@ npm run build  # Test production build
 
 ---
 
-## Current Limitations (Template Phase)
+## Current Capabilities (Phase 1 Complete)
 
-- No routing system implemented yet
-- No state management (Redux, Zustand, etc.)
-- No API integration
-- No authentication
-- App component contains demo code (counter)
-- Static content only
+### Implemented
+- [x] React Router setup with Layout wrapper
+- [x] Redux store configuration with hooks
+- [x] Design system with CSS variables
+- [x] Navigation UI (Navbar, SearchBar, UserMenu, GenreDropdown)
+- [x] HomePage with 12 genre grid
+- [x] Responsive design (mobile-first)
+- [x] Accessibility features (focus states, aria labels)
+- [x] TypeScript strict mode throughout
+- [x] ESLint configuration
+
+### Not Yet Implemented
+- [ ] API integration / backend connection
+- [ ] User authentication
+- [ ] Redux slices & state logic
+- [ ] Component library (Button, Card, Modal, etc.)
+- [ ] Search functionality
+- [ ] Genre filtering
+- [ ] Manga detail pages
+- [ ] Reader interface
 
 ---
 
-## Next Steps
+## Phase 2 Priorities
 
-1. Remove template demo code from App.tsx
-2. Implement routing structure
-3. Create base component library
-4. Set up state management
-5. Design and implement API services
-6. Build manga browsing features
+1. Create reusable component library (Button, Card, Input, Modal)
+2. Implement theme switching (dark/light mode)
+3. Add form components and validation
+4. Expand layout system (Sidebar, Footer)
+5. Set up API service layer
+6. Create Redux slices for state management
+7. Build unit tests for components
 
-See `project-roadmap.md` for detailed timeline.
+See `project-roadmap.md` for detailed timeline and dependencies.
 

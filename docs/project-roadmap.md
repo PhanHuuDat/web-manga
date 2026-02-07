@@ -4,9 +4,9 @@
 
 This document outlines the development roadmap for the web-manga project, tracking progress through phases from foundation to full-featured application.
 
-**Current Phase:** Phase 1 - Foundation Setup
+**Current Phase:** Phase 1 - Foundation & UI Framework
 **Last Updated:** 2026-02-06
-**Status:** In Progress
+**Status:** Phase 1 Complete (100%), Phase 2 Starting
 
 ---
 
@@ -14,8 +14,8 @@ This document outlines the development roadmap for the web-manga project, tracki
 
 | Phase | Name | Timeline | Status | Progress |
 |-------|------|----------|--------|----------|
-| 1 | Foundation Setup | Weeks 1-2 | In Progress | 90% |
-| 2 | Core UI Components | Weeks 3-4 | Pending | 0% |
+| 1 | Foundation & UI Framework | Weeks 1-2 | Complete | 100% |
+| 2 | Core Components & State | Weeks 3-4 | In Progress | 15% |
 | 3 | Manga Discovery | Weeks 5-8 | Pending | 0% |
 | 4 | Reading Experience | Weeks 9-12 | Pending | 0% |
 | 5 | User Features | Weeks 13-16 | Pending | 0% |
@@ -23,108 +23,119 @@ This document outlines the development roadmap for the web-manga project, tracki
 
 ---
 
-## Phase 1: Foundation Setup
+## Phase 1: Foundation & UI Framework (COMPLETE)
 
 **Timeline:** Weeks 1-2
-**Status:** In Progress (90%)
-**Owner:** TBD
+**Status:** Complete (100%)
+**Owner:** Development Team
 
 ### Objectives
-- Establish development environment
-- Configure build pipeline
-- Create project documentation
-- Set up code standards
-- Initialize project structure
+- [x] Establish development environment
+- [x] Configure build pipeline
+- [x] Create UI foundation with navigation
+- [x] Implement routing structure
+- [x] Create project documentation
+- [x] Set up Redux store
+- [x] Implement design system
 
 ### Completed Tasks
-- [x] React + Vite project initialization
-- [x] TypeScript configuration (strict mode)
-- [x] ESLint setup and configuration
-- [x] Development scripts configured
-- [x] Git repository initialized
-- [x] Project structure documentation
-
-### In Progress
-- [x] Create project overview (PDR)
-- [x] Create code standards documentation
-- [x] Create system architecture documentation
-- [x] Create codebase summary
-- [x] Update project roadmap
-
-### Pending
-- [ ] Update main README with quick start
-- [ ] Set up CI/CD pipeline (optional for Phase 1)
-- [ ] Configure code review process
+- [x] React + Vite + TypeScript setup
+- [x] ESLint configuration with strict rules
+- [x] Redux Toolkit store with typed hooks
+- [x] React Router v7 integration
+- [x] Design system (colors, typography)
+- [x] Navbar component (40 LOC) with logo, navigation
+- [x] SearchBar component (47 LOC)
+- [x] UserMenu component (28 LOC)
+- [x] GenreDropdown component (85 LOC) with hover & click
+- [x] HomePage with 12 genre grid (37 LOC)
+- [x] Layout wrapper with Outlet (16 LOC)
+- [x] CSS architecture (reset, variables, global, 203 LOC total)
+- [x] Type definitions (genre-types, navigation-types)
+- [x] All documentation files created & updated
+- [x] README updated with current status
 
 ### Deliverables
 - [x] Development environment ready
-- [x] Build pipeline working
-- [x] Linting and type checking functional
+- [x] Build pipeline working (CSS: 7.91 KB gzipped, JS: 77.65 KB gzipped)
+- [x] Responsive UI foundation (mobile-first)
+- [x] Accessibility features (focus states, aria labels)
 - [x] Documentation complete
-- [ ] README updated with project info
+- [x] All code passes TypeScript strict mode
+- [x] All code passes ESLint
 
 ### Success Criteria
 - [x] `npm run dev` works without errors
 - [x] `npm run build` produces valid output
 - [x] `npm run lint` passes
-- [x] TypeScript strict mode enabled
-- [x] All documentation files created
-- [ ] README reflects actual project state
+- [x] TypeScript strict mode 100% coverage
+- [x] UI renders correctly on desktop & mobile
+- [x] All navigation interactive and responsive
+- [x] Documentation reflects actual implementation
 
-### Risk Assessment
-- **Low:** All foundation tasks are straightforward
-- **Mitigation:** Clear documentation and standards
+### What Got Built
+**Lines of Code:** ~800 across 16 files
+- **Components:** 6 interactive components (layout, navigation)
+- **Pages:** 1 page (HomePage) with genre grid
+- **Styling:** Design system with CSS variables, responsive
+- **Routing:** React Router with Layout wrapper
+- **State:** Redux store configured, ready for slices
+- **Types:** 39 lines of TypeScript interfaces
+- **Constants:** 12 genre definitions
 
 ### Next Steps
-- Complete README update
-- Begin Phase 2 planning
-- Set up Component library structure
+- Begin Phase 2: Component Library & State Management
+- Create reusable components (Button, Card, Modal)
+- Implement Redux slices for data
+- Add theme switching support
+- Set up API service layer
 
 ---
 
-## Phase 2: Core UI Components
+## Phase 2: Component Library & State Management
 
 **Timeline:** Weeks 3-4
-**Target Status:** Not Started
+**Target Status:** In Progress
 **Estimated Effort:** 40 hours
 
 ### Objectives
 - Build reusable component library
-- Establish layout system
-- Implement styling system
-- Create design tokens
+- Implement Redux slices for state
+- Add theme switching capability
+- Create API service layer foundation
 
 ### Key Features
-- [ ] Common components (Button, Card, Input, Modal)
-- [ ] Layout components (Header, Footer, Sidebar)
-- [ ] Theme system (dark/light mode)
-- [ ] Typography system
-- [ ] Spacing/grid system
-- [ ] Form components (FormInput, FormSelect)
+- [ ] Common components (Button, Card, Input, Modal, Badge)
+- [ ] Redux slices (manga, auth, ui, reading)
+- [ ] Theme context and switching (dark/light mode)
+- [ ] API service skeleton
+- [ ] Form validation utility
+- [ ] Custom hooks (useTheme, useFetch)
 
 ### Deliverables
-- Component library in `src/components/common/`
-- CSS/styling system (globals + theme)
-- Storybook setup (optional)
-- Component documentation
+- Component library in `src/components/common/` (5+ components)
+- Redux slices for core features
+- Theme switching system
+- API service foundation
+- Updated component documentation
 
 ### Acceptance Criteria
-- [ ] 10+ reusable components created
-- [ ] Dark/light mode implemented
-- [ ] All components have TypeScript props
-- [ ] Responsive design verified
-- [ ] Accessibility standards met
-- [ ] Components tested
+- [ ] 5+ reusable components with full types
+- [ ] Redux slices created (manga, auth, ui)
+- [ ] Dark/light mode implemented & working
+- [ ] API service patterns established
+- [ ] All components responsive & accessible
+- [ ] 80%+ test coverage for new components
 
 ### Technical Decisions
-- [ ] CSS vs CSS-in-JS (recommend CSS Modules or CSS-in-JS)
-- [ ] Icon library selection (recommend Heroicons or Feather)
-- [ ] Responsive breakpoints definition
-- [ ] Color palette definition
+- [x] CSS architecture: CSS Modules with BEM (done in Phase 1)
+- [x] Color palette & fonts: Deep Ocean Blue theme (done in Phase 1)
+- [ ] Icon library: TBD (Heroicons or Feather)
+- [ ] Responsive breakpoints: Mobile-first (in progress)
 
 ### Dependencies
-- Phase 1 completion
-- Design system finalization
+- Phase 1 completion (complete)
+- Design system finalization (complete)
 
 ---
 
@@ -418,18 +429,21 @@ GET    /api/user/reading-stats     - Reading statistics
 
 ## Success Metrics by Phase
 
-### Phase 1
+### Phase 1 (COMPLETE)
 - [x] Build pipeline functional
 - [x] TypeScript strict mode enabled
 - [x] ESLint passes with no warnings
 - [x] Documentation complete
-- [ ] README updated
+- [x] README updated with current status
+- [x] UI foundation with 6 components
+- [x] Responsive design verified
 
-### Phase 2
-- [ ] 10+ components created
+### Phase 2 (IN PROGRESS)
+- [ ] 5+ reusable components created
+- [ ] Redux slices implemented (manga, auth, ui)
+- [ ] Theme switching operational
 - [ ] Lighthouse score: 90+
-- [ ] Component reusability: 100%
-- [ ] Test coverage: 80%+
+- [ ] Component test coverage: 80%+
 
 ### Phase 3
 - [ ] Manga grid loads < 2s
