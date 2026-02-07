@@ -2,17 +2,18 @@
 
 A modern, responsive web application for discovering, reading, and managing manga using React and TypeScript.
 
-**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress
+**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress (15%)
 **Version:** 0.1.0
-**Last Updated:** 2026-02-06
+**Last Updated:** 2026-02-07
 
 ---
 
 ## Quick Start
 
 ### Prerequisites
-- Node.js 18+ (with npm)
+- Node.js 18+
 - Git
+- pnpm (npm install -g pnpm)
 
 ### Installation & Setup
 ```bash
@@ -21,19 +22,19 @@ git clone <repository-url>
 cd web-manga
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm dev
 
 # Visit http://localhost:5173
 ```
 
 ### Build for Production
 ```bash
-npm run build      # Creates optimized dist/ folder
-npm run preview    # Test production build locally
-npm run lint       # Check code quality
+pnpm build         # Creates optimized dist/ folder
+pnpm preview       # Test production build locally
+pnpm lint          # Check code quality
 ```
 
 ---
@@ -109,15 +110,19 @@ web-manga/
 
 ```bash
 # Development
-npm run dev              # Start dev server with HMR (http://localhost:5173)
+pnpm dev              # Start dev server with HMR (http://localhost:5173)
 
 # Production
-npm run build           # Build for production (tsc -b && vite build)
-npm run preview         # Preview production build locally
+pnpm build            # Build for production (tsc -b && vite build)
+pnpm preview          # Preview production build locally
 
 # Code Quality
-npm run lint            # Run ESLint checks
-npm run lint -- --fix   # Auto-fix linting issues
+pnpm lint             # Run ESLint checks
+pnpm lint -- --fix    # Auto-fix linting issues
+
+# Testing
+pnpm test             # Run unit tests (Vitest)
+pnpm test:e2e         # Run end-to-end tests (Playwright)
 ```
 
 ---
@@ -135,8 +140,8 @@ Follow the standards defined in `./docs/code-standards.md`:
 
 ### Before Committing
 ```bash
-npm run lint   # Code quality check
-npm run build  # Verify production build
+pnpm lint   # Code quality check
+pnpm build  # Verify production build
 ```
 
 ### Git Workflow
@@ -257,22 +262,22 @@ The application implements:
 ### Port Already in Use
 ```bash
 # On Windows (change 5173 to your desired port)
-npm run dev -- --port 3000
+pnpm dev -- --port 3000
 
 # On macOS/Linux
-PORT=3000 npm run dev
+PORT=3000 pnpm dev
 ```
 
 ### TypeScript Errors
 ```bash
 # Verify TypeScript configuration
-npm run build
+pnpm build
 ```
 
 ### ESLint Issues
 ```bash
 # Auto-fix common issues
-npm run lint -- --fix
+pnpm lint -- --fix
 ```
 
 ### Clear Build Cache
@@ -286,12 +291,12 @@ npm run build
 ## Performance Tips
 
 ### Development
-- Use `npm run dev` for fast HMR (hot module replacement)
+- Use `pnpm dev` for fast HMR (hot module replacement)
 - Browser DevTools: Check React DevTools extension
 - Performance profiling: Chrome DevTools Performance tab
 
 ### Production
-- Check bundle size: `npm run build` output
+- Check bundle size: `pnpm build` output
 - Lighthouse audit: Chrome DevTools → Lighthouse
 - Network tab: Verify caching and compression
 
@@ -322,7 +327,7 @@ npm run build
 ## FAQ
 
 **Q: What's the current status of the project?**
-A: We're in Phase 1 (Foundation). Core components will be built in Phase 2.
+A: Phase 1 (Foundation) is complete. Phase 2 (Component library & state management) is in progress (15%).
 
 **Q: When will the manga reader be ready?**
 A: Targeted for Phase 4 (Weeks 9-12). See roadmap for details.
@@ -376,5 +381,5 @@ See `./docs/project-roadmap.md` for Phase 2 details.
 
 ---
 
-**Last Updated:** 2026-02-06
+**Last Updated:** 2026-02-07
 

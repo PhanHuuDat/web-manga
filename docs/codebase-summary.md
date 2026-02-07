@@ -4,10 +4,10 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~800 (UI foundation phase)
+**Current Lines of Code:** ~389 TS/TSX + 245 SCSS (~634 total)
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
-**Status:** Phase 1 (Foundation) - UI foundation complete, routing & state management active
+**Status:** Phase 1 (Foundation) Complete - UI foundation, routing & state management established
 
 ---
 
@@ -23,11 +23,11 @@ web-manga/
 │   │   │   ├── Navbar.tsx        # Fixed navigation bar (40 LOC)
 │   │   │   └── Navbar.css        # Navbar styles (73 LOC)
 │   │   └── navigation/
-│   │       ├── SearchBar.tsx     # Search input component (47 LOC)
+│   │       ├── SearchBar.tsx     # Search input component (51 LOC)
 │   │       ├── SearchBar.css     # SearchBar styles (48 LOC)
 │   │       ├── UserMenu.tsx      # User profile menu (28 LOC)
 │   │       ├── UserMenu.css      # UserMenu styles (24 LOC)
-│   │       ├── GenreDropdown.tsx # Genre filter dropdown (85 LOC)
+│   │       ├── GenreDropdown.tsx # Genre filter dropdown (90 LOC)
 │   │       └── GenreDropdown.css # GenreDropdown styles (98 LOC)
 │   │
 │   ├── pages/                    # Page-level components
@@ -120,10 +120,10 @@ web-manga/
 - **Body:** Poppins (Google Fonts) - Readable, modern content
 
 #### Style Files
-- **`src/styles/reset.css`** - Browser normalization (51 LOC)
-- **`src/styles/variables.css`** - CSS design tokens & colors (86 LOC)
-- **`src/styles/global.css`** - Global imports, fonts, base styles (66 LOC)
-- **Component styles** - Scoped CSS files alongside components (BEM naming)
+- **`src/styles/_reset.scss`** - Browser normalization (51 LOC)
+- **`src/styles/_variables.scss`** - CSS design tokens & colors (86 LOC)
+- **`src/styles/global.scss`** - Global imports, fonts, base styles (66 LOC)
+- **Component styles** - Scoped SCSS files alongside components (BEM naming)
 
 ### Configuration Files
 
@@ -190,27 +190,26 @@ web-manga/
 
 ## Code Organization (Current State)
 
-### Implemented Structure (Phase 1)
+### Implemented Structure (Phase 1 Complete)
 
 ```
-src/
-├── components/                  # Reusable UI components (170 LOC)
+src/                                    # Total: 389 LOC TS/TSX + 245 LOC SCSS
+├── components/                  # Reusable UI components (197 LOC TS/TSX)
 │   ├── layout/                 # Layout system
-│   │   ├── Layout.tsx          # Main layout wrapper
-│   │   ├── Layout.css
-│   │   ├── Navbar.tsx          # Fixed navigation bar
-│   │   └── Navbar.css
+│   │   ├── Layout.tsx          # Main layout wrapper (16 LOC)
+│   │   ├── Layout.scss
+│   │   ├── Navbar.tsx          # Fixed navigation bar (40 LOC)
+│   │   └── Navbar.scss
 │   └── navigation/             # Navigation controls
-│       ├── SearchBar.tsx       # Search input
-│       ├── SearchBar.css
-│       ├── UserMenu.tsx        # User profile dropdown
-│       ├── UserMenu.css
-│       ├── GenreDropdown.tsx   # Genre selector
-│       └── GenreDropdown.css
+│       ├── SearchBar.tsx       # Search input (51 LOC)
+│       ├── SearchBar.scss
+│       ├── UserMenu.tsx        # User profile dropdown (28 LOC)
+│       ├── UserMenu.scss
+│       ├── GenreDropdown.tsx   # Genre selector (90 LOC)
+│       └── GenreDropdown.scss
 │
-├── pages/                       # Page-level components (107 LOC)
-│   ├── HomePage.tsx            # Manga discovery grid
-│   └── HomePage.css
+├── pages/                       # Page-level components (37 LOC)
+│   └── HomePage.tsx            # Manga discovery grid (37 LOC)
 │
 ├── types/                       # TypeScript interfaces (39 LOC)
 │   ├── genre-types.ts
@@ -221,13 +220,13 @@ src/
 │
 ├── store/                       # Redux store setup
 │   ├── index.ts                # Store configuration
-│   └── hooks.ts                # Typed hooks
+│   └── hooks.ts                # Typed hooks (16 LOC)
 │
-├── styles/                      # Global styles (203 LOC)
-│   ├── reset.css
-│   ├── variables.css
-│   ├── global.css
-│   └── App.css
+├── styles/                      # Global styles (245 LOC SCSS)
+│   ├── _reset.scss             # (51 LOC)
+│   ├── _variables.scss         # (86 LOC)
+│   ├── global.scss             # (66 LOC)
+│   └── App.scss                # (42 LOC)
 │
 ├── App.tsx                      # Root component (19 LOC)
 └── main.tsx                     # Entry point (10 LOC)
@@ -340,28 +339,30 @@ npm run build  # Test production build
 
 ---
 
-## Current Capabilities (Phase 1 Complete)
+## Current Capabilities (Phase 1 Complete 100%)
 
 ### Implemented
-- [x] React Router setup with Layout wrapper
-- [x] Redux store configuration with hooks
-- [x] Design system with CSS variables
+- [x] React Router v7 setup with Layout wrapper
+- [x] Redux Toolkit store configuration with typed hooks
+- [x] Design system with SCSS variables & Deep Ocean Blue theme
 - [x] Navigation UI (Navbar, SearchBar, UserMenu, GenreDropdown)
-- [x] HomePage with 12 genre grid
-- [x] Responsive design (mobile-first)
+- [x] HomePage with 12 genre grid (mobile-first responsive)
+- [x] Layout wrapper with dynamic Outlet
 - [x] Accessibility features (focus states, aria labels)
-- [x] TypeScript strict mode throughout
-- [x] ESLint configuration
+- [x] TypeScript strict mode 100% coverage
+- [x] ESLint configuration with React/Hooks plugins
+- [x] Comprehensive project documentation
 
-### Not Yet Implemented
+### Not Yet Implemented (Phase 2+)
+- [ ] Redux slices & state management
+- [ ] Component library (Button, Card, Modal, Input, Badge)
 - [ ] API integration / backend connection
-- [ ] User authentication
-- [ ] Redux slices & state logic
-- [ ] Component library (Button, Card, Modal, etc.)
-- [ ] Search functionality
-- [ ] Genre filtering
+- [ ] Search functionality with real data
+- [ ] Genre filtering with API
+- [ ] Theme switching (dark/light mode)
 - [ ] Manga detail pages
 - [ ] Reader interface
+- [ ] User authentication
 
 ---
 

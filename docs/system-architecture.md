@@ -4,7 +4,7 @@
 
 Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux Toolkit, and React Router, providing a fast, responsive reading experience. The architecture emphasizes modularity, type safety, performance, and component reusability.
 
-**Status:** Phase 1 Foundation complete with UI framework established. Phase 2 will expand component library and state management.
+**Status:** Phase 1 Foundation complete (100%) with UI framework established. Phase 2 in progress (15%) - expanding component library and state management.
 
 ---
 
@@ -73,8 +73,8 @@ Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux 
   - `Navbar.tsx` (40 LOC) - Fixed navbar with logo, search, menu, user profile
 
 - **Navigation:**
-  - `SearchBar.tsx` (47 LOC) - Search input with icon
-  - `GenreDropdown.tsx` (85 LOC) - Genre selector with hover/click behavior
+  - `SearchBar.tsx` (51 LOC) - Search input with icon
+  - `GenreDropdown.tsx` (90 LOC) - Genre selector with hover/click behavior
   - `UserMenu.tsx` (28 LOC) - User profile dropdown
 
 **Planned Components (Phase 2+):**
@@ -170,7 +170,9 @@ export const mangaService = {
   },
 
   async getChapters(mangaId: string): Promise<Chapter[]> {
-    // Implementation
+    const response = await fetch(`/api/manga/${mangaId}/chapters`)
+    if (!response.ok) throw new Error('Failed to fetch chapters')
+    return response.json()
   },
 }
 ```
@@ -489,7 +491,7 @@ Merge to main
 CI/CD Pipeline
   ├── Lint (ESLint)
   ├── Type check (TypeScript)
-  ├── Test (Jest)
+  ├── Test (Vitest & Playwright)
   ├── Build (Vite)
   └── Deploy to production
         ↓

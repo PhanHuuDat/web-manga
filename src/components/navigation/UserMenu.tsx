@@ -1,4 +1,4 @@
-import './UserMenu.css';
+import './UserMenu.scss';
 
 function UserMenu() {
   return (

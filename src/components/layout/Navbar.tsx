@@ -4,7 +4,7 @@ import GenreDropdown from '../navigation/GenreDropdown';
 import UserMenu from '../navigation/UserMenu';
 import { GENRES } from '../../constants/genres';
 import type { NavbarProps } from '../../types/navigation-types';
-import './Navbar.css';
+import './Navbar.scss';
 
 function Navbar({ className = '' }: NavbarProps) {
   const handleSearch = (query: string) => {

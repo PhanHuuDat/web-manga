@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import type { GenreDropdownProps } from '../../types/navigation-types';
-import './GenreDropdown.css';
+import './GenreDropdown.scss';
 
 function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,10 @@ function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -71,7 +74,9 @@ function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
               >
                 <span className="genre-dropdown__item-name">{genre.name}</span>
                 {genre.description && (
-                  <span className="genre-dropdown__item-desc">{genre.description}</span>
+                  <span className="genre-dropdown__item-desc">
+                    {genre.description}
+                  </span>
                 )}
               </button>
             ))}

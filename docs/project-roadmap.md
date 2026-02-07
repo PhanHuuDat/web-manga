@@ -4,9 +4,9 @@
 
 This document outlines the development roadmap for the web-manga project, tracking progress through phases from foundation to full-featured application.
 
-**Current Phase:** Phase 1 - Foundation & UI Framework
-**Last Updated:** 2026-02-06
-**Status:** Phase 1 Complete (100%), Phase 2 Starting
+**Current Phase:** Phase 1 - Foundation & UI Framework (Complete), Phase 2 - Components & State (In Progress)
+**Last Updated:** 2026-02-07
+**Status:** Phase 1 Complete (100%), Phase 2 In Progress (15%)
 
 ---
 
@@ -39,21 +39,22 @@ This document outlines the development roadmap for the web-manga project, tracki
 - [x] Implement design system
 
 ### Completed Tasks
-- [x] React + Vite + TypeScript setup
-- [x] ESLint configuration with strict rules
+- [x] React 19 + Vite 7 + TypeScript 5.9 setup
+- [x] ESLint 9 configuration with strict rules
 - [x] Redux Toolkit store with typed hooks
 - [x] React Router v7 integration
-- [x] Design system (colors, typography)
+- [x] Design system (Deep Ocean Blue, Righteous/Poppins fonts)
 - [x] Navbar component (40 LOC) with logo, navigation
-- [x] SearchBar component (47 LOC)
+- [x] SearchBar component (51 LOC)
 - [x] UserMenu component (28 LOC)
-- [x] GenreDropdown component (85 LOC) with hover & click
+- [x] GenreDropdown component (90 LOC) with hover & click
 - [x] HomePage with 12 genre grid (37 LOC)
 - [x] Layout wrapper with Outlet (16 LOC)
-- [x] CSS architecture (reset, variables, global, 203 LOC total)
+- [x] SCSS architecture (_reset, _variables, global, App, 245 LOC total)
 - [x] Type definitions (genre-types, navigation-types)
 - [x] All documentation files created & updated
-- [x] README updated with current status
+- [x] README updated to reflect Phase 1 completion
+- [x] Vitest & Playwright test framework configured
 
 ### Deliverables
 - [x] Development environment ready
@@ -537,8 +538,8 @@ GET    /api/user/reading-stats     - Reading statistics
 
 | Version | Phase | Status | Release Date |
 |---------|-------|--------|--------------|
-| 0.1.0 | 1 | In Progress | End of Week 2 |
-| 0.2.0 | 2 | Pending | End of Week 4 |
+| 0.1.0 | 1 | Released | 2026-02-07 |
+| 0.2.0 | 2 | In Progress | End of Week 4 |
 | 0.3.0 | 3 | Pending | End of Week 8 |
 | 0.4.0 | 4 | Pending | End of Week 12 |
 | 1.0.0 | 5 | Pending | End of Week 16 |

@@ -5,7 +5,7 @@
 Coding standards for consistency, maintainability, and code quality.
 
 **Enforcement:** ESLint + TypeScript strict mode
-**Commands:** `npm run lint` (check) | `npm run lint -- --fix` (auto-fix)
+**Commands:** `pnpm lint` (check) | `pnpm lint -- --fix` (auto-fix)
 
 ---
 
@@ -160,7 +160,8 @@ See [code-examples.md](./code-examples.md) for full color palette.
 
 ## Testing Standards
 
-- **Framework:** Jest (to be set up)
+- **Unit Testing:** Vitest with React Testing Library
+- **E2E Testing:** Playwright
 - **Coverage:** 80%+
 - **Location:** `__tests__/` or `.test.ts` suffix
 
@@ -173,8 +174,9 @@ See [code-examples.md](./code-examples.md) for full color palette.
 
 ### Pre-commit
 ```bash
-npm run lint   # Must pass
-npm run build  # Verify TypeScript
+pnpm lint   # Must pass
+pnpm build  # Verify TypeScript
+pnpm test   # Unit tests should pass
 ```
 
 ---

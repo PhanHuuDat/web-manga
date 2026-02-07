@@ -4,9 +4,9 @@
 
 **Web-Manga** is a modern, web-based manga reading platform built with React and TypeScript. The application delivers a seamless reading experience for manga enthusiasts, featuring intuitive navigation, responsive design, and comprehensive library management capabilities.
 
-**Status:** Phase 1 - Foundation Setup (Active)
-**Version:** 0.0.0
-**Last Updated:** 2026-02-06
+**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress (15%)
+**Version:** 0.1.0
+**Last Updated:** 2026-02-07
 
 ---
 
@@ -27,9 +27,10 @@ Enable manga enthusiasts to discover, read, and manage their manga library throu
 | Linting | ESLint | 9.39.1 |
 
 **Development Environment:**
-- Node.js with npm package management
+- Node.js 18+ with pnpm package management
 - ES modules (type: "module")
 - SPA (Single Page Application) architecture
+- Vitest for unit testing, Playwright for E2E testing
 
 ---
 
@@ -37,11 +38,14 @@ Enable manga enthusiasts to discover, read, and manage their manga library throu
 
 ### Functional Requirements
 
-#### Phase 1: Foundation (Current)
+#### Phase 1: Foundation (Complete)
 - [x] Development environment setup
 - [x] Build pipeline configuration
 - [x] ESLint rules implementation
-- [ ] Project documentation (in progress)
+- [x] Project documentation complete
+- [x] UI foundation with 6 components
+- [x] Redux store configuration
+- [x] React Router v7 integration
 
 #### Phase 2: Core UI Components
 - [ ] Reusable component library
@@ -175,33 +179,39 @@ web-manga (SPA)
 
 ## Development Workflow
 
-### NPM Scripts
+### pnpm Scripts
 ```bash
-npm run dev      # Start dev server (HMR enabled)
-npm run build    # Compile & build for production
-npm run lint     # Check code quality
-npm run preview  # Preview production build locally
+pnpm dev          # Start dev server (HMR enabled)
+pnpm build        # Compile & build for production
+pnpm lint         # Check code quality
+pnpm preview      # Preview production build locally
+pnpm test         # Run unit tests (Vitest)
+pnpm test:e2e     # Run E2E tests (Playwright)
 ```
 
 ### Development Commands
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev        # Visit http://localhost:5173
+pnpm dev          # Visit http://localhost:5173
 
 # Build for production
-npm run build
+pnpm build
 
 # Preview production build
-npm run preview
+pnpm preview
 
 # Check code quality
-npm run lint
+pnpm lint
 
-# Format check (recommended)
-npm run lint -- --fix
+# Auto-fix linting issues
+pnpm lint -- --fix
+
+# Run tests
+pnpm test
+pnpm test:e2e
 ```
 
 ---
@@ -272,5 +282,6 @@ Visit http://localhost:5173 to view the application.
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2026-02-07 | 0.1.0 | Phase 1 complete: UI foundation, routing, design system, documentation |
 | 2026-02-06 | 0.0.0 | Initial project documentation |
 
