@@ -11,7 +11,12 @@
       "Bash(npm run lint:*)",
       "Bash(node:*)",
       "Bash(repomix:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm test:*)",
+      "Bash(git add:*)"
     ]
   }
 }

@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import SearchBar from '../navigation/SearchBar';
 import GenreDropdown from '../navigation/GenreDropdown';
 import UserMenu from '../navigation/UserMenu';
 import { GENRES } from '../../constants/genres';
-import type { NavbarProps } from '../../types/navigation-types';
-import './Navbar.scss';
 
-function Navbar({ className = '' }: NavbarProps) {
+function Navbar() {
   const handleSearch = (query: string) => {
     // TODO: Implement search navigation
     console.log('Searching for:', query);
@@ -18,22 +21,41 @@ function Navbar({ className = '' }: NavbarProps) {
   };
 
   return (
-    <nav className={`navbar ${className}`}>
-      <div className="navbar__container">
-        <Link to="/" className="navbar__logo">
-          <span className="navbar__logo-text">MangaVerse</span>
-        </Link>
+    <AppBar
+      position="fixed"
+      sx={{
+        bgcolor: 'background.paper',
+        boxShadow: 'none',
+        borderBottom: 1,
+        borderColor: 'divider',
+      }}
+    >
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ minHeight: 72 }}>
+          <Typography
+            variant="h5"
+            component={Link}
+            to="/"
+            sx={{
+              fontFamily: '"Righteous", sans-serif',
+              color: 'primary.main',
+              textDecoration: 'none',
+              '&:hover': { color: 'primary.light' },
+            }}
+          >
+            MangaVerse
+          </Typography>
 
-        <div className="navbar__search">
-          <SearchBar onSearch={handleSearch} placeholder="Search manga..." />
-        </div>
+          <Box sx={{ flexGrow: 1 }} />
 
-        <div className="navbar__actions">
-          <GenreDropdown genres={GENRES} onGenreSelect={handleGenreSelect} />
-          <UserMenu />
-        </div>
-      </div>
-    </nav>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <SearchBar onSearch={handleSearch} placeholder="Search manga..." />
+            <GenreDropdown genres={GENRES} onGenreSelect={handleGenreSelect} />
+            <UserMenu />
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
 

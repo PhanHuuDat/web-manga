@@ -4,9 +4,10 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~389 TS/TSX + 245 SCSS (~634 total)
+**Current Lines of Code:** ~450 TS/TSX (MUI components with sx props)
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
+**Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
 **Status:** Phase 1 (Foundation) Complete - UI foundation, routing & state management established
 
 ---
@@ -16,43 +17,34 @@ Web-Manga is a React + TypeScript + Vite single-page application for reading and
 ```
 web-manga/
 ├── src/                          # Application source code
-│   ├── components/               # Reusable React components
+│   ├── components/               # Reusable React components (MUI + sx props)
 │   │   ├── layout/
-│   │   │   ├── Layout.tsx        # Main layout wrapper (16 LOC)
-│   │   │   ├── Layout.css        # Layout styles (18 LOC)
-│   │   │   ├── Navbar.tsx        # Fixed navigation bar (40 LOC)
-│   │   │   └── Navbar.css        # Navbar styles (73 LOC)
+│   │   │   ├── Layout.tsx        # Main layout wrapper with MUI Box
+│   │   │   └── Navbar.tsx        # Fixed AppBar with Toolbar
 │   │   └── navigation/
-│   │       ├── SearchBar.tsx     # Search input component (51 LOC)
-│   │       ├── SearchBar.css     # SearchBar styles (48 LOC)
-│   │       ├── UserMenu.tsx      # User profile menu (28 LOC)
-│   │       ├── UserMenu.css      # UserMenu styles (24 LOC)
-│   │       ├── GenreDropdown.tsx # Genre filter dropdown (90 LOC)
-│   │       └── GenreDropdown.css # GenreDropdown styles (98 LOC)
+│   │       ├── SearchBar.tsx     # MUI InputBase search component
+│   │       ├── UserMenu.tsx      # MUI IconButton user menu
+│   │       └── GenreDropdown.tsx # MUI Button + Menu dropdown
 │   │
 │   ├── pages/                    # Page-level components
-│   │   ├── HomePage.tsx          # Landing page with genres (37 LOC)
-│   │   └── HomePage.css          # HomePage styles (70 LOC)
+│   │   └── HomePage.tsx          # Landing page with MUI Container/Box/Paper
+│   │
+│   ├── theme/                    # MUI theming
+│   │   └── theme.ts              # Deep Ocean Blue theme configuration
 │   │
 │   ├── types/                    # TypeScript interfaces
-│   │   ├── genre-types.ts        # Genre interface (20 LOC)
-│   │   └── navigation-types.ts   # Component props types (19 LOC)
+│   │   ├── genre-types.ts        # Genre interface
+│   │   └── navigation-types.ts   # Component props types
 │   │
 │   ├── constants/                # Application constants
-│   │   └── genres.ts             # 12 genre definitions (16 LOC)
+│   │   └── genres.ts             # 12 genre definitions
 │   │
 │   ├── store/                    # Redux store setup
 │   │   ├── index.ts              # Store configuration
 │   │   └── hooks.ts              # Typed useAppDispatch & useAppSelector
 │   │
-│   ├── styles/                   # Global and shared styles
-│   │   ├── reset.css             # Browser normalization (51 LOC)
-│   │   ├── variables.css         # CSS design tokens (86 LOC)
-│   │   ├── global.css            # Global imports & fonts (66 LOC)
-│   │   └── App.css               # App wrapper styles
-│   │
-│   ├── main.tsx                  # React entry point (10 LOC)
-│   └── App.tsx                   # Root component with routing (19 LOC)
+│   ├── main.tsx                  # React entry point with ThemeProvider
+│   └── App.tsx                   # Root component with routing
 │
 ├── public/                        # Static assets served as-is
 │   └── vite.svg                  # Vite logo
@@ -67,14 +59,14 @@ web-manga/
 ├── plans/                         # Implementation plans
 │   └── reports/                   # Reports from analysis/research
 │
-├── index.html                     # HTML entry point (14 lines)
-├── vite.config.ts                 # Vite configuration (7 lines)
+├── index.html                     # HTML entry point with Google Fonts
+├── vite.config.ts                 # Vite configuration
 ├── tsconfig.json                  # TypeScript config reference
 ├── tsconfig.app.json              # Application TypeScript settings
 ├── tsconfig.node.json             # Node tooling TypeScript settings
 ├── eslint.config.js               # ESLint rules configuration
 ├── package.json                   # Dependencies & scripts
-├── package-lock.json              # Dependency lock file
+├── pnpm-lock.yaml                 # pnpm dependency lock file
 ├── README.md                       # Template documentation
 └── .gitignore                      # Git ignore rules
 ```
@@ -90,11 +82,11 @@ web-manga/
 - Contains root `<div id="root">` for React mounting
 - References Vite client script with automatic HMR
 
-#### `src/main.tsx` (10 lines)
+#### `src/main.tsx`
 - React entry point
 - Creates root with React 19 APIs
+- Wraps app with MUI ThemeProvider + CssBaseline
 - Renders App component with StrictMode
-- Imports global styles
 
 #### `src/App.tsx` (19 lines)
 - Root component with React Router setup
@@ -102,28 +94,32 @@ web-manga/
 - Configures main routes (/ → HomePage)
 - Responsive design with fixed navbar
 
-### Styling System
+### Styling System (Material UI v7)
 
 #### Design System Colors (Deep Ocean Blue Theme)
-```css
---bg-primary: #0F172A (slate-900)
---bg-secondary: #1E293B (slate-800)
---bg-tertiary: #334155 (slate-700)
---accent-primary: #0EA5E9 (sky-500)
---accent-secondary: #38BDF8 (sky-400)
---text-primary: #F8FAFC (slate-50)
---text-secondary: #94A3B8 (slate-400)
+Defined in `src/theme/theme.ts` using MUI's `createTheme()`:
+```typescript
+palette: {
+  mode: 'dark',
+  primary.main: '#0EA5E9',      // Ocean blue accent
+  secondary.main: '#38BDF8',    // Light blue
+  background.default: '#0F172A', // Dark slate
+  background.paper: '#1E293B',   // Lighter slate
+  text.primary: '#F8FAFC',       // Near white
+  text.secondary: '#94A3B8',     // Muted gray
+}
 ```
 
 #### Typography
-- **Display:** Righteous (Google Fonts) - Bold, distinctive headings
+- **Display (h1-h6):** Righteous (Google Fonts) - Bold, distinctive headings
 - **Body:** Poppins (Google Fonts) - Readable, modern content
+- Configured via MUI theme `typography` property
 
-#### Style Files
-- **`src/styles/_reset.scss`** - Browser normalization (51 LOC)
-- **`src/styles/_variables.scss`** - CSS design tokens & colors (86 LOC)
-- **`src/styles/global.scss`** - Global imports, fonts, base styles (66 LOC)
-- **Component styles** - Scoped SCSS files alongside components (BEM naming)
+#### Styling Approach
+- **MUI CssBaseline** - Provides browser normalization (replaces reset.css)
+- **sx prop** - All component styling via MUI's sx prop (type-safe, theme-aware)
+- **Theme tokens** - Colors, spacing, typography accessed via theme
+- **No CSS/SCSS files** - All styles co-located with components in TSX
 
 ### Configuration Files
 
@@ -164,7 +160,10 @@ web-manga/
   "react-dom": "^19.2.0",          // DOM rendering
   "react-redux": "^9.2.0",         // Redux integration
   "@reduxjs/toolkit": "^2.11.2",   // Redux state management
-  "react-router-dom": "^7.13.0"    // Client-side routing
+  "react-router-dom": "^7.13.0",   // Client-side routing
+  "@mui/material": "^7.3.7",       // Material UI component library
+  "@emotion/react": "^11.14.0",    // CSS-in-JS (MUI dependency)
+  "@emotion/styled": "^11.14.1"    // Styled components (MUI dependency)
 }
 ```
 
@@ -193,43 +192,35 @@ web-manga/
 ### Implemented Structure (Phase 1 Complete)
 
 ```
-src/                                    # Total: 389 LOC TS/TSX + 245 LOC SCSS
-├── components/                  # Reusable UI components (197 LOC TS/TSX)
-│   ├── layout/                 # Layout system
-│   │   ├── Layout.tsx          # Main layout wrapper (16 LOC)
-│   │   ├── Layout.scss
-│   │   ├── Navbar.tsx          # Fixed navigation bar (40 LOC)
-│   │   └── Navbar.scss
-│   └── navigation/             # Navigation controls
-│       ├── SearchBar.tsx       # Search input (51 LOC)
-│       ├── SearchBar.scss
-│       ├── UserMenu.tsx        # User profile dropdown (28 LOC)
-│       ├── UserMenu.scss
-│       ├── GenreDropdown.tsx   # Genre selector (90 LOC)
-│       └── GenreDropdown.scss
+src/                              # All styling via MUI sx props
+├── components/                   # Reusable UI components
+│   ├── layout/
+│   │   ├── Layout.tsx           # MUI Box wrapper with main padding
+│   │   └── Navbar.tsx           # MUI AppBar + Toolbar + Container
+│   └── navigation/
+│       ├── SearchBar.tsx        # MUI Box + InputBase + IconButton
+│       ├── UserMenu.tsx         # MUI IconButton with inline SVG
+│       └── GenreDropdown.tsx    # MUI Button + Menu + MenuItem grid
 │
-├── pages/                       # Page-level components (37 LOC)
-│   └── HomePage.tsx            # Manga discovery grid (37 LOC)
+├── pages/
+│   └── HomePage.tsx             # MUI Container + Box + Typography + Paper
 │
-├── types/                       # TypeScript interfaces (39 LOC)
+├── theme/
+│   └── theme.ts                 # MUI createTheme with Deep Ocean Blue palette
+│
+├── types/
 │   ├── genre-types.ts
 │   └── navigation-types.ts
 │
-├── constants/                   # Application constants (16 LOC)
+├── constants/
 │   └── genres.ts
 │
-├── store/                       # Redux store setup
-│   ├── index.ts                # Store configuration
-│   └── hooks.ts                # Typed hooks (16 LOC)
+├── store/
+│   ├── index.ts                 # Redux store configuration
+│   └── hooks.ts                 # Typed useAppDispatch & useAppSelector
 │
-├── styles/                      # Global styles (245 LOC SCSS)
-│   ├── _reset.scss             # (51 LOC)
-│   ├── _variables.scss         # (86 LOC)
-│   ├── global.scss             # (66 LOC)
-│   └── App.scss                # (42 LOC)
-│
-├── App.tsx                      # Root component (19 LOC)
-└── main.tsx                     # Entry point (10 LOC)
+├── App.tsx                      # Root component with routing
+└── main.tsx                     # Entry point with ThemeProvider + CssBaseline
 ```
 
 ### Planned Structure (Phase 2+)
@@ -344,7 +335,9 @@ npm run build  # Test production build
 ### Implemented
 - [x] React Router v7 setup with Layout wrapper
 - [x] Redux Toolkit store configuration with typed hooks
-- [x] Design system with SCSS variables & Deep Ocean Blue theme
+- [x] **Material UI v7 theming** with Deep Ocean Blue palette
+- [x] **MUI components** throughout (AppBar, Box, Container, Typography, etc.)
+- [x] **sx prop styling** - no external CSS/SCSS files
 - [x] Navigation UI (Navbar, SearchBar, UserMenu, GenreDropdown)
 - [x] HomePage with 12 genre grid (mobile-first responsive)
 - [x] Layout wrapper with dynamic Outlet
@@ -355,14 +348,15 @@ npm run build  # Test production build
 
 ### Not Yet Implemented (Phase 2+)
 - [ ] Redux slices & state management
-- [ ] Component library (Button, Card, Modal, Input, Badge)
+- [ ] Extended MUI components (Cards for manga, Modals, etc.)
 - [ ] API integration / backend connection
 - [ ] Search functionality with real data
 - [ ] Genre filtering with API
-- [ ] Theme switching (dark/light mode)
+- [ ] Theme switching (dark/light mode) - theme infrastructure ready
 - [ ] Manga detail pages
 - [ ] Reader interface
 - [ ] User authentication
+- [ ] @mui/icons-material (noted as future enhancement)
 
 ---
 

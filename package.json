@@ -13,6 +13,9 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.7",
     "@reduxjs/toolkit": "^2.11.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -35,7 +38,6 @@
     "globals": "^16.5.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
-    "sass": "^1.97.3",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",

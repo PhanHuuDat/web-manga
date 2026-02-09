@@ -1,36 +1,111 @@
-import './HomePage.scss';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 
 function HomePage() {
   return (
-    <div className="home-page">
-      <section className="home-page__hero">
-        <h1 className="home-page__title">Discover Your Next Manga</h1>
-        <p className="home-page__subtitle">
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Box
+        component="section"
+        sx={{
+          textAlign: 'center',
+          py: { xs: 4, md: 6 },
+          mb: 6,
+        }}
+      >
+        <Typography
+          variant="h2"
+          component="h1"
+          sx={{
+            fontFamily: '"Righteous", sans-serif',
+            color: 'primary.main',
+            mb: 2,
+          }}
+        >
+          Discover Your Next Manga
+        </Typography>
+        <Typography
+          variant="h6"
+          color="text.secondary"
+          sx={{ maxWidth: 600, mx: 'auto' }}
+        >
           Explore thousands of manga series from popular genres
-        </p>
-      </section>
+        </Typography>
+      </Box>
 
-      <section className="home-page__section">
-        <h2 className="home-page__section-title">Featured Manga</h2>
-        <div className="home-page__placeholder">
-          <p>Manga cards will be displayed here</p>
-        </div>
-      </section>
+      <Box component="section" sx={{ mb: 6 }}>
+        <Typography
+          variant="h4"
+          component="h2"
+          gutterBottom
+          sx={{ fontFamily: '"Righteous", sans-serif' }}
+        >
+          Featured Manga
+        </Typography>
+        <Paper
+          elevation={0}
+          sx={{
+            p: 4,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            textAlign: 'center',
+          }}
+        >
+          <Typography color="text.secondary">
+            Manga cards will be displayed here
+          </Typography>
+        </Paper>
+      </Box>
 
-      <section className="home-page__section">
-        <h2 className="home-page__section-title">Popular Genres</h2>
-        <div className="home-page__placeholder">
-          <p>Genre categories will be displayed here</p>
-        </div>
-      </section>
+      <Box component="section" sx={{ mb: 6 }}>
+        <Typography
+          variant="h4"
+          component="h2"
+          gutterBottom
+          sx={{ fontFamily: '"Righteous", sans-serif' }}
+        >
+          Popular Genres
+        </Typography>
+        <Paper
+          elevation={0}
+          sx={{
+            p: 4,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            textAlign: 'center',
+          }}
+        >
+          <Typography color="text.secondary">
+            Genre categories will be displayed here
+          </Typography>
+        </Paper>
+      </Box>
 
-      <section className="home-page__section">
-        <h2 className="home-page__section-title">Latest Updates</h2>
-        <div className="home-page__placeholder">
-          <p>Recently updated manga will be displayed here</p>
-        </div>
-      </section>
-    </div>
+      <Box component="section" sx={{ mb: 6 }}>
+        <Typography
+          variant="h4"
+          component="h2"
+          gutterBottom
+          sx={{ fontFamily: '"Righteous", sans-serif' }}
+        >
+          Latest Updates
+        </Typography>
+        <Paper
+          elevation={0}
+          sx={{
+            p: 4,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            textAlign: 'center',
+          }}
+        >
+          <Typography color="text.secondary">
+            Recently updated manga will be displayed here
+          </Typography>
+        </Paper>
+      </Box>
+    </Container>
   );
 }
 

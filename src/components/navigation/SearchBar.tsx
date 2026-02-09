@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import Box from '@mui/material/Box';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
 import type { SearchBarProps } from '../../types/navigation-types';
-import './SearchBar.scss';
 
 function SearchBar({
   onSearch,
@@ -16,10 +18,25 @@ function SearchBar({
   };
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
-      <button type="submit" className="search-bar__button" aria-label="Search">
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        bgcolor: 'background.default',
+        borderRadius: 1,
+        px: 1.5,
+        py: 0.5,
+        border: 1,
+        borderColor: 'divider',
+        '&:focus-within': {
+          borderColor: 'primary.main',
+        },
+      }}
+    >
+      <IconButton type="submit" size="small" sx={{ color: 'text.secondary' }} aria-label="Search">
         <svg
-          className="search-bar__icon"
           width="20"
           height="20"
           viewBox="0 0 24 24"
@@ -34,17 +51,21 @@ function SearchBar({
             strokeLinecap="round"
           />
         </svg>
-      </button>
+      </IconButton>
 
-      <input
-        type="text"
-        className="search-bar__input"
+      <InputBase
         placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        aria-label="Search manga"
+        inputProps={{ 'aria-label': 'Search manga' }}
+        sx={{
+          ml: 1,
+          flex: 1,
+          color: 'text.primary',
+          '& ::placeholder': { color: 'text.secondary' },
+        }}
       />
-    </form>
+    </Box>
   );
 }
 
