@@ -39,6 +39,17 @@ web-manga/
 │   ├── constants/                # Application constants
 │   │   └── genres.ts             # 12 genre definitions
 │   │
+│   ├── i18n/                     # Internationalization (i18next)
+│   │   ├── i18n-config.ts        # i18n initialization
+│   │   ├── i18n-types.ts         # Type definitions
+│   │   └── locales/              # Translation files
+│   │       ├── en/               # English translations
+│   │       │   ├── common.json
+│   │       │   └── home.json
+│   │       └── vi/               # Vietnamese translations
+│   │           ├── common.json
+│   │           └── home.json
+│   │
 │   ├── store/                    # Redux store setup
 │   │   ├── index.ts              # Store configuration
 │   │   └── hooks.ts              # Typed useAppDispatch & useAppSelector
@@ -163,7 +174,10 @@ palette: {
   "react-router-dom": "^7.13.0",   // Client-side routing
   "@mui/material": "^7.3.7",       // Material UI component library
   "@emotion/react": "^11.14.0",    // CSS-in-JS (MUI dependency)
-  "@emotion/styled": "^11.14.1"    // Styled components (MUI dependency)
+  "@emotion/styled": "^11.14.1",   // Styled components (MUI dependency)
+  "i18next": "^23.7.6",            // Internationalization framework
+  "react-i18next": "^14.0.3",      // React i18n integration
+  "i18next-browser-languagedetector": "^8.0.0" // Auto language detection
 }
 ```
 
@@ -205,6 +219,13 @@ src/                              # All styling via MUI sx props
 ├── pages/
 │   └── HomePage.tsx             # MUI Container + Box + Typography + Paper
 │
+├── i18n/
+│   ├── i18n-config.ts           # i18next setup with language detection
+│   ├── i18n-types.ts            # TypeScript types for translations
+│   └── locales/                 # Translation JSON files
+│       ├── en/ (common.json, home.json)
+│       └── vi/ (common.json, home.json)
+│
 ├── theme/
 │   └── theme.ts                 # MUI createTheme with Deep Ocean Blue palette
 │
@@ -220,7 +241,7 @@ src/                              # All styling via MUI sx props
 │   └── hooks.ts                 # Typed useAppDispatch & useAppSelector
 │
 ├── App.tsx                      # Root component with routing
-└── main.tsx                     # Entry point with ThemeProvider + CssBaseline
+└── main.tsx                     # Entry point with ThemeProvider + i18n
 ```
 
 ### Planned Structure (Phase 2+)
@@ -341,6 +362,8 @@ npm run build  # Test production build
 - [x] Navigation UI (Navbar, SearchBar, UserMenu, GenreDropdown)
 - [x] HomePage with 12 genre grid (mobile-first responsive)
 - [x] Layout wrapper with dynamic Outlet
+- [x] **Internationalization (i18n)** - English & Vietnamese support
+- [x] LanguageSwitcher component for language selection
 - [x] Accessibility features (focus states, aria labels)
 - [x] TypeScript strict mode 100% coverage
 - [x] ESLint configuration with React/Hooks plugins
@@ -353,6 +376,7 @@ npm run build  # Test production build
 - [ ] Search functionality with real data
 - [ ] Genre filtering with API
 - [ ] Theme switching (dark/light mode) - theme infrastructure ready
+- [ ] Additional language support (currently English & Vietnamese)
 - [ ] Manga detail pages
 - [ ] Reader interface
 - [ ] User authentication

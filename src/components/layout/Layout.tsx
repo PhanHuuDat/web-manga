@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 function Layout() {
   return (
@@ -10,12 +11,12 @@ function Layout() {
         component="main"
         sx={{
           flexGrow: 1,
-          pt: '72px', // navbar height
           bgcolor: 'background.default',
         }}
       >
         <Outlet />
       </Box>
+      <Footer />
     </Box>
   );
 }

@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": "Discover Your Next Manga",
+    "subtitle": "Explore thousands of manga series from popular genres"
+  },
+  "sections": {
+    "featured": "Featured Manga",
+    "featuredPlaceholder": "Manga cards will be displayed here",
+    "genres": "Popular Genres",
+    "genresPlaceholder": "Genre categories will be displayed here",
+    "latest": "Latest Updates",
+    "latestPlaceholder": "Recently updated manga will be displayed here"
+  },
+  "featured": {
+    "title": "Featured Manga"
+  },
+  "latest": {
+    "title": "Latest Updates",
+    "viewAll": "View All"
+  },
+  "topViews": {
+    "title": "Top 10 Views",
+    "daily": "DAILY",
+    "weekly": "WEEKLY",
+    "monthly": "MONTHLY",
+    "views": "{{count}} Views"
+  },
+  "comments": {
+    "title": "Latest Comments"
+  },
+  "activeUsers": {
+    "title": "Active Users",
+    "level": "Lv. {{level}}"
+  }
+}

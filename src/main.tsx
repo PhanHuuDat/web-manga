@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { store } from './store';
 import theme from './theme/theme';
+import './i18n/i18n-config'; // Initialize i18n before app
 import App from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(

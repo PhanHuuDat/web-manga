@@ -9,8 +9,8 @@ export const GENRES: Genre[] = [
   { id: 'horror', name: 'Horror', slug: 'horror', description: 'Scary and suspenseful tales' },
   { id: 'mystery', name: 'Mystery', slug: 'mystery', description: 'Puzzles and detective stories' },
   { id: 'romance', name: 'Romance', slug: 'romance', description: 'Love stories and relationships' },
-  { id: 'sci-fi', name: 'Sci-Fi', slug: 'sci-fi', description: 'Science fiction and technology' },
-  { id: 'slice-of-life', name: 'Slice of Life', slug: 'slice-of-life', description: 'Everyday life experiences' },
+  { id: 'sciFi', name: 'Sci-Fi', slug: 'sci-fi', description: 'Science fiction and technology' },
+  { id: 'sliceOfLife', name: 'Slice of Life', slug: 'slice-of-life', description: 'Everyday life experiences' },
   { id: 'sports', name: 'Sports', slug: 'sports', description: 'Athletic competitions and training' },
   { id: 'supernatural', name: 'Supernatural', slug: 'supernatural', description: 'Paranormal and mystical elements' },
 ];

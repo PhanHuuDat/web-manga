@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "search": "Tìm kiếm manga...",
+    "genres": "Thể loại",
+    "userMenu": "Menu người dùng"
+  },
+  "navbar": {
+    "browse": "Duyệt",
+    "popular": "Phổ biến",
+    "schedule": "Lịch",
+    "login": "ĐĂNG NHẬP"
+  },
+  "aria": {
+    "search": "Tìm kiếm",
+    "searchManga": "Tìm kiếm manga",
+    "changeLanguage": "Đổi ngôn ngữ"
+  },
+  "genres": {
+    "action": { "name": "Hành động", "description": "Trận chiến và phiêu lưu kịch tính" },
+    "adventure": { "name": "Phiêu lưu", "description": "Hành trình và nhiệm vụ thú vị" },
+    "comedy": { "name": "Hài hước", "description": "Câu chuyện vui nhộn và nhẹ nhàng" },
+    "drama": { "name": "Chính kịch", "description": "Cốt truyện cảm xúc và nghiêm túc" },
+    "fantasy": { "name": "Giả tưởng", "description": "Thế giới phép thuật và sinh vật kỳ ảo" },
+    "horror": { "name": "Kinh dị", "description": "Câu chuyện đáng sợ và hồi hộp" },
+    "mystery": { "name": "Bí ẩn", "description": "Câu đố và truyện trinh thám" },
+    "romance": { "name": "Lãng mạn", "description": "Câu chuyện tình yêu" },
+    "sciFi": { "name": "Khoa học viễn tưởng", "description": "Khoa học và công nghệ" },
+    "sliceOfLife": { "name": "Đời thường", "description": "Trải nghiệm cuộc sống hàng ngày" },
+    "sports": { "name": "Thể thao", "description": "Thi đấu và luyện tập thể thao" },
+    "supernatural": { "name": "Siêu nhiên", "description": "Yếu tố huyền bí và siêu nhiên" }
+  },
+  "chapter_one": "{{count}} chương",
+  "chapter_other": "{{count}} chương",
+  "footer": {
+    "description": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao.",
+    "navigation": "Điều hướng",
+    "support": "Hỗ trợ",
+    "nav": {
+      "home": "Trang chủ",
+      "latest": "Mới cập nhật",
+      "popular": "Phổ biến",
+      "genres": "Thể loại"
+    },
+    "supportLinks": {
+      "privacy": "Chính sách bảo mật",
+      "terms": "Điều khoản",
+      "contact": "Liên hệ",
+      "discord": "Discord"
+    }
+  }
+}

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>MangaVoid - Homepage Mockup</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "dark-navy": "#0a0c14",
+            "deep-charcoal": "#121520",
+            "card-bg": "#1a1e2e",
+            "neon-blue": "#3b82f6",
+            "neon-purple": "#a855f7",
+            "glass": "rgba(255, 255, 255, 0.05)",
+          },
+          fontFamily: {
+            "sans": ["Spline Sans", "sans-serif"],
+            "display": ["Outfit", "sans-serif"]
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      body {
+        @apply bg-dark-navy text-gray-200;
+      }
+    }
+    .glass-morphism {
+      @apply bg-white/5 backdrop-blur-md border border-white/10;
+    }
+    .glow-blue {
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+    .manga-card-hover:hover {
+      @apply ring-2 ring-neon-blue/50 shadow-[0_0_20px_rgba(59,130,246,0.2)];
+    }
+    .section-header-line {
+      @apply h-1 w-12 bg-neon-blue rounded-full;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      @apply bg-dark-navy;
+    }
+    ::-webkit-scrollbar-thumb {
+      @apply bg-white/10 rounded-full hover:bg-white/20;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+<!-- ========== NAVBAR ========== -->
+<header class="sticky top-0 z-50 border-b border-white/5 bg-dark-navy/80 backdrop-blur-lg">
+  <nav class="max-w-[1500px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between gap-8">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-gradient-to-br from-neon-blue to-neon-purple rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.4)]">
+        <span class="material-symbols-outlined text-white">auto_stories</span>
+      </div>
+      <span class="text-2xl font-display font-extrabold tracking-tighter text-white glow-blue">MANGA<span class="text-neon-blue">VOID</span></span>
+    </div>
+
+    <!-- SearchBar -->
+    <div class="flex-1 max-w-2xl hidden md:block">
+      <div class="relative group">
+        <input class="w-full h-11 bg-white/5 border border-white/10 rounded-full px-12 focus:ring-2 focus:ring-neon-blue focus:bg-white/10 transition-all text-sm outline-none" placeholder="Tìm kiếm manga yêu thích..." type="text"/>
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-neon-blue">search</span>
+      </div>
+    </div>
+
+    <!-- Nav Links + Actions -->
+    <div class="flex items-center gap-8">
+      <div class="hidden lg:flex gap-6 font-medium text-sm text-gray-400">
+        <a class="hover:text-neon-blue transition-colors cursor-pointer">Duyệt</a>
+        <a class="hover:text-neon-blue transition-colors cursor-pointer">Phổ biến</a>
+        <a class="hover:text-neon-blue transition-colors cursor-pointer">Lịch</a>
+      </div>
+
+      <!-- Language Switcher -->
+      <div class="flex items-center gap-2 text-sm text-gray-400">
+        <button class="px-2 py-1 rounded bg-neon-blue/20 text-neon-blue font-bold text-xs">VI</button>
+        <button class="px-2 py-1 rounded hover:bg-white/10 text-xs">EN</button>
+      </div>
+
+      <!-- Login Button -->
+      <button class="px-6 py-2.5 bg-gradient-to-r from-neon-blue to-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-lg text-white font-bold text-sm tracking-wide transition-all active:scale-95">
+        ĐĂNG NHẬP
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ========== FEATURED SECTION ========== -->
+<section class="max-w-[1500px] mx-auto px-6 lg:px-12 py-10">
+  <div class="flex items-center gap-4 mb-8">
+    <div class="section-header-line"></div>
+    <h2 class="text-xl font-display font-bold uppercase tracking-widest text-white">Truyện Tiêu Điểm</h2>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+    <!-- Featured Card 1 - HOT -->
+    <div class="group relative aspect-[3/4.5] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-2 manga-card-hover">
+      <img alt="Solo Leveling" class="w-full h-full object-cover" src="https://placehold.co/300x450/1a1e2e/3b82f6?text=Solo+Leveling"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-dark-navy via-transparent to-transparent opacity-90"></div>
+      <div class="absolute bottom-0 p-4 w-full">
+        <span class="text-[10px] bg-neon-purple/80 px-2 py-0.5 rounded text-white font-bold mb-2 inline-block">HOT</span>
+        <h3 class="text-sm font-bold text-white line-clamp-1 group-hover:text-neon-blue transition-colors">Solo Leveling: Arise</h3>
+        <p class="text-xs text-gray-400">Ch. 248</p>
+      </div>
+    </div>
+
+    <!-- Featured Card 2 - TOP -->
+    <div class="group relative aspect-[3/4.5] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-2 manga-card-hover">
+      <img alt="Return of Hero" class="w-full h-full object-cover" src="https://placehold.co/300x450/1a1e2e/a855f7?text=Return+Hero"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-dark-navy via-transparent to-transparent opacity-90"></div>
+      <div class="absolute bottom-0 p-4 w-full">
+        <span class="text-[10px] bg-blue-600/80 px-2 py-0.5 rounded text-white font-bold mb-2 inline-block">TOP</span>
+        <h3 class="text-sm font-bold text-white line-clamp-1 group-hover:text-neon-blue">Return of the Hero</h3>
+        <p class="text-xs text-gray-400">Ch. 120</p>
+      </div>
+    </div>
+
+    <!-- Featured Card 3 -->
+    <div class="group relative aspect-[3/4.5] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-2 manga-card-hover">
+      <img alt="Tower of God" class="w-full h-full object-cover" src="https://placehold.co/300x450/1a1e2e/22c55e?text=Tower+of+God"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-dark-navy via-transparent to-transparent opacity-90"></div>
+      <div class="absolute bottom-0 p-4 w-full">
+        <span class="text-[10px] bg-green-600/80 px-2 py-0.5 rounded text-white font-bold mb-2 inline-block">NEW</span>
+        <h3 class="text-sm font-bold text-white line-clamp-1">Tower of God S3</h3>
+        <p class="text-xs text-gray-400">Ch. 568</p>
+      </div>
+    </div>
+
+    <!-- Featured Card 4 -->
+    <div class="group relative aspect-[3/4.5] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-2 manga-card-hover">
+      <img alt="One Piece" class="w-full h-full object-cover" src="https://placehold.co/300x450/1a1e2e/f59e0b?text=One+Piece"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-dark-navy via-transparent to-transparent opacity-90"></div>
+      <div class="absolute bottom-0 p-4 w-full">
+        <h3 class="text-sm font-bold text-white line-clamp-1">One Piece</h3>
+        <p class="text-xs text-gray-400">Ch. 1110</p>
+      </div>
+    </div>
+
+    <!-- Featured Card 5 -->
+    <div class="group relative aspect-[3/4.5] rounded-xl overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-2 manga-card-hover">
+      <img alt="Jujutsu Kaisen" class="w-full h-full object-cover" src="https://placehold.co/300x450/1a1e2e/ef4444?text=Jujutsu+Kaisen"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-dark-navy via-transparent to-transparent opacity-90"></div>
+      <div class="absolute bottom-0 p-4 w-full">
+        <h3 class="text-sm font-bold text-white line-clamp-1">Jujutsu Kaisen</h3>
+        <p class="text-xs text-gray-400">Ch. 250</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MAIN CONTENT (Two Columns) ========== -->
+<main class="max-w-[1500px] mx-auto px-6 lg:px-12 py-10">
+  <div class="flex flex-col lg:flex-row gap-12">
+
+    <!-- ========== LEFT COLUMN (65%) - Latest Manga List ========== -->
+    <div class="w-full lg:w-[65%]">
+      <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+        <div class="flex items-center gap-4">
+          <div class="section-header-line"></div>
+          <h2 class="text-xl font-display font-bold uppercase tracking-widest text-white">Truyện Mới Cập Nhật</h2>
+        </div>
+        <button class="text-xs font-bold text-neon-blue hover:text-white transition-colors flex items-center gap-1 group">
+          XEM TẤT CẢ <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Latest Card 1 -->
+        <div class="flex gap-6 p-4 rounded-xl bg-card-bg/30 hover:bg-card-bg transition-colors border border-white/5 group cursor-pointer">
+          <div class="w-24 sm:w-32 shrink-0 aspect-[3/4] rounded-lg overflow-hidden relative">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://placehold.co/200x280/1a1e2e/3b82f6?text=Manga+1"/>
+          </div>
+          <div class="flex flex-col justify-center py-1">
+            <h3 class="text-lg font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-1">The Ancient One's Legacy</h3>
+            <p class="text-sm text-gray-400 mb-2">Tác giả: Han Sung-Joo</p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-[10px] uppercase font-bold text-neon-blue px-2 py-0.5 bg-neon-blue/10 border border-neon-blue/20 rounded">Action</span>
+              <span class="text-[10px] uppercase font-bold text-neon-purple px-2 py-0.5 bg-neon-purple/10 border border-neon-purple/20 rounded">Fantasy</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">update</span> 2 giờ trước</span>
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">visibility</span> 14.5k</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Card 2 -->
+        <div class="flex gap-6 p-4 rounded-xl bg-card-bg/30 hover:bg-card-bg transition-colors border border-white/5 group cursor-pointer">
+          <div class="w-24 sm:w-32 shrink-0 aspect-[3/4] rounded-lg overflow-hidden">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://placehold.co/200x280/1a1e2e/a855f7?text=Manga+2"/>
+          </div>
+          <div class="flex flex-col justify-center py-1">
+            <h3 class="text-lg font-bold text-white group-hover:text-neon-blue">Omniscient Reader's Viewpoint</h3>
+            <p class="text-sm text-gray-400 mb-2">Tác giả: sing N song</p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="text-[10px] uppercase font-bold text-neon-blue px-2 py-0.5 bg-neon-blue/10 rounded">Adventure</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">update</span> 5 giờ trước</span>
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">visibility</span> 8.2k</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Card 3 -->
+        <div class="flex gap-6 p-4 rounded-xl bg-card-bg/30 hover:bg-card-bg transition-colors border border-white/5 group cursor-pointer">
+          <div class="w-24 sm:w-32 shrink-0 aspect-[3/4] rounded-lg overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://placehold.co/200x280/1a1e2e/22c55e?text=Manga+3"/>
+          </div>
+          <div class="flex flex-col justify-center">
+            <h3 class="text-lg font-bold text-white group-hover:text-neon-blue">Berserk</h3>
+            <p class="text-sm text-gray-400">Chapter 375</p>
+          </div>
+        </div>
+
+        <!-- Latest Card 4 -->
+        <div class="flex gap-6 p-4 rounded-xl bg-card-bg/30 hover:bg-card-bg transition-colors border border-white/5 group cursor-pointer">
+          <div class="w-24 sm:w-32 shrink-0 aspect-[3/4] rounded-lg overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://placehold.co/200x280/1a1e2e/f59e0b?text=Manga+4"/>
+          </div>
+          <div class="flex flex-col justify-center">
+            <h3 class="text-lg font-bold text-white group-hover:text-neon-blue">Kingdom</h3>
+            <p class="text-sm text-gray-400">Chapter 789</p>
+          </div>
+        </div>
+
+        <!-- Latest Card 5 -->
+        <div class="flex gap-6 p-4 rounded-xl bg-card-bg/30 hover:bg-card-bg transition-colors border border-white/5 group cursor-pointer">
+          <div class="w-24 sm:w-32 shrink-0 aspect-[3/4] rounded-lg overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://placehold.co/200x280/1a1e2e/ef4444?text=Manga+5"/>
+          </div>
+          <div class="flex flex-col justify-center">
+            <h3 class="text-lg font-bold text-white group-hover:text-neon-blue">Chainsaw Man</h3>
+            <p class="text-sm text-gray-400">Chapter 158</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="mt-12 flex justify-center items-center gap-3">
+        <button class="w-10 h-10 rounded-lg bg-card-bg border border-white/10 flex items-center justify-center font-bold text-neon-blue">1</button>
+        <button class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 hover:border-neon-blue/50 flex items-center justify-center font-bold transition-all">2</button>
+        <button class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 hover:border-neon-blue/50 flex items-center justify-center font-bold transition-all">3</button>
+        <span class="text-gray-500">...</span>
+        <button class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 hover:border-neon-blue/50 flex items-center justify-center font-bold transition-all">12</button>
+        <button class="w-10 h-10 rounded-lg bg-neon-blue flex items-center justify-center font-bold transition-all">
+          <span class="material-symbols-outlined text-white">chevron_right</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========== RIGHT COLUMN (35%) - Sidebar ========== -->
+    <div class="w-full lg:w-[35%] flex flex-col gap-10">
+
+      <!-- Top 10 Views Section -->
+      <section class="bg-card-bg/50 rounded-2xl border border-white/5 p-6 shadow-xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-1.5 h-6 bg-neon-purple rounded-full"></div>
+          <h3 class="text-sm font-display font-black uppercase tracking-widest text-white">Top 10 Lượt Xem</h3>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-1 mb-6 p-1 bg-dark-navy/50 rounded-lg">
+          <button class="flex-1 py-1.5 text-[10px] font-bold rounded-md bg-neon-blue text-white shadow-lg">NGÀY</button>
+          <button class="flex-1 py-1.5 text-[10px] font-bold rounded-md text-gray-500 hover:text-white transition-colors">TUẦN</button>
+          <button class="flex-1 py-1.5 text-[10px] font-bold rounded-md text-gray-500 hover:text-white transition-colors">THÁNG</button>
+        </div>
+
+        <!-- Rank List -->
+        <div class="space-y-4">
+          <!-- Rank 1 -->
+          <div class="flex gap-4 items-center group cursor-pointer">
+            <div class="relative">
+              <span class="absolute -top-2 -left-2 w-6 h-6 bg-neon-blue text-white text-[10px] font-black flex items-center justify-center rounded-lg shadow-lg z-10">01</span>
+              <div class="w-12 h-16 rounded-lg overflow-hidden border border-white/10">
+                <img class="w-full h-full object-cover" src="https://placehold.co/100x140/1a1e2e/3b82f6?text=1"/>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h4 class="text-sm font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-1">Eleceed: The Awakening</h4>
+              <p class="text-[10px] text-gray-500">2.4M lượt xem</p>
+            </div>
+          </div>
+
+          <!-- Rank 2 -->
+          <div class="flex gap-4 items-center group cursor-pointer border-t border-white/5 pt-4">
+            <div class="relative">
+              <span class="absolute -top-2 -left-2 w-6 h-6 bg-card-bg text-gray-400 text-[10px] font-black flex items-center justify-center rounded-lg border border-white/10 z-10">02</span>
+              <div class="w-12 h-16 rounded-lg overflow-hidden border border-white/10">
+                <img class="w-full h-full object-cover" src="https://placehold.co/100x140/1a1e2e/a855f7?text=2"/>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h4 class="text-sm font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-1">Omniscient Reader</h4>
+              <p class="text-[10px] text-gray-500">1.8M lượt xem</p>
+            </div>
+          </div>
+
+          <!-- Rank 3 -->
+          <div class="flex gap-4 items-center group cursor-pointer border-t border-white/5 pt-4">
+            <div class="relative">
+              <span class="absolute -top-2 -left-2 w-6 h-6 bg-card-bg text-gray-400 text-[10px] font-black flex items-center justify-center rounded-lg border border-white/10 z-10">03</span>
+              <div class="w-12 h-16 rounded-lg overflow-hidden border border-white/10">
+                <img class="w-full h-full object-cover" src="https://placehold.co/100x140/1a1e2e/22c55e?text=3"/>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h4 class="text-sm font-bold text-white group-hover:text-neon-blue transition-colors line-clamp-1">The Beginning After The End</h4>
+              <p class="text-[10px] text-gray-500">1.5M lượt xem</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Top Comments Section -->
+      <section class="bg-card-bg/50 rounded-2xl border border-white/5 p-6">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-1.5 h-6 bg-neon-blue rounded-full"></div>
+          <h3 class="text-sm font-display font-black uppercase tracking-widest text-white">Bình Luận Mới</h3>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Comment 1 -->
+          <div class="flex gap-3">
+            <img class="w-8 h-8 rounded-full border border-neon-blue/30 p-0.5" src="https://placehold.co/40x40/1a1e2e/3b82f6?text=U1"/>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[11px] font-bold text-white">ShadowKing</span>
+                <span class="text-[9px] text-gray-500">5 phút trước</span>
+              </div>
+              <p class="text-[11px] text-gray-400 line-clamp-2 bg-dark-navy/30 p-2 rounded-lg border border-white/5 italic">"Chapter này quá đỉnh! Cái twist ở cuối làm mình sốc..."</p>
+            </div>
+          </div>
+
+          <!-- Comment 2 -->
+          <div class="flex gap-3 pt-4 border-t border-white/5">
+            <img class="w-8 h-8 rounded-full border border-neon-purple/30 p-0.5" src="https://placehold.co/40x40/1a1e2e/a855f7?text=U2"/>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[11px] font-bold text-white">MangaLover99</span>
+                <span class="text-[9px] text-gray-500">12 phút trước</span>
+              </div>
+              <p class="text-[11px] text-gray-400 line-clamp-2 bg-dark-navy/30 p-2 rounded-lg border border-white/5 italic">"Art style ngày càng đẹp, tác giả vẽ quá tuyệt vời!"</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Users Section -->
+      <section class="bg-card-bg/50 rounded-2xl border border-white/5 p-6">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-1.5 h-6 bg-green-500 rounded-full"></div>
+          <h3 class="text-sm font-display font-black uppercase tracking-widest text-white">Đang Hoạt Động</h3>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <!-- User 1 -->
+          <div class="flex flex-col items-center p-3 rounded-xl bg-dark-navy/30 border border-white/5 hover:border-neon-blue/30 transition-colors cursor-pointer">
+            <div class="relative">
+              <img class="w-12 h-12 rounded-xl mb-2" src="https://placehold.co/50x50/1a1e2e/3b82f6?text=A"/>
+              <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-dark-navy rounded-full"></div>
+            </div>
+            <span class="text-[10px] font-bold text-white">Alex_V</span>
+            <span class="text-[9px] text-neon-blue uppercase">Cấp 42</span>
+          </div>
+
+          <!-- User 2 -->
+          <div class="flex flex-col items-center p-3 rounded-xl bg-dark-navy/30 border border-white/5 hover:border-neon-blue/30 transition-colors cursor-pointer">
+            <div class="relative">
+              <img class="w-12 h-12 rounded-xl mb-2" src="https://placehold.co/50x50/1a1e2e/a855f7?text=G"/>
+              <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-dark-navy rounded-full"></div>
+            </div>
+            <span class="text-[10px] font-bold text-white">GhostReader</span>
+            <span class="text-[9px] text-neon-blue uppercase">Cấp 38</span>
+          </div>
+
+          <!-- User 3 -->
+          <div class="flex flex-col items-center p-3 rounded-xl bg-dark-navy/30 border border-white/5 hover:border-neon-blue/30 transition-colors cursor-pointer">
+            <div class="relative">
+              <img class="w-12 h-12 rounded-xl mb-2" src="https://placehold.co/50x50/1a1e2e/22c55e?text=S"/>
+              <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-gray-600 border-2 border-dark-navy rounded-full"></div>
+            </div>
+            <span class="text-[10px] font-bold text-white">Satoru_G</span>
+            <span class="text-[9px] text-neon-blue uppercase">Cấp 99</span>
+          </div>
+
+          <!-- User 4 -->
+          <div class="flex flex-col items-center p-3 rounded-xl bg-dark-navy/30 border border-white/5 hover:border-neon-blue/30 transition-colors cursor-pointer">
+            <div class="relative">
+              <img class="w-12 h-12 rounded-xl mb-2" src="https://placehold.co/50x50/1a1e2e/f59e0b?text=V"/>
+              <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-dark-navy rounded-full"></div>
+            </div>
+            <span class="text-[10px] font-bold text-white">V_Kpop</span>
+            <span class="text-[9px] text-neon-blue uppercase">Cấp 15</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="mt-20 border-t border-white/5 bg-deep-charcoal py-20 px-6 lg:px-12">
+  <div class="max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <!-- Brand Column -->
+    <div class="col-span-1 md:col-span-2 flex flex-col gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-neon-blue rounded-lg flex items-center justify-center">
+          <span class="material-symbols-outlined text-white text-sm">auto_stories</span>
+        </div>
+        <span class="text-xl font-display font-extrabold text-white glow-blue">MANGAVOID</span>
+      </div>
+      <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
+        MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.
+      </p>
+      <div class="flex gap-4">
+        <a class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-neon-blue transition-colors border border-white/10 cursor-pointer">
+          <span class="material-symbols-outlined text-white">public</span>
+        </a>
+        <a class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-neon-blue transition-colors border border-white/10 cursor-pointer">
+          <span class="material-symbols-outlined text-white">rss_feed</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation Column -->
+    <div>
+      <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-widest">Điều Hướng</h4>
+      <ul class="flex flex-col gap-4 text-sm text-gray-500">
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Trang chủ</a></li>
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Mới cập nhật</a></li>
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Phổ biến</a></li>
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Thể loại</a></li>
+      </ul>
+    </div>
+
+    <!-- Support Column -->
+    <div>
+      <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-widest">Hỗ Trợ</h4>
+      <ul class="flex flex-col gap-4 text-sm text-gray-500">
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Chính sách bảo mật</a></li>
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Điều khoản dịch vụ</a></li>
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Liên hệ</a></li>
+        <li><a class="hover:text-neon-blue transition-colors cursor-pointer">Discord</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="max-w-[1500px] mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+    <p class="text-gray-600 text-[10px] font-medium tracking-widest uppercase">© 2026 MANGAVOID. ALL RIGHTS RESERVED.</p>
+    <div class="flex gap-6 text-[10px] font-bold text-gray-600 uppercase">
+      <a class="hover:text-white cursor-pointer">API</a>
+      <a class="hover:text-white cursor-pointer">DMCA</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

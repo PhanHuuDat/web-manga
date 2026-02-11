@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "search": "Search manga...",
+    "genres": "Genres",
+    "userMenu": "User menu"
+  },
+  "navbar": {
+    "browse": "Browse",
+    "popular": "Popular",
+    "schedule": "Schedule",
+    "login": "LOGIN"
+  },
+  "aria": {
+    "search": "Search",
+    "searchManga": "Search manga",
+    "changeLanguage": "Change language"
+  },
+  "genres": {
+    "action": { "name": "Action", "description": "High-energy battles and adventures" },
+    "adventure": { "name": "Adventure", "description": "Exciting journeys and quests" },
+    "comedy": { "name": "Comedy", "description": "Humorous and lighthearted stories" },
+    "drama": { "name": "Drama", "description": "Emotional and serious narratives" },
+    "fantasy": { "name": "Fantasy", "description": "Magical worlds and creatures" },
+    "horror": { "name": "Horror", "description": "Scary and suspenseful tales" },
+    "mystery": { "name": "Mystery", "description": "Puzzles and detective stories" },
+    "romance": { "name": "Romance", "description": "Love stories and relationships" },
+    "sciFi": { "name": "Sci-Fi", "description": "Science fiction and technology" },
+    "sliceOfLife": { "name": "Slice of Life", "description": "Everyday life experiences" },
+    "sports": { "name": "Sports", "description": "Athletic competitions and training" },
+    "supernatural": { "name": "Supernatural", "description": "Paranormal and mystical elements" }
+  },
+  "chapter_one": "{{count}} chapter",
+  "chapter_other": "{{count}} chapters",
+  "footer": {
+    "description": "MangaVoid is your premium destination for high-quality manga reading.",
+    "navigation": "Navigation",
+    "support": "Support",
+    "nav": {
+      "home": "Home",
+      "latest": "Latest Updates",
+      "popular": "Popular Manga",
+      "genres": "Genres"
+    },
+    "supportLinks": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact Us",
+      "discord": "Discord Community"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": "Khám phá Manga tiếp theo của bạn",
+    "subtitle": "Khám phá hàng nghìn bộ manga từ các thể loại phổ biến"
+  },
+  "sections": {
+    "featured": "Manga nổi bật",
+    "featuredPlaceholder": "Các thẻ manga sẽ hiển thị ở đây",
+    "genres": "Thể loại phổ biến",
+    "genresPlaceholder": "Danh mục thể loại sẽ hiển thị ở đây",
+    "latest": "Cập nhật mới nhất",
+    "latestPlaceholder": "Manga cập nhật gần đây sẽ hiển thị ở đây"
+  },
+  "featured": {
+    "title": "Truyện Tiêu Điểm"
+  },
+  "latest": {
+    "title": "Truyện Mới Cập Nhật",
+    "viewAll": "Xem tất cả"
+  },
+  "topViews": {
+    "title": "Top 10 Lượt Xem",
+    "daily": "NGÀY",
+    "weekly": "TUẦN",
+    "monthly": "THÁNG",
+    "views": "{{count}} lượt xem"
+  },
+  "comments": {
+    "title": "Bình Luận Mới"
+  },
+  "activeUsers": {
+    "title": "Đang Hoạt Động",
+    "level": "Cấp {{level}}"
+  }
+}

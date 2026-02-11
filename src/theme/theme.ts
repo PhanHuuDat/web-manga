@@ -1,76 +1,105 @@
 import { createTheme } from '@mui/material/styles';
 
-// Deep Ocean Blue theme - mapped from _variables.scss
+// MangaVoid Dark Theme - Reference design colors
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#0EA5E9', // accent-primary
-      light: '#38BDF8', // accent-secondary
-      dark: '#0284C7', // accent-tertiary
+      main: '#3b82f6', // neon-blue
+      light: '#60a5fa',
+      dark: '#2563eb',
     },
     secondary: {
-      main: '#38BDF8', // accent-secondary
+      main: '#a855f7', // neon-purple
+      light: '#c084fc',
+      dark: '#9333ea',
     },
     background: {
-      default: '#0F172A', // bg-primary
-      paper: '#1E293B', // bg-secondary
+      default: '#0a0c14', // dark-navy
+      paper: '#1a1e2e', // card-bg
     },
     text: {
-      primary: '#F8FAFC',
-      secondary: '#94A3B8',
-      disabled: '#64748B', // text-tertiary
+      primary: '#f1f5f9',
+      secondary: '#94a3b8',
+      disabled: '#64748b',
     },
-    divider: '#334155', // border-primary
+    divider: 'rgba(255, 255, 255, 0.05)',
     error: {
-      main: '#EF4444',
+      main: '#ef4444',
     },
     warning: {
-      main: '#F59E0B',
+      main: '#f59e0b',
     },
     success: {
-      main: '#10B981',
+      main: '#22c55e',
     },
     info: {
-      main: '#3B82F6',
+      main: '#3b82f6',
     },
     action: {
-      hover: '#475569', // hover-bg
-      selected: '#64748B', // active-bg
+      hover: 'rgba(255, 255, 255, 0.05)',
+      selected: 'rgba(255, 255, 255, 0.1)',
     },
   },
   typography: {
-    fontFamily: '"Poppins", sans-serif',
-    h1: { fontFamily: '"Righteous", sans-serif' },
-    h2: { fontFamily: '"Righteous", sans-serif' },
-    h3: { fontFamily: '"Righteous", sans-serif' },
-    h4: { fontFamily: '"Righteous", sans-serif' },
-    h5: { fontFamily: '"Righteous", sans-serif' },
-    h6: { fontFamily: '"Righteous", sans-serif' },
+    fontFamily: '"Spline Sans", sans-serif',
+    h1: { fontFamily: '"Outfit", sans-serif', fontWeight: 800 },
+    h2: { fontFamily: '"Outfit", sans-serif', fontWeight: 800 },
+    h3: { fontFamily: '"Outfit", sans-serif', fontWeight: 700 },
+    h4: { fontFamily: '"Outfit", sans-serif', fontWeight: 700 },
+    h5: { fontFamily: '"Outfit", sans-serif', fontWeight: 600 },
+    h6: { fontFamily: '"Outfit", sans-serif', fontWeight: 600 },
   },
   shape: {
-    borderRadius: 8, // 0.5rem default
+    borderRadius: 8,
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
           scrollbarWidth: 'thin',
-          scrollbarColor: '#475569 #1E293B',
+          scrollbarColor: '#1a1e2e #0a0c14',
           '&::-webkit-scrollbar': {
             width: '8px',
           },
           '&::-webkit-scrollbar-track': {
-            background: '#1E293B',
+            background: '#0a0c14',
           },
           '&::-webkit-scrollbar-thumb': {
-            background: '#475569',
+            background: '#1a1e2e',
             borderRadius: '4px',
           },
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: 600,
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
+        },
+      },
+    },
   },
 });
+
+// Custom colors for easy access throughout the app
+export const customColors = {
+  darkNavy: '#0a0c14',
+  deepCharcoal: '#121520',
+  cardBg: '#1a1e2e',
+  cardBgHover: '#242938',
+  neonBlue: '#3b82f6',
+  neonPurple: '#a855f7',
+  glass: 'rgba(255, 255, 255, 0.05)',
+  glassBorder: 'rgba(255, 255, 255, 0.1)',
+};
 
 export default theme;

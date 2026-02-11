@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import IconButton from '@mui/material/IconButton';
 
 function UserMenu() {
+  const { t } = useTranslation('common');
+
   return (
     <IconButton
-      aria-label="User menu"
+      aria-label={t('nav.userMenu')}
       sx={{
         color: 'text.secondary',
         '&:hover': { color: 'text.primary', bgcolor: 'action.hover' },

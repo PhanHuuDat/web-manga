@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import type { GenreDropdownProps } from '../../types/navigation-types';
 
 function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
+  const { t } = useTranslation('common');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -51,7 +53,7 @@ function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
           '&:hover': { bgcolor: 'action.hover' },
         }}
       >
-        Genres
+        {t('nav.genres')}
       </Button>
 
       <Menu
@@ -92,11 +94,11 @@ function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
               }}
             >
               <Typography variant="body2" fontWeight={500}>
-                {genre.name}
+                {t(`genres.${genre.id}.name`, { defaultValue: genre.name })}
               </Typography>
               {genre.description && (
                 <Typography variant="caption" color="text.secondary">
-                  {genre.description}
+                  {t(`genres.${genre.id}.description`, { defaultValue: genre.description })}
                 </Typography>
               )}
             </MenuItem>

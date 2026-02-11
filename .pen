@@ -1,0 +1,2892 @@
+{
+  "version": "2.7",
+  "children": [
+    {
+      "type": "frame",
+      "id": "7jVKK",
+      "x": 0,
+      "y": 0,
+      "name": "Homepage",
+      "width": 1500,
+      "height": 2000,
+      "fill": "#0a0c14",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Frw7P",
+          "name": "Navbar",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "#121520",
+          "gap": 32,
+          "padding": 24,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Ibk29",
+              "name": "logoContainer",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "l86EI",
+                  "name": "logoIcon",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#3b82f6",
+                  "cornerRadius": 10
+                },
+                {
+                  "type": "text",
+                  "id": "jvG3z",
+                  "name": "logoText",
+                  "fill": "#FFFFFF",
+                  "content": "MANGAVOID",
+                  "fontFamily": "Inter",
+                  "fontSize": 24,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JqIri",
+              "name": "searchContainer",
+              "width": "fill_container",
+              "height": 44,
+              "fill": "#FFFFFF0D",
+              "cornerRadius": 22,
+              "gap": 12,
+              "padding": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "UIGpl",
+                  "name": "searchIcon",
+                  "fill": "#9CA3AF",
+                  "content": "search",
+                  "fontFamily": "Material Symbols Outlined",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Mzljr",
+                  "name": "searchPlaceholder",
+                  "fill": "#9CA3AF",
+                  "content": "Tìm kiếm manga yêu thích...",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VrQso",
+              "name": "linksContainer",
+              "gap": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0OXYf",
+                  "name": "navLinkBrowse",
+                  "fill": "#9CA3AF",
+                  "content": "Duyệt",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "Juhpx",
+                  "name": "navLinkPopular",
+                  "fill": "#9CA3AF",
+                  "content": "Phổ biến",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "iotek",
+                  "name": "navLinkSchedule",
+                  "fill": "#9CA3AF",
+                  "content": "Lịch",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gJf7r",
+              "name": "langContainer",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NfdG1",
+                  "name": "langButtonVi",
+                  "fill": "#3b82f6",
+                  "cornerRadius": 4,
+                  "padding": 4,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9riXy",
+                      "name": "langTextVi",
+                      "fill": "#FFFFFF",
+                      "content": "VI",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JAN3l",
+                  "name": "langButtonEn",
+                  "fill": "transparent",
+                  "cornerRadius": 4,
+                  "padding": 4,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sdB6j",
+                      "name": "langTextEn",
+                      "fill": "#9CA3AF",
+                      "content": "EN",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7DDFO",
+              "name": "loginButton",
+              "width": 120,
+              "height": 40,
+              "fill": "#3b82f6",
+              "cornerRadius": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "KThgQ",
+                  "name": "loginButtonText",
+                  "fill": "#FFFFFF",
+                  "content": "ĐĂNG NHẬP",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yEwDZ",
+          "name": "FeaturedSection",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 48,
+          "children": [
+            {
+              "type": "frame",
+              "id": "MSfBs",
+              "name": "featuredHeader",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 2,
+                  "id": "11Txb",
+                  "name": "featuredAccentLine",
+                  "fill": "#3b82f6",
+                  "width": 48,
+                  "height": 4
+                },
+                {
+                  "type": "text",
+                  "id": "TBIKP",
+                  "name": "featuredTitle",
+                  "fill": "#FFFFFF",
+                  "content": "TRUYỆN TIÊU ĐIỂM",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hC44G",
+              "name": "FeaturedGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "7ch14",
+                  "name": "FeaturedCard1",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "caio_delarolle",
+                    "link": "https://unsplash.com/@caio_delarolle",
+                    "author": "CC PD"
+                  },
+                  "width": "fill_container",
+                  "height": 360,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1742414304022-b38977ce1533?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgxNzd8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "4Y558",
+                      "name": "featuredCard1Overlay",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "MzkyF",
+                          "name": "featuredCard1Content",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "hp0D8",
+                              "name": "featuredCard1Badge",
+                              "fill": "#a855f7CC",
+                              "cornerRadius": 4,
+                              "padding": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "rwYFW",
+                                  "name": "featuredCard1BadgeText",
+                                  "fill": "#FFFFFF",
+                                  "content": "HOT",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "Yb2Ms",
+                              "name": "featuredCard1Title",
+                              "fill": "#FFFFFF",
+                              "content": "Solo Leveling: Arise",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "7pkM6",
+                              "name": "featuredCard1Chapter",
+                              "fill": "#9CA3AF",
+                              "content": "Ch. 248",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KFcLQ",
+                  "name": "FeaturedCard2",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "caio_delarolle",
+                    "link": "https://unsplash.com/@caio_delarolle",
+                    "author": "CC PD"
+                  },
+                  "width": "fill_container",
+                  "height": 360,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1742414304022-b38977ce1533?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgxNzd8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "easrA",
+                      "name": "featuredCard2Overlay",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "HGthm",
+                          "name": "featuredCard2Content",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "hM70e",
+                              "name": "featuredCard2Badge",
+                              "fill": "#a855f7CC",
+                              "cornerRadius": 4,
+                              "padding": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Srwj4",
+                                  "name": "featuredCard2BadgeText",
+                                  "fill": "#FFFFFF",
+                                  "content": "HOT",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "luF4e",
+                              "name": "featuredCard2Title",
+                              "fill": "#FFFFFF",
+                              "content": "Solo Leveling: Arise",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "6V8TE",
+                              "name": "featuredCard2Chapter",
+                              "fill": "#9CA3AF",
+                              "content": "Ch. 248",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pGCaV",
+                  "name": "FeaturedCard3",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "totteannerbrink",
+                    "link": "https://unsplash.com/@totteannerbrink",
+                    "author": "Totte Annerbrink"
+                  },
+                  "width": "fill_container",
+                  "height": 360,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1618058368547-e10c14427722?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgxNzd8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "zQdg0",
+                      "name": "featuredCard3Overlay",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WXlTu",
+                          "name": "featuredCard3Content",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "2Li6N",
+                              "name": "featuredCard3Badge",
+                              "fill": "#2563ebCC",
+                              "cornerRadius": 4,
+                              "padding": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "fG9Tg",
+                                  "name": "featuredCard3BadgeText",
+                                  "fill": "#FFFFFF",
+                                  "content": "TOP",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "fvRfh",
+                              "name": "featuredCard3Title",
+                              "fill": "#FFFFFF",
+                              "content": "Return of the Hero",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "KcPUf",
+                              "name": "featuredCard3Chapter",
+                              "fill": "#9CA3AF",
+                              "content": "Ch. 120",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "I9Iz2",
+                  "name": "FeaturedCard4",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "claybanks",
+                    "link": "https://unsplash.com/@claybanks",
+                    "author": "Clay Banks"
+                  },
+                  "width": "fill_container",
+                  "height": 360,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1681166625185-7bc6af1795ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgxNzh8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "75EQy",
+                      "name": "featuredCard4Overlay",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "IbH8b",
+                          "name": "featuredCard4Content",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "dEdyq",
+                              "name": "featuredCard4Badge",
+                              "fill": "#16a34aCC",
+                              "cornerRadius": 4,
+                              "padding": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BbzG9",
+                                  "name": "featuredCard4BadgeText",
+                                  "fill": "#FFFFFF",
+                                  "content": "NEW",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "VUtcF",
+                              "name": "featuredCard4Title",
+                              "fill": "#FFFFFF",
+                              "content": "Tower of God S3",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "cXt32",
+                              "name": "featuredCard4Chapter",
+                              "fill": "#9CA3AF",
+                              "content": "Ch. 568",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sHzng",
+                  "name": "FeaturedCard5",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "rrajputphotography",
+                    "link": "https://unsplash.com/@rrajputphotography",
+                    "author": "Rajesh Rajput"
+                  },
+                  "width": "fill_container",
+                  "height": 360,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1766062996151-e247dc21c1cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgxNzh8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "8YzFX",
+                      "name": "featuredCard5Overlay",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "MiVpZ",
+                          "name": "featuredCard5Content",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "URDSQ",
+                              "name": "featuredCard5Title",
+                              "fill": "#FFFFFF",
+                              "content": "One Piece",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "gatn3",
+                              "name": "featuredCard5Chapter",
+                              "fill": "#9CA3AF",
+                              "content": "Ch. 1110",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FBKtQ",
+                  "name": "FeaturedCard6",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "giusedr",
+                    "link": "https://unsplash.com/@giusedr",
+                    "author": "giuse"
+                  },
+                  "width": "fill_container",
+                  "height": 360,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1762681829629-1ebe8a135784?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgxNzl8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "jerYg",
+                      "name": "featuredCard6Overlay",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "KBNTL",
+                          "name": "featuredCard6Content",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "JkUoo",
+                              "name": "featuredCard6Title",
+                              "fill": "#FFFFFF",
+                              "content": "Jujutsu Kaisen",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "zCUOl",
+                              "name": "featuredCard6Chapter",
+                              "fill": "#9CA3AF",
+                              "content": "Ch. 250",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QlMSk",
+          "name": "MainContent",
+          "width": 1500,
+          "gap": 48,
+          "padding": 48,
+          "children": [
+            {
+              "type": "frame",
+              "id": "i0Gnr",
+              "name": "LeftColumn",
+              "width": 940,
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UfK35",
+                  "name": "latestMangaHeader",
+                  "width": "fill_container",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "oYPAi",
+                      "name": "latestMangaTitleGroup",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "eLeJi",
+                          "name": "latestMangaAccentLine",
+                          "fill": "#3b82f6",
+                          "width": 48,
+                          "height": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "pwfeT",
+                          "name": "latestMangaTitle",
+                          "fill": "#FFFFFF",
+                          "content": "TRUYỆN MỚI CẬP NHẬT",
+                          "fontFamily": "Inter",
+                          "fontSize": 20,
+                          "fontWeight": "700",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TuckW",
+                      "name": "viewAllButton",
+                      "gap": 4,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SLy6J",
+                          "name": "viewAllText",
+                          "fill": "#3b82f6",
+                          "content": "XEM TẤT CẢ",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "S31zV",
+                          "name": "viewAllIcon",
+                          "fill": "#3b82f6",
+                          "content": "arrow_forward",
+                          "fontFamily": "Material Symbols Outlined",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sirUm",
+                  "name": "MangaListContainer",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "e24Ca",
+                      "name": "MangaCard1",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": "#1a1e2e4D",
+                      "cornerRadius": 12,
+                      "gap": 24,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "wgkIh",
+                          "name": "mangaCard1Image",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "libraryofcongress",
+                            "link": "https://unsplash.com/@libraryofcongress",
+                            "author": "Library of Congress"
+                          },
+                          "width": 110,
+                          "height": 140,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1578406843598-34a4518d168d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgyNTV8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "a8zdU",
+                          "name": "mangaCard1Details",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "MQqoe",
+                              "name": "mangaCard1Title",
+                              "fill": "#FFFFFF",
+                              "content": "The Ancient One's Legacy",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "RiN2b",
+                              "name": "mangaCard1Author",
+                              "fill": "#9CA3AF",
+                              "content": "Tác giả: Han Sung-Joo",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "FqcML",
+                              "name": "mangaCard1Tags",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "8b6ZY",
+                                  "name": "mangaCard1TagAction",
+                                  "fill": "#3b82f61A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "T8h8W",
+                                      "name": "mangaCard1TagActionText",
+                                      "fill": "#3b82f6",
+                                      "content": "ACTION",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "o4ikN",
+                                  "name": "mangaCard1TagFantasy",
+                                  "fill": "#a855f71A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "5NEL6",
+                                      "name": "mangaCard1TagFantasyText",
+                                      "fill": "#a855f7",
+                                      "content": "FANTASY",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "QcvVR",
+                              "name": "mangaCard1Stats",
+                              "gap": 16,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "xTsU6",
+                                  "name": "mangaCard1StatUpdate",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "LHFnw",
+                                      "name": "mangaCard1UpdateIcon",
+                                      "fill": "#6B7280",
+                                      "content": "update",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "ug753",
+                                      "name": "mangaCard1UpdateText",
+                                      "fill": "#6B7280",
+                                      "content": "2 giờ trước",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "uYcHa",
+                                  "name": "mangaCard1StatViews",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "Wj77n",
+                                      "name": "mangaCard1ViewsIcon",
+                                      "fill": "#6B7280",
+                                      "content": "visibility",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "tHZFQ",
+                                      "name": "mangaCard1ViewsText",
+                                      "fill": "#6B7280",
+                                      "content": "14.5k",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HUbo9",
+                      "name": "MangaCard2",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": "#1a1e2e4D",
+                      "cornerRadius": 12,
+                      "gap": 24,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Grrds",
+                          "name": "mangaCard2Image",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "defrino",
+                            "link": "https://unsplash.com/@defrino",
+                            "author": "Defrino Maasy"
+                          },
+                          "width": 110,
+                          "height": 140,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1728484704808-a26b19641e8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgyNTV8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n1ZBX",
+                          "name": "mangaCard2Details",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VVWBV",
+                              "name": "mangaCard2Title",
+                              "fill": "#FFFFFF",
+                              "content": "Omniscient Reader's Viewpoint",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ih1tP",
+                              "name": "mangaCard2Author",
+                              "fill": "#9CA3AF",
+                              "content": "Tác giả: sing N song",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "rYAmW",
+                              "name": "mangaCard2Tags",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "e7ckC",
+                                  "name": "mangaCard2TagAdventure",
+                                  "fill": "#3b82f61A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "KsRX0",
+                                      "name": "mangaCard2TagAdventureText",
+                                      "fill": "#3b82f6",
+                                      "content": "ADVENTURE",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qNBYJ",
+                              "name": "mangaCard2Stats",
+                              "gap": 16,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "KuFn4",
+                                  "name": "mangaCard2StatUpdate",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "obIia",
+                                      "name": "mangaCard2UpdateIcon",
+                                      "fill": "#6B7280",
+                                      "content": "update",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "XZzID",
+                                      "name": "mangaCard2UpdateText",
+                                      "fill": "#6B7280",
+                                      "content": "5 giờ trước",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "bxzYy",
+                                  "name": "s1b",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "uPRR9",
+                                      "fill": "#6B7280",
+                                      "content": "visibility",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "CwwL8",
+                                      "fill": "#6B7280",
+                                      "content": "14.5k",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "67SaU",
+                      "name": "MangaCard3",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": "#1a1e2e4D",
+                      "cornerRadius": 12,
+                      "gap": 24,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "VJPxA",
+                          "name": "mangaCard3Image",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "fl__q",
+                            "link": "https://unsplash.com/@fl__q",
+                            "author": "Taiki Ishikawa"
+                          },
+                          "width": 110,
+                          "height": 140,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1643425959020-b48e240d01b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgyNzN8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "zfHZP",
+                          "name": "mangaCard3Details",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "TchCq",
+                              "name": "mangaCard3Title",
+                              "fill": "#FFFFFF",
+                              "content": "Berserk",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "AjRDF",
+                              "name": "mangaCard3Author",
+                              "fill": "#9CA3AF",
+                              "content": "Tác giả: Kentaro Miura",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "tU9L9",
+                              "name": "tags3",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "MFyzH",
+                                  "name": "tag3a",
+                                  "fill": "#3b82f61A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "GQyqz",
+                                      "fill": "#3b82f6",
+                                      "content": "ACTION",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "LhdRQ",
+                                  "name": "tag3b",
+                                  "fill": "#a855f71A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "wUhtW",
+                                      "fill": "#a855f7",
+                                      "content": "DRAMA",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "lXgcK",
+                              "name": "stats3",
+                              "gap": 16,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "8bk8p",
+                                  "name": "s3a",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "ycHss",
+                                      "fill": "#6B7280",
+                                      "content": "update",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "Hw07N",
+                                      "fill": "#6B7280",
+                                      "content": "1 ngày trước",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Sp7vs",
+                                  "name": "s3b",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "WiMnb",
+                                      "fill": "#6B7280",
+                                      "content": "visibility",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "Zh7zn",
+                                      "fill": "#6B7280",
+                                      "content": "8.2k",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "UlS4q",
+                      "name": "MangaCard4",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": "#1a1e2e4D",
+                      "cornerRadius": 12,
+                      "gap": 24,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "d1EPT",
+                          "name": "mangaCard4Image",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "caio_delarolle",
+                            "link": "https://unsplash.com/@caio_delarolle",
+                            "author": "CC PD"
+                          },
+                          "width": 110,
+                          "height": 140,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1763315371253-ce4d195ba6d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgyNzN8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QQBrb",
+                          "name": "mangaCard4Details",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hO3Td",
+                              "name": "mangaCard4Title",
+                              "fill": "#FFFFFF",
+                              "content": "Kingdom",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Z6iaG",
+                              "name": "mangaCard4Author",
+                              "fill": "#9CA3AF",
+                              "content": "Tác giả: Yasuhisa Hara",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "qddSD",
+                              "name": "tags4",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "X8rWd",
+                                  "name": "tag4a",
+                                  "fill": "#3b82f61A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "EvL2Z",
+                                      "fill": "#3b82f6",
+                                      "content": "ACTION",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "PsTbj",
+                                  "name": "tag4b",
+                                  "fill": "#ef44441A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "wT2AP",
+                                      "fill": "#ef4444",
+                                      "content": "HISTORICAL",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "FO6Bh",
+                              "name": "stats4",
+                              "gap": 16,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "c7pOg",
+                                  "name": "s4a",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "PYwvL",
+                                      "fill": "#6B7280",
+                                      "content": "update",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "I0a99",
+                                      "fill": "#6B7280",
+                                      "content": "3 ngày trước",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Du4A1",
+                                  "name": "s4b",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "LsXyD",
+                                      "fill": "#6B7280",
+                                      "content": "visibility",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "c42Po",
+                                      "fill": "#6B7280",
+                                      "content": "12.3k",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AhYXW",
+                      "name": "MangaCard5",
+                      "width": "fill_container",
+                      "height": 160,
+                      "fill": "#1a1e2e4D",
+                      "cornerRadius": 12,
+                      "gap": 24,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "NmQMe",
+                          "name": "mangaCard5Image",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "insane_scene",
+                            "link": "https://unsplash.com/@insane_scene",
+                            "author": "Bhanu Singh"
+                          },
+                          "width": 110,
+                          "height": 140,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1762270108017-dc0348c950a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgyNzR8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gjyfX",
+                          "name": "mangaCard5Details",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hsbli",
+                              "name": "mangaCard5Title",
+                              "fill": "#FFFFFF",
+                              "content": "Chainsaw Man",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "NisnE",
+                              "name": "mangaCard5Author",
+                              "fill": "#9CA3AF",
+                              "content": "Tác giả: Tatsuki Fujimoto",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "0OYBG",
+                              "name": "tags5",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "pgerJ",
+                                  "name": "tag5a",
+                                  "fill": "#3b82f61A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "TGGQy",
+                                      "fill": "#3b82f6",
+                                      "content": "ACTION",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "VCF7x",
+                                  "name": "tag5b",
+                                  "fill": "#ef44441A",
+                                  "cornerRadius": 4,
+                                  "padding": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "XTxPy",
+                                      "fill": "#ef4444",
+                                      "content": "HORROR",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 10,
+                                      "fontWeight": "700"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "5Zsrg",
+                              "name": "stats5",
+                              "gap": 16,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "s5L0Z",
+                                  "name": "s5a",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "VAGlb",
+                                      "fill": "#6B7280",
+                                      "content": "update",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "XxzCJ",
+                                      "fill": "#6B7280",
+                                      "content": "6 giờ trước",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "5SEjy",
+                                  "name": "s5b",
+                                  "gap": 4,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "pXPib",
+                                      "fill": "#6B7280",
+                                      "content": "visibility",
+                                      "fontFamily": "Material Symbols Outlined",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "3n20E",
+                                      "fill": "#6B7280",
+                                      "content": "25.8k",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "W5vb1",
+                  "name": "Pagination",
+                  "width": "fill_container",
+                  "height": 60,
+                  "gap": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "4AKEc",
+                      "name": "paginationPage1",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#1a1e2e",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "3seZu",
+                          "name": "paginationPage1Text",
+                          "fill": "#3b82f6",
+                          "content": "1",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rkW6s",
+                      "name": "paginationPage2",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#FFFFFF0D",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SOsXk",
+                          "name": "paginationPage2Text",
+                          "fill": "#9CA3AF",
+                          "content": "2",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yuybK",
+                      "name": "paginationPage3",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#FFFFFF0D",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "1CSeV",
+                          "name": "paginationPage3Text",
+                          "fill": "#9CA3AF",
+                          "content": "3",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "sfrfx",
+                      "name": "paginationEllipsis",
+                      "fill": "#6B7280",
+                      "content": "...",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ou6E6",
+                      "name": "paginationPage12",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#FFFFFF0D",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "sDv3k",
+                          "name": "paginationPage12Text",
+                          "fill": "#9CA3AF",
+                          "content": "12",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Dljt4",
+                      "name": "paginationNextButton",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#3b82f6",
+                      "cornerRadius": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "r3zj4",
+                          "name": "paginationNextIcon",
+                          "fill": "#FFFFFF",
+                          "content": "chevron_right",
+                          "fontFamily": "Material Symbols Outlined",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "C07GJ",
+              "name": "RightColumn",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 40,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NmBIH",
+                  "name": "Top10Section",
+                  "width": "fill_container",
+                  "fill": "#1a1e2e80",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Si3rn",
+                      "name": "top10Header",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 3,
+                          "id": "SZ88z",
+                          "name": "top10AccentLine",
+                          "fill": "#a855f7",
+                          "width": 6,
+                          "height": 24
+                        },
+                        {
+                          "type": "text",
+                          "id": "m2HL0",
+                          "name": "top10Title",
+                          "fill": "#FFFFFF",
+                          "content": "TOP 10 LƯỢT XEM",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "3lUHh",
+                      "name": "top10Tabs",
+                      "width": "fill_container",
+                      "height": 32,
+                      "fill": "#0a0c1480",
+                      "cornerRadius": 8,
+                      "gap": 4,
+                      "padding": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "TAOCG",
+                          "name": "top10TabDaily",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "fill": "#3b82f6",
+                          "cornerRadius": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HgcYZ",
+                              "name": "top10TabDailyText",
+                              "fill": "#FFFFFF",
+                              "content": "NGÀY",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "AbKu6",
+                          "name": "top10TabWeekly",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Pm80h",
+                              "name": "top10TabWeeklyText",
+                              "fill": "#6B7280",
+                              "content": "TUẦN",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lsCdw",
+                          "name": "top10TabMonthly",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "DTdQX",
+                              "name": "top10TabMonthlyText",
+                              "fill": "#6B7280",
+                              "content": "THÁNG",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TTlEu",
+                      "name": "RankingList",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ttibR",
+                          "name": "RankItem1",
+                          "width": "fill_container",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "JlxRv",
+                              "name": "rankItem1Image",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "mykomoto",
+                                "link": "https://unsplash.com/@mykomoto",
+                                "author": "Myko Makhlai"
+                              },
+                              "width": 48,
+                              "height": 64,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1622535436200-6e0269d0f4c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzMzJ8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 8
+                            },
+                            {
+                              "type": "text",
+                              "id": "JGC0N",
+                              "name": "rankItem1Number",
+                              "fill": "#3b82f6",
+                              "content": "01",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "900"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "pIYe2",
+                              "name": "rankItem1Info",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "7ERjk",
+                                  "name": "rankItem1Title",
+                                  "fill": "#FFFFFF",
+                                  "content": "Eleceed: The Awakening",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 14,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Q0Tk6",
+                                  "name": "rankItem1Views",
+                                  "fill": "#6B7280",
+                                  "content": "2.4M lượt xem",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "GSXB2",
+                          "name": "RankItem2",
+                          "width": "fill_container",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "w5WxB",
+                              "name": "rankItem2Image",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "britishlibrary",
+                                "link": "https://unsplash.com/@britishlibrary",
+                                "author": "British Library"
+                              },
+                              "width": 48,
+                              "height": 64,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1576497588359-504c819d809e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzMzN8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 8
+                            },
+                            {
+                              "type": "text",
+                              "id": "ykfTd",
+                              "name": "rankItem2Number",
+                              "fill": "#9CA3AF",
+                              "content": "02",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "900"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "x40sY",
+                              "name": "rankItem2Info",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "9NOpq",
+                                  "name": "rankItem2Title",
+                                  "fill": "#FFFFFF",
+                                  "content": "Omniscient Reader",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 14,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "dDx2q",
+                                  "name": "rankItem2Views",
+                                  "fill": "#6B7280",
+                                  "content": "1.8M lượt xem",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ViizJ",
+                          "name": "RankItem3",
+                          "width": "fill_container",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "u5igv",
+                              "name": "rankItem3Image",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "joshuakettle",
+                                "link": "https://unsplash.com/@joshuakettle",
+                                "author": "Joshua Kettle"
+                              },
+                              "width": 48,
+                              "height": 64,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1640265225791-e41dd0b40a86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzMzN8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 8
+                            },
+                            {
+                              "type": "text",
+                              "id": "uvo5j",
+                              "name": "rankItem3Number",
+                              "fill": "#9CA3AF",
+                              "content": "03",
+                              "fontFamily": "Inter",
+                              "fontSize": 18,
+                              "fontWeight": "900"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "3oxqj",
+                              "name": "rankItem3Info",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 4,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "JjbAX",
+                                  "name": "rankItem3Title",
+                                  "fill": "#FFFFFF",
+                                  "content": "The Beginning After The End",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 14,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "fRtqs",
+                                  "name": "rankItem3Views",
+                                  "fill": "#6B7280",
+                                  "content": "1.5M lượt xem",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Xmnyx",
+                  "name": "CommentsSection",
+                  "width": "fill_container",
+                  "fill": "#1a1e2e80",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PXZ2B",
+                      "name": "commentsHeader",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 3,
+                          "id": "KG4BU",
+                          "name": "commentsAccentLine",
+                          "fill": "#3b82f6",
+                          "width": 6,
+                          "height": 24
+                        },
+                        {
+                          "type": "text",
+                          "id": "jiTFi",
+                          "name": "commentsTitle",
+                          "fill": "#FFFFFF",
+                          "content": "BÌNH LUẬN MỚI",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "B98mk",
+                      "name": "CommentItem1",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "7K19J",
+                          "name": "commentItem1Avatar",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "bostonpubliclibrary",
+                            "link": "https://unsplash.com/@bostonpubliclibrary",
+                            "author": "Boston Public Library"
+                          },
+                          "width": 32,
+                          "height": 32,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1711655803417-4695cbc20fb8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzODJ8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 16
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yHMPY",
+                          "name": "commentItem1Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "0WSRf",
+                              "name": "commentItem1Meta",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Q67LH",
+                                  "name": "commentItem1Username",
+                                  "fill": "#FFFFFF",
+                                  "content": "ShadowKing",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xo2cA",
+                                  "name": "commentItem1Time",
+                                  "fill": "#6B7280",
+                                  "content": "5 phút trước",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 9,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "nBoIY",
+                              "name": "commentItem1Text",
+                              "fill": "#9CA3AF",
+                              "content": "\"Chapter này quá đỉnh! Cái twist ở cuối làm mình sốc...\"",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "normal",
+                              "fontStyle": "italic"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rlEIN",
+                      "name": "CommentItem2",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "hWNZc",
+                          "name": "commentItem2Avatar",
+                          "metadata": {
+                            "type": "unsplash",
+                            "username": "wikisinaloa",
+                            "link": "https://unsplash.com/@wikisinaloa",
+                            "author": "Wiki Sinaloa"
+                          },
+                          "width": 32,
+                          "height": 32,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "https://images.unsplash.com/photo-1732996909440-503fabf6ad27?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzODN8&ixlib=rb-4.1.0&q=80&w=1080",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": 16
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QhosU",
+                          "name": "commentItem2Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Y5sS0",
+                              "name": "commentItem2Meta",
+                              "gap": 8,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "df69w",
+                                  "name": "commentItem2Username",
+                                  "fill": "#FFFFFF",
+                                  "content": "MangaLover99",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "HcGh5",
+                                  "name": "commentItem2Time",
+                                  "fill": "#6B7280",
+                                  "content": "12 phút trước",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 9,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "xwZM5",
+                              "name": "commentItem2Text",
+                              "fill": "#9CA3AF",
+                              "content": "\"Art style ngày càng đẹp, tác giả vẽ quá tuyệt vời!\"",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "normal",
+                              "fontStyle": "italic"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "9oc7b",
+                  "name": "ActiveUsersSection",
+                  "width": "fill_container",
+                  "fill": "#1a1e2e80",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "saBSC",
+                      "name": "activeUsersHeader",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 3,
+                          "id": "rFIuE",
+                          "name": "activeUsersAccentLine",
+                          "fill": "#22c55e",
+                          "width": 6,
+                          "height": 24
+                        },
+                        {
+                          "type": "text",
+                          "id": "jM7rw",
+                          "name": "activeUsersTitle",
+                          "fill": "#FFFFFF",
+                          "content": "ĐANG HOẠT ĐỘNG",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "X4ezu",
+                      "name": "activeUsersGrid",
+                      "width": "fill_container",
+                      "height": "fit_content(0)",
+                      "gap": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DLDTp",
+                      "name": "activeUsersRow1",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "58pVI",
+                          "name": "UserCard1",
+                          "width": "fill_container",
+                          "fill": "#0a0c144D",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "KYttB",
+                              "name": "userCard1Avatar",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "farhat099",
+                                "link": "https://unsplash.com/@farhat099",
+                                "author": "Farhat Altaf"
+                              },
+                              "width": 48,
+                              "height": 48,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1705904506562-f28266845273?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzODR8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 12
+                            },
+                            {
+                              "type": "text",
+                              "id": "A1Zjc",
+                              "name": "userCard1Name",
+                              "fill": "#FFFFFF",
+                              "content": "Alex_V",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Rls5v",
+                              "name": "userCard1Level",
+                              "fill": "#3b82f6",
+                              "content": "CẤP 42",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "nMvv0",
+                          "name": "UserCard2",
+                          "width": "fill_container",
+                          "fill": "#0a0c144D",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "EQ2Pd",
+                              "name": "userCard2Avatar",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "buddhaelemental3d",
+                                "link": "https://unsplash.com/@buddhaelemental3d",
+                                "author": "Buddha Elemental 3D"
+                              },
+                              "width": 48,
+                              "height": 48,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1750816204148-5d02aff367cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzODV8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 12
+                            },
+                            {
+                              "type": "text",
+                              "id": "QMzpF",
+                              "name": "userCard2Name",
+                              "fill": "#FFFFFF",
+                              "content": "GhostReader",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "5RoDo",
+                              "name": "userCard2Level",
+                              "fill": "#3b82f6",
+                              "content": "CẤP 38",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b1IVA",
+                      "name": "activeUsersRow2",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "zZ8v9",
+                          "name": "UserCard3",
+                          "width": "fill_container",
+                          "fill": "#0a0c144D",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "wn7Ds",
+                              "name": "userCard3Avatar",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "ellenqin",
+                                "link": "https://unsplash.com/@ellenqin",
+                                "author": "Ellen Qin"
+                              },
+                              "width": 48,
+                              "height": 48,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1557110437-0bcd0a636d62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzODZ8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 12
+                            },
+                            {
+                              "type": "text",
+                              "id": "oSvGK",
+                              "name": "userCard3Name",
+                              "fill": "#FFFFFF",
+                              "content": "Satoru_G",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "uNKog",
+                              "name": "userCard3Level",
+                              "fill": "#3b82f6",
+                              "content": "CẤP 99",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "JRJVM",
+                          "name": "UserCard4",
+                          "width": "fill_container",
+                          "fill": "#0a0c144D",
+                          "cornerRadius": 12,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "D7F20",
+                              "name": "userCard4Avatar",
+                              "metadata": {
+                                "type": "unsplash",
+                                "username": "tonmoyhasanrajib",
+                                "link": "https://unsplash.com/@tonmoyhasanrajib",
+                                "author": "Tonmoy Hasan Rajib"
+                              },
+                              "width": 48,
+                              "height": 48,
+                              "fill": {
+                                "type": "image",
+                                "enabled": true,
+                                "url": "https://images.unsplash.com/photo-1635194936300-08a36d3a90de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzA2NTgzODd8&ixlib=rb-4.1.0&q=80&w=1080",
+                                "mode": "fill"
+                              },
+                              "cornerRadius": 12
+                            },
+                            {
+                              "type": "text",
+                              "id": "O1OWy",
+                              "name": "userCard4Name",
+                              "fill": "#FFFFFF",
+                              "content": "V_Kpop",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ycSgl",
+                              "name": "userCard4Level",
+                              "fill": "#3b82f6",
+                              "content": "CẤP 15",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "49SII",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "#121520",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 48,
+          "children": [
+            {
+              "type": "frame",
+              "id": "ODYBf",
+              "name": "footerContent",
+              "width": "fill_container",
+              "gap": 48,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "rAb0s",
+                  "name": "footerBrand",
+                  "width": 600,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "4F8F5",
+                      "name": "footerLogo",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "yDGl0",
+                          "name": "footerLogoIcon",
+                          "width": 32,
+                          "height": 32,
+                          "fill": "#3b82f6",
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "text",
+                          "id": "mUGec",
+                          "name": "footerLogoText",
+                          "fill": "#FFFFFF",
+                          "content": "MANGAVOID",
+                          "fontFamily": "Inter",
+                          "fontSize": 20,
+                          "fontWeight": "800",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Xr173",
+                      "name": "footerDescription",
+                      "fill": "#9CA3AF",
+                      "content": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "CXLWk",
+                      "name": "footerSocials",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XOf9M",
+                          "name": "socialButtonWeb",
+                          "width": 40,
+                          "height": 40,
+                          "fill": "#FFFFFF0D",
+                          "cornerRadius": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Cqwfg",
+                              "name": "socialButtonWebIcon",
+                              "fill": "#FFFFFF",
+                              "content": "public",
+                              "fontFamily": "Material Symbols Outlined",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ww2K0",
+                          "name": "socialButtonRss",
+                          "width": 40,
+                          "height": 40,
+                          "fill": "#FFFFFF0D",
+                          "cornerRadius": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HJkkE",
+                              "name": "socialButtonRssIcon",
+                              "fill": "#FFFFFF",
+                              "content": "rss_feed",
+                              "fontFamily": "Material Symbols Outlined",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "j8hIl",
+                  "name": "footerNavigation",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xCZBY",
+                      "name": "footerNavTitle",
+                      "fill": "#FFFFFF",
+                      "content": "ĐIỀU HƯỚNG",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "QwTBm",
+                      "name": "footerNavHome",
+                      "fill": "#6B7280",
+                      "content": "Trang chủ",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4iKRt",
+                      "name": "footerNavLatest",
+                      "fill": "#6B7280",
+                      "content": "Mới cập nhật",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "8fvAK",
+                      "name": "footerNavPopular",
+                      "fill": "#6B7280",
+                      "content": "Phổ biến",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4ttu2",
+                      "name": "footerNavGenres",
+                      "fill": "#6B7280",
+                      "content": "Thể loại",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pm4bK",
+                  "name": "footerSupport",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NTdRQ",
+                      "name": "footerSupportTitle",
+                      "fill": "#FFFFFF",
+                      "content": "HỖ TRỢ",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "jcJCD",
+                      "name": "footerSupportPrivacy",
+                      "fill": "#6B7280",
+                      "content": "Chính sách bảo mật",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JFgkp",
+                      "name": "footerSupportTerms",
+                      "fill": "#6B7280",
+                      "content": "Điều khoản dịch vụ",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Gi9k0",
+                      "name": "footerSupportContact",
+                      "fill": "#6B7280",
+                      "content": "Liên hệ",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oOzQS",
+                      "name": "footerSupportDiscord",
+                      "fill": "#6B7280",
+                      "content": "Discord",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UmAhV",
+              "name": "footerBottomBar",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RLwxZ",
+                  "name": "footerCopyright",
+                  "fill": "#4B5563",
+                  "content": "© 2026 MANGAVOID. ALL RIGHTS RESERVED.",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "700",
+                  "letterSpacing": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "celzJ",
+                  "name": "footerBottomLinks",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uG2xm",
+                      "name": "footerLinkApi",
+                      "fill": "#4B5563",
+                      "content": "API",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nEBh6",
+                      "name": "footerLinkDmca",
+                      "fill": "#4B5563",
+                      "content": "DMCA",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

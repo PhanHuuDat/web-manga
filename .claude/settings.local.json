@@ -16,7 +16,10 @@
       "Bash(pnpm install:*)",
       "Bash(pnpm lint:*)",
       "Bash(pnpm test:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(pnpm add:*)",
+      "Bash(start \"\" \"D:\\\\projects\\\\manga\\\\web-manga\\\\plans\\\\260209-2309-homepage-ui-implementation\\\\mockup.html\")",
+      "Bash(pnpm tsc:*)"
     ]
   }
 }

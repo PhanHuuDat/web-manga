@@ -1,13 +1,12 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import type { SearchBarProps } from '../../types/navigation-types';
 
-function SearchBar({
-  onSearch,
-  placeholder = 'Search manga...',
-}: SearchBarProps) {
+function SearchBar({ onSearch, placeholder }: SearchBarProps) {
+  const { t } = useTranslation('common');
   const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,18 +23,23 @@ function SearchBar({
       sx={{
         display: 'flex',
         alignItems: 'center',
-        bgcolor: 'background.default',
-        borderRadius: 1,
-        px: 1.5,
-        py: 0.5,
-        border: 1,
-        borderColor: 'divider',
+        bgcolor: 'rgba(255, 255, 255, 0.05)',
+        borderRadius: 2,
+        px: 2,
+        py: 1,
+        border: '1px solid rgba(255, 255, 255, 0.1)',
         '&:focus-within': {
           borderColor: 'primary.main',
+          bgcolor: 'rgba(255, 255, 255, 0.08)',
         },
       }}
     >
-      <IconButton type="submit" size="small" sx={{ color: 'text.secondary' }} aria-label="Search">
+      <IconButton
+        type="submit"
+        size="small"
+        sx={{ color: 'text.secondary' }}
+        aria-label={t('aria.search')}
+      >
         <svg
           width="20"
           height="20"
@@ -54,10 +58,10 @@ function SearchBar({
       </IconButton>
 
       <InputBase
-        placeholder={placeholder}
+        placeholder={placeholder || t('nav.search')}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        inputProps={{ 'aria-label': 'Search manga' }}
+        inputProps={{ 'aria-label': t('aria.searchManga') }}
         sx={{
           ml: 1,
           flex: 1,
