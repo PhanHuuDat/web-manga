@@ -2379,6 +2379,8 @@
                           "layout": "vertical",
                           "gap": 8,
                           "padding": 12,
+                          "justifyContent": "center",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
@@ -2432,6 +2434,8 @@
                           "layout": "vertical",
                           "gap": 8,
                           "padding": 12,
+                          "justifyContent": "center",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
@@ -2494,6 +2498,8 @@
                           "layout": "vertical",
                           "gap": 8,
                           "padding": 12,
+                          "justifyContent": "center",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
@@ -2547,6 +2553,8 @@
                           "layout": "vertical",
                           "gap": 8,
                           "padding": 12,
+                          "justifyContent": "center",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
@@ -2620,8 +2628,10 @@
                   "id": "rAb0s",
                   "name": "footerBrand",
                   "width": 600,
+                  "height": 133,
                   "layout": "vertical",
                   "gap": 16,
+                  "justifyContent": "space_between",
                   "children": [
                     {
                       "type": "frame",
@@ -2656,6 +2666,9 @@
                       "id": "Xr173",
                       "name": "footerDescription",
                       "fill": "#9CA3AF",
+                      "textGrowth": "fixed-width-height",
+                      "width": "fill_container",
+                      "height": 17,
                       "content": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.",
                       "fontFamily": "Inter",
                       "fontSize": 14,
@@ -2675,6 +2688,8 @@
                           "height": 40,
                           "fill": "#FFFFFF0D",
                           "cornerRadius": 8,
+                          "justifyContent": "center",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "text",
@@ -2696,6 +2711,8 @@
                           "height": 40,
                           "fill": "#FFFFFF0D",
                           "cornerRadius": 8,
+                          "justifyContent": "center",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "text",
