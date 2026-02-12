@@ -4,6 +4,7 @@ import Chip from '@mui/material/Chip';
 import type { Manga } from '../../types/manga-types';
 import { formatRelativeTime } from '../../utils/format-relative-time';
 import { formatNumber } from '../../utils/format-number';
+import { customColors } from '../../theme/theme';
 
 interface MangaListCardProps {
   manga: Manga;
@@ -17,11 +18,15 @@ function MangaListCard({ manga }: MangaListCardProps) {
         gap: 3,
         p: 2,
         borderRadius: 2,
-        bgcolor: 'rgba(26, 30, 46, 0.3)',
-        border: '1px solid rgba(255,255,255,0.05)',
+        bgcolor: 'background.paper',
+        border: '1px solid',
+        borderColor: 'divider',
         cursor: 'pointer',
         transition: 'all 0.2s',
-        '&:hover': { bgcolor: 'rgba(26, 30, 46, 0.8)' },
+        '&:hover': {
+          bgcolor: customColors.cardBgHover,
+          borderColor: 'primary.main',
+        },
       }}
     >
       {/* Thumbnail */}

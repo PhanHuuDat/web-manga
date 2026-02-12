@@ -14,6 +14,6 @@ describe('App', () => {
         </BrowserRouter>
       </Provider>,
     );
-    expect(screen.getByText(/Discover Your Next Manga/i)).toBeInTheDocument();
+    expect(screen.getByText(/Featured Manga/i)).toBeInTheDocument();
   });
 });

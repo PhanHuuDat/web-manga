@@ -10,16 +10,26 @@ function TopCommentsSection() {
   return (
     <Box
       sx={{
-        bgcolor: 'rgba(26, 30, 46, 0.5)',
-        borderRadius: 4,
-        border: '1px solid rgba(255,255,255,0.05)',
+        bgcolor: 'background.paper',
+        borderRadius: 2,
+        border: '1px solid',
+        borderColor: 'divider',
         p: 3,
       }}
     >
       {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-        <Box sx={{ width: 6, height: 24, bgcolor: 'primary.main', borderRadius: 1 }} />
-        <Typography sx={{ fontWeight: 700, fontSize: 14, textTransform: 'uppercase' }}>
+        <Box
+          sx={{
+            width: 6,
+            height: 24,
+            bgcolor: 'primary.main',
+            borderRadius: 1,
+          }}
+        />
+        <Typography
+          sx={{ fontWeight: 700, fontSize: 14, textTransform: 'uppercase' }}
+        >
           {t('comments.title')}
         </Typography>
       </Box>

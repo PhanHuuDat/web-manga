@@ -14,17 +14,19 @@ function CommentCard({ comment }: CommentCardProps) {
       sx={{
         p: 2,
         borderRadius: 2,
-        bgcolor: 'rgba(255,255,255,0.02)',
+        bgcolor: 'action.hover',
         cursor: 'pointer',
         transition: 'all 0.2s',
-        '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' },
+        '&:hover': { bgcolor: 'action.selected' },
       }}
     >
       {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
         <Avatar src={comment.avatarUrl} sx={{ width: 32, height: 32 }} />
         <Box sx={{ flex: 1 }}>
-          <Typography sx={{ fontSize: 12, fontWeight: 600, color: 'text.primary' }}>
+          <Typography
+            sx={{ fontSize: 12, fontWeight: 600, color: 'text.primary' }}
+          >
             {comment.username}
           </Typography>
         </Box>

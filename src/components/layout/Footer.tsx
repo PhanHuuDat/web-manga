@@ -44,7 +44,11 @@ function Footer() {
                   justifyContent: 'center',
                 }}
               >
-                <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 14 }}>M</Typography>
+                <Typography
+                  sx={{ color: 'white', fontWeight: 800, fontSize: 14 }}
+                >
+                  M
+                </Typography>
               </Box>
               <Typography
                 sx={{
@@ -57,7 +61,14 @@ function Footer() {
                 MANGAVOID
               </Typography>
             </Box>
-            <Typography sx={{ fontSize: 14, color: 'text.secondary', mb: 3, maxWidth: 280 }}>
+            <Typography
+              sx={{
+                fontSize: 14,
+                color: 'text.secondary',
+                mb: 3,
+                maxWidth: 280,
+              }}
+            >
               {t('footer.description')}
             </Typography>
             {/* Social Icons */}
@@ -89,20 +100,61 @@ function Footer() {
 
           {/* Navigation Column */}
           <Box sx={{ flex: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: 12, mb: 2, color: 'white', letterSpacing: 1, textTransform: 'uppercase' }}>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: 12,
+                mb: 2,
+                color: 'white',
+                letterSpacing: 1,
+                textTransform: 'uppercase',
+              }}
+            >
               {t('footer.navigation')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-              <Link href="/" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.nav.home')}
               </Link>
-              <Link href="/latest" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/latest"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.nav.latest')}
               </Link>
-              <Link href="/popular" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/popular"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.nav.popular')}
               </Link>
-              <Link href="/genres" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/genres"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.nav.genres')}
               </Link>
             </Box>
@@ -110,20 +162,61 @@ function Footer() {
 
           {/* Support Column */}
           <Box sx={{ flex: 1 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: 12, mb: 2, color: 'white', letterSpacing: 1, textTransform: 'uppercase' }}>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: 12,
+                mb: 2,
+                color: 'white',
+                letterSpacing: 1,
+                textTransform: 'uppercase',
+              }}
+            >
               {t('footer.support')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-              <Link href="/privacy" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/privacy"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.supportLinks.privacy')}
               </Link>
-              <Link href="/terms" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/terms"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.supportLinks.terms')}
               </Link>
-              <Link href="/contact" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/contact"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.supportLinks.contact')}
               </Link>
-              <Link href="/discord" underline="none" sx={{ color: 'text.secondary', fontSize: 14, '&:hover': { color: 'primary.main' } }}>
+              <Link
+                href="/discord"
+                underline="none"
+                sx={{
+                  color: 'text.secondary',
+                  fontSize: 14,
+                  '&:hover': { color: 'primary.main' },
+                }}
+              >
                 {t('footer.supportLinks.discord')}
               </Link>
             </Box>
@@ -142,14 +235,39 @@ function Footer() {
             gap: 2,
           }}
         >
-          <Typography sx={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#4B5563' }}>
+          <Typography
+            sx={{
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: 1,
+              color: '#4B5563',
+            }}
+          >
             © 2026 MANGAVOID. ALL RIGHTS RESERVED.
           </Typography>
           <Box sx={{ display: 'flex', gap: 3 }}>
-            <Link href="/api" underline="none" sx={{ fontSize: 10, fontWeight: 700, color: '#4B5563', '&:hover': { color: 'text.secondary' } }}>
+            <Link
+              href="/api"
+              underline="none"
+              sx={{
+                fontSize: 10,
+                fontWeight: 700,
+                color: '#4B5563',
+                '&:hover': { color: 'text.secondary' },
+              }}
+            >
               API
             </Link>
-            <Link href="/dmca" underline="none" sx={{ fontSize: 10, fontWeight: 700, color: '#4B5563', '&:hover': { color: 'text.secondary' } }}>
+            <Link
+              href="/dmca"
+              underline="none"
+              sx={{
+                fontSize: 10,
+                fontWeight: 700,
+                color: '#4B5563',
+                '&:hover': { color: 'text.secondary' },
+              }}
+            >
               DMCA
             </Link>
           </Box>

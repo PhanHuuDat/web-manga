@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import type { MangaRanked } from '../../types/manga-types';
+import { customColors } from '../../theme/theme';
 
 interface MangaRankCardProps {
   manga: MangaRanked;
@@ -19,7 +20,7 @@ function MangaRankCard({ manga }: MangaRankCardProps) {
         borderRadius: 2,
         cursor: 'pointer',
         transition: 'all 0.2s',
-        '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' },
+        '&:hover': { bgcolor: customColors.cardBgHover },
       }}
     >
       {/* Rank Badge */}
@@ -28,7 +29,7 @@ function MangaRankCard({ manga }: MangaRankCardProps) {
           width: 28,
           height: 28,
           borderRadius: 1,
-          bgcolor: isFirst ? 'primary.main' : 'rgba(255,255,255,0.1)',
+          bgcolor: isFirst ? 'primary.main' : 'action.selected',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
