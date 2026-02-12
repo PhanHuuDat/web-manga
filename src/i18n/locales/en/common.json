@@ -47,5 +47,56 @@
       "contact": "Contact Us",
       "discord": "Discord Community"
     }
+  },
+  "manga": {
+    "chapters": "Chapters",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "chapterNumber": "Chapter {{number}}",
+    "views": "views",
+    "by": "by",
+    "synopsis": "Synopsis",
+    "readNow": "Read Now",
+    "bookmark": "Bookmark",
+    "notFound": "Manga Not Found",
+    "notFoundDescription": "The manga you're looking for doesn't exist or has been removed."
+  },
+  "reader": {
+    "back": "Back to manga",
+    "chapter": "Chapter {{number}}",
+    "toggleMode": "Toggle reading mode",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fullscreen": "Toggle fullscreen",
+    "progress": "Reading Progress",
+    "pages": "pages"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "login": "Login",
+    "register": "Register",
+    "welcomeBack": "Welcome Back",
+    "loginSubtitle": "Login to access your library and continue reading",
+    "createAccount": "Create Account",
+    "registerSubtitle": "Join MangaVoid to start your manga journey",
+    "orContinueWith": "Or continue with",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithFacebook": "Continue with Facebook",
+    "continueWithGithub": "Continue with GitHub",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "iAccept": "I accept the",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "usernameMinLength": "Username must be at least 3 characters",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordMismatch": "Passwords do not match",
+    "mustAcceptTerms": "You must accept the terms and privacy policy"
   }
 }

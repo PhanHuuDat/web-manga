@@ -4,11 +4,12 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~450 TS/TSX (MUI components with sx props)
+**Current Lines of Code:** ~6,664 across 80 source files (tracked: 2,757 LOC, untracked: 3,907 LOC)
+**Source Directories:** 29 directories
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
 **Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
-**Status:** Phase 1 (Foundation) Complete - UI foundation, routing & state management established
+**Status:** Phase 1 Complete (100%), Phase 2 In Progress (60%) - Auth UI, comment system, manga detail, reader components implemented
 
 ---
 
@@ -173,6 +174,7 @@ palette: {
   "@reduxjs/toolkit": "^2.11.2",   // Redux state management
   "react-router-dom": "^7.13.0",   // Client-side routing
   "@mui/material": "^7.3.7",       // Material UI component library
+  "@mui/icons-material": "^7.3.7", // Material UI icons
   "@emotion/react": "^11.14.0",    // CSS-in-JS (MUI dependency)
   "@emotion/styled": "^11.14.1",   // Styled components (MUI dependency)
   "i18next": "^23.7.6",            // Internationalization framework
@@ -203,57 +205,106 @@ palette: {
 
 ## Code Organization (Current State)
 
-### Implemented Structure (Phase 1 Complete)
+### Implemented Structure (Phase 1 Complete, Phase 2 60%)
 
 ```
 src/                              # All styling via MUI sx props
-├── components/                   # Reusable UI components
+├── components/                   # Reusable UI components (~3,400 LOC)
 │   ├── layout/
 │   │   ├── Layout.tsx           # MUI Box wrapper with main padding
 │   │   └── Navbar.tsx           # MUI AppBar + Toolbar + Container
-│   └── navigation/
-│       ├── SearchBar.tsx        # MUI Box + InputBase + IconButton
-│       ├── UserMenu.tsx         # MUI IconButton with inline SVG
-│       └── GenreDropdown.tsx    # MUI Button + Menu + MenuItem grid
+│   ├── navigation/
+│   │   ├── SearchBar.tsx        # MUI Box + InputBase + IconButton
+│   │   ├── UserMenu.tsx         # MUI IconButton with inline SVG
+│   │   └── GenreDropdown.tsx    # MUI Button + Menu + MenuItem grid
+│   ├── auth/                    # Authentication components
+│   │   ├── AuthLayout.tsx       # Auth page wrapper
+│   │   ├── LoginForm.tsx        # Login form with validation
+│   │   └── RegisterForm.tsx     # Registration form
+│   ├── common/                  # Shared UI components
+│   │   ├── Badge.tsx            # Status badge component
+│   │   ├── GlassCard.tsx        # Glassmorphism card
+│   │   ├── IconButton.tsx       # Custom icon button
+│   │   ├── PasswordField.tsx    # Password input with visibility toggle
+│   │   ├── SocialLoginButton.tsx # Social auth button
+│   │   ├── StatusBadge.tsx      # Manga status badge
+│   │   └── ErrorBoundary.tsx    # Error boundary wrapper
+│   ├── comment/                 # Comment system (8 components)
+│   │   ├── CommentItem.tsx      # Individual comment
+│   │   ├── CommentInput.tsx     # Comment input field
+│   │   ├── CommentList.tsx      # Nested comment list
+│   │   ├── ReactionButtons.tsx  # Like/dislike buttons
+│   │   ├── MangaCommentSection.tsx # Manga page comments
+│   │   ├── ChapterCommentSidebar.tsx # Chapter sidebar comments
+│   │   ├── PageCommentModal.tsx # Page-specific comments
+│   │   └── index.ts             # Comment exports
+│   ├── manga/                   # Manga components
+│   │   ├── MangaInfo.tsx        # Manga info display
+│   │   └── ChapterList.tsx      # Chapter list with sorting
+│   └── reader/                  # Reader components
+│       ├── VerticalReader.tsx   # Vertical reading mode
+│       ├── HorizontalReader.tsx # Horizontal reading mode
+│       ├── ReaderToolbar.tsx    # Reader controls
+│       └── ReaderProgress.tsx   # Progress bar
 │
-├── pages/
-│   └── HomePage.tsx             # MUI Container + Box + Typography + Paper
+├── pages/                       # Page-level components
+│   ├── HomePage.tsx             # MUI Container + Box + Typography + Paper
+│   ├── auth/                    # Auth pages
+│   │   ├── LoginPage.tsx        # Login page
+│   │   └── RegisterPage.tsx     # Registration page
+│   ├── manga/                   # Manga pages
+│   │   └── MangaDetailPage.tsx  # Manga detail page
+│   └── reader/                  # Reader pages
+│       └── ReaderPage.tsx       # Chapter reader page
 │
 ├── i18n/
-│   ├── i18n-config.ts           # i18next setup with language detection
+│   ├── i18n-config.ts           # i18next setup with namespaces
 │   ├── i18n-types.ts            # TypeScript types for translations
 │   └── locales/                 # Translation JSON files
-│       ├── en/ (common.json, home.json)
-│       └── vi/ (common.json, home.json)
+│       ├── en/                  # English
+│       │   ├── common.json, home.json
+│       │   ├── auth.json, manga.json
+│       │   ├── reader.json, comment.json
+│       └── vi/                  # Vietnamese
+│           ├── common.json, home.json
+│           ├── auth.json, manga.json
+│           ├── reader.json, comment.json
 │
 ├── theme/
 │   └── theme.ts                 # MUI createTheme with Deep Ocean Blue palette
 │
 ├── types/
-│   ├── genre-types.ts
-│   └── navigation-types.ts
+│   ├── genre-types.ts           # Genre types
+│   ├── navigation-types.ts      # Navigation types
+│   ├── comment-types.ts         # Comment system types
+│   └── manga-types.ts           # Manga, Chapter, Page types
 │
 ├── constants/
-│   └── genres.ts
+│   ├── genres.ts                # Genre definitions
+│   ├── mock-chapter-data.ts     # Mock chapter data
+│   └── mock-comment-data.ts     # Mock comment data
+│
+├── utils/                       # Utility functions
+│   ├── format-relative-time.ts  # Relative time formatter
+│   └── format-number.ts         # Number formatter
 │
 ├── store/
 │   ├── index.ts                 # Redux store configuration
-│   └── hooks.ts                 # Typed useAppDispatch & useAppSelector
+│   ├── hooks.ts                 # Typed useAppDispatch & useAppSelector
+│   └── slices/                  # Redux slices
+│       └── comment-slice.ts     # Comment state management
 │
-├── App.tsx                      # Root component with routing
+├── App.tsx                      # Root component with routing + ErrorBoundary
 └── main.tsx                     # Entry point with ThemeProvider + i18n
 ```
 
-### Planned Structure (Phase 2+)
+### Planned Structure (Phase 2+ Remaining)
 
 Future additions:
-- `src/components/common/` - Shared components (Button, Card, etc.)
-- `src/components/manga/` - Manga-specific components
-- `src/components/reader/` - Reader interface
 - `src/services/` - API & business logic
 - `src/hooks/` - Custom React hooks
-- `src/utils/` - Utility functions
 - `src/assets/` - Images, icons, fonts
+- Additional Redux slices (manga, auth, ui, reading)
 
 ---
 
@@ -351,9 +402,9 @@ npm run build  # Test production build
 
 ---
 
-## Current Capabilities (Phase 1 Complete 100%)
+## Current Capabilities
 
-### Implemented
+### Phase 1 Complete (100%)
 - [x] React Router v7 setup with Layout wrapper
 - [x] Redux Toolkit store configuration with typed hooks
 - [x] **Material UI v7 theming** with Deep Ocean Blue palette
@@ -369,30 +420,44 @@ npm run build  # Test production build
 - [x] ESLint configuration with React/Hooks plugins
 - [x] Comprehensive project documentation
 
+### Phase 2 Implemented (60%)
+- [x] **Auth System:** LoginPage, RegisterPage with LoginForm, RegisterForm
+- [x] **Social Login:** Google, Facebook, Twitter buttons
+- [x] **Comment System:** Full featured with nested replies (max depth 3), reactions (like/dislike)
+- [x] **Comment Components:** CommentItem, CommentInput, CommentList, ReactionButtons, MangaCommentSection, ChapterCommentSidebar, PageCommentModal
+- [x] **Manga Detail:** MangaDetailPage with MangaInfo (cover/stats/synopsis), ChapterList (sort toggle)
+- [x] **Reader Interface:** ReaderPage with VerticalReader, HorizontalReader modes
+- [x] **Reader Controls:** ReaderToolbar (zoom, fullscreen, mode switching), ReaderProgress (scroll tracking)
+- [x] **Common Components:** Badge, GlassCard, IconButton, PasswordField, SocialLoginButton, StatusBadge, ErrorBoundary
+- [x] **Redux State:** comment-slice.ts implemented
+- [x] **Routing:** /login, /register, /manga/:id, /read/:mangaId/:chapterId, 404 route
+- [x] **i18n Namespaces:** auth, manga, reader, comment (English & Vietnamese)
+- [x] **Utilities:** format-relative-time, format-number
+- [x] **Mock Data:** mock-chapter-data, mock-comment-data
+- [x] **@mui/icons-material** - Now included
+
 ### Not Yet Implemented (Phase 2+)
-- [ ] Redux slices & state management
-- [ ] Extended MUI components (Cards for manga, Modals, etc.)
-- [ ] API integration / backend connection
+- [ ] Real API integration / backend connection
+- [ ] Additional Redux slices (manga, auth, ui, reading)
+- [ ] Theme switching (dark/light mode) - infrastructure ready
 - [ ] Search functionality with real data
 - [ ] Genre filtering with API
-- [ ] Theme switching (dark/light mode) - theme infrastructure ready
-- [ ] Additional language support (currently English & Vietnamese)
-- [ ] Manga detail pages
-- [ ] Reader interface
-- [ ] User authentication
-- [ ] @mui/icons-material (noted as future enhancement)
+- [ ] Unit tests for components
+- [ ] API service layer
 
 ---
 
-## Phase 2 Priorities
+## Phase 2 Remaining Priorities
 
-1. Create reusable component library (Button, Card, Input, Modal)
+1. ~~Create reusable component library~~ ✓ (Badge, GlassCard, IconButton, etc.)
 2. Implement theme switching (dark/light mode)
-3. Add form components and validation
-4. Expand layout system (Sidebar, Footer)
+3. ~~Add form components and validation~~ ✓ (LoginForm, RegisterForm)
+4. Expand layout system (Footer)
 5. Set up API service layer
-6. Create Redux slices for state management
+6. ~~Create Redux slices for state management~~ ✓ (comment-slice implemented)
 7. Build unit tests for components
+
+**Phase 2 Progress:** 60% complete. Major UI components implemented. API integration and testing remain.
 
 See `project-roadmap.md` for detailed timeline and dependencies.
 

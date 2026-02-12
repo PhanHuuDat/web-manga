@@ -1,0 +1,35 @@
+{
+  "detail": {
+    "readFirst": "Đọc từ đầu",
+    "continue": "Đọc tiếp",
+    "addLibrary": "Thêm vào thư viện",
+    "inLibrary": "Đã thêm",
+    "synopsis": "Tóm tắt",
+    "chapters": "Danh sách chương",
+    "searchChapters": "Tìm chương...",
+    "sortNewest": "Mới nhất",
+    "sortOldest": "Cũ nhất",
+    "noChapters": "Chưa có chương nào",
+    "related": "Có thể bạn cũng thích"
+  },
+  "info": {
+    "author": "Tác giả",
+    "artist": "Họa sĩ",
+    "status": "Trạng thái",
+    "genres": "Thể loại",
+    "rating": "Đánh giá",
+    "views": "Lượt xem",
+    "updated": "Cập nhật",
+    "chapters": "Số chương"
+  },
+  "status": {
+    "ongoing": "Đang tiến hành",
+    "completed": "Hoàn thành",
+    "hiatus": "Tạm ngưng"
+  },
+  "badge": {
+    "hot": "HOT",
+    "new": "MỚI",
+    "top": "TOP"
+  }
+}

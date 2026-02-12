@@ -214,6 +214,75 @@ pnpm test   # Unit tests should pass
 
 ---
 
+## Redux Slice Naming Conventions
+
+### File Structure
+- Location: `src/store/slices/`
+- Naming: `{feature}-slice.ts` (e.g., `comment-slice.ts`, `auth-slice.ts`)
+
+### Slice Naming
+- Slice name: `{feature}` (lowercase, singular)
+- Actions: `{verb}{Noun}` (e.g., `addComment`, `updateUser`)
+- Selectors: `select{Noun}` (e.g., `selectComments`, `selectUser`)
+
+### Example
+```typescript
+const commentSlice = createSlice({
+  name: 'comment',
+  initialState,
+  reducers: {
+    addComment: (state, action) => { },
+    updateComment: (state, action) => { },
+    deleteComment: (state, action) => { },
+  },
+});
+```
+
+---
+
+## i18n Standards
+
+### Namespace Organization
+- **common.json** - Shared UI text (buttons, navigation, errors)
+- **{feature}.json** - Feature-specific translations (auth, manga, reader, comment)
+
+### Translation Keys
+- Use dot notation: `{section}.{key}`
+- Lowercase with underscores: `auth.login_button`, `manga.chapter_count`
+- Avoid deep nesting (max 2 levels)
+
+### Usage in Components
+```typescript
+import { useTranslation } from 'react-i18next';
+
+const { t } = useTranslation('auth'); // Specify namespace
+const buttonText = t('login_button');
+```
+
+---
+
+## Error Boundary Guidelines
+
+### When to Use
+- Wrap root Routes in App.tsx
+- Wrap critical sections (reader, payment flows)
+- Around third-party components
+
+### Implementation
+```typescript
+<ErrorBoundary>
+  <Component />
+</ErrorBoundary>
+```
+
+**Features:**
+- Logs errors to console (production: send to monitoring service)
+- Shows user-friendly fallback UI
+- Provides reload button
+- Does not catch event handler errors (use try-catch)
+
+---
+
 ## Related Documentation
 
 - [Code Examples](./code-examples.md) - Detailed code patterns and examples

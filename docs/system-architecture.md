@@ -4,7 +4,7 @@
 
 Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux Toolkit, and React Router, providing a fast, responsive reading experience. The architecture emphasizes modularity, type safety, performance, and component reusability.
 
-**Status:** Phase 1 Foundation complete (100%) with UI framework established. Phase 2 in progress (15%) - expanding component library and state management.
+**Status:** Phase 1 Foundation complete (100%) with UI framework established. Phase 2 in progress (60%) - auth UI, comment system, manga detail, and reader components implemented.
 
 ---
 
@@ -64,24 +64,50 @@ Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux 
 
 **Responsibility:** Render UI and handle user interactions
 
-**Current Components (Phase 1):**
+**Current Components (Phase 1 + Phase 2):**
 - **Pages:**
-  - `HomePage.tsx` (37 LOC) - Displays 12 genres in 2-column grid
+  - `HomePage.tsx` - Displays 12 genres in 2-column grid
+  - `LoginPage.tsx`, `RegisterPage.tsx` - Auth pages
+  - `MangaDetailPage.tsx` - Manga detail with info and chapters
+  - `ReaderPage.tsx` - Chapter reader with vertical/horizontal modes
 
 - **Layout:**
-  - `Layout.tsx` (16 LOC) - Main wrapper with React Router Outlet
-  - `Navbar.tsx` (40 LOC) - Fixed navbar with logo, search, menu, user profile
+  - `Layout.tsx` - Main wrapper with React Router Outlet
+  - `Navbar.tsx` - Fixed navbar with logo, search, menu, user profile
+  - `AuthLayout.tsx` - Auth page wrapper
 
 - **Navigation:**
-  - `SearchBar.tsx` (51 LOC) - Search input with icon
-  - `GenreDropdown.tsx` (90 LOC) - Genre selector with hover/click behavior
-  - `UserMenu.tsx` (28 LOC) - User profile dropdown
+  - `SearchBar.tsx` - Search input with icon
+  - `GenreDropdown.tsx` - Genre selector with hover/click behavior
+  - `UserMenu.tsx` - User profile dropdown
 
-**Planned Components (Phase 2+):**
-- Common components: Button, Card, Input, Modal, Badge
-- Manga components: MangaCard, MangaGrid, MangaFilter
-- Reader components: PageViewer, ChapterNav, ReadingControls
-- Shared: ErrorBoundary, LoadingSpinner, Toast
+- **Auth Components:**
+  - `LoginForm.tsx`, `RegisterForm.tsx` - Auth forms with validation
+  - `SocialLoginButton.tsx` - Social auth buttons
+
+- **Comment System (8 components):**
+  - `CommentItem.tsx`, `CommentInput.tsx`, `CommentList.tsx`
+  - `ReactionButtons.tsx` - Like/dislike reactions
+  - `MangaCommentSection.tsx`, `ChapterCommentSidebar.tsx`, `PageCommentModal.tsx`
+
+- **Manga Components:**
+  - `MangaInfo.tsx` - Manga info display with cover, stats, synopsis
+  - `ChapterList.tsx` - Chapter list with sort toggle
+
+- **Reader Components:**
+  - `VerticalReader.tsx`, `HorizontalReader.tsx` - Reading modes
+  - `ReaderToolbar.tsx` - Controls (zoom, fullscreen, mode)
+  - `ReaderProgress.tsx` - Progress bar with scroll tracking
+
+- **Common Components:**
+  - `Badge.tsx`, `GlassCard.tsx`, `IconButton.tsx`
+  - `PasswordField.tsx`, `StatusBadge.tsx`, `ErrorBoundary.tsx`
+
+**Planned Components (Phase 2+ Remaining):**
+- API service layer
+- Additional Redux slices (manga, auth, ui, reading)
+- Theme switcher component
+- LoadingSpinner, Toast notifications
 
 **Technology:** React 19 functional components with hooks
 
@@ -116,6 +142,9 @@ Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux 
 - Typed hooks exported from `src/store/hooks.ts`
   - `useAppDispatch` - Typed dispatch hook
   - `useAppSelector` - Typed selector hook
+
+**State Slices (Implemented):**
+- `commentSlice` - Comment state with nested replies, reactions, add/update/delete actions
 
 **State Slices (Planned):**
 - `mangaSlice` - Manga catalog, current manga, chapters
@@ -291,36 +320,41 @@ TypeScript Check (tsc -b)
 
 ## Routing Architecture
 
-### Current Routing (Phase 1)
+### Current Routing (Phase 1 + Phase 2)
 ```
 /                      → HomePage (12 genre grid)
+/login                 → LoginPage (authentication)
+/register              → RegisterPage (user registration)
+/manga/:id             → MangaDetailPage (info, chapters)
+/read/:mangaId/:chapterId → ReaderPage (chapter viewer)
+*                      → 404 Not Found page
 ```
 
-**Implementation:** React Router v7.13.0 (integrated in App.tsx)
+**Implementation:** React Router v7.13.0 (integrated in App.tsx with ErrorBoundary)
 
 ```typescript
-<BrowserRouter>
-  <Routes>
-    <Route element={<Layout />}>
-      <Route path="/" element={<HomePage />} />
-      {/* Future routes here */}
-    </Route>
-  </Routes>
-</BrowserRouter>
+<ErrorBoundary>
+  <BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/manga/:id" element={<MangaDetailPage />} />
+        <Route path="/read/:mangaId/:chapterId" element={<ReaderPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+</ErrorBoundary>
 ```
 
-### Planned Routing (Phase 2-4)
+### Planned Routing (Phase 3+)
 ```
-/                      → HomePage (browse manga)
-/manga/:id             → MangaDetailPage (info, chapters)
-/read/:id/:chapter     → ReaderPage (chapter viewer)
 /library               → LibraryPage (user's manga)
 /search                → SearchResultsPage
 /settings              → SettingsPage (preferences)
-/login                 → LoginPage (authentication)
-/register              → RegisterPage
 /profile               → ProfilePage (user profile)
-/404                   → NotFoundPage
 ```
 
 ---
@@ -363,12 +397,22 @@ User scrolls/navigates → Update page state
 | Validation errors | Service layer | Early validation, clear error messages |
 | State errors | Hooks/Components | Default values, null checks |
 
-### Error Boundary Example
+### Error Boundary Implementation
 ```typescript
-<ErrorBoundary fallback={<ErrorFallback />}>
-  <ReaderPage />
+// Implemented in src/components/common/ErrorBoundary.tsx
+// Wraps all routes in App.tsx
+<ErrorBoundary>
+  <Routes>
+    {/* All routes */}
+  </Routes>
 </ErrorBoundary>
 ```
+
+**Features:**
+- Catches React render errors
+- Displays user-friendly fallback UI
+- Logs error details for debugging
+- Reload button for recovery
 
 ---
 

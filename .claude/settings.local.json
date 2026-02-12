@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(find:*)",
@@ -19,7 +22,11 @@
       "Bash(git add:*)",
       "Bash(pnpm add:*)",
       "Bash(start \"\" \"D:\\\\projects\\\\manga\\\\web-manga\\\\plans\\\\260209-2309-homepage-ui-implementation\\\\mockup.html\")",
-      "Bash(pnpm tsc:*)"
+      "Bash(pnpm tsc:*)",
+      "Bash(pnpm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell -File:*)"
     ]
   }
 }

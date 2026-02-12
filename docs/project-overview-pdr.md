@@ -4,9 +4,9 @@
 
 **Web-Manga** is a modern, web-based manga reading platform built with React and TypeScript. The application delivers a seamless reading experience for manga enthusiasts, featuring intuitive navigation, responsive design, and comprehensive library management capabilities.
 
-**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress (15%)
-**Version:** 0.1.0
-**Last Updated:** 2026-02-07
+**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress (60%)
+**Version:** 0.2.0
+**Last Updated:** 2026-02-12
 
 ---
 
@@ -47,28 +47,46 @@ Enable manga enthusiasts to discover, read, and manage their manga library throu
 - [x] Redux store configuration
 - [x] React Router v7 integration
 
-#### Phase 2: Core UI Components
-- [ ] Reusable component library
-- [ ] Layout system (header, navigation, main content)
-- [ ] Dark/light theme support
-- [ ] Responsive grid system
+#### Phase 2: Core UI Components (60% Complete)
+- [x] Common component library (Badge, GlassCard, IconButton, PasswordField, SocialLoginButton, StatusBadge, ErrorBoundary)
+- [x] Auth components (AuthLayout, LoginForm, RegisterForm)
+- [x] Comment system (8 components)
+- [x] Manga components (MangaInfo, ChapterList)
+- [x] Reader components (VerticalReader, HorizontalReader, ReaderToolbar, ReaderProgress)
+- [x] Layout system (header, navigation, main content, auth layout)
+- [x] Responsive grid system
+- [x] Redux comment slice
+- [x] i18n namespaces (auth, manga, reader, comment)
+- [ ] Dark/light theme support - infrastructure ready
+- [ ] Additional Redux slices (manga, auth, ui, reading)
+- [ ] API service layer
+- [ ] Unit tests
 
-#### Phase 3: Manga Discovery & Browsing
+#### Phase 3: Manga Discovery & Browsing (20% Complete)
+- [x] Manga detail pages (MangaDetailPage with MangaInfo and ChapterList)
 - [ ] Manga catalog display
-- [ ] Search functionality
+- [ ] Search functionality with real data
 - [ ] Filter by genre, status, rating
-- [ ] Manga detail pages
 - [ ] Pagination/infinite scroll
 
-#### Phase 4: Reading Experience
-- [ ] Manga chapter reader
-- [ ] Image gallery with zoom/pan
-- [ ] Navigation between chapters
-- [ ] Reading progress tracking
+#### Phase 4: Reading Experience (40% Complete)
+- [x] Manga chapter reader (VerticalReader, HorizontalReader)
+- [x] Reader toolbar with controls
+- [x] Image gallery with zoom/pan
+- [x] Navigation between chapters
+- [x] Reading progress tracking (scroll-based with Intersection Observer)
+- [x] Fullscreen mode
+- [x] Page comment modal
+- [ ] Real API integration for chapter data
 - [ ] Page quality/resolution options
+- [ ] Bookmarking
 
-#### Phase 5: User Features
-- [ ] User registration & authentication
+#### Phase 5: User Features (30% Complete)
+- [x] User registration page (RegisterPage with RegisterForm)
+- [x] User login page (LoginPage with LoginForm)
+- [x] Auth forms with validation
+- [x] Social login buttons
+- [ ] Real authentication backend integration
 - [ ] Personal library management
 - [ ] Bookmarks & reading history
 - [ ] Favorites/watchlist
@@ -231,10 +249,10 @@ pnpm test:e2e
 | Phase | Timeline | Status | Key Deliverables |
 |-------|----------|--------|------------------|
 | 1 | Weeks 1-2 | Complete | Setup, build pipeline, docs |
-| 2 | Weeks 3-4 | Pending | Component library, layout system |
-| 3 | Weeks 5-8 | Pending | Manga catalog, search, filters |
-| 4 | Weeks 9-12 | Pending | Reader, navigation, progress |
-| 5 | Weeks 13-16 | Pending | Auth, library, bookmarks |
+| 2 | Weeks 3-4 | In Progress (60%) | Component library, auth UI, comment system, manga/reader components |
+| 3 | Weeks 5-8 | Early Start (20%) | Manga detail page implemented, catalog pending |
+| 4 | Weeks 9-12 | Early Start (40%) | Reader interface implemented, API integration pending |
+| 5 | Weeks 13-16 | Early Start (30%) | Auth UI implemented, backend integration pending |
 | 6 | Weeks 17+ | Pending | Advanced features, optimization |
 
 ---
@@ -282,6 +300,7 @@ Visit http://localhost:5173 to view the application.
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2026-02-12 | 0.2.0 | Phase 2 (60%): Auth UI, comment system, manga detail, reader components, Redux comment slice |
 | 2026-02-07 | 0.1.0 | Phase 1 complete: UI foundation, routing, design system, documentation |
 | 2026-02-06 | 0.0.0 | Initial project documentation |
 

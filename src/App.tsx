@@ -1,18 +1,97 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
+import { Box, Typography, Button } from '@mui/material';
+import { Home } from '@mui/icons-material';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
+import MangaDetailPage from './pages/manga/MangaDetailPage';
+import ReaderPage from './pages/reader/ReaderPage';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        {/* Future routes */}
-        {/* <Route path="/manga/:id" element={<MangaDetailPage />} /> */}
-        {/* <Route path="/genre/:slug" element={<GenrePage />} /> */}
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
-      </Route>
-    </Routes>
+    <ErrorBoundary>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/manga/:slug" element={<MangaDetailPage />} />
+        </Route>
+
+        {/* Reader page without layout (fullscreen) */}
+        <Route path="/manga/:mangaSlug/:chapterSlug" element={<ReaderPage />} />
+
+        {/* Auth pages without layout */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {/* 404 catch-all */}
+        <Route
+          path="*"
+          element={
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '100vh',
+                bgcolor: '#0a0c14',
+                p: 3,
+              }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: 72,
+                  fontWeight: 900,
+                  color: '#3b82f6',
+                  mb: 2,
+                }}
+              >
+                404
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: '#f1f5f9',
+                  mb: 1,
+                }}
+              >
+                Page Not Found
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: 'JetBrains Mono, monospace',
+                  fontSize: 14,
+                  color: '#94a3b8',
+                  mb: 3,
+                }}
+              >
+                The page you are looking for does not exist
+              </Typography>
+              <Button
+                component={Link}
+                to="/"
+                startIcon={<Home />}
+                variant="contained"
+                sx={{
+                  bgcolor: '#3b82f6',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  textTransform: 'none',
+                  px: 3,
+                  '&:hover': { bgcolor: '#2563eb' },
+                }}
+              >
+                Back to Home
+              </Button>
+            </Box>
+          }
+        />
+      </Routes>
+    </ErrorBoundary>
   );
 }
 

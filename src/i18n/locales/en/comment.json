@@ -1,0 +1,26 @@
+{
+  "title": "Comments",
+  "commentsCount": "{{count}} comments",
+  "noComments": "No comments yet",
+  "beFirst": "Be the first to comment!",
+  "placeholder": "Write a comment...",
+  "replyPlaceholder": "Reply to {{username}}...",
+  "pagePlaceholder": "Add a comment about this page...",
+  "chapterPlaceholder": "Share your thoughts on this chapter...",
+  "submit": "Post",
+  "reply": "Reply",
+  "cancel": "Cancel",
+  "replyingTo": "Replying to",
+  "loadMore": "Load more comments",
+  "loading": "Loading comments...",
+  "pageComments": "Page {{number}} Comments",
+  "chapterComments": "Chapter {{number}} Comments",
+  "currentPage": "Current viewing page",
+  "pageOf": "Page {{current}} of {{total}}",
+  "reactions": {
+    "like": "Like",
+    "dislike": "Dislike",
+    "total": "Total reactions"
+  },
+  "maxDepth": "// max_depth"
+}

@@ -5,15 +5,23 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // Import translation files
 import enCommon from './locales/en/common.json';
 import enHome from './locales/en/home.json';
+import enAuth from './locales/en/auth.json';
+import enManga from './locales/en/manga.json';
+import enReader from './locales/en/reader.json';
+import enComment from './locales/en/comment.json';
 import viCommon from './locales/vi/common.json';
 import viHome from './locales/vi/home.json';
+import viAuth from './locales/vi/auth.json';
+import viManga from './locales/vi/manga.json';
+import viReader from './locales/vi/reader.json';
+import viComment from './locales/vi/comment.json';
 
 // Import types for augmentation
 import './i18n-types';
 
 const resources = {
-  en: { common: enCommon, home: enHome },
-  vi: { common: viCommon, home: viHome },
+  en: { common: enCommon, home: enHome, auth: enAuth, manga: enManga, reader: enReader, comment: enComment },
+  vi: { common: viCommon, home: viHome, auth: viAuth, manga: viManga, reader: viReader, comment: viComment },
 };
 
 i18n

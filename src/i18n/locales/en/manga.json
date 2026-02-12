@@ -1,0 +1,35 @@
+{
+  "detail": {
+    "readFirst": "Read First Chapter",
+    "continue": "Continue Reading",
+    "addLibrary": "Add to Library",
+    "inLibrary": "In Library",
+    "synopsis": "Synopsis",
+    "chapters": "Chapters",
+    "searchChapters": "Search chapters...",
+    "sortNewest": "Newest First",
+    "sortOldest": "Oldest First",
+    "noChapters": "No chapters available yet",
+    "related": "You May Also Like"
+  },
+  "info": {
+    "author": "Author",
+    "artist": "Artist",
+    "status": "Status",
+    "genres": "Genres",
+    "rating": "Rating",
+    "views": "Views",
+    "updated": "Updated",
+    "chapters": "Chapters"
+  },
+  "status": {
+    "ongoing": "Ongoing",
+    "completed": "Completed",
+    "hiatus": "Hiatus"
+  },
+  "badge": {
+    "hot": "HOT",
+    "new": "NEW",
+    "top": "TOP"
+  }
+}

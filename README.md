@@ -2,9 +2,9 @@
 
 A modern, responsive web application for discovering, reading, and managing manga using React and TypeScript.
 
-**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress (15%)
-**Version:** 0.1.0
-**Last Updated:** 2026-02-07
+**Status:** Phase 1 - Complete (100%), Phase 2 - In Progress (60%)
+**Version:** 0.2.0
+**Last Updated:** 2026-02-12
 
 ---
 
@@ -55,38 +55,80 @@ pnpm lint          # Check code quality
 
 ```
 web-manga/
-├── src/                        # Application source code (~800 LOC)
-│   ├── components/            # Reusable React components (170 LOC)
+├── src/                        # Application source code (~6,664 LOC)
+│   ├── components/            # Reusable React components (~3,400 LOC)
 │   │   ├── layout/           # Layout components
-│   │   │   ├── Layout.tsx    # Main layout wrapper (16 LOC)
-│   │   │   └── Navbar.tsx    # Fixed navigation bar (40 LOC)
-│   │   └── navigation/       # Navigation controls
-│   │       ├── SearchBar.tsx # Search input (47 LOC)
-│   │       ├── UserMenu.tsx  # User dropdown (28 LOC)
-│   │       └── GenreDropdown.tsx # Genre selector (85 LOC)
+│   │   │   ├── Layout.tsx    # Main layout wrapper
+│   │   │   └── Navbar.tsx    # Fixed navigation bar
+│   │   ├── navigation/       # Navigation controls
+│   │   │   ├── SearchBar.tsx # Search input
+│   │   │   ├── UserMenu.tsx  # User dropdown
+│   │   │   └── GenreDropdown.tsx # Genre selector
+│   │   ├── auth/             # Authentication components
+│   │   │   ├── AuthLayout.tsx # Auth page layout
+│   │   │   ├── LoginForm.tsx # Login form
+│   │   │   └── RegisterForm.tsx # Registration form
+│   │   ├── common/           # Common UI components
+│   │   │   ├── Badge.tsx, GlassCard.tsx
+│   │   │   ├── IconButton.tsx, PasswordField.tsx
+│   │   │   ├── SocialLoginButton.tsx, StatusBadge.tsx
+│   │   │   └── ErrorBoundary.tsx
+│   │   ├── comment/          # Comment system
+│   │   │   ├── CommentItem.tsx, CommentInput.tsx
+│   │   │   ├── CommentList.tsx, ReactionButtons.tsx
+│   │   │   ├── MangaCommentSection.tsx
+│   │   │   ├── ChapterCommentSidebar.tsx
+│   │   │   └── PageCommentModal.tsx
+│   │   ├── manga/            # Manga components
+│   │   │   ├── MangaInfo.tsx
+│   │   │   └── ChapterList.tsx
+│   │   └── reader/           # Reader interface
+│   │       ├── VerticalReader.tsx, HorizontalReader.tsx
+│   │       ├── ReaderToolbar.tsx
+│   │       └── ReaderProgress.tsx
 │   │
-│   ├── pages/                 # Page-level components (107 LOC)
-│   │   └── HomePage.tsx       # Manga discovery grid (37 LOC)
+│   ├── pages/                 # Page-level components
+│   │   ├── HomePage.tsx       # Manga discovery grid
+│   │   ├── auth/             # Auth pages
+│   │   │   ├── LoginPage.tsx
+│   │   │   └── RegisterPage.tsx
+│   │   ├── manga/            # Manga pages
+│   │   │   └── MangaDetailPage.tsx
+│   │   └── reader/           # Reader pages
+│   │       └── ReaderPage.tsx
 │   │
 │   ├── store/                 # Redux state management
 │   │   ├── index.ts          # Store configuration
-│   │   └── hooks.ts          # Typed hooks
+│   │   ├── hooks.ts          # Typed hooks
+│   │   └── slices/           # State slices
+│   │       └── comment-slice.ts
 │   │
-│   ├── types/                 # TypeScript interfaces (39 LOC)
-│   │   ├── genre-types.ts
-│   │   └── navigation-types.ts
+│   ├── types/                 # TypeScript interfaces
+│   │   ├── genre-types.ts, navigation-types.ts
+│   │   ├── comment-types.ts  # Comment system types
+│   │   └── manga-types.ts    # Manga/chapter types
 │   │
-│   ├── constants/             # Application constants (16 LOC)
-│   │   └── genres.ts
+│   ├── constants/             # Application constants
+│   │   ├── genres.ts
+│   │   ├── mock-chapter-data.ts
+│   │   └── mock-comment-data.ts
 │   │
-│   ├── styles/                # Global styles (203 LOC)
-│   │   ├── reset.css
-│   │   ├── variables.css
-│   │   ├── global.css
-│   │   └── App.css
+│   ├── utils/                 # Utility functions
+│   │   ├── format-relative-time.ts
+│   │   └── format-number.ts
 │   │
-│   ├── App.tsx                # Root component (19 LOC)
-│   └── main.tsx               # React entry point (10 LOC)
+│   ├── i18n/                  # Internationalization
+│   │   ├── i18n-config.ts    # i18n initialization
+│   │   └── locales/          # Translation files
+│   │       ├── en/           # English (common, home, auth, manga, reader, comment)
+│   │       └── vi/           # Vietnamese (common, home, auth, manga, reader, comment)
+│   │
+│   ├── styles/                # Global styles
+│   │   ├── reset.css, variables.css
+│   │   ├── global.css, App.css
+│   │
+│   ├── App.tsx                # Root component with routing
+│   └── main.tsx               # React entry point
 │
 ├── public/                     # Static assets
 ├── docs/                       # Project documentation
@@ -180,24 +222,37 @@ Comprehensive documentation is available in the `./docs` directory:
 - [x] All code passes TypeScript strict mode
 - [x] Responsive design (mobile-first)
 
-### Phase 2: Component Library & State Management (In Progress)
-- [ ] Reusable components (Button, Card, Modal, Form)
-- [ ] Redux slices (manga, auth, ui, reading)
-- [ ] Theme switching (dark/light mode)
-- [ ] API service foundation
-- [ ] Unit tests for components
+### Phase 2: Component Library & State Management (In Progress - 60%)
+- [x] Common components (Badge, GlassCard, IconButton, PasswordField, SocialLoginButton, StatusBadge, ErrorBoundary)
+- [x] Auth UI components (AuthLayout, LoginForm, RegisterForm)
+- [x] Comment system (8 components with nested replies, reactions)
+- [x] Manga components (MangaInfo, ChapterList)
+- [x] Reader components (Vertical/Horizontal modes, toolbar, progress tracking)
+- [x] Redux slice for comments (comment-slice.ts)
+- [x] i18n namespaces (auth, manga, reader, comment)
+- [x] Utility functions (format-relative-time, format-number)
+- [ ] Theme switching (dark/light mode) - infrastructure ready
+- [ ] API service foundation - still planned
+- [ ] Unit tests for components - not started
 
-### Phase 3: Manga Discovery (Pending)
+### Phase 3: Manga Discovery (Early Implementation - 20%)
+- [x] Manga detail page (MangaDetailPage) with info and chapter list
 - [ ] Manga catalog browsing with filters
-- [ ] Search functionality
-- [ ] Detail pages
+- [ ] Search functionality with real data
 
-### Phase 4: Reading Experience (Pending)
-- [ ] Chapter reader interface
-- [ ] Progress tracking & bookmarks
+### Phase 4: Reading Experience (Early Implementation - 40%)
+- [x] Chapter reader interface (VerticalReader, HorizontalReader)
+- [x] Reader toolbar with zoom, fullscreen, mode controls
+- [x] Progress tracking with Intersection Observer
+- [x] Page comment modal
+- [ ] Real API integration for chapters
+- [ ] Bookmarks system
 
-### Phase 5: User Features (Pending)
-- [ ] Authentication system
+### Phase 5: User Features (Early Implementation - 30%)
+- [x] Authentication UI pages (LoginPage, RegisterPage)
+- [x] Auth forms with validation (LoginForm, RegisterForm)
+- [x] Social login buttons (Google, Facebook, Twitter)
+- [ ] Real authentication backend integration
 - [ ] User library management
 
 ### Phase 6: Advanced Features (Pending)
@@ -327,16 +382,16 @@ npm run build
 ## FAQ
 
 **Q: What's the current status of the project?**
-A: Phase 1 (Foundation) is complete. Phase 2 (Component library & state management) is in progress (15%).
+A: Phase 1 (Foundation) is complete. Phase 2 (Component library & state management) is 60% complete with auth UI, comment system, manga detail, and reader components implemented.
 
 **Q: When will the manga reader be ready?**
-A: Targeted for Phase 4 (Weeks 9-12). See roadmap for details.
+A: Reader UI is implemented (vertical/horizontal modes, toolbar, progress tracking). Backend integration for real manga data is pending.
 
 **Q: How can I contribute?**
 A: Follow the Contributing section above. Create a feature branch and submit a PR.
 
 **Q: Is authentication implemented?**
-A: Not yet. User authentication is planned for Phase 5.
+A: Authentication UI pages and forms are complete. Backend integration is pending.
 
 ---
 
@@ -359,27 +414,30 @@ TBD
 
 | Version | Date | Status | Highlights |
 |---------|------|--------|-----------|
+| 0.2.0 | 2026-02-12 | Phase 2 (60%) | Auth UI, comment system, manga detail, reader components |
 | 0.1.0 | 2026-02-06 | Phase 1 Complete | UI foundation, routing, design system |
 | 0.0.0 | Initial | Initial setup | Development environment |
 
 ---
 
-## What's New in v0.1.0
+## What's New in v0.2.0
 
-**Phase 1 Complete!** The UI foundation is now ready:
-- **Navigation System:** Fixed navbar with logo, search bar, genre dropdown, user menu
-- **Homepage:** Displays 12 genres in a responsive 2-column grid
-- **Design System:** Deep Ocean Blue theme with Righteous & Poppins fonts
-- **Responsive:** Mobile-first design that adapts to all screen sizes
-- **Accessible:** Focus states, ARIA labels, keyboard navigation
-- **Tech Stack:** React 19 + Redux Toolkit + React Router v7
-- **Documentation:** Comprehensive guides for architecture, standards, and roadmap
+**Phase 2 Progress (60%)!** Major component implementations:
+- **Auth System:** LoginPage, RegisterPage with forms, validation, social login buttons
+- **Comment System:** Full featured with nested replies (max depth 3), reactions (like/dislike), manga/chapter/page comments
+- **Manga Detail:** MangaInfo component with cover/stats/synopsis, ChapterList with sort toggle
+- **Reader Interface:** Vertical + Horizontal reading modes, toolbar with zoom/fullscreen/mode controls, progress bar with scroll tracking, page comment modal
+- **Common Components:** Badge, GlassCard, IconButton, PasswordField, SocialLoginButton, StatusBadge, ErrorBoundary
+- **State Management:** Redux comment slice implemented
+- **Routing:** Added /login, /register, /manga/:id, /read/:mangaId/:chapterId, 404 page
+- **i18n:** Added auth, manga, reader, comment namespaces (English & Vietnamese)
+- **Utilities:** format-relative-time, format-number helpers
 
-**Next (Phase 2):** Component library, Redux slices, theme switching
+**What's Missing:** Real API integration, theme switching implementation, unit tests
 
-See `./docs/project-roadmap.md` for Phase 2 details.
+See `./docs/project-roadmap.md` for updated Phase 2 details.
 
 ---
 
-**Last Updated:** 2026-02-07
+**Last Updated:** 2026-02-12
 

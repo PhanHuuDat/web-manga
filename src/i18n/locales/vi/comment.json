@@ -1,0 +1,26 @@
+{
+  "title": "Bình luận",
+  "commentsCount": "{{count}} bình luận",
+  "noComments": "Chưa có bình luận",
+  "beFirst": "Hãy là người đầu tiên bình luận!",
+  "placeholder": "Viết bình luận...",
+  "replyPlaceholder": "Trả lời {{username}}...",
+  "pagePlaceholder": "Thêm bình luận về trang này...",
+  "chapterPlaceholder": "Chia sẻ suy nghĩ của bạn về chương này...",
+  "submit": "Đăng",
+  "reply": "Trả lời",
+  "cancel": "Hủy",
+  "replyingTo": "Đang trả lời",
+  "loadMore": "Xem thêm bình luận",
+  "loading": "Đang tải bình luận...",
+  "pageComments": "Bình luận trang {{number}}",
+  "chapterComments": "Bình luận chương {{number}}",
+  "currentPage": "Trang đang xem",
+  "pageOf": "Trang {{current}} / {{total}}",
+  "reactions": {
+    "like": "Thích",
+    "dislike": "Không thích",
+    "total": "Tổng tương tác"
+  },
+  "maxDepth": "// max_depth"
+}

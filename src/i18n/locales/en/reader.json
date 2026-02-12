@@ -1,0 +1,46 @@
+{
+  "toolbar": {
+    "back": "Back",
+    "chapter": "Chapter {{number}}",
+    "prev": "Previous",
+    "next": "Next",
+    "settings": "Settings",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit Fullscreen",
+    "toggleMode": "Toggle Mode",
+    "zoomIn": "Zoom In",
+    "zoomOut": "Zoom Out",
+    "comments": "Comments",
+    "pageComment": "Page Comment"
+  },
+  "mode": {
+    "vertical": "Vertical",
+    "horizontal": "Horizontal",
+    "singlePage": "Single Page",
+    "doublePage": "Double Page"
+  },
+  "settings": {
+    "readingMode": "Reading Mode",
+    "pageLayout": "Page Layout",
+    "zoom": "Zoom",
+    "fitWidth": "Fit Width",
+    "fitHeight": "Fit Height",
+    "originalSize": "Original Size"
+  },
+  "navigation": {
+    "tapLeft": "Tap left for previous",
+    "tapRight": "Tap right for next",
+    "swipe": "Swipe to navigate",
+    "scroll": "Scroll to read"
+  },
+  "progress": {
+    "page": "Page {{current}} of {{total}}",
+    "chapter": "Ch. {{number}}"
+  },
+  "endChapter": {
+    "title": "End of Chapter",
+    "nextChapter": "Next Chapter",
+    "prevChapter": "Previous Chapter",
+    "backToManga": "Back to Manga"
+  }
+}

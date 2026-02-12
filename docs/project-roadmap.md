@@ -5,8 +5,8 @@
 This document outlines the development roadmap for the web-manga project, tracking progress through phases from foundation to full-featured application.
 
 **Current Phase:** Phase 1 - Foundation & UI Framework (Complete), Phase 2 - Components & State (In Progress)
-**Last Updated:** 2026-02-07
-**Status:** Phase 1 Complete (100%), Phase 2 In Progress (15%)
+**Last Updated:** 2026-02-12
+**Status:** Phase 1 Complete (100%), Phase 2 In Progress (60%)
 
 ---
 
@@ -15,10 +15,10 @@ This document outlines the development roadmap for the web-manga project, tracki
 | Phase | Name | Timeline | Status | Progress |
 |-------|------|----------|--------|----------|
 | 1 | Foundation & UI Framework | Weeks 1-2 | Complete | 100% |
-| 2 | Core Components & State | Weeks 3-4 | In Progress | 15% |
-| 3 | Manga Discovery | Weeks 5-8 | Pending | 0% |
-| 4 | Reading Experience | Weeks 9-12 | Pending | 0% |
-| 5 | User Features | Weeks 13-16 | Pending | 0% |
+| 2 | Core Components & State | Weeks 3-4 | In Progress | 60% |
+| 3 | Manga Discovery | Weeks 5-8 | Early Start | 20% |
+| 4 | Reading Experience | Weeks 9-12 | Early Start | 40% |
+| 5 | User Features | Weeks 13-16 | Early Start | 30% |
 | 6 | Advanced Features | Weeks 17+ | Pending | 0% |
 
 ---
@@ -106,27 +106,44 @@ This document outlines the development roadmap for the web-manga project, tracki
 - Create API service layer foundation
 
 ### Key Features
-- [ ] Common components (Button, Card, Input, Modal, Badge)
-- [ ] Redux slices (manga, auth, ui, reading)
-- [ ] Theme context and switching (dark/light mode)
-- [ ] API service skeleton
-- [ ] Form validation utility
-- [ ] Custom hooks (useTheme, useFetch)
+- [x] Common components (Badge, GlassCard, IconButton, PasswordField, SocialLoginButton, StatusBadge, ErrorBoundary)
+- [x] Auth components (AuthLayout, LoginForm, RegisterForm)
+- [x] Comment system (8 components with nested replies, reactions)
+- [x] Manga components (MangaInfo, ChapterList)
+- [x] Reader components (VerticalReader, HorizontalReader, ReaderToolbar, ReaderProgress)
+- [x] Redux slice for comments (comment-slice.ts)
+- [x] i18n namespaces (auth, manga, reader, comment)
+- [x] Utility functions (format-relative-time, format-number)
+- [ ] Additional Redux slices (manga, auth, ui, reading) - pending
+- [ ] Theme context and switching (dark/light mode) - pending
+- [ ] API service skeleton - pending
+- [ ] Custom hooks (useTheme, useFetch) - pending
 
 ### Deliverables
-- Component library in `src/components/common/` (5+ components)
-- Redux slices for core features
-- Theme switching system
-- API service foundation
-- Updated component documentation
+- [x] Component library in `src/components/common/` (7 components)
+- [x] Auth UI in `src/components/auth/` and `src/pages/auth/`
+- [x] Comment system in `src/components/comment/` (8 components)
+- [x] Manga components in `src/components/manga/` and `src/pages/manga/`
+- [x] Reader components in `src/components/reader/` and `src/pages/reader/`
+- [x] Redux comment slice
+- [x] i18n support for new features
+- [ ] Additional Redux slices for core features - pending
+- [ ] Theme switching system - pending
+- [ ] API service foundation - pending
+- [ ] Updated component documentation - in progress
 
 ### Acceptance Criteria
-- [ ] 5+ reusable components with full types
-- [ ] Redux slices created (manga, auth, ui)
-- [ ] Dark/light mode implemented & working
-- [ ] API service patterns established
-- [ ] All components responsive & accessible
-- [ ] 80%+ test coverage for new components
+- [x] 7+ reusable common components with full types
+- [x] Auth UI pages and forms implemented
+- [x] Comment system fully functional (UI only, no backend)
+- [x] Manga detail page with info and chapters
+- [x] Reader interface with vertical/horizontal modes
+- [x] Redux comment slice created
+- [x] All components responsive & accessible
+- [ ] Additional Redux slices (manga, auth, ui) - pending
+- [ ] Dark/light mode implemented & working - pending
+- [ ] API service patterns established - pending
+- [ ] 80%+ test coverage for new components - pending
 
 ### Technical Decisions
 - [x] CSS architecture: CSS Modules with BEM (done in Phase 1)
@@ -152,12 +169,14 @@ This document outlines the development roadmap for the web-manga project, tracki
 - Build manga detail pages
 
 ### Key Features
-- [ ] Manga catalog display (grid/list)
-- [ ] Search by title/author
-- [ ] Filter by genre, status, rating
-- [ ] Pagination or infinite scroll
-- [ ] Manga detail page with chapters
-- [ ] Genre management system
+- [x] Manga detail page with chapters (MangaDetailPage)
+- [x] MangaInfo component (cover, stats, synopsis)
+- [x] ChapterList component with sort toggle
+- [ ] Manga catalog display (grid/list) - pending
+- [ ] Search by title/author - pending
+- [ ] Filter by genre, status, rating - pending
+- [ ] Pagination or infinite scroll - pending
+- [ ] Genre management system - pending
 
 ### API Endpoints Needed
 ```
@@ -207,14 +226,18 @@ GET  /api/genres                     - Available genres
 - Track reading progress
 
 ### Key Features
-- [ ] Chapter image gallery viewer
-- [ ] Image zoom and pan
-- [ ] Page navigation (prev/next)
-- [ ] Reading progress indicator
-- [ ] Chapter bookmarking
-- [ ] Reading history tracking
-- [ ] Image quality settings
-- [ ] Fullscreen mode
+- [x] Chapter viewer with vertical/horizontal modes (VerticalReader, HorizontalReader)
+- [x] Reader toolbar with controls (ReaderToolbar)
+- [x] Image zoom and pan
+- [x] Page navigation (prev/next)
+- [x] Reading progress indicator (ReaderProgress with Intersection Observer)
+- [x] Fullscreen mode
+- [x] Page comment modal (PageCommentModal)
+- [x] Chapter comment sidebar (ChapterCommentSidebar)
+- [ ] Chapter bookmarking - pending
+- [ ] Reading history tracking - pending
+- [ ] Image quality settings - pending
+- [ ] Real API integration for chapter data - pending
 
 ### Technical Considerations
 - [ ] Image lazy loading
@@ -270,14 +293,18 @@ POST /api/bookmarks                      - Save bookmark
 - Build library management
 
 ### Key Features
-- [ ] User registration
-- [ ] User login/logout
-- [ ] Password reset
-- [ ] User profile page
-- [ ] Personal manga library
-- [ ] Reading preferences
-- [ ] Favorites/watchlist
-- [ ] Reading statistics
+- [x] User registration page (RegisterPage with RegisterForm)
+- [x] User login page (LoginPage with LoginForm)
+- [x] Auth forms with validation
+- [x] Social login buttons (Google, Facebook, Twitter)
+- [x] Password field with visibility toggle
+- [ ] User login/logout with real backend - pending
+- [ ] Password reset - pending
+- [ ] User profile page - pending
+- [ ] Personal manga library - pending
+- [ ] Reading preferences - pending
+- [ ] Favorites/watchlist - pending
+- [ ] Reading statistics - pending
 
 ### Authentication Strategy
 - JWT tokens in secure cookies
@@ -439,12 +466,16 @@ GET    /api/user/reading-stats     - Reading statistics
 - [x] UI foundation with 6 components
 - [x] Responsive design verified
 
-### Phase 2 (IN PROGRESS)
-- [ ] 5+ reusable components created
-- [ ] Redux slices implemented (manga, auth, ui)
-- [ ] Theme switching operational
-- [ ] Lighthouse score: 90+
-- [ ] Component test coverage: 80%+
+### Phase 2 (IN PROGRESS - 60%)
+- [x] 7+ reusable common components created
+- [x] Auth UI components created
+- [x] Comment system implemented (8 components)
+- [x] Manga and reader components created
+- [x] Redux comment slice implemented
+- [ ] Additional Redux slices (manga, auth, ui) - pending
+- [ ] Theme switching operational - pending
+- [ ] Lighthouse score: 90+ - to be measured
+- [ ] Component test coverage: 80%+ - pending
 
 ### Phase 3
 - [ ] Manga grid loads < 2s

@@ -1,0 +1,46 @@
+{
+  "toolbar": {
+    "back": "Quay lại",
+    "chapter": "Chương {{number}}",
+    "prev": "Trước",
+    "next": "Sau",
+    "settings": "Cài đặt",
+    "fullscreen": "Toàn màn hình",
+    "exitFullscreen": "Thoát toàn màn hình",
+    "toggleMode": "Đổi chế độ",
+    "zoomIn": "Phóng to",
+    "zoomOut": "Thu nhỏ",
+    "comments": "Bình luận",
+    "pageComment": "Bình luận trang"
+  },
+  "mode": {
+    "vertical": "Dọc",
+    "horizontal": "Ngang",
+    "singlePage": "Từng trang",
+    "doublePage": "Trang đôi"
+  },
+  "settings": {
+    "readingMode": "Chế độ đọc",
+    "pageLayout": "Bố cục trang",
+    "zoom": "Phóng to",
+    "fitWidth": "Vừa chiều rộng",
+    "fitHeight": "Vừa chiều cao",
+    "originalSize": "Kích thước gốc"
+  },
+  "navigation": {
+    "tapLeft": "Chạm trái để quay lại",
+    "tapRight": "Chạm phải để tiếp tục",
+    "swipe": "Vuốt để chuyển trang",
+    "scroll": "Cuộn để đọc"
+  },
+  "progress": {
+    "page": "Trang {{current}} / {{total}}",
+    "chapter": "Ch. {{number}}"
+  },
+  "endChapter": {
+    "title": "Hết chương",
+    "nextChapter": "Chương tiếp",
+    "prevChapter": "Chương trước",
+    "backToManga": "Quay lại truyện"
+  }
+}
