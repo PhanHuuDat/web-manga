@@ -1,59 +1,57 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Alert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
 import AuthLayout from '../../components/auth/AuthLayout';
 import RegisterForm from '../../components/auth/RegisterForm';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  registerThunk,
+  selectAuthError,
+  selectAuthLoading,
+  clearError,
+} from '../../store/slices/auth-slice';
 
 function RegisterPage() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const navigate = useNavigate();
-  const [submitting, setSubmitting] = useState(false);
+  const dispatch = useAppDispatch();
+  const error = useAppSelector(selectAuthError);
+  const isLoading = useAppSelector(selectAuthLoading);
+
+  useEffect(() => {
+    return () => { dispatch(clearError()); };
+  }, [dispatch]);
 
   const handleSubmit = async (
     username: string,
     email: string,
     password: string,
     confirmPassword: string,
-    acceptTerms: boolean
+    _acceptTerms: boolean,
   ) => {
-    if (submitting) return;
-    setSubmitting(true);
-
-    try {
-      // TODO: Implement actual API call for registration
-      // Simulate successful registration
-      await new Promise(resolve => setTimeout(resolve, 1000));
+    const result = await dispatch(registerThunk({ username, email, password, confirmPassword }));
+    if (registerThunk.fulfilled.match(result)) {
       navigate('/login');
-    } finally {
-      setSubmitting(false);
     }
   };
 
   return (
-    <AuthLayout
-      title={t('auth.register.title')}
-      subtitle={t('auth.register.subtitle')}
-    >
-      <RegisterForm onSubmit={handleSubmit} disabled={submitting} />
+    <AuthLayout title={t('register.title')} subtitle={t('register.subtitle')}>
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
 
-      {/* Login link */}
-      <Typography
-        sx={{
-          textAlign: 'center',
-          mt: 3,
-          color: 'text.secondary',
-          fontSize: 14,
-        }}
-      >
-        {t('auth.register.hasAccount')}{' '}
-        <Link
-          component={RouterLink}
-          to="/login"
-          sx={{ fontWeight: 600, textDecoration: 'none' }}
-        >
-          {t('auth.register.login')}
+      <RegisterForm onSubmit={handleSubmit} disabled={isLoading} />
+
+      <Typography sx={{ textAlign: 'center', mt: 3, color: 'text.secondary', fontSize: 14 }}>
+        {t('register.hasAccount')}{' '}
+        <Link component={RouterLink} to="/login" sx={{ fontWeight: 600, textDecoration: 'none' }}>
+          {t('register.login')}
         </Link>
       </Typography>
     </AuthLayout>

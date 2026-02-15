@@ -24,7 +24,7 @@ function LoginForm({
   onSocialLogin,
   disabled = false,
 }: LoginFormProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -38,7 +38,7 @@ function LoginForm({
     <Box component="form" onSubmit={handleSubmit}>
       {/* Email field */}
       <TextField
-        label={t('auth.login.email')}
+        label={t('login.email')}
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -50,7 +50,7 @@ function LoginForm({
 
       {/* Password field */}
       <PasswordField
-        label={t('auth.login.password')}
+        label={t('login.password')}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         fullWidth
@@ -79,7 +79,7 @@ function LoginForm({
           }
           label={
             <Typography sx={{ fontSize: 14 }}>
-              {t('auth.login.rememberMe')}
+              {t('login.rememberMe')}
             </Typography>
           }
         />
@@ -89,7 +89,7 @@ function LoginForm({
           onClick={onForgotPassword}
           sx={{ fontSize: 14, cursor: 'pointer' }}
         >
-          {t('auth.login.forgotPassword')}
+          {t('login.forgotPassword')}
         </Link>
       </Box>
 
@@ -102,13 +102,13 @@ function LoginForm({
         disabled={disabled}
         sx={{ mb: 3, fontWeight: 600 }}
       >
-        {t('auth.login.submit')}
+        {t('login.submit')}
       </Button>
 
       {/* Divider */}
       <Divider sx={{ mb: 3 }}>
         <Typography sx={{ fontSize: 12, color: 'text.secondary' }}>
-          {t('auth.login.or')}
+          {t('login.or')}
         </Typography>
       </Divider>
 

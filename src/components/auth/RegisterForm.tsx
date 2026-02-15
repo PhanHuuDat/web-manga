@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { useTranslation } from 'react-i18next';
 import PasswordField from '../common/PasswordField';
 
@@ -21,7 +20,7 @@ interface RegisterFormProps {
 }
 
 function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('auth');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,19 +35,19 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
     const newErrors: Record<string, string> = {};
 
     if (username.length < 3) {
-      newErrors.username = t('auth.validation.usernameMin');
+      newErrors.username = t('validation.usernameMin');
     }
 
     if (password.length < 8) {
-      newErrors.password = t('auth.validation.passwordMin');
+      newErrors.password = t('validation.passwordMin');
     }
 
     if (password !== confirmPassword) {
-      newErrors.confirmPassword = t('auth.validation.passwordMismatch');
+      newErrors.confirmPassword = t('validation.passwordMismatch');
     }
 
     if (!acceptTerms) {
-      newErrors.terms = t('auth.validation.termsRequired');
+      newErrors.terms = t('validation.termsRequired');
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -64,7 +63,7 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
     <Box component="form" onSubmit={handleSubmit}>
       {/* Username field */}
       <TextField
-        label={t('auth.register.username')}
+        label={t('register.username')}
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -78,7 +77,7 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
 
       {/* Email field */}
       <TextField
-        label={t('auth.register.email')}
+        label={t('register.email')}
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -92,7 +91,7 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
 
       {/* Password field */}
       <PasswordField
-        label={t('auth.register.password')}
+        label={t('register.password')}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         error={!!errors.password}
@@ -105,7 +104,7 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
 
       {/* Confirm password field */}
       <PasswordField
-        label={t('auth.register.confirmPassword')}
+        label={t('register.confirmPassword')}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         error={!!errors.confirmPassword}
@@ -128,7 +127,7 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
           }
           label={
             <Typography sx={{ fontSize: 14 }}>
-              {t('auth.register.terms')}
+              {t('register.terms')}
             </Typography>
           }
         />
@@ -148,7 +147,7 @@ function RegisterForm({ onSubmit, disabled = false }: RegisterFormProps) {
         disabled={disabled}
         sx={{ fontWeight: 600 }}
       >
-        {t('auth.register.submit')}
+        {t('register.submit')}
       </Button>
     </Box>
   );
