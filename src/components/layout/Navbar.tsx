@@ -8,9 +8,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import SearchBar from '../navigation/SearchBar';
 import LanguageSwitcher from '../common/LanguageSwitcher';
+import { useAppDispatch } from '../../store/hooks';
+import { openAuthModal } from '../../store/slices/auth-slice';
 
 function Navbar() {
   const { t } = useTranslation('common');
+  const dispatch = useAppDispatch();
 
   const handleSearch = (query: string) => {
     console.log('Searching for:', query);
@@ -114,6 +117,7 @@ function Navbar() {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <LanguageSwitcher />
             <Button
+              onClick={() => dispatch(openAuthModal('login'))}
               variant="contained"
               sx={{
                 background: 'linear-gradient(90deg, #3b82f6, #2563eb)',

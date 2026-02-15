@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { useAppDispatch } from '../../store/hooks';
 import {
@@ -17,6 +17,7 @@ interface AuthProviderProps {
 function AuthProvider({ children }: AuthProviderProps) {
   const dispatch = useAppDispatch();
   const [isInitialized, setIsInitialized] = useState(false);
+  const initCalled = useRef(false);
 
   useEffect(() => {
     // Wire up axios interceptor callbacks
@@ -30,7 +31,16 @@ function AuthProvider({ children }: AuthProviderProps) {
       },
     });
 
-    // Attempt silent refresh on mount
+    // Guard against StrictMode double-mount in dev
+    if (initCalled.current) return;
+    initCalled.current = true;
+
+    // Only attempt refresh if user has logged in before
+    if (!localStorage.getItem('isLoggedIn')) {
+      setIsInitialized(true);
+      return;
+    }
+
     const initAuth = async () => {
       try {
         const result = await dispatch(refreshTokenThunk()).unwrap();
@@ -38,7 +48,8 @@ function AuthProvider({ children }: AuthProviderProps) {
           await dispatch(getCurrentUserThunk());
         }
       } catch {
-        // Not logged in — that's fine
+        // Refresh failed — clear the flag
+        localStorage.removeItem('isLoggedIn');
       } finally {
         setIsInitialized(true);
       }

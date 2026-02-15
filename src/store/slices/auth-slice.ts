@@ -4,11 +4,15 @@ import { authApi } from '../../services/api/auth-api-service';
 import type { AuthResponse, UserProfile } from '../../types/auth-types';
 import type { RootState } from '../index';
 
+type AuthModalView = 'login' | 'register';
+
 interface AuthState {
   user: UserProfile | null;
   accessToken: string | null;
   isLoading: boolean;
   error: string | null;
+  authModalOpen: boolean;
+  authModalView: AuthModalView;
 }
 
 const initialState: AuthState = {
@@ -16,6 +20,8 @@ const initialState: AuthState = {
   accessToken: null,
   isLoading: false,
   error: null,
+  authModalOpen: false,
+  authModalView: 'login',
 };
 
 // Extract error message from API ProblemDetails or fallback
@@ -95,6 +101,19 @@ const authSlice = createSlice({
     clearError(state) {
       state.error = null;
     },
+    openAuthModal(state, action: PayloadAction<AuthModalView>) {
+      state.authModalOpen = true;
+      state.authModalView = action.payload;
+      state.error = null;
+    },
+    closeAuthModal(state) {
+      state.authModalOpen = false;
+      state.error = null;
+    },
+    switchAuthModalView(state, action: PayloadAction<AuthModalView>) {
+      state.authModalView = action.payload;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -106,6 +125,8 @@ const authSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.accessToken = action.payload.accessToken;
+        state.authModalOpen = false;
+        localStorage.setItem('isLoggedIn', '1');
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -127,6 +148,7 @@ const authSlice = createSlice({
       .addCase(logoutThunk.fulfilled, (state) => {
         state.user = null;
         state.accessToken = null;
+        localStorage.removeItem('isLoggedIn');
         state.error = null;
       })
       // Refresh
@@ -144,12 +166,14 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, clearAuth, clearError } = authSlice.actions;
+export const { setCredentials, clearAuth, clearError, openAuthModal, closeAuthModal, switchAuthModalView } = authSlice.actions;
 
 // Selectors
 export const selectIsAuthenticated = (state: RootState) => !!state.auth.accessToken;
 export const selectCurrentUser = (state: RootState) => state.auth.user;
 export const selectAuthError = (state: RootState) => state.auth.error;
 export const selectAuthLoading = (state: RootState) => state.auth.isLoading;
+export const selectAuthModalOpen = (state: RootState) => state.auth.authModalOpen;
+export const selectAuthModalView = (state: RootState) => state.auth.authModalView;
 
 export default authSlice.reducer;
