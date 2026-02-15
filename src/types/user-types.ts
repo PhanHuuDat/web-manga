@@ -5,3 +5,13 @@ export interface User {
   level: number;
   isOnline: boolean;
 }
+
+export interface AuthenticatedUser {
+  id: string;
+  username: string;
+  displayName: string | null;
+  email: string;
+  avatarUrl: string | null;
+  roles: string[];
+  emailConfirmed: boolean;
+}

@@ -13,11 +13,12 @@ import authReducer, {
   selectAuthError,
   selectAuthLoading,
 } from '../auth-slice';
+import commentReducer from '../comment-slice';
 import type { RootState } from '../../index';
 
 function createStore(preloadedState?: Partial<RootState>) {
   return configureStore({
-    reducer: { auth: authReducer, comments: (state = {}) => state },
+    reducer: { auth: authReducer, comments: commentReducer },
     preloadedState: preloadedState as RootState,
   });
 }
@@ -40,7 +41,7 @@ describe('auth-slice reducers', () => {
 
   it('clearAuth resets to initial state', () => {
     const prevState = {
-      user: { id: '1', username: 'test', displayName: null, email: 'test@test.com', avatarUrl: null, roles: ['Reader'], emailConfirmed: true },
+      user: { id: '1', username: 'test', displayName: null, email: 'test@test.com', avatarUrl: null, level: 1, roles: ['Reader'], emailConfirmed: true },
       accessToken: 'token',
       isLoading: false,
       error: 'some error',
@@ -96,7 +97,7 @@ describe('auth-slice extraReducers', () => {
 
   it('logoutThunk.fulfilled resets state', () => {
     const state = authReducer(
-      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null },
+      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null },
       { type: logoutThunk.fulfilled.type },
     );
     expect(state.user).toBeNull();
@@ -116,7 +117,7 @@ describe('auth-slice extraReducers', () => {
 
   it('refreshTokenThunk.rejected clears auth', () => {
     const state = authReducer(
-      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null },
+      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null },
       { type: refreshTokenThunk.rejected.type },
     );
     expect(state.user).toBeNull();
@@ -124,7 +125,7 @@ describe('auth-slice extraReducers', () => {
   });
 
   it('getCurrentUserThunk.fulfilled sets user', () => {
-    const profile = { id: '1', username: 'test', displayName: 'Test', email: 'a@b.com', avatarUrl: null, roles: ['Reader'], emailConfirmed: true };
+    const profile = { id: '1', username: 'test', displayName: 'Test', email: 'a@b.com', avatarUrl: null, level: 1, roles: ['Reader'], emailConfirmed: true };
     const state = authReducer(
       { user: null, accessToken: 'token', isLoading: false, error: null },
       { type: getCurrentUserThunk.fulfilled.type, payload: profile },
@@ -145,7 +146,7 @@ describe('auth-slice selectors', () => {
   });
 
   it('selectCurrentUser returns user', () => {
-    const user = { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, roles: ['Reader'], emailConfirmed: true };
+    const user = { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: ['Reader'], emailConfirmed: true };
     const store = createStore({ auth: { user, accessToken: 'token', isLoading: false, error: null } });
     expect(selectCurrentUser(store.getState())).toEqual(user);
   });

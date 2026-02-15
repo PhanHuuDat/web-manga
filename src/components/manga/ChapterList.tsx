@@ -13,7 +13,7 @@ interface ChapterListProps {
 }
 
 function ChapterList({ chapters, onChapterClick }: ChapterListProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('manga');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   const sortedChapters = [...chapters].sort((a, b) => {
@@ -34,7 +34,7 @@ function ChapterList({ chapters, onChapterClick }: ChapterListProps) {
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          {t('manga.detail.chapters')}
+          {t('detail.chapters')}
         </Typography>
 
         <ButtonGroup size="small">
@@ -42,13 +42,13 @@ function ChapterList({ chapters, onChapterClick }: ChapterListProps) {
             onClick={() => setSortOrder('desc')}
             variant={sortOrder === 'desc' ? 'contained' : 'outlined'}
           >
-            {t('manga.detail.sortNewest')}
+            {t('detail.sortNewest')}
           </Button>
           <Button
             onClick={() => setSortOrder('asc')}
             variant={sortOrder === 'asc' ? 'contained' : 'outlined'}
           >
-            {t('manga.detail.sortOldest')}
+            {t('detail.sortOldest')}
           </Button>
         </ButtonGroup>
       </Box>
@@ -89,7 +89,7 @@ function ChapterList({ chapters, onChapterClick }: ChapterListProps) {
             </Box>
 
             <Typography sx={{ fontSize: 12, color: 'text.disabled' }}>
-              {chapter.views.toLocaleString()} {t('manga.info.views')}
+              {chapter.views.toLocaleString()} {t('info.views')}
             </Typography>
           </Box>
         ))}

@@ -26,6 +26,7 @@ function SocialLoginButton({ provider, sx, ...props }: SocialLoginButtonProps) {
 
   return (
     <Button
+      type="button"
       variant="outlined"
       fullWidth
       sx={{

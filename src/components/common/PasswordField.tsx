@@ -23,6 +23,7 @@ function PasswordField({ ...props }: PasswordFieldProps) {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
+                type="button"
                 onClick={handleToggleVisibility}
                 edge="end"
                 size="small"

@@ -212,15 +212,18 @@ src/                              # All styling via MUI sx props
 ├── components/                   # Reusable UI components (~3,400 LOC)
 │   ├── layout/
 │   │   ├── Layout.tsx           # MUI Box wrapper with main padding
-│   │   └── Navbar.tsx           # MUI AppBar + Toolbar + Container
+│   │   ├── Navbar.tsx           # MUI AppBar + Toolbar + Container
+│   │   ├── ProtectedRoute.tsx   # Auth-gated route wrapper
+│   │   └── AuthProvider.tsx     # Auth context + axios interceptors
 │   ├── navigation/
 │   │   ├── SearchBar.tsx        # MUI Box + InputBase + IconButton
 │   │   ├── UserMenu.tsx         # MUI IconButton with inline SVG
 │   │   └── GenreDropdown.tsx    # MUI Button + Menu + MenuItem grid
-│   ├── auth/                    # Authentication components
+│   ├── auth/                    # Authentication components (Redux integrated)
 │   │   ├── AuthLayout.tsx       # Auth page wrapper
-│   │   ├── LoginForm.tsx        # Login form with validation
-│   │   └── RegisterForm.tsx     # Registration form
+│   │   ├── LoginForm.tsx        # Login form with API integration
+│   │   ├── RegisterForm.tsx     # Registration form with validation
+│   │   └── EmailVerification.tsx # Email verification flow
 │   ├── common/                  # Shared UI components
 │   │   ├── Badge.tsx            # Status badge component
 │   │   ├── GlassCard.tsx        # Glassmorphism card
@@ -288,11 +291,19 @@ src/                              # All styling via MUI sx props
 │   ├── format-relative-time.ts  # Relative time formatter
 │   └── format-number.ts         # Number formatter
 │
+├── services/                    # API & business logic (new)
+│   ├── api-client.ts            # Axios instance with interceptors
+│   ├── auth-service.ts          # Auth API calls (login, register, refresh, logout)
+│   ├── manga-service.ts         # Manga API calls
+│   └── token-manager.ts         # Access/refresh token management
+│
 ├── store/
 │   ├── index.ts                 # Redux store configuration
 │   ├── hooks.ts                 # Typed useAppDispatch & useAppSelector
 │   └── slices/                  # Redux slices
-│       └── comment-slice.ts     # Comment state management
+│       ├── comment-slice.ts     # Comment state management
+│       ├── auth-slice.ts        # Auth state (user, tokens, loading, error)
+│       └── ui-slice.ts          # UI state (notifications, modals)
 │
 ├── App.tsx                      # Root component with routing + ErrorBoundary
 └── main.tsx                     # Entry point with ThemeProvider + i18n
@@ -420,21 +431,29 @@ npm run build  # Test production build
 - [x] ESLint configuration with React/Hooks plugins
 - [x] Comprehensive project documentation
 
-### Phase 2 Implemented (60%)
+### Phase 2 Implemented (100% - Auth Complete)
 - [x] **Auth System:** LoginPage, RegisterPage with LoginForm, RegisterForm
-- [x] **Social Login:** Google, Facebook, Twitter buttons
+- [x] **Auth API Integration:** axios interceptors, token refresh, logout
+- [x] **Protected Routes:** ProtectedRoute component guards authenticated pages
+- [x] **Auth Provider:** AuthProvider with context + interceptors
+- [x] **Auth Slice:** Redux auth-slice for user state, token caching, loading
+- [x] **Token Management:** Access/refresh token handling, HttpOnly cookie support
+- [x] **Social Login:** Google, Facebook, Twitter buttons (UI ready for backend)
+- [x] **Email Verification:** EmailVerification component for email verification flow
+- [x] **Password Reset:** Forms for forgot password & reset password flows
 - [x] **Comment System:** Full featured with nested replies (max depth 3), reactions (like/dislike)
 - [x] **Comment Components:** CommentItem, CommentInput, CommentList, ReactionButtons, MangaCommentSection, ChapterCommentSidebar, PageCommentModal
 - [x] **Manga Detail:** MangaDetailPage with MangaInfo (cover/stats/synopsis), ChapterList (sort toggle)
 - [x] **Reader Interface:** ReaderPage with VerticalReader, HorizontalReader modes
 - [x] **Reader Controls:** ReaderToolbar (zoom, fullscreen, mode switching), ReaderProgress (scroll tracking)
 - [x] **Common Components:** Badge, GlassCard, IconButton, PasswordField, SocialLoginButton, StatusBadge, ErrorBoundary
-- [x] **Redux State:** comment-slice.ts implemented
+- [x] **Redux State:** comment-slice.ts, auth-slice.ts, ui-slice.ts implemented
+- [x] **API Services:** auth-service, manga-service, token-manager, api-client
 - [x] **Routing:** /login, /register, /manga/:id, /read/:mangaId/:chapterId, 404 route
 - [x] **i18n Namespaces:** auth, manga, reader, comment (English & Vietnamese)
 - [x] **Utilities:** format-relative-time, format-number
 - [x] **Mock Data:** mock-chapter-data, mock-comment-data
-- [x] **@mui/icons-material** - Now included
+- [x] **@mui/icons-material** - Included
 
 ### Not Yet Implemented (Phase 2+)
 - [ ] Real API integration / backend connection
@@ -457,7 +476,7 @@ npm run build  # Test production build
 6. ~~Create Redux slices for state management~~ ✓ (comment-slice implemented)
 7. Build unit tests for components
 
-**Phase 2 Progress:** 60% complete. Major UI components implemented. API integration and testing remain.
+**Phase 2 Progress:** 100% complete. Auth system fully integrated with backend. Comments, manga detail, reader UI all functional with mock data. Testing and advanced features remain for Phase 3.
 
 See `project-roadmap.md` for detailed timeline and dependencies.
 

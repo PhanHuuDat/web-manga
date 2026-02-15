@@ -4,17 +4,18 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { describe, it, expect } from 'vitest';
 import authReducer from '../../../store/slices/auth-slice';
+import commentReducer from '../../../store/slices/comment-slice';
 import ProtectedRoute from '../ProtectedRoute';
 
 function renderWithAuth(accessToken: string | null, initialRoute = '/protected') {
   const store = configureStore({
     reducer: {
       auth: authReducer,
-      comments: (state = {}) => state,
+      comments: commentReducer,
     },
     preloadedState: {
       auth: {
-        user: accessToken ? { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, roles: ['Reader'], emailConfirmed: true } : null,
+        user: accessToken ? { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: ['Reader'], emailConfirmed: true } : null,
         accessToken,
         isLoading: false,
         error: null,

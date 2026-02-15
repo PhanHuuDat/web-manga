@@ -8,6 +8,7 @@ import { store } from './store';
 import theme from './theme/theme';
 import './i18n/i18n-config'; // Initialize i18n before app
 import App from './App.tsx';
+import AuthProvider from './components/auth/AuthProvider';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -15,7 +16,9 @@ createRoot(document.getElementById('root')!).render(
       <CssBaseline />
       <Provider store={store}>
         <BrowserRouter>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </BrowserRouter>
       </Provider>
     </ThemeProvider>

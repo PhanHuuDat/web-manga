@@ -14,7 +14,7 @@ interface HorizontalReaderProps {
 }
 
 function HorizontalReader({ pages, zoom, onPageChange }: HorizontalReaderProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('reader');
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ function HorizontalReader({ pages, zoom, onPageChange }: HorizontalReaderProps) 
         }}
       >
         <Typography sx={{ fontSize: 14, fontWeight: 600 }}>
-          {t('reader.progress.page', { current: currentPage + 1, total: pages.length })}
+          {t('progress.page', { current: currentPage + 1, total: pages.length })}
         </Typography>
       </Box>
     </Box>
