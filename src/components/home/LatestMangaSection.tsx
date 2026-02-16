@@ -12,14 +12,14 @@ import { fetchMangaList, selectMangaList } from '../../store/slices/manga-slice'
 function LatestMangaSection() {
   const { t } = useTranslation('home');
   const dispatch = useAppDispatch();
-  const { data, loading, page, pageSize, totalCount } = useAppSelector(selectMangaList);
+  const { data, loading, loaded, page, pageSize, totalCount } = useAppSelector(selectMangaList);
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 
   useEffect(() => {
-    if (data.length === 0) {
+    if (!loaded) {
       dispatch(fetchMangaList({ page: 1, pageSize: 10 }));
     }
-  }, [dispatch, data.length]);
+  }, [dispatch, loaded]);
 
   const handlePageChange = (newPage: number) => {
     dispatch(fetchMangaList({ page: newPage, pageSize: 10 }));

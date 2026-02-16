@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { authApi } from '../../services/api/auth-api-service';
+import { extractError } from '../../utils/extract-api-error';
 import type { AuthResponse, UserProfile } from '../../types/auth-types';
 import type { RootState } from '../index';
 
@@ -23,20 +24,6 @@ const initialState: AuthState = {
   authModalOpen: false,
   authModalView: 'login',
 };
-
-// Extract error message from API ProblemDetails or fallback
-function extractError(err: unknown): string {
-  if (
-    typeof err === 'object' &&
-    err !== null &&
-    'response' in err
-  ) {
-    const resp = (err as { response?: { data?: { detail?: string; errors?: string[] } } }).response;
-    if (resp?.data?.detail) return resp.data.detail;
-    if (resp?.data?.errors) return resp.data.errors.join('; ');
-  }
-  return 'Something went wrong. Please try again.';
-}
 
 export const loginThunk = createAsyncThunk<AuthResponse, { email: string; password: string }>(
   'auth/login',

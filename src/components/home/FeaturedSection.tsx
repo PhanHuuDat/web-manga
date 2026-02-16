@@ -10,13 +10,13 @@ import { fetchTrendingManga, selectTrendingManga } from '../../store/slices/mang
 function FeaturedSection() {
   const { t } = useTranslation('home');
   const dispatch = useAppDispatch();
-  const { data, loading } = useAppSelector(selectTrendingManga);
+  const { data, loading, loaded } = useAppSelector(selectTrendingManga);
 
   useEffect(() => {
-    if (data.length === 0) {
+    if (!loaded) {
       dispatch(fetchTrendingManga({ days: 7 }));
     }
-  }, [dispatch, data.length]);
+  }, [dispatch, loaded]);
 
   return (
     <Box>

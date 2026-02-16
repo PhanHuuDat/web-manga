@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { chapterApi } from '../../services/api/chapter-api-service';
+import { extractError } from '../../utils/extract-api-error';
 import type { ChapterDetailDto } from '../../types/chapter-api-types';
 import type { RootState } from '../index';
 
@@ -14,14 +15,6 @@ interface ChapterState {
 const initialState: ChapterState = {
   selected: { data: null, loading: false, error: null },
 };
-
-function extractError(err: unknown): string {
-  if (typeof err === 'object' && err !== null && 'response' in err) {
-    const resp = (err as { response?: { data?: { errors?: string[] } } }).response;
-    if (resp?.data?.errors) return resp.data.errors.join('; ');
-  }
-  return 'Something went wrong. Please try again.';
-}
 
 export const fetchChapterDetail = createAsyncThunk<ChapterDetailDto, string>(
   'chapter/fetchDetail',

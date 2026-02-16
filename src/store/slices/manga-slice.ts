@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { mangaApi } from '../../services/api/manga-api-service';
+import { extractError } from '../../utils/extract-api-error';
 import type { PagedResponse, ListParams } from '../../types/api-types';
 import type {
   MangaDto,
@@ -14,6 +15,7 @@ interface MangaState {
     data: MangaDto[];
     loading: boolean;
     error: string | null;
+    loaded: boolean;
     page: number;
     pageSize: number;
     totalCount: number;
@@ -36,6 +38,7 @@ interface MangaState {
     data: MangaDto[];
     loading: boolean;
     error: string | null;
+    loaded: boolean;
   };
   search: {
     data: MangaDto[];
@@ -48,20 +51,12 @@ interface MangaState {
 }
 
 const initialState: MangaState = {
-  list: { data: [], loading: false, error: null, page: 1, pageSize: 20, totalCount: 0, hasNext: false },
+  list: { data: [], loading: false, error: null, loaded: false, page: 1, pageSize: 20, totalCount: 0, hasNext: false },
   selected: { data: null, loading: false, error: null },
   chapters: { data: [], loading: false, error: null, page: 1, totalCount: 0, hasNext: false },
-  trending: { data: [], loading: false, error: null },
+  trending: { data: [], loading: false, error: null, loaded: false },
   search: { data: [], loading: false, error: null, query: '', totalCount: 0, hasNext: false },
 };
-
-function extractError(err: unknown): string {
-  if (typeof err === 'object' && err !== null && 'response' in err) {
-    const resp = (err as { response?: { data?: { errors?: string[] } } }).response;
-    if (resp?.data?.errors) return resp.data.errors.join('; ');
-  }
-  return 'Something went wrong. Please try again.';
-}
 
 export const fetchMangaList = createAsyncThunk<PagedResponse<MangaDto>, ListMangaParams>(
   'manga/fetchList',
@@ -150,6 +145,7 @@ const mangaSlice = createSlice({
         state.list.pageSize = action.payload.pageSize;
         state.list.totalCount = action.payload.totalCount;
         state.list.hasNext = action.payload.hasNext;
+        state.list.loaded = true;
         state.list.loading = false;
       })
       .addCase(fetchMangaList.rejected, (state, action) => {
@@ -192,6 +188,7 @@ const mangaSlice = createSlice({
       })
       .addCase(fetchTrendingManga.fulfilled, (state, action) => {
         state.trending.data = action.payload.data;
+        state.trending.loaded = true;
         state.trending.loading = false;
       })
       .addCase(fetchTrendingManga.rejected, (state, action) => {
