@@ -1,11 +1,36 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 import CommentCard from './CommentCard';
-import { LATEST_COMMENTS } from '../../constants/mock-comment-data';
+import { commentApi } from '../../services/api/comment-api-service';
+import { mapCommentDtoToComment } from '../../utils/comment-mapper';
+import type { Comment } from '../../types/comment-types';
 
 function TopCommentsSection() {
   const { t } = useTranslation('home');
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    commentApi
+      .list({ pageSize: 5 })
+      .then((res) => {
+        if (!cancelled) setComments(res.data.map(mapCommentDtoToComment));
+      })
+      .catch(() => {
+        // Silently fail -- section is non-critical
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  // Don't render section if no comments and not loading
+  if (!loading && comments.length === 0) return null;
 
   return (
     <Box
@@ -36,9 +61,13 @@ function TopCommentsSection() {
 
       {/* Comments List */}
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {LATEST_COMMENTS.slice(0, 2).map((comment) => (
-          <CommentCard key={comment.id} comment={comment} />
-        ))}
+        {loading
+          ? Array.from({ length: 2 }).map((_, i) => (
+              <Skeleton key={i} variant="rounded" height={80} sx={{ bgcolor: 'rgba(255,255,255,0.05)' }} />
+            ))
+          : comments.slice(0, 2).map((comment) => (
+              <CommentCard key={comment.id} comment={comment} />
+            ))}
       </Box>
     </Box>
   );

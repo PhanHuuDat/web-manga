@@ -3,11 +3,12 @@ import { Box, Typography, Chip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
-  fetchMangaComments,
-  addMangaComment,
-  toggleReaction,
+  fetchComments,
+  createComment,
+  toggleCommentReaction,
   setReplyingTo,
 } from '../../store/slices/comment-slice';
+import { selectIsAuthenticated } from '../../store/slices/auth-slice';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 
@@ -16,28 +17,32 @@ interface MangaCommentSectionProps {
   mangaTitle: string;
 }
 
-export default function MangaCommentSection({ mangaId, mangaTitle }: MangaCommentSectionProps) {
+export default function MangaCommentSection({ mangaId }: MangaCommentSectionProps) {
   const { t } = useTranslation('comment');
   const dispatch = useAppDispatch();
 
   const comments = useAppSelector((state) => state.comments.mangaComments[mangaId] || []);
   const userReactions = useAppSelector((state) => state.comments.userReactions);
   const loading = useAppSelector((state) => state.comments.loading);
+  const submitting = useAppSelector((state) => state.comments.submitting);
   const replyingTo = useAppSelector((state) => state.comments.replyingTo);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   useEffect(() => {
-    dispatch(fetchMangaComments(mangaId));
+    dispatch(fetchComments({ mangaSeriesId: mangaId }));
   }, [dispatch, mangaId]);
 
-  const handleSubmit = (content: string) => {
-    dispatch(
-      addMangaComment({
-        mangaId,
-        mangaTitle,
+  const handleSubmit = async (content: string) => {
+    const result = await dispatch(
+      createComment({
         content,
+        mangaSeriesId: mangaId,
         parentId: replyingTo || undefined,
-      })
+      }),
     );
+    if (createComment.fulfilled.match(result)) {
+      dispatch(fetchComments({ mangaSeriesId: mangaId }));
+    }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -51,23 +56,23 @@ export default function MangaCommentSection({ mangaId, mangaTitle }: MangaCommen
 
   const handleLike = (commentId: string) => {
     dispatch(
-      toggleReaction({
+      toggleCommentReaction({
         commentId,
         reaction: 'like',
         context: 'manga',
         targetId: mangaId,
-      })
+      }),
     );
   };
 
   const handleDislike = (commentId: string) => {
     dispatch(
-      toggleReaction({
+      toggleCommentReaction({
         commentId,
         reaction: 'dislike',
         context: 'manga',
         targetId: mangaId,
-      })
+      }),
     );
   };
 
@@ -117,13 +122,16 @@ export default function MangaCommentSection({ mangaId, mangaTitle }: MangaCommen
       </Box>
 
       {/* Comment Input */}
-      <Box sx={{ mb: 3 }}>
-        <CommentInput
-          onSubmit={handleSubmit}
-          replyingTo={replyingToUsername}
-          onCancelReply={replyingTo ? handleCancelReply : undefined}
-        />
-      </Box>
+      {isAuthenticated && (
+        <Box sx={{ mb: 3 }}>
+          <CommentInput
+            onSubmit={handleSubmit}
+            submitting={submitting}
+            replyingTo={replyingToUsername}
+            onCancelReply={replyingTo ? handleCancelReply : undefined}
+          />
+        </Box>
+      )}
 
       {/* Comment List */}
       <Box

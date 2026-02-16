@@ -4,10 +4,11 @@ import { Close } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
-  fetchPageComments,
-  addPageComment,
-  toggleReaction,
+  fetchComments,
+  createComment,
+  toggleCommentReaction,
 } from '../../store/slices/comment-slice';
+import { selectIsAuthenticated } from '../../store/slices/auth-slice';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 
@@ -41,44 +42,43 @@ export default function PageCommentModal({
   const comments = useAppSelector((state) => state.comments.pageComments[pageKey] || []);
   const userReactions = useAppSelector((state) => state.comments.userReactions);
   const loading = useAppSelector((state) => state.comments.loading);
+  const submitting = useAppSelector((state) => state.comments.submitting);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   useEffect(() => {
     if (open) {
-      dispatch(fetchPageComments({ chapterId, pageNumber }));
+      dispatch(fetchComments({ chapterId, pageNumber }));
     }
   }, [dispatch, chapterId, pageNumber, open]);
 
-  const handleSubmit = (content: string) => {
-    dispatch(
-      addPageComment({
-        chapterId,
-        pageNumber,
-        mangaId,
-        mangaTitle,
-        content,
-      })
+  const handleSubmit = async (content: string) => {
+    const result = await dispatch(
+      createComment({ content, chapterId, pageNumber, mangaSeriesId: mangaId }),
     );
+    if (createComment.fulfilled.match(result)) {
+      dispatch(fetchComments({ chapterId, pageNumber }));
+    }
   };
 
   const handleLike = (commentId: string) => {
     dispatch(
-      toggleReaction({
+      toggleCommentReaction({
         commentId,
         reaction: 'like',
         context: 'page',
         targetId: pageKey,
-      })
+      }),
     );
   };
 
   const handleDislike = (commentId: string) => {
     dispatch(
-      toggleReaction({
+      toggleCommentReaction({
         commentId,
         reaction: 'dislike',
         context: 'page',
         targetId: pageKey,
-      })
+      }),
     );
   };
 
@@ -257,18 +257,21 @@ export default function PageCommentModal({
           </Box>
 
           {/* Comment Input */}
-          <Box
-            sx={{
-              p: 2,
-              bgcolor: '#121520',
-              borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-            }}
-          >
-            <CommentInput
-              placeholder={t('pagePlaceholder', 'Add a comment about this page...')}
-              onSubmit={handleSubmit}
-            />
-          </Box>
+          {isAuthenticated && (
+            <Box
+              sx={{
+                p: 2,
+                bgcolor: '#121520',
+                borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+              }}
+            >
+              <CommentInput
+                placeholder={t('pagePlaceholder', 'Add a comment about this page...')}
+                submitting={submitting}
+                onSubmit={handleSubmit}
+              />
+            </Box>
+          )}
         </Box>
       </Fade>
     </Modal>

@@ -18,6 +18,8 @@ import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import VerifyEmailPage from './pages/auth/VerifyEmailPage';
 import BookmarkListPage from './pages/bookmark/BookmarkListPage';
 import ReadingHistoryPage from './pages/reading-history/ReadingHistoryPage';
+import ProfilePage from './pages/profile/ProfilePage';
+import SearchResultsPage from './pages/search/SearchResultsPage';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/chapters/:id/edit" element={<ProtectedRoute><ChapterEditPage /></ProtectedRoute>} />
           <Route path="/bookmarks" element={<ProtectedRoute><BookmarkListPage /></ProtectedRoute>} />
           <Route path="/history" element={<ProtectedRoute><ReadingHistoryPage /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+          <Route path="/search" element={<SearchResultsPage />} />
         </Route>
 
         {/* Reader page without layout (fullscreen) — ID-based route */}

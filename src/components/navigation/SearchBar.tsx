@@ -50,6 +50,12 @@ function SearchBar({ placeholder }: SearchBarProps) {
       setDismissed(true);
       dispatch(clearSearch());
       inputRef.current?.blur();
+    } else if (e.key === 'Enter' && query.trim()) {
+      e.preventDefault();
+      setDismissed(true);
+      dispatch(clearSearch());
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      inputRef.current?.blur();
     }
   };
 

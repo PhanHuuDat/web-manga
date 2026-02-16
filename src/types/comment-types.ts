@@ -30,8 +30,3 @@ export interface CommentState {
   replyingTo: string | null;
 }
 
-export const MOCK_USER = {
-  id: 'mock-user',
-  username: 'You',
-  avatarUrl: 'https://placehold.co/40x40/3b82f6/ffffff?text=You',
-};

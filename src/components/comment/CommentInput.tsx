@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Box, Avatar, TextField, IconButton, Typography, Button } from '@mui/material';
 import { Send } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { MOCK_USER } from '../../types/comment-types';
+import { useAppSelector } from '../../store/hooks';
+import { selectCurrentUser } from '../../store/slices/auth-slice';
 
 interface CommentInputProps {
   placeholder?: string;
@@ -23,6 +24,7 @@ export default function CommentInput({
 }: CommentInputProps) {
   const { t } = useTranslation('comment');
   const [content, setContent] = useState('');
+  const user = useAppSelector(selectCurrentUser);
 
   const handleSubmit = () => {
     if (content.trim() && !submitting) {
@@ -125,7 +127,7 @@ export default function CommentInput({
       }}
     >
       <Avatar
-        src={MOCK_USER.avatarUrl}
+        src={user?.avatarUrl || undefined}
         sx={{
           width: avatarSize,
           height: avatarSize,
@@ -134,7 +136,7 @@ export default function CommentInput({
           fontWeight: 600,
         }}
       >
-        {MOCK_USER.username.charAt(0)}
+        {(user?.displayName || user?.username || '?').charAt(0)}
       </Avatar>
 
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1.5 }}>

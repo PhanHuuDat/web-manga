@@ -4,10 +4,11 @@ import { Close, ChatBubbleOutline } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
-  fetchChapterComments,
-  addChapterComment,
-  toggleReaction,
+  fetchComments,
+  createComment,
+  toggleCommentReaction,
 } from '../../store/slices/comment-slice';
+import { selectIsAuthenticated } from '../../store/slices/auth-slice';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 
@@ -23,7 +24,6 @@ interface ChapterCommentSidebarProps {
 export default function ChapterCommentSidebar({
   chapterId,
   mangaId,
-  mangaTitle,
   isOpen,
   onClose,
   onOpen,
@@ -36,43 +36,41 @@ export default function ChapterCommentSidebar({
   const comments = useAppSelector((state) => state.comments.chapterComments[chapterId] || []);
   const userReactions = useAppSelector((state) => state.comments.userReactions);
   const loading = useAppSelector((state) => state.comments.loading);
+  const submitting = useAppSelector((state) => state.comments.submitting);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   useEffect(() => {
     if (isOpen) {
-      dispatch(fetchChapterComments(chapterId));
+      dispatch(fetchComments({ chapterId }));
     }
   }, [dispatch, chapterId, isOpen]);
 
-  const handleSubmit = (content: string) => {
-    dispatch(
-      addChapterComment({
-        chapterId,
-        mangaId,
-        mangaTitle,
-        content,
-      })
-    );
+  const handleSubmit = async (content: string) => {
+    const result = await dispatch(createComment({ content, chapterId, mangaSeriesId: mangaId }));
+    if (createComment.fulfilled.match(result)) {
+      dispatch(fetchComments({ chapterId }));
+    }
   };
 
   const handleLike = (commentId: string) => {
     dispatch(
-      toggleReaction({
+      toggleCommentReaction({
         commentId,
         reaction: 'like',
         context: 'chapter',
         targetId: chapterId,
-      })
+      }),
     );
   };
 
   const handleDislike = (commentId: string) => {
     dispatch(
-      toggleReaction({
+      toggleCommentReaction({
         commentId,
         reaction: 'dislike',
         context: 'chapter',
         targetId: chapterId,
-      })
+      }),
     );
   };
 
@@ -152,11 +150,14 @@ export default function ChapterCommentSidebar({
       </Box>
 
       {/* Comment Input */}
-      <CommentInput
-        compact
-        placeholder={t('chapterPlaceholder', 'Comment on this chapter...')}
-        onSubmit={handleSubmit}
-      />
+      {isAuthenticated && (
+        <CommentInput
+          compact
+          submitting={submitting}
+          placeholder={t('chapterPlaceholder', 'Comment on this chapter...')}
+          onSubmit={handleSubmit}
+        />
+      )}
     </Box>
   );
 

@@ -92,6 +92,7 @@ export interface ListMangaParams extends ListParams {
   genreId?: string;
   status?: SeriesStatus;
   sortBy?: MangaSortBy;
+  search?: string;
 }
 
 /** Params for GET /api/manga/search. */

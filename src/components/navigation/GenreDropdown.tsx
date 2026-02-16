@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -9,12 +10,14 @@ import type { GenreDropdownProps } from '../../types/navigation-types';
 
 function GenreDropdown({ genres, onGenreSelect }: GenreDropdownProps) {
   const { t } = useTranslation('common');
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleGenreClick = (genreId: string) => {
     onGenreSelect(genreId);
     setAnchorEl(null);
+    navigate(`/search?genre=${genreId}`);
   };
 
   return (
