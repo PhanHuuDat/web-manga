@@ -21,8 +21,8 @@ function App() {
           <Route path="/manga/:slug" element={<MangaDetailPage />} />
         </Route>
 
-        {/* Reader page without layout (fullscreen) */}
-        <Route path="/manga/:mangaSlug/:chapterSlug" element={<ReaderPage />} />
+        {/* Reader page without layout (fullscreen) — ID-based route */}
+        <Route path="/read/:mangaSlug/:chapterSlug" element={<ReaderPage />} />
 
         {/* Auth pages without layout */}
         <Route path="/login" element={<LoginPage />} />

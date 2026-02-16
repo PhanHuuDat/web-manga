@@ -4,12 +4,12 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~6,664 across 80 source files (tracked: 2,757 LOC, untracked: 3,907 LOC)
-**Source Directories:** 29 directories
+**Current Lines of Code:** ~7,200+ across 85+ source files
+**Source Directories:** 35+ directories
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
 **Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
-**Status:** Phase 1 Complete (100%), Phase 2 In Progress (60%) - Auth UI, comment system, manga detail, reader components implemented
+**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%) - Full API integration with Redux, loading skeletons, real data fetching
 
 ---
 
@@ -280,7 +280,12 @@ src/                              # All styling via MUI sx props
 │   ├── genre-types.ts           # Genre types
 │   ├── navigation-types.ts      # Navigation types
 │   ├── comment-types.ts         # Comment system types
-│   └── manga-types.ts           # Manga, Chapter, Page types
+│   ├── manga-types.ts           # Manga, Chapter, Page types
+│   ├── api-types/               # API DTOs
+│   │   ├── manga-dto.ts         # MangaDto, MangaDetailDto, CreateMangaRequest
+│   │   ├── chapter-dto.ts       # ChapterDto, ChapterDetailDto
+│   │   └── genre-dto.ts         # GenreDto
+│   └── index.ts                 # Type exports
 │
 ├── constants/
 │   ├── genres.ts                # Genre definitions
@@ -291,10 +296,12 @@ src/                              # All styling via MUI sx props
 │   ├── format-relative-time.ts  # Relative time formatter
 │   └── format-number.ts         # Number formatter
 │
-├── services/                    # API & business logic (new)
+├── services/                    # API & business logic
 │   ├── api-client.ts            # Axios instance with interceptors
 │   ├── auth-service.ts          # Auth API calls (login, register, refresh, logout)
-│   ├── manga-service.ts         # Manga API calls
+│   ├── manga-api.ts             # Manga CRUD + search/trending queries
+│   ├── chapter-api.ts           # Chapter fetching and listing
+│   ├── genre-api.ts             # Genre management & filtering
 │   └── token-manager.ts         # Access/refresh token management
 │
 ├── store/
@@ -303,6 +310,9 @@ src/                              # All styling via MUI sx props
 │   └── slices/                  # Redux slices
 │       ├── comment-slice.ts     # Comment state management
 │       ├── auth-slice.ts        # Auth state (user, tokens, loading, error)
+│       ├── manga-slice.ts       # Manga list, search results, filters (Phase 3)
+│       ├── chapter-slice.ts     # Chapter data for reader (Phase 3)
+│       ├── genre-slice.ts       # Genre list for filtering (Phase 3)
 │       └── ui-slice.ts          # UI state (notifications, modals)
 │
 ├── App.tsx                      # Root component with routing + ErrorBoundary
@@ -455,28 +465,57 @@ npm run build  # Test production build
 - [x] **Mock Data:** mock-chapter-data, mock-comment-data
 - [x] **@mui/icons-material** - Included
 
-### Not Yet Implemented (Phase 2+)
-- [ ] Real API integration / backend connection
-- [ ] Additional Redux slices (manga, auth, ui, reading)
+### Phase 3 Complete (100% - Manga API Integration)
+- [x] Manga CRUD API integration via Redux thunks
+- [x] Chapter API integration with pagination
+- [x] Genre API integration with filtering
+- [x] Search API with debounced input (SearchBar component)
+- [x] Trending manga endpoint integration
+- [x] Redux slices: manga-slice, chapter-slice, genre-slice
+- [x] API types: MangaDto, ChapterDto, GenreDto (DTOs matching backend)
+- [x] API services: manga-api.ts, chapter-api.ts, genre-api.ts
+- [x] Loading skeletons for async data fetches
+- [x] HomePage displays real manga grid from API
+- [x] MangaDetailPage fetches data via Redux
+- [x] ReaderPage retrieves chapters from API
+- [x] 19 frontend tests all passing
+
+### Not Yet Implemented (Phase 4+)
 - [ ] Theme switching (dark/light mode) - infrastructure ready
-- [ ] Search functionality with real data
-- [ ] Genre filtering with API
-- [ ] Unit tests for components
-- [ ] API service layer
+- [ ] Unit tests for new Redux slices
+- [ ] Custom hooks for API data fetching
+- [ ] Infinite scroll / pagination UI
+- [ ] Optimistic updates for mutations
 
 ---
 
-## Phase 2 Remaining Priorities
+## Phase 3 Summary: Manga API Endpoints Integration
 
-1. ~~Create reusable component library~~ ✓ (Badge, GlassCard, IconButton, etc.)
-2. Implement theme switching (dark/light mode)
-3. ~~Add form components and validation~~ ✓ (LoginForm, RegisterForm)
-4. Expand layout system (Footer)
-5. Set up API service layer
-6. ~~Create Redux slices for state management~~ ✓ (comment-slice implemented)
-7. Build unit tests for components
+**Status:** 100% Complete (Feb 16, 2026)
 
-**Phase 2 Progress:** 100% complete. Auth system fully integrated with backend. Comments, manga detail, reader UI all functional with mock data. Testing and advanced features remain for Phase 3.
+**What Was Built:**
+- Full API integration layer: manga-api.ts, chapter-api.ts, genre-api.ts
+- Redux slices for manga, chapter, genre state management with async thunks
+- API request types (DTOs) matching backend responses
+- SearchBar with debounced API queries
+- HomePage displaying real manga grid from backend
+- MangaDetailPage fetches manga info + chapters via Redux
+- ReaderPage retrieves chapter pages from API
+- Loading skeletons during data fetch operations
+- 19 new frontend tests, all passing
+- Error handling & retry logic in Redux thunks
+
+**Key Files Added/Modified:**
+- `src/services/manga-api.ts` — Manga CRUD & search queries
+- `src/services/chapter-api.ts` — Chapter fetching
+- `src/services/genre-api.ts` — Genre listing
+- `src/store/slices/manga-slice.ts` — Manga state + async thunks
+- `src/store/slices/chapter-slice.ts` — Chapter state
+- `src/store/slices/genre-slice.ts` — Genre state
+- `src/types/api-types/` — Request/response DTOs
+- Updated components: SearchBar, HomePage, MangaDetailPage, ReaderPage
+
+**Next Phase:** Phase 4 (Advanced Search, Bookmarks, Reading History)
 
 See `project-roadmap.md` for detailed timeline and dependencies.
 

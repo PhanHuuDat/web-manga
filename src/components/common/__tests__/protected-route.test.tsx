@@ -5,6 +5,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { describe, it, expect } from 'vitest';
 import authReducer from '../../../store/slices/auth-slice';
 import commentReducer from '../../../store/slices/comment-slice';
+import mangaReducer from '../../../store/slices/manga-slice';
+import chapterReducer from '../../../store/slices/chapter-slice';
+import genreReducer from '../../../store/slices/genre-slice';
 import ProtectedRoute from '../ProtectedRoute';
 
 function renderWithAuth(accessToken: string | null, initialRoute = '/protected') {
@@ -12,6 +15,9 @@ function renderWithAuth(accessToken: string | null, initialRoute = '/protected')
     reducer: {
       auth: authReducer,
       comments: commentReducer,
+      manga: mangaReducer,
+      chapter: chapterReducer,
+      genre: genreReducer,
     },
     preloadedState: {
       auth: {
@@ -19,6 +25,8 @@ function renderWithAuth(accessToken: string | null, initialRoute = '/protected')
         accessToken,
         isLoading: false,
         error: null,
+        authModalOpen: false,
+        authModalView: 'login' as const,
       },
     },
   });

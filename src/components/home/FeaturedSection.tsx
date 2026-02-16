@@ -1,11 +1,22 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 import SectionHeader from '../common/SectionHeader';
 import MangaFeaturedCard from '../manga/MangaFeaturedCard';
-import { FEATURED_MANGA } from '../../constants/mock-manga-data';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchTrendingManga, selectTrendingManga } from '../../store/slices/manga-slice';
 
 function FeaturedSection() {
   const { t } = useTranslation('home');
+  const dispatch = useAppDispatch();
+  const { data, loading } = useAppSelector(selectTrendingManga);
+
+  useEffect(() => {
+    if (data.length === 0) {
+      dispatch(fetchTrendingManga({ days: 7 }));
+    }
+  }, [dispatch, data.length]);
 
   return (
     <Box>
@@ -22,9 +33,17 @@ function FeaturedSection() {
           gap: 3,
         }}
       >
-        {FEATURED_MANGA.map((manga) => (
-          <MangaFeaturedCard key={manga.id} manga={manga} />
-        ))}
+        {loading && data.length === 0
+          ? [...Array(6)].map((_, i) => (
+              <Skeleton
+                key={i}
+                variant="rectangular"
+                sx={{ aspectRatio: '3 / 4.5', borderRadius: 3 }}
+              />
+            ))
+          : data.slice(0, 6).map((manga) => (
+              <MangaFeaturedCard key={manga.id} manga={manga} />
+            ))}
       </Box>
     </Box>
   );

@@ -7,17 +7,17 @@ import VerticalReader from '../../components/reader/VerticalReader';
 import HorizontalReader from '../../components/reader/HorizontalReader';
 import ReaderProgress from '../../components/reader/ReaderProgress';
 import { ChapterCommentSidebar, PageCommentModal } from '../../components/comment';
-import { getChapterDetail } from '../../constants/mock-chapter-data';
-import type { ChapterDetail } from '../../types/manga-types';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchChapterDetail, clearChapter, selectSelectedChapter } from '../../store/slices/chapter-slice';
 
 function ReaderPage() {
-  const { mangaSlug, chapterSlug } = useParams<{
+  const { mangaSlug: mangaId, chapterSlug: chapterId } = useParams<{
     mangaSlug: string;
     chapterSlug: string;
   }>();
   const navigate = useNavigate();
-  const [chapter, setChapter] = useState<ChapterDetail | null>(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const { data: chapter, loading } = useAppSelector(selectSelectedChapter);
   const [mode, setMode] = useState<'vertical' | 'horizontal'>('vertical');
   const [zoom, setZoom] = useState(100);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -26,28 +26,15 @@ function ReaderPage() {
   const [selectedPage, setSelectedPage] = useState(1);
 
   useEffect(() => {
-    // Simulate API call
-    const fetchChapter = async () => {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      if (mangaSlug && chapterSlug) {
-        const chapterNumber = parseInt(chapterSlug.replace('chapter-', ''));
-        const data = getChapterDetail(mangaSlug, chapterNumber);
-        setChapter(data);
-      }
-      setLoading(false);
-    };
-
-    fetchChapter();
-  }, [mangaSlug, chapterSlug]);
+    if (!chapterId) return;
+    dispatch(fetchChapterDetail(chapterId));
+    return () => { dispatch(clearChapter()); };
+  }, [chapterId, dispatch]);
 
   useEffect(() => {
-    // Sync fullscreen state when user presses ESC
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
-
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
@@ -55,7 +42,13 @@ function ReaderPage() {
   }, []);
 
   const handleBack = () => {
-    navigate(`/manga/${mangaSlug}`);
+    if (mangaId) {
+      navigate(`/manga/${mangaId}`);
+    } else if (chapter) {
+      navigate(`/manga/${chapter.mangaSeriesId}`);
+    } else {
+      navigate('/');
+    }
   };
 
   const handleModeToggle = () => {
@@ -78,22 +71,6 @@ function ReaderPage() {
       document.exitFullscreen();
       setIsFullscreen(false);
     }
-  };
-
-  const handleCommentToggle = () => {
-    setSidebarOpen((prev) => !prev);
-  };
-
-  const handlePageCommentOpen = () => {
-    setPageModalOpen(true);
-  };
-
-  const handlePageCommentClose = () => {
-    setPageModalOpen(false);
-  };
-
-  const handleSidebarClose = () => {
-    setSidebarOpen(false);
   };
 
   if (loading || !chapter) {
@@ -126,21 +103,21 @@ function ReaderPage() {
         onZoomIn={handleZoomIn}
         onZoomOut={handleZoomOut}
         onFullscreenToggle={handleFullscreenToggle}
-        onCommentToggle={handleCommentToggle}
-        onPageComment={handlePageCommentOpen}
+        onCommentToggle={() => setSidebarOpen((prev) => !prev)}
+        onPageComment={() => setPageModalOpen(true)}
       />
 
       {/* Reader content */}
       <Box sx={{ pt: mode === 'vertical' ? 8 : 0 }}>
         {mode === 'vertical' ? (
           <VerticalReader
-            pages={chapter.images}
+            pages={chapter.pages}
             zoom={zoom}
             onPageChange={setSelectedPage}
           />
         ) : (
           <HorizontalReader
-            pages={chapter.images}
+            pages={chapter.pages}
             zoom={zoom}
             onPageChange={setSelectedPage}
           />
@@ -149,16 +126,16 @@ function ReaderPage() {
 
       {/* Progress bar (only for vertical mode) */}
       {mode === 'vertical' && (
-        <ReaderProgress current={selectedPage} total={chapter.images.length} />
+        <ReaderProgress current={selectedPage} total={chapter.pages.length} />
       )}
 
       {/* Chapter comment sidebar */}
       <ChapterCommentSidebar
         isOpen={sidebarOpen}
         chapterId={chapter.id}
-        mangaId={chapter.mangaId}
+        mangaId={chapter.mangaSeriesId}
         mangaTitle={chapter.mangaTitle}
-        onClose={handleSidebarClose}
+        onClose={() => setSidebarOpen(false)}
       />
 
       {/* Page comment modal */}
@@ -166,12 +143,12 @@ function ReaderPage() {
         open={pageModalOpen}
         chapterId={chapter.id}
         pageNumber={selectedPage}
-        pageImageUrl={chapter.images[selectedPage - 1]?.imageUrl}
-        mangaId={chapter.mangaId}
+        pageImageUrl={chapter.pages[selectedPage - 1]?.imageUrl}
+        mangaId={chapter.mangaSeriesId}
         mangaTitle={chapter.mangaTitle}
         chapterTitle={`Chapter ${chapter.chapterNumber}`}
-        totalPages={chapter.images.length}
-        onClose={handlePageCommentClose}
+        totalPages={chapter.pages.length}
+        onClose={() => setPageModalOpen(false)}
       />
     </Box>
   );

@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import type { MangaRanked } from '../../types/manga-types';
 import { customColors } from '../../theme/theme';
+import type { MangaDto } from '../../types/manga-api-types';
 
 interface MangaRankCardProps {
-  manga: MangaRanked;
+  manga: MangaDto & { rank: number; viewsFormatted: string };
 }
 
 function MangaRankCard({ manga }: MangaRankCardProps) {
@@ -12,6 +13,8 @@ function MangaRankCard({ manga }: MangaRankCardProps) {
 
   return (
     <Box
+      component={Link}
+      to={`/manga/${manga.id}`}
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -19,6 +22,7 @@ function MangaRankCard({ manga }: MangaRankCardProps) {
         p: 1.5,
         borderRadius: 2,
         cursor: 'pointer',
+        textDecoration: 'none',
         transition: 'all 0.2s',
         '&:hover': { bgcolor: customColors.cardBgHover },
       }}
@@ -58,7 +62,7 @@ function MangaRankCard({ manga }: MangaRankCardProps) {
       >
         <Box
           component="img"
-          src={manga.coverUrl}
+          src={manga.coverUrl ?? '/placeholder-cover.png'}
           alt={manga.title}
           sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />

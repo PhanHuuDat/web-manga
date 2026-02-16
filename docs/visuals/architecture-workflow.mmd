@@ -1,0 +1,172 @@
+---
+title: Web-Manga Application Architecture & Workflow
+---
+flowchart TB
+    subgraph Entry["🚀 Entry Point"]
+        HTML["index.html<br/>#root div"]
+        Main["main.tsx<br/>React 19 + Providers"]
+        HTML --> Main
+    end
+
+    subgraph Providers["⚙️ Provider Stack"]
+        direction LR
+        ReduxP["Redux Store<br/>Provider"]
+        ThemeP["MUI Theme<br/>CssBaseline"]
+        I18nP["i18next<br/>en / vi"]
+        RouterP["BrowserRouter<br/>React Router v7"]
+    end
+
+    Main --> ReduxP --> ThemeP --> I18nP --> RouterP
+
+    subgraph Routes["🗺️ Route Structure"]
+        direction TB
+        Layout["Layout<br/>Navbar + Outlet + Footer"]
+        R_Home["/ → HomePage"]
+        R_Manga["/manga/:slug → MangaDetailPage"]
+        R_Reader["/manga/:mangaSlug/:chapterSlug<br/>→ ReaderPage &#40;no layout&#41;"]
+        R_Login["/login → LoginPage &#40;no layout&#41;"]
+        R_Register["/register → RegisterPage &#40;no layout&#41;"]
+        R_404["* → 404 Not Found"]
+
+        RouterP --> Layout
+        Layout --> R_Home
+        Layout --> R_Manga
+        RouterP --> R_Reader
+        RouterP --> R_Login
+        RouterP --> R_Register
+        RouterP --> R_404
+    end
+
+    subgraph HomePage["🏠 HomePage"]
+        direction TB
+        Featured["FeaturedSection<br/>Featured manga carousel"]
+        Latest["LatestMangaSection<br/>Latest releases grid"]
+        Sidebar["HomeSidebar"]
+        TopViews["TopViewsSection"]
+        TopComments["TopCommentsSection"]
+        ActiveUsers["ActiveUsersSection"]
+
+        R_Home --> Featured
+        R_Home --> Latest
+        R_Home --> Sidebar
+        Sidebar --> TopViews
+        Sidebar --> TopComments
+        Sidebar --> ActiveUsers
+    end
+
+    subgraph MangaPage["📖 MangaDetailPage"]
+        direction TB
+        MangaInfo["MangaInfo<br/>Cover, stats, synopsis"]
+        ChapterList["ChapterList<br/>Sort: newest/oldest"]
+        MangaComments["MangaCommentSection"]
+
+        R_Manga --> MangaInfo
+        R_Manga --> ChapterList
+        R_Manga --> MangaComments
+    end
+
+    subgraph ReaderPage["📚 ReaderPage"]
+        direction TB
+        Toolbar["ReaderToolbar<br/>Zoom, fullscreen, mode"]
+        VReader["VerticalReader<br/>IntersectionObserver"]
+        HReader["HorizontalReader<br/>Pagination"]
+        Progress["ReaderProgress<br/>Scroll tracking"]
+        ChComments["ChapterCommentSidebar"]
+        PageModal["PageCommentModal"]
+
+        R_Reader --> Toolbar
+        R_Reader --> VReader
+        R_Reader --> HReader
+        R_Reader --> Progress
+        R_Reader --> ChComments
+        R_Reader --> PageModal
+    end
+
+    subgraph AuthPages["🔐 Auth Pages"]
+        direction TB
+        AuthLayout["AuthLayout wrapper"]
+        LoginForm["LoginForm<br/>Email + password"]
+        RegForm["RegisterForm<br/>Email + password + confirm"]
+        Social["SocialLoginButton<br/>Google / Facebook / Twitter"]
+
+        R_Login --> AuthLayout --> LoginForm --> Social
+        R_Register --> AuthLayout --> RegForm --> Social
+    end
+
+    subgraph State["🗄️ Redux Store"]
+        direction TB
+        CommentSlice["comment-slice.ts"]
+        MangaC["mangaComments<br/>Record‹string, Comment[]›"]
+        ChapterC["chapterComments<br/>Record‹string, Comment[]›"]
+        PageC["pageComments<br/>Record‹string, Comment[]›"]
+        Reactions["userReactions<br/>Record‹string, ReactionType›"]
+
+        CommentSlice --> MangaC
+        CommentSlice --> ChapterC
+        CommentSlice --> PageC
+        CommentSlice --> Reactions
+    end
+
+    subgraph Actions["⚡ Redux Actions"]
+        direction TB
+        A1["fetchMangaComments"]
+        A2["fetchChapterComments"]
+        A3["fetchPageComments"]
+        A4["addMangaComment"]
+        A5["addChapterComment"]
+        A6["addPageComment"]
+        A7["toggleReaction"]
+    end
+
+    subgraph MockData["📦 Mock Data Layer"]
+        direction TB
+        MockManga["mock-manga-data.ts<br/>FEATURED / TOP manga"]
+        MockChapter["mock-chapter-data.ts<br/>getChapterDetail()"]
+        MockComment["mock-comment-data.ts<br/>Comments per manga/chapter"]
+        MockUser["mock-user-data.ts<br/>User profiles"]
+        Genres["genres.ts<br/>12 genre definitions"]
+    end
+
+    subgraph FutureAPI["🔮 Future: API Services"]
+        direction LR
+        SvcManga["MangaService"]
+        SvcAuth["AuthService"]
+        SvcComment["CommentService"]
+        SvcUser["UserService"]
+    end
+
+    %% Connections between sections
+    MangaComments --> Actions
+    ChComments --> Actions
+    PageModal --> Actions
+    Actions --> CommentSlice
+    CommentSlice -.->|useAppSelector| MangaComments
+    CommentSlice -.->|useAppSelector| ChComments
+    CommentSlice -.->|useAppSelector| PageModal
+
+    Actions -.->|currently| MockData
+    Actions -.->|planned| FutureAPI
+
+    ChapterList -->|navigate| R_Reader
+    MangaInfo -->|"Read First Chapter"| R_Reader
+
+    %% Styling
+    classDef entry fill:#1e293b,stroke:#3b82f6,color:#f1f5f9,stroke-width:2px
+    classDef provider fill:#1a1e2e,stroke:#a855f7,color:#f1f5f9,stroke-width:2px
+    classDef route fill:#0f172a,stroke:#22c55e,color:#f1f5f9,stroke-width:2px
+    classDef page fill:#1e1b2e,stroke:#f59e0b,color:#f1f5f9,stroke-width:2px
+    classDef state fill:#1a1e2e,stroke:#ef4444,color:#f1f5f9,stroke-width:2px
+    classDef mock fill:#1a2e1e,stroke:#22c55e,color:#f1f5f9,stroke-width:1px
+    classDef future fill:#1a1e2e,stroke:#94a3b8,color:#94a3b8,stroke-width:1px,stroke-dasharray:5
+
+    class HTML,Main entry
+    class ReduxP,ThemeP,I18nP,RouterP provider
+    class Layout,R_Home,R_Manga,R_Reader,R_Login,R_Register,R_404 route
+    class Featured,Latest,Sidebar,TopViews,TopComments,ActiveUsers page
+    class MangaInfo,ChapterList,MangaComments page
+    class Toolbar,VReader,HReader,Progress,ChComments,PageModal page
+    class AuthLayout,LoginForm,RegForm,Social page
+    class CommentSlice,MangaC,ChapterC,PageC,Reactions state
+    class A1,A2,A3,A4,A5,A6,A7 state
+    class MockManga,MockChapter,MockComment,MockUser,Genres mock
+    class SvcManga,SvcAuth,SvcComment,SvcUser future

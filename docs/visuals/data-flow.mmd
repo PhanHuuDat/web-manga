@@ -1,0 +1,64 @@
+---
+title: Web-Manga Data Flow
+---
+sequenceDiagram
+    actor User
+    participant UI as React Component
+    participant Router as React Router v7
+    participant Redux as Redux Store
+    participant Slice as comment-slice
+    participant Mock as Mock Data Layer
+    participant API as Future API Service
+
+    Note over User,API: 📖 Reading Flow
+    User->>Router: Navigate to /manga/:slug
+    Router->>UI: Render MangaDetailPage
+    UI->>Mock: getMangaDetail(slug)
+    Mock-->>UI: MangaDetail + Chapters
+    UI-->>User: Display manga info + chapter list
+
+    User->>Router: Click chapter → /manga/:slug/:chapter
+    Router->>UI: Render ReaderPage
+    UI->>Mock: getChapterDetail(mangaSlug, chapterSlug)
+    Mock-->>UI: ChapterDetail + page images
+    UI-->>User: Display reader (vertical/horizontal)
+
+    Note over User,API: 💬 Comment Flow
+    User->>UI: Type comment + submit
+    UI->>Redux: dispatch(addMangaComment)
+    Redux->>Slice: Reducer creates Comment object
+    Slice->>Slice: Generate ID, set timestamps
+    Slice-->>Redux: Updated state
+    Redux-->>UI: useAppSelector re-render
+    UI-->>User: Show new comment
+
+    Note over User,API: 👍 Reaction Flow
+    User->>UI: Click like/dislike
+    UI->>Redux: dispatch(toggleReaction)
+    Redux->>Slice: Update counts recursively
+    Slice-->>Redux: Updated reactions + counts
+    Redux-->>UI: Re-render reaction buttons
+    UI-->>User: Updated like/dislike counts
+
+    Note over User,API: ↩️ Nested Reply Flow (max depth 3)
+    User->>UI: Click "Reply" on comment
+    UI->>Redux: dispatch(setReplyingTo(commentId))
+    Redux-->>UI: Show reply input
+    User->>UI: Type reply + submit
+    UI->>Redux: dispatch(addMangaComment with parentId)
+    Redux->>Slice: addReplyToComment() recursive insert
+    Slice-->>Redux: Comment with nested reply
+    Redux-->>UI: Re-render comment thread
+    UI-->>User: Show nested reply
+
+    Note over User,API: 🌐 i18n Flow
+    User->>UI: Click language switcher
+    UI->>UI: i18next.changeLanguage(lang)
+    UI->>UI: localStorage.setItem('i18nextLng', lang)
+    UI-->>User: All text re-rendered in new language
+
+    Note over Mock,API: 🔮 Future: Replace Mock → API
+    UI-->>API: fetch('/api/manga/:slug')
+    API-->>UI: JSON response
+    UI->>Redux: dispatch(async thunk)
+    Redux-->>UI: Loading → Success state

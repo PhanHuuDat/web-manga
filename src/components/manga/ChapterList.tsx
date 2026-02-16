@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useTranslation } from 'react-i18next';
 import { customColors } from '../../theme/theme';
-import type { Chapter } from '../../types/manga-types';
+import type { ChapterDto } from '../../types/manga-api-types';
 
 interface ChapterListProps {
-  chapters: Chapter[];
+  chapters: ChapterDto[];
   onChapterClick: (chapterId: string) => void;
 }
 

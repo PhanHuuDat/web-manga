@@ -7,16 +7,19 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useTranslation } from 'react-i18next';
 import Badge from '../common/Badge';
 import { formatNumber } from '../../utils/format-number';
-import type { MangaDetail } from '../../types/manga-types';
+import { getStatusLabel, getBadgeLabel } from '../../utils/enum-display-helpers';
+import type { MangaDetailDto } from '../../types/manga-api-types';
 
 interface MangaInfoProps {
-  manga: MangaDetail;
+  manga: MangaDetailDto;
   onReadClick: () => void;
   onBookmarkClick: () => void;
 }
 
 function MangaInfo({ manga, onReadClick, onBookmarkClick }: MangaInfoProps) {
   const { t } = useTranslation();
+  const badge = getBadgeLabel(manga.badge);
+  const statusLabel = getStatusLabel(manga.status);
 
   return (
     <Box sx={{ display: 'flex', gap: 3, flexDirection: { xs: 'column', md: 'row' } }}>
@@ -33,7 +36,7 @@ function MangaInfo({ manga, onReadClick, onBookmarkClick }: MangaInfoProps) {
       >
         <Box
           component="img"
-          src={manga.coverUrl}
+          src={manga.coverUrl ?? '/placeholder-cover.png'}
           alt={manga.title}
           sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -47,10 +50,10 @@ function MangaInfo({ manga, onReadClick, onBookmarkClick }: MangaInfoProps) {
             <Typography variant="h4" sx={{ fontWeight: 800 }}>
               {manga.title}
             </Typography>
-            {manga.badge && <Badge type={manga.badge} size="medium" />}
+            {badge && <Badge type={badge} size="medium" />}
           </Box>
           <Typography sx={{ color: 'text.secondary', fontSize: 14 }}>
-            {t('manga.by')} {manga.author}
+            {t('manga.by')} {manga.author.name}
           </Typography>
         </Box>
 
@@ -68,15 +71,15 @@ function MangaInfo({ manga, onReadClick, onBookmarkClick }: MangaInfoProps) {
               {formatNumber(manga.views)}
             </Typography>
           </Box>
-          <Badge type={manga.status} size="medium" />
+          <Badge type={statusLabel} size="medium" />
         </Box>
 
         {/* Genres */}
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2 }}>
           {manga.genres.map((genre) => (
             <Chip
-              key={genre}
-              label={genre}
+              key={genre.id}
+              label={genre.name}
               size="small"
               sx={{
                 bgcolor: 'rgba(59,130,246,0.1)',

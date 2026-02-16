@@ -4,11 +4,11 @@ import MuiIconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import type { ChapterPage } from '../../types/manga-types';
+import type { ChapterPageDto } from '../../types/chapter-api-types';
 import { useTranslation } from 'react-i18next';
 
 interface HorizontalReaderProps {
-  pages: ChapterPage[];
+  pages: ChapterPageDto[];
   zoom: number;
   onPageChange?: (page: number) => void;
 }

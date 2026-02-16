@@ -1,9 +1,11 @@
 import Chip from '@mui/material/Chip';
+import type { SeriesStatus, MangaBadge } from '../../types/manga-api-types';
+import { getStatusLabel, getBadgeLabel } from '../../utils/enum-display-helpers';
 
 type BadgeType = 'hot' | 'top' | 'new' | 'ongoing' | 'completed' | 'hiatus';
 
 interface BadgeProps {
-  type: BadgeType;
+  type: BadgeType | SeriesStatus | MangaBadge;
   size?: 'small' | 'medium';
 }
 
@@ -44,7 +46,11 @@ const badgeConfig: Record<
 };
 
 function Badge({ type, size = 'small' }: BadgeProps) {
-  const config = badgeConfig[type];
+  // Resolve int enums to string keys
+  const resolvedType: BadgeType = typeof type === 'number'
+    ? (getStatusLabel(type) ?? getBadgeLabel(type) ?? 'ongoing')
+    : type;
+  const config = badgeConfig[resolvedType];
 
   return (
     <Chip

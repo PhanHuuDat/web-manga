@@ -1,13 +1,15 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import type { Manga } from '../../types/manga-types';
+import type { MangaDto } from '../../types/manga-api-types';
+import { getBadgeLabel } from '../../utils/enum-display-helpers';
 
 interface MangaFeaturedCardProps {
-  manga: Manga;
+  manga: MangaDto;
 }
 
-const badgeColors = {
+const badgeColors: Record<string, string> = {
   hot: 'rgba(168, 85, 247, 0.9)',
   top: 'rgba(37, 99, 235, 0.9)',
   new: 'rgba(34, 197, 94, 0.9)',
@@ -15,15 +17,20 @@ const badgeColors = {
 
 function MangaFeaturedCard({ manga }: MangaFeaturedCardProps) {
   const { t } = useTranslation('common');
+  const badge = getBadgeLabel(manga.badge);
 
   return (
     <Box
+      component={Link}
+      to={`/manga/${manga.id}`}
       sx={{
         position: 'relative',
         aspectRatio: '3 / 4.5',
         borderRadius: 3,
         overflow: 'hidden',
         cursor: 'pointer',
+        textDecoration: 'none',
+        display: 'block',
         transition: 'all 0.3s ease',
         '&:hover': {
           transform: 'translateY(-8px)',
@@ -35,7 +42,7 @@ function MangaFeaturedCard({ manga }: MangaFeaturedCardProps) {
       {/* Cover Image */}
       <Box
         component="img"
-        src={manga.coverUrl}
+        src={manga.coverUrl ?? '/placeholder-cover.png'}
         alt={manga.title}
         sx={{
           width: '100%',
@@ -45,13 +52,13 @@ function MangaFeaturedCard({ manga }: MangaFeaturedCardProps) {
       />
 
       {/* Badge */}
-      {manga.badge && (
+      {badge && (
         <Box
           sx={{
             position: 'absolute',
             top: 12,
             left: 12,
-            bgcolor: badgeColors[manga.badge],
+            bgcolor: badgeColors[badge],
             px: 1.5,
             py: 0.5,
             borderRadius: 1,
@@ -66,7 +73,7 @@ function MangaFeaturedCard({ manga }: MangaFeaturedCardProps) {
               color: 'white',
             }}
           >
-            {manga.badge}
+            {badge}
           </Typography>
         </Box>
       )}
@@ -109,7 +116,7 @@ function MangaFeaturedCard({ manga }: MangaFeaturedCardProps) {
             color: 'text.secondary',
           }}
         >
-          {t('chapter_other', { count: manga.latestChapter })}
+          {t('chapter_other', { count: manga.totalChapters })}
         </Typography>
       </Box>
     </Box>

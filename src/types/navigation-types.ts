@@ -5,7 +5,7 @@ export interface NavbarProps {
 }
 
 export interface SearchBarProps {
-  onSearch: (query: string) => void;
+  onSearch?: (query: string) => void;
   placeholder?: string;
 }
 

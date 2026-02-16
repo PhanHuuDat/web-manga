@@ -3,26 +3,29 @@ import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Skeleton from '@mui/material/Skeleton';
 import MangaRankCard from '../manga/MangaRankCard';
-import {
-  TOP_MANGA_DAILY,
-  TOP_MANGA_WEEKLY,
-  TOP_MANGA_MONTHLY,
-} from '../../constants/mock-manga-data';
-import type { ViewPeriod } from '../../types/manga-types';
+import { useAppSelector } from '../../store/hooks';
+import { selectTrendingManga } from '../../store/slices/manga-slice';
+import type { MangaDto } from '../../types/manga-api-types';
+import { formatNumber } from '../../utils/format-number';
 
-const tabData: { key: ViewPeriod; data: typeof TOP_MANGA_DAILY }[] = [
-  { key: 'daily', data: TOP_MANGA_DAILY },
-  { key: 'weekly', data: TOP_MANGA_WEEKLY },
-  { key: 'monthly', data: TOP_MANGA_MONTHLY },
-];
+type ViewPeriod = 'daily' | 'weekly' | 'monthly';
+
+/** Adapts MangaDto to the shape MangaRankCard expects (rank + viewsFormatted). */
+function toRanked(manga: MangaDto, index: number) {
+  return { ...manga, rank: index + 1, viewsFormatted: `${formatNumber(manga.views)} views` };
+}
 
 function TopViewsSection() {
   const { t } = useTranslation('home');
   const [activeTab, setActiveTab] = useState<ViewPeriod>('daily');
+  const { data, loading } = useAppSelector(selectTrendingManga);
 
-  const currentData =
-    tabData.find((tab) => tab.key === activeTab)?.data || TOP_MANGA_DAILY;
+  // Use trending data for all tabs (backend doesn't support period filtering yet)
+  const rankedData = data.slice(0, 3).map(toRanked);
+
+  const tabs: ViewPeriod[] = ['daily', 'weekly', 'monthly'];
 
   return (
     <Box
@@ -53,7 +56,7 @@ function TopViewsSection() {
 
       {/* Tabs */}
       <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
-        {tabData.map(({ key }) => (
+        {tabs.map((key) => (
           <Button
             key={key}
             onClick={() => setActiveTab(key)}
@@ -80,9 +83,13 @@ function TopViewsSection() {
 
       {/* List */}
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        {currentData.map((manga) => (
-          <MangaRankCard key={manga.id} manga={manga} />
-        ))}
+        {loading && rankedData.length === 0
+          ? [...Array(3)].map((_, i) => (
+              <Skeleton key={i} variant="rectangular" height={72} sx={{ borderRadius: 2 }} />
+            ))
+          : rankedData.map((manga) => (
+              <MangaRankCard key={manga.id} manga={manga} />
+            ))}
       </Box>
     </Box>
   );

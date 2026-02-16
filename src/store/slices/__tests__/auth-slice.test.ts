@@ -14,11 +14,14 @@ import authReducer, {
   selectAuthLoading,
 } from '../auth-slice';
 import commentReducer from '../comment-slice';
+import mangaReducer from '../manga-slice';
+import chapterReducer from '../chapter-slice';
+import genreReducer from '../genre-slice';
 import type { RootState } from '../../index';
 
 function createStore(preloadedState?: Partial<RootState>) {
   return configureStore({
-    reducer: { auth: authReducer, comments: commentReducer },
+    reducer: { auth: authReducer, comments: commentReducer, manga: mangaReducer, chapter: chapterReducer, genre: genreReducer },
     preloadedState: preloadedState as RootState,
   });
 }
@@ -31,6 +34,8 @@ describe('auth-slice reducers', () => {
       accessToken: null,
       isLoading: false,
       error: null,
+      authModalOpen: false,
+      authModalView: 'login',
     });
   });
 
@@ -45,6 +50,8 @@ describe('auth-slice reducers', () => {
       accessToken: 'token',
       isLoading: false,
       error: 'some error',
+      authModalOpen: false,
+      authModalView: 'login' as const,
     };
     const state = authReducer(prevState, clearAuth());
     expect(state.user).toBeNull();
@@ -58,6 +65,8 @@ describe('auth-slice reducers', () => {
       accessToken: null,
       isLoading: false,
       error: 'some error',
+      authModalOpen: false,
+      authModalView: 'login' as const,
     };
     const state = authReducer(prevState, clearError());
     expect(state.error).toBeNull();
@@ -67,7 +76,7 @@ describe('auth-slice reducers', () => {
 describe('auth-slice extraReducers', () => {
   it('loginThunk.pending sets isLoading true and clears error', () => {
     const state = authReducer(
-      { user: null, accessToken: null, isLoading: false, error: 'old error' },
+      { user: null, accessToken: null, isLoading: false, error: 'old error', authModalOpen: false, authModalView: 'login' as const },
       { type: loginThunk.pending.type },
     );
     expect(state.isLoading).toBe(true);
@@ -76,7 +85,7 @@ describe('auth-slice extraReducers', () => {
 
   it('loginThunk.fulfilled sets accessToken', () => {
     const state = authReducer(
-      { user: null, accessToken: null, isLoading: true, error: null },
+      { user: null, accessToken: null, isLoading: true, error: null, authModalOpen: false, authModalView: 'login' as const },
       {
         type: loginThunk.fulfilled.type,
         payload: { accessToken: 'jwt-token', expiresAt: '2026-01-01', userId: '1', username: 'test', displayName: null },
@@ -88,7 +97,7 @@ describe('auth-slice extraReducers', () => {
 
   it('loginThunk.rejected sets error', () => {
     const state = authReducer(
-      { user: null, accessToken: null, isLoading: true, error: null },
+      { user: null, accessToken: null, isLoading: true, error: null, authModalOpen: false, authModalView: 'login' as const },
       { type: loginThunk.rejected.type, payload: 'Invalid credentials' },
     );
     expect(state.isLoading).toBe(false);
@@ -97,7 +106,7 @@ describe('auth-slice extraReducers', () => {
 
   it('logoutThunk.fulfilled resets state', () => {
     const state = authReducer(
-      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null },
+      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null, authModalOpen: false, authModalView: 'login' as const },
       { type: logoutThunk.fulfilled.type },
     );
     expect(state.user).toBeNull();
@@ -106,7 +115,7 @@ describe('auth-slice extraReducers', () => {
 
   it('refreshTokenThunk.fulfilled updates accessToken', () => {
     const state = authReducer(
-      { user: null, accessToken: 'old-token', isLoading: false, error: null },
+      { user: null, accessToken: 'old-token', isLoading: false, error: null, authModalOpen: false, authModalView: 'login' as const },
       {
         type: refreshTokenThunk.fulfilled.type,
         payload: { accessToken: 'new-token', expiresAt: '2026-01-01', userId: '1', username: 'test', displayName: null },
@@ -117,7 +126,7 @@ describe('auth-slice extraReducers', () => {
 
   it('refreshTokenThunk.rejected clears auth', () => {
     const state = authReducer(
-      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null },
+      { user: { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: [], emailConfirmed: true }, accessToken: 'token', isLoading: false, error: null, authModalOpen: false, authModalView: 'login' as const },
       { type: refreshTokenThunk.rejected.type },
     );
     expect(state.user).toBeNull();
@@ -127,7 +136,7 @@ describe('auth-slice extraReducers', () => {
   it('getCurrentUserThunk.fulfilled sets user', () => {
     const profile = { id: '1', username: 'test', displayName: 'Test', email: 'a@b.com', avatarUrl: null, level: 1, roles: ['Reader'], emailConfirmed: true };
     const state = authReducer(
-      { user: null, accessToken: 'token', isLoading: false, error: null },
+      { user: null, accessToken: 'token', isLoading: false, error: null, authModalOpen: false, authModalView: 'login' as const },
       { type: getCurrentUserThunk.fulfilled.type, payload: profile },
     );
     expect(state.user).toEqual(profile);
@@ -136,7 +145,7 @@ describe('auth-slice extraReducers', () => {
 
 describe('auth-slice selectors', () => {
   it('selectIsAuthenticated returns true when accessToken present', () => {
-    const store = createStore({ auth: { user: null, accessToken: 'token', isLoading: false, error: null } });
+    const store = createStore({ auth: { user: null, accessToken: 'token', isLoading: false, error: null, authModalOpen: false, authModalView: 'login' } });
     expect(selectIsAuthenticated(store.getState())).toBe(true);
   });
 
@@ -147,17 +156,17 @@ describe('auth-slice selectors', () => {
 
   it('selectCurrentUser returns user', () => {
     const user = { id: '1', username: 'test', displayName: null, email: 'a@b.com', avatarUrl: null, level: 1, roles: ['Reader'], emailConfirmed: true };
-    const store = createStore({ auth: { user, accessToken: 'token', isLoading: false, error: null } });
+    const store = createStore({ auth: { user, accessToken: 'token', isLoading: false, error: null, authModalOpen: false, authModalView: 'login' } });
     expect(selectCurrentUser(store.getState())).toEqual(user);
   });
 
   it('selectAuthError returns error', () => {
-    const store = createStore({ auth: { user: null, accessToken: null, isLoading: false, error: 'test error' } });
+    const store = createStore({ auth: { user: null, accessToken: null, isLoading: false, error: 'test error', authModalOpen: false, authModalView: 'login' } });
     expect(selectAuthError(store.getState())).toBe('test error');
   });
 
   it('selectAuthLoading returns loading state', () => {
-    const store = createStore({ auth: { user: null, accessToken: null, isLoading: true, error: null } });
+    const store = createStore({ auth: { user: null, accessToken: null, isLoading: true, error: null, authModalOpen: false, authModalView: 'login' } });
     expect(selectAuthLoading(store.getState())).toBe(true);
   });
 });

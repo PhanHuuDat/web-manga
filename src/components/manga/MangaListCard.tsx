@@ -1,18 +1,23 @@
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
-import type { Manga } from '../../types/manga-types';
-import { formatRelativeTime } from '../../utils/format-relative-time';
+import type { MangaDto } from '../../types/manga-api-types';
 import { formatNumber } from '../../utils/format-number';
+import { getStatusLabel } from '../../utils/enum-display-helpers';
+import Badge from '../common/Badge';
 import { customColors } from '../../theme/theme';
 
 interface MangaListCardProps {
-  manga: Manga;
+  manga: MangaDto;
 }
 
 function MangaListCard({ manga }: MangaListCardProps) {
+  const statusLabel = getStatusLabel(manga.status);
+
   return (
     <Box
+      component={Link}
+      to={`/manga/${manga.id}`}
       sx={{
         display: 'flex',
         gap: 3,
@@ -22,6 +27,7 @@ function MangaListCard({ manga }: MangaListCardProps) {
         border: '1px solid',
         borderColor: 'divider',
         cursor: 'pointer',
+        textDecoration: 'none',
         transition: 'all 0.2s',
         '&:hover': {
           bgcolor: customColors.cardBgHover,
@@ -41,7 +47,7 @@ function MangaListCard({ manga }: MangaListCardProps) {
       >
         <Box
           component="img"
-          src={manga.coverUrl}
+          src={manga.coverUrl ?? '/placeholder-cover.png'}
           alt={manga.title}
           sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -60,36 +66,18 @@ function MangaListCard({ manga }: MangaListCardProps) {
         </Typography>
 
         <Typography sx={{ fontSize: 12, color: 'text.secondary' }}>
-          {manga.author}
+          {manga.authorName}
         </Typography>
 
-        {/* Genre Chips */}
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-          {manga.genres.slice(0, 3).map((genre) => (
-            <Chip
-              key={genre}
-              label={genre}
-              size="small"
-              sx={{
-                fontSize: 10,
-                textTransform: 'uppercase',
-                fontWeight: 700,
-                height: 20,
-                bgcolor: 'rgba(59,130,246,0.1)',
-                border: '1px solid rgba(59,130,246,0.2)',
-                color: 'primary.main',
-              }}
-            />
-          ))}
-        </Box>
+        <Badge type={statusLabel} size="small" />
 
         {/* Meta */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 'auto' }}>
           <Typography sx={{ fontSize: 11, color: 'text.disabled' }}>
-            ⏰ {formatRelativeTime(manga.updatedAt)}
+            Ch. {manga.totalChapters}
           </Typography>
           <Typography sx={{ fontSize: 11, color: 'text.disabled' }}>
-            👁 {formatNumber(manga.views)}
+            {formatNumber(manga.views)} views
           </Typography>
         </Box>
       </Box>

@@ -1,0 +1,137 @@
+---
+title: Web-Manga Component Hierarchy
+---
+flowchart TD
+    App["App.tsx<br/>Routes + ErrorBoundary"]
+
+    subgraph LayoutRoutes["Layout Routes"]
+        Layout["Layout.tsx<br/>Navbar + Outlet + Footer"]
+        Navbar["Navbar.tsx"]
+        Footer["Footer.tsx"]
+
+        Layout --- Navbar
+        Layout --- Footer
+    end
+
+    subgraph NavComponents["Navigation"]
+        SearchBar["SearchBar"]
+        UserMenu["UserMenu"]
+        GenreDropdown["GenreDropdown"]
+        LangSwitch["LanguageSwitcher"]
+
+        Navbar --> SearchBar
+        Navbar --> UserMenu
+        Navbar --> GenreDropdown
+        Navbar --> LangSwitch
+    end
+
+    subgraph HomeComponents["HomePage"]
+        HP["HomePage"]
+        FS["FeaturedSection"]
+        LMS["LatestMangaSection"]
+        HS["HomeSidebar"]
+        TVS["TopViewsSection"]
+        TCS["TopCommentsSection"]
+        AUS["ActiveUsersSection"]
+        MFC["MangaFeaturedCard"]
+        MLC["MangaListCard"]
+        MRC["MangaRankCard"]
+        CC["CommentCard"]
+
+        HP --> FS --> MFC
+        HP --> LMS --> MLC
+        HP --> HS
+        HS --> TVS --> MRC
+        HS --> TCS --> CC
+        HS --> AUS
+    end
+
+    subgraph MangaComponents["MangaDetailPage"]
+        MDP["MangaDetailPage"]
+        MI["MangaInfo<br/>Cover, stats, synopsis"]
+        CL["ChapterList<br/>Sort toggle"]
+        MCS["MangaCommentSection"]
+
+        MDP --> MI
+        MDP --> CL
+        MDP --> MCS
+    end
+
+    subgraph ReaderComponents["ReaderPage"]
+        RP["ReaderPage"]
+        RT["ReaderToolbar<br/>Zoom, fullscreen, mode"]
+        VR["VerticalReader<br/>IntersectionObserver"]
+        HR["HorizontalReader<br/>Pagination"]
+        RPR["ReaderProgress"]
+        CCS["ChapterCommentSidebar"]
+        PCM["PageCommentModal"]
+
+        RP --> RT
+        RP --> VR
+        RP --> HR
+        RP --> RPR
+        RP --> CCS
+        RP --> PCM
+    end
+
+    subgraph CommentSystem["Comment System"]
+        CLi["CommentList"]
+        CI["CommentItem<br/>Nested max depth 3"]
+        CIn["CommentInput"]
+        RB["ReactionButtons<br/>Like / Dislike"]
+
+        MCS --> CLi
+        CCS --> CLi
+        PCM --> CLi
+        CLi --> CI
+        CI --> CI
+        CI --> RB
+        CLi --> CIn
+    end
+
+    subgraph AuthComponents["Auth Pages"]
+        LP["LoginPage"]
+        RgP["RegisterPage"]
+        AL["AuthLayout"]
+        LF["LoginForm"]
+        RF["RegisterForm"]
+        SLB["SocialLoginButton"]
+        PF["PasswordField"]
+
+        LP --> AL --> LF
+        RgP --> AL --> RF
+        LF --> PF
+        LF --> SLB
+        RF --> PF
+        RF --> SLB
+    end
+
+    subgraph CommonComponents["Common / Shared"]
+        Badge["Badge"]
+        GC["GlassCard"]
+        IB["IconButton"]
+        SB["StatusBadge"]
+        SH["SectionHeader"]
+        EB["ErrorBoundary"]
+    end
+
+    App --> Layout
+    Layout -->|"/"| HP
+    Layout -->|"/manga/:slug"| MDP
+    App -->|"/manga/:s/:c"| RP
+    App -->|"/login"| LP
+    App -->|"/register"| RgP
+
+    classDef page fill:#1e293b,stroke:#3b82f6,color:#f1f5f9,stroke-width:2px
+    classDef comp fill:#1a1e2e,stroke:#a855f7,color:#f1f5f9,stroke-width:1px
+    classDef common fill:#1a2e1e,stroke:#22c55e,color:#f1f5f9,stroke-width:1px
+    classDef comment fill:#2e1a1e,stroke:#ef4444,color:#f1f5f9,stroke-width:1px
+
+    class App,Layout,HP,MDP,RP,LP,RgP page
+    class Navbar,Footer,SearchBar,UserMenu,GenreDropdown,LangSwitch comp
+    class FS,LMS,HS,TVS,TCS,AUS,MFC,MLC,MRC,CC comp
+    class MI,CL,MCS comp
+    class RT,VR,HR,RPR,CCS,PCM comp
+    class AL,LF,RF,SLB,PF comp
+    class CLi,CI,CIn,RB comment
+    class Badge,GC,IB,SB,SH,EB common

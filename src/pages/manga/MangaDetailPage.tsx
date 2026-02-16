@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -8,47 +8,45 @@ import { useTranslation } from 'react-i18next';
 import MangaInfo from '../../components/manga/MangaInfo';
 import ChapterList from '../../components/manga/ChapterList';
 import { MangaCommentSection } from '../../components/comment';
-import { getMangaDetail } from '../../constants/mock-chapter-data';
-import type { MangaDetail } from '../../types/manga-types';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  fetchMangaDetail,
+  fetchMangaChapters,
+  selectSelectedManga,
+  selectMangaChapters,
+  clearSelected,
+} from '../../store/slices/manga-slice';
 
 function MangaDetailPage() {
   const { t } = useTranslation();
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: id } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const [manga, setManga] = useState<MangaDetail | null>(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const { data: manga, loading, error } = useAppSelector(selectSelectedManga);
+  const chapters = useAppSelector(selectMangaChapters);
 
   useEffect(() => {
-    // Simulate API call
-    const fetchManga = async () => {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      if (slug) {
-        const data = getMangaDetail(slug);
-        setManga(data || null);
-      }
-      setLoading(false);
-    };
-
-    fetchManga();
-  }, [slug]);
+    if (!id) return;
+    dispatch(fetchMangaDetail(id));
+    dispatch(fetchMangaChapters({ mangaId: id, page: 1, pageSize: 50 }));
+    return () => { dispatch(clearSelected()); };
+  }, [id, dispatch]);
 
   const handleReadClick = () => {
-    if (manga && manga.chapters.length > 0) {
-      navigate(`/manga/${manga.slug}/${manga.chapters[0].slug}`);
+    if (manga && chapters.data.length > 0) {
+      // Navigate to first chapter by ID
+      const firstChapter = [...chapters.data].sort((a, b) => a.chapterNumber - b.chapterNumber)[0];
+      navigate(`/read/${manga.id}/${firstChapter.id}`);
     }
   };
 
   const handleBookmarkClick = () => {
-    // TODO: Implement bookmark functionality
-    console.log('Bookmark clicked');
+    // TODO: Implement bookmark functionality when backend supports it
   };
 
   const handleChapterClick = (chapterId: string) => {
-    const chapter = manga?.chapters.find((ch) => ch.id === chapterId);
-    if (chapter && manga) {
-      navigate(`/manga/${manga.slug}/${chapter.slug}`);
+    if (manga) {
+      navigate(`/read/${manga.id}/${chapterId}`);
     }
   };
 
@@ -67,14 +65,14 @@ function MangaDetailPage() {
     );
   }
 
-  if (!manga) {
+  if (error || !manga) {
     return (
       <Container sx={{ py: 8, textAlign: 'center' }}>
         <Typography variant="h4" sx={{ fontWeight: 700, mb: 2 }}>
           {t('manga.notFound')}
         </Typography>
         <Typography sx={{ color: 'text.secondary' }}>
-          {t('manga.notFoundDescription')}
+          {error || t('manga.notFoundDescription')}
         </Typography>
       </Container>
     );
@@ -129,7 +127,7 @@ function MangaDetailPage() {
         {/* Chapter list */}
         <Box sx={{ mt: 6 }}>
           <ChapterList
-            chapters={manga.chapters}
+            chapters={chapters.data}
             onChapterClick={handleChapterClick}
           />
         </Box>

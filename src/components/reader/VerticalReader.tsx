@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import type { ChapterPage } from '../../types/manga-types';
+import type { ChapterPageDto } from '../../types/chapter-api-types';
 
 interface VerticalReaderProps {
-  pages: ChapterPage[];
+  pages: ChapterPageDto[];
   zoom: number;
   onPageChange?: (page: number) => void;
 }
