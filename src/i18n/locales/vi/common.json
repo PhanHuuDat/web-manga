@@ -8,7 +8,9 @@
     "browse": "Duyệt",
     "popular": "Phổ biến",
     "schedule": "Lịch",
-    "login": "ĐĂNG NHẬP"
+    "login": "ĐĂNG NHẬP",
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
   },
   "aria": {
     "search": "Tìm kiếm",

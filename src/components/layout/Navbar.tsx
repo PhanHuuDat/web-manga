@@ -7,13 +7,15 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import SearchBar from '../navigation/SearchBar';
+import UserMenu from '../navigation/UserMenu';
 import LanguageSwitcher from '../common/LanguageSwitcher';
-import { useAppDispatch } from '../../store/hooks';
-import { openAuthModal } from '../../store/slices/auth-slice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { openAuthModal, selectIsAuthenticated } from '../../store/slices/auth-slice';
 
 function Navbar() {
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const handleSearch = (query: string) => {
     console.log('Searching for:', query);
@@ -113,24 +115,28 @@ function Navbar() {
             </Button>
           </Box>
 
-          {/* Language + Login */}
+          {/* Language + Auth */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <LanguageSwitcher />
-            <Button
-              onClick={() => dispatch(openAuthModal('login'))}
-              variant="contained"
-              sx={{
-                background: 'linear-gradient(90deg, #3b82f6, #2563eb)',
-                fontWeight: 700,
-                px: 3,
-                '&:hover': {
-                  background: 'linear-gradient(90deg, #60a5fa, #3b82f6)',
-                  boxShadow: '0 0 20px rgba(59,130,246,0.3)',
-                },
-              }}
-            >
-              {t('navbar.login')}
-            </Button>
+            {isAuthenticated ? (
+              <UserMenu />
+            ) : (
+              <Button
+                onClick={() => dispatch(openAuthModal('login'))}
+                variant="contained"
+                sx={{
+                  background: 'linear-gradient(90deg, #3b82f6, #2563eb)',
+                  fontWeight: 700,
+                  px: 3,
+                  '&:hover': {
+                    background: 'linear-gradient(90deg, #60a5fa, #3b82f6)',
+                    boxShadow: '0 0 20px rgba(59,130,246,0.3)',
+                  },
+                }}
+              >
+                {t('navbar.login')}
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

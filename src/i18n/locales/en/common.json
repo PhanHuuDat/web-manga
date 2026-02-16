@@ -8,7 +8,9 @@
     "browse": "Browse",
     "popular": "Popular",
     "schedule": "Schedule",
-    "login": "LOGIN"
+    "login": "LOGIN",
+    "profile": "Profile",
+    "logout": "Logout"
   },
   "aria": {
     "search": "Search",
