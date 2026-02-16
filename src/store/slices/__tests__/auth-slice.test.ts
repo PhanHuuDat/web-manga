@@ -17,11 +17,13 @@ import commentReducer from '../comment-slice';
 import mangaReducer from '../manga-slice';
 import chapterReducer from '../chapter-slice';
 import genreReducer from '../genre-slice';
+import bookmarkReducer from '../bookmark-slice';
+import readingHistoryReducer from '../reading-history-slice';
 import type { RootState } from '../../index';
 
 function createStore(preloadedState?: Partial<RootState>) {
   return configureStore({
-    reducer: { auth: authReducer, comments: commentReducer, manga: mangaReducer, chapter: chapterReducer, genre: genreReducer },
+    reducer: { auth: authReducer, comments: commentReducer, manga: mangaReducer, chapter: chapterReducer, genre: genreReducer, bookmark: bookmarkReducer, readingHistory: readingHistoryReducer },
     preloadedState: preloadedState as RootState,
   });
 }

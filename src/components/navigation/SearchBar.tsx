@@ -18,27 +18,28 @@ function SearchBar({ placeholder }: SearchBarProps) {
   const dispatch = useAppDispatch();
   const { data: results, loading } = useAppSelector(selectMangaSearch);
   const [query, setQuery] = useState('');
-  const [showResults, setShowResults] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
   const debouncedQuery = useDebounce(query, 500);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (debouncedQuery.length >= 2) {
       dispatch(searchManga({ query: debouncedQuery, pageSize: 5 }));
-      setShowResults(true);
     } else {
       dispatch(clearSearch());
-      setShowResults(false);
     }
   }, [debouncedQuery, dispatch]);
 
+  // Show results when query is long enough and not manually dismissed
+  const showResults = debouncedQuery.length >= 2 && !dismissed;
+
   const handleClose = () => {
-    setShowResults(false);
+    setDismissed(true);
   };
 
   const handleSelect = (mangaId: string) => {
     setQuery('');
-    setShowResults(false);
+    setDismissed(true);
     dispatch(clearSearch());
     navigate(`/manga/${mangaId}`);
   };
@@ -46,7 +47,7 @@ function SearchBar({ placeholder }: SearchBarProps) {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setQuery('');
-      setShowResults(false);
+      setDismissed(true);
       dispatch(clearSearch());
       inputRef.current?.blur();
     }
@@ -98,8 +99,8 @@ function SearchBar({ placeholder }: SearchBarProps) {
             inputRef={inputRef}
             placeholder={placeholder || t('nav.search')}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => { if (results.length > 0) setShowResults(true); }}
+            onChange={(e) => { setQuery(e.target.value); setDismissed(false); }}
+            onFocus={() => { if (results.length > 0) setDismissed(false); }}
             onKeyDown={handleKeyDown}
             inputProps={{ 'aria-label': t('aria.searchManga') }}
             sx={{

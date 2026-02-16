@@ -38,6 +38,7 @@ function LoginPage() {
     return () => { dispatch(clearError()); };
   }, [dispatch]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmit = async (email: string, password: string, _rememberMe: boolean) => {
     dispatch(loginThunk({ email, password }));
   };
@@ -46,6 +47,7 @@ function LoginPage() {
     navigate('/forgot-password');
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSocialLogin = (_provider: 'google' | 'facebook') => {
     // TODO: Implement social login
   };

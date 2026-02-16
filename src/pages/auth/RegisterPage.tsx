@@ -30,6 +30,7 @@ function RegisterPage() {
     email: string,
     password: string,
     confirmPassword: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _acceptTerms: boolean,
   ) => {
     const result = await dispatch(registerThunk({ username, email, password, confirmPassword }));

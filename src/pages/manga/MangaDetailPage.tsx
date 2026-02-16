@@ -16,6 +16,7 @@ import {
   selectMangaChapters,
   clearSelected,
 } from '../../store/slices/manga-slice';
+import { useViewTracker } from '../../hooks/use-view-tracker';
 
 function MangaDetailPage() {
   const { t } = useTranslation();
@@ -24,6 +25,9 @@ function MangaDetailPage() {
   const dispatch = useAppDispatch();
   const { data: manga, loading, error } = useAppSelector(selectSelectedManga);
   const chapters = useAppSelector(selectMangaChapters);
+
+  // Fire-and-forget view tracking on page load
+  useViewTracker('Series', id);
 
   useEffect(() => {
     if (!id) return;

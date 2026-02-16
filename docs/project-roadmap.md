@@ -17,9 +17,10 @@ This document outlines the development roadmap for the web-manga project, tracki
 | 1 | Foundation & UI Framework | Weeks 1-2 | Complete | 100% |
 | 2 | Core Components & State | Weeks 3-4 | Complete | 100% |
 | 3 | Manga API Integration | Weeks 5-6 | Complete | 100% |
-| 4 | File Upload & Media | Weeks 7 | Complete | 100% |
-| 5 | Advanced Features | Weeks 8-11 | Pending | 0% |
-| 6 | User Features & Profile | Weeks 12-15 | Pending | 0% |
+| 4 | File Upload & Media | Week 7 | Complete | 100% |
+| 5 | View Tracking & CI/CD | Week 8 | Complete | 100% |
+| 6 | Advanced Features | Weeks 9-12 | Pending | 0% |
+| 7 | User Features & Profile | Weeks 13-16 | Pending | 0% |
 
 ---
 
@@ -264,11 +265,64 @@ This document outlines the development roadmap for the web-manga project, tracki
 - Phase 3: API integration complete ✓
 - Backend upload endpoints available ✓
 
-**Next**: → Phase 5: Advanced Features & Bookmarks
+**Next**: → Phase 5: View Tracking Integration
 
 ---
 
-## Phase 5: Advanced Features & Bookmarks
+## Phase 5: View Tracking Integration (COMPLETE)
+
+**Timeline:** Week 8
+**Status:** 100% Complete ✓
+**Completed:** 2026-02-16
+**Estimated Effort:** 20 hours
+
+### Objectives
+- [x] Implement view tracking hook
+- [x] Integrate with backend view tracking API
+- [x] Track views on manga detail and reader pages
+- [x] Setup GitHub Actions CI/CD pipeline
+
+### Completed Features
+- [x] view-tracking-api-service.ts (fire-and-forget requests)
+- [x] use-view-tracker.ts hook (StrictMode-safe)
+- [x] MangaDetailPage integrated with view tracking
+- [x] ReaderPage integrated with view tracking
+- [x] Automatic view tracking on page load
+- [x] Batched/debounced tracking for performance
+- [x] GitHub Actions CI/CD workflow (Node 22, pnpm)
+- [x] ESLint, TypeScript, Vitest in CI pipeline
+
+### Deliverables
+- View tracking API service
+- Custom useViewTracker hook
+- Updated MangaDetailPage with tracking
+- Updated ReaderPage with tracking
+- GitHub Actions CI/CD workflow (web-manga/.github/workflows/ci.yml)
+- Frontend coverage reports
+
+### Acceptance Criteria
+- [x] Views tracked without blocking UI
+- [x] Hook safely handles React StrictMode
+- [x] API errors don't crash application
+- [x] CI/CD pipeline passes all checks
+- [x] Linting, build, and tests all pass
+- [x] Coverage reports generated
+
+### Implementation Details
+- **Fire-and-forget tracking**: No awaiting tracking requests
+- **Debounced calls**: Multiple rapid views batched into single request
+- **Anonymous tracking**: Backend generates viewer ID from IP+UserAgent
+- **CI/CD**: Node 22 + pnpm, ESLint/build/test stages
+
+### Dependencies Met
+- Phase 4: File upload complete ✓
+- Backend view tracking endpoint available ✓
+
+**Next**: → Phase 6: Advanced Features & Bookmarks
+
+---
+
+## Phase 6: Advanced Features & Bookmarks
 
 **Timeline:** Weeks 8-11
 **Target Status:** Pending

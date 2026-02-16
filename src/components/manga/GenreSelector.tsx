@@ -13,10 +13,9 @@ interface GenreSelectorProps {
 
 function GenreSelector({ value, onChange, disabled = false }: GenreSelectorProps) {
   const [genres, setGenres] = useState<GenreWithCountDto[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     genreApi
       .list()
       .then(setGenres)

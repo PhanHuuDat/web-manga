@@ -16,6 +16,8 @@ import RegisterPage from './pages/auth/RegisterPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import VerifyEmailPage from './pages/auth/VerifyEmailPage';
+import BookmarkListPage from './pages/bookmark/BookmarkListPage';
+import ReadingHistoryPage from './pages/reading-history/ReadingHistoryPage';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/manga/:id/edit" element={<ProtectedRoute><MangaEditPage /></ProtectedRoute>} />
           <Route path="/manga/:id/chapters/create" element={<ProtectedRoute><ChapterCreatePage /></ProtectedRoute>} />
           <Route path="/chapters/:id/edit" element={<ProtectedRoute><ChapterEditPage /></ProtectedRoute>} />
+          <Route path="/bookmarks" element={<ProtectedRoute><BookmarkListPage /></ProtectedRoute>} />
+          <Route path="/history" element={<ProtectedRoute><ReadingHistoryPage /></ProtectedRoute>} />
         </Route>
 
         {/* Reader page without layout (fullscreen) — ID-based route */}

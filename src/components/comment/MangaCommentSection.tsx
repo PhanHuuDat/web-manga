@@ -40,6 +40,7 @@ export default function MangaCommentSection({ mangaId, mangaTitle }: MangaCommen
     );
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleReply = (commentId: string, _username: string) => {
     dispatch(setReplyingTo(commentId));
   };

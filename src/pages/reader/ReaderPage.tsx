@@ -9,6 +9,7 @@ import ReaderProgress from '../../components/reader/ReaderProgress';
 import { ChapterCommentSidebar, PageCommentModal } from '../../components/comment';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchChapterDetail, clearChapter, selectSelectedChapter } from '../../store/slices/chapter-slice';
+import { useViewTracker } from '../../hooks/use-view-tracker';
 
 function ReaderPage() {
   const { mangaSlug: mangaId, chapterSlug: chapterId } = useParams<{
@@ -24,6 +25,9 @@ function ReaderPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [pageModalOpen, setPageModalOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState(1);
+
+  // Fire-and-forget view tracking on chapter load
+  useViewTracker('Chapter', chapterId);
 
   useEffect(() => {
     if (!chapterId) return;

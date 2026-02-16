@@ -10,28 +10,29 @@ function VerifyEmailPage() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
 
-  useEffect(() => {
-    const token = searchParams.get('token');
-    const userId = searchParams.get('userId');
+  const token = searchParams.get('token');
+  const userId = searchParams.get('userId');
+  const hasParams = !!(token && userId);
 
-    if (!token || !userId) {
-      setStatus('error');
-      return;
-    }
+  useEffect(() => {
+    if (!hasParams) return;
 
     authApi
-      .verifyEmail(token, userId)
+      .verifyEmail(token!, userId!)
       .then(() => setStatus('success'))
       .catch(() => setStatus('error'));
-  }, [searchParams]);
+  }, [hasParams, token, userId]);
+
+  // Derive error state from missing params without setState in effect
+  const effectiveStatus = hasParams ? status : 'error';
 
   return (
     <AuthLayout
       title={t('verifyEmail.title')}
       subtitle=""
     >
-      {status === 'loading' && <CircularProgress sx={{ display: 'block', mx: 'auto', my: 3 }} />}
-      {status === 'success' && (
+      {effectiveStatus === 'loading' && <CircularProgress sx={{ display: 'block', mx: 'auto', my: 3 }} />}
+      {effectiveStatus === 'success' && (
         <>
           <Typography sx={{ textAlign: 'center', color: 'success.main', mb: 2 }}>
             {t('verifyEmail.success')}
@@ -41,7 +42,7 @@ function VerifyEmailPage() {
           </Button>
         </>
       )}
-      {status === 'error' && (
+      {effectiveStatus === 'error' && (
         <Typography sx={{ textAlign: 'center', color: 'error.main' }}>
           {t('verifyEmail.error')}
         </Typography>

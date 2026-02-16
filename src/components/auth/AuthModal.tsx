@@ -34,6 +34,7 @@ function AuthModal() {
 
   const handleClose = () => dispatch(closeAuthModal());
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleLogin = async (email: string, password: string, _rememberMe: boolean) => {
     const result = await dispatch(loginThunk({ email, password }));
     if (loginThunk.fulfilled.match(result)) {
@@ -46,6 +47,7 @@ function AuthModal() {
     email: string,
     password: string,
     confirmPassword: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _acceptTerms: boolean,
   ) => {
     const result = await dispatch(registerThunk({ username, email, password, confirmPassword }));
@@ -59,6 +61,7 @@ function AuthModal() {
     navigate('/forgot-password');
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSocialLogin = (_provider: 'google' | 'facebook') => {
     // TODO: Implement social login
   };

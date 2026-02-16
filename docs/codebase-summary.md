@@ -4,12 +4,12 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~8,500+ across 95+ source files
-**Source Directories:** 40+ directories
+**Current Lines of Code:** ~9,000+ across 100+ source files
+**Source Directories:** 42+ directories
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
 **Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
-**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%), Phase 4 Complete (100%) - File upload, image processing, manga/chapter forms
+**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%), Phase 4 Complete (100%), Phase 5 Complete (100%) - File upload, view tracking integration, GitHub Actions CI/CD
 
 ---
 
@@ -296,14 +296,17 @@ src/                              # All styling via MUI sx props
 │   ├── format-relative-time.ts  # Relative time formatter
 │   └── format-number.ts         # Number formatter
 │
-├── services/                    # API & business logic
-│   ├── api-client.ts            # Axios instance with interceptors
-│   ├── auth-service.ts          # Auth API calls (login, register, refresh, logout)
-│   ├── manga-api.ts             # Manga CRUD + search/trending queries
-│   ├── chapter-api.ts           # Chapter fetching and listing
-│   ├── genre-api.ts             # Genre management & filtering
-│   ├── attachment-api-service.ts # File upload + progress tracking (Phase 4)
-│   └── token-manager.ts         # Access/refresh token management
+├── services/                      # API & business logic
+│   ├── api-client.ts              # Axios instance with interceptors
+│   ├── auth-service.ts            # Auth API calls (login, register, refresh, logout)
+│   ├── manga-api.ts               # Manga CRUD + search/trending queries
+│   ├── chapter-api.ts             # Chapter fetching and listing
+│   ├── genre-api.ts               # Genre management & filtering
+│   ├── attachment-api-service.ts  # File upload + progress tracking (Phase 4)
+│   ├── view-tracking-api-service.ts # View tracking API (Phase 5)
+│   ├── token-manager.ts           # Access/refresh token management
+│   └── hooks/
+│       └── use-view-tracker.ts    # View tracking hook (Phase 5)
 │
 ├── store/
 │   ├── index.ts                 # Redux store configuration
@@ -492,13 +495,21 @@ npm run build  # Test production build
 - [x] attachment-api-service.ts with upload function + progress tracking
 - [x] react-dropzone 15.x integration
 
-### Not Yet Implemented (Phase 5+)
+### Phase 5 Implemented (100% - View Tracking & CI/CD)
+- [x] view-tracking-api-service.ts (fire-and-forget API calls)
+- [x] use-view-tracker.ts hook (StrictMode-safe)
+- [x] MangaDetailPage integrated with view tracking
+- [x] ReaderPage integrated with view tracking
+- [x] GitHub Actions CI/CD workflow for frontend
+- [x] ESLint, TypeScript, Vitest in CI pipeline
+- [x] Coverage reports generation
+
+### Not Yet Implemented (Phase 6+)
 - [ ] Theme switching (dark/light mode) - infrastructure ready
 - [ ] Bookmarks & reading history UI
 - [ ] User library management
 - [ ] Infinite scroll / pagination UI
 - [ ] Optimistic updates for mutations
-- [ ] Custom hooks for API data fetching
 
 ---
 
@@ -552,7 +563,25 @@ npm run build  # Test production build
 - `src/services/attachment-api-service.ts` — Upload API calls
 - Updated routing in App.tsx
 
-**Next Phase:** Phase 5 (Bookmarks, Reading History, Advanced Features)
+## Phase 5 Summary: View Tracking & CI/CD
+
+**Status:** 100% Complete (Feb 16, 2026)
+
+**What Was Built:**
+- View tracking API service with fire-and-forget pattern
+- useViewTracker custom hook (StrictMode-safe, debounced)
+- MangaDetailPage auto-tracking views
+- ReaderPage auto-tracking views
+- GitHub Actions CI/CD workflow for frontend
+- ESLint, TypeScript build, Vitest unit tests
+
+**Key Files:**
+- `src/services/view-tracking-api-service.ts` — View tracking API calls
+- `src/services/hooks/use-view-tracker.ts` — View tracking hook
+- Updated MangaDetailPage and ReaderPage
+- `web-manga/.github/workflows/ci.yml` — CI/CD pipeline
+
+**Next Phase:** Phase 6 (Advanced Features, Bookmarks, Reading History)
 
 See `project-roadmap.md` for detailed timeline and dependencies.
 

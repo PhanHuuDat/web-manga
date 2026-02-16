@@ -4,6 +4,8 @@ import authReducer from './slices/auth-slice';
 import mangaReducer from './slices/manga-slice';
 import chapterReducer from './slices/chapter-slice';
 import genreReducer from './slices/genre-slice';
+import bookmarkReducer from './slices/bookmark-slice';
+import readingHistoryReducer from './slices/reading-history-slice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,8 @@ export const store = configureStore({
     manga: mangaReducer,
     chapter: chapterReducer,
     genre: genreReducer,
+    bookmark: bookmarkReducer,
+    readingHistory: readingHistoryReducer,
   },
 });
 
