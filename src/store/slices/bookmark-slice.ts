@@ -3,6 +3,7 @@ import { bookmarkApi } from '../../services/api/bookmark-api-service';
 import { extractError } from '../../utils/extract-api-error';
 import type { BookmarkDto } from '../../types/bookmark-api-types';
 import type { RootState } from '../index';
+import { logoutThunk } from './auth-slice';
 
 interface BookmarkState {
   list: {
@@ -104,7 +105,9 @@ const bookmarkSlice = createSlice({
       // Check
       .addCase(checkBookmark.fulfilled, (state, action) => {
         state.bookmarkedIds[action.payload.mangaId] = action.payload.isBookmarked;
-      });
+      })
+      // Logout - reset state
+      .addCase(logoutThunk.fulfilled, () => initialState);
   },
 });
 

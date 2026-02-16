@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import {
   Box, Typography, Avatar, TextField, IconButton, Chip,
-  Card, CardContent, Skeleton, Snackbar, Alert,
+  Card, CardContent, Skeleton, Snackbar, Alert, CircularProgress,
 } from '@mui/material';
 import {
   Edit, Save, Close, CameraAlt,
@@ -20,6 +20,7 @@ export default function ProfilePage() {
   const [editing, setEditing] = useState(false);
   const [displayName, setDisplayName] = useState('');
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [snackbar, setSnackbar] = useState<{ open: boolean; msg: string; severity: 'success' | 'error' }>({
     open: false, msg: '', severity: 'success',
   });
@@ -53,12 +54,15 @@ export default function ProfilePage() {
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setUploading(true);
     try {
       await userApi.uploadAvatar(file);
       await dispatch(getCurrentUserThunk());
       setSnackbar({ open: true, msg: 'Avatar updated', severity: 'success' });
     } catch {
       setSnackbar({ open: true, msg: 'Failed to upload avatar', severity: 'error' });
+    } finally {
+      setUploading(false);
     }
     // Reset input so same file can be re-selected
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -92,12 +96,25 @@ export default function ProfilePage() {
             >
               {(user.displayName || user.username).charAt(0).toUpperCase()}
             </Avatar>
+            {uploading && (
+              <Box
+                sx={{
+                  position: 'absolute', top: 0, left: 0, width: 100, height: 100,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  bgcolor: 'rgba(0,0,0,0.6)', borderRadius: '50%',
+                }}
+              >
+                <CircularProgress size={32} sx={{ color: '#3b82f6' }} />
+              </Box>
+            )}
             <IconButton
               onClick={() => fileInputRef.current?.click()}
+              disabled={uploading}
               sx={{
                 position: 'absolute', bottom: 0, right: -4,
                 bgcolor: '#3b82f6', width: 32, height: 32,
                 '&:hover': { bgcolor: '#2563eb' },
+                '&.Mui-disabled': { bgcolor: '#64748b' },
               }}
             >
               <CameraAlt sx={{ fontSize: 16, color: '#fff' }} />

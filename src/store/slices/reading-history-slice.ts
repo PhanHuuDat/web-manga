@@ -3,6 +3,7 @@ import { readingHistoryApi } from '../../services/api/reading-history-api-servic
 import { extractError } from '../../utils/extract-api-error';
 import type { ReadingHistoryDto, ResumePointDto } from '../../types/reading-history-api-types';
 import type { RootState } from '../index';
+import { logoutThunk } from './auth-slice';
 
 interface ReadingHistoryState {
   list: {
@@ -95,7 +96,9 @@ const readingHistorySlice = createSlice({
         state.list.data = state.list.data.filter((h) => h.mangaSeriesId !== action.payload);
         state.list.totalCount = Math.max(0, state.list.totalCount - 1);
         delete state.resumePoints[action.payload];
-      });
+      })
+      // Logout - reset state
+      .addCase(logoutThunk.fulfilled, () => initialState);
   },
 });
 

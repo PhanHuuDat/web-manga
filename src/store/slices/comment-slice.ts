@@ -5,6 +5,7 @@ import type { ListCommentsParams } from '../../types/comment-api-types';
 import { commentApi } from '../../services/api/comment-api-service';
 import { mapCommentDtoToComment, mapApiReaction, mapReactionToApi } from '../../utils/comment-mapper';
 import { extractError } from '../../utils/extract-api-error';
+import { logoutThunk } from './auth-slice';
 
 const initialState: CommentState = {
   mangaComments: {},
@@ -201,7 +202,9 @@ const commentSlice = createSlice({
         } else {
           state.pageComments[targetId] = updater(state.pageComments[targetId] || []);
         }
-      });
+      })
+      // Logout - reset state
+      .addCase(logoutThunk.fulfilled, () => initialState);
   },
 });
 

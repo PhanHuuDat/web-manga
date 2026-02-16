@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   Box, Typography, Chip, Select, MenuItem, Skeleton, Pagination,
 } from '@mui/material';
@@ -28,6 +28,7 @@ const SORT_OPTIONS = [
 export default function SearchResultsPage() {
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { data: genres, loaded: genresLoaded } = useAppSelector(selectGenres);
   const { data: results, loading, totalCount, pageSize } = useAppSelector(selectMangaList);
@@ -55,6 +56,15 @@ export default function SearchResultsPage() {
   }, [dispatch, q, genreId, status, sortBy, currentPage]);
 
   const totalPages = useMemo(() => Math.ceil(totalCount / (pageSize || 20)), [totalCount, pageSize]);
+
+  // Clamp page to valid range
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      const params = new URLSearchParams(searchParams);
+      params.delete('page');
+      navigate(`/search?${params.toString()}`, { replace: true });
+    }
+  }, [currentPage, totalPages, searchParams, navigate]);
 
   const updateParam = (key: string, value: string) => {
     setSearchParams((prev) => {
