@@ -2,9 +2,14 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { Box, Typography, Button } from '@mui/material';
 import { Home } from '@mui/icons-material';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import ProtectedRoute from './components/common/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
 import MangaDetailPage from './pages/manga/MangaDetailPage';
+import MangaCreatePage from './pages/manga/MangaCreatePage';
+import MangaEditPage from './pages/manga/MangaEditPage';
+import ChapterCreatePage from './pages/manga/ChapterCreatePage';
+import ChapterEditPage from './pages/manga/ChapterEditPage';
 import ReaderPage from './pages/reader/ReaderPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
@@ -18,7 +23,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="/manga/create" element={<ProtectedRoute><MangaCreatePage /></ProtectedRoute>} />
           <Route path="/manga/:slug" element={<MangaDetailPage />} />
+          <Route path="/manga/:id/edit" element={<ProtectedRoute><MangaEditPage /></ProtectedRoute>} />
+          <Route path="/manga/:id/chapters/create" element={<ProtectedRoute><ChapterCreatePage /></ProtectedRoute>} />
+          <Route path="/chapters/:id/edit" element={<ProtectedRoute><ChapterEditPage /></ProtectedRoute>} />
         </Route>
 
         {/* Reader page without layout (fullscreen) — ID-based route */}

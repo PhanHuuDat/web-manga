@@ -4,9 +4,9 @@
 
 This document outlines the development roadmap for the web-manga project, tracking progress through phases from foundation to full-featured application.
 
-**Current Phase:** Phase 3 - Manga API Integration (Complete)
+**Current Phase:** Phase 4 - File Upload & Media (Complete)
 **Last Updated:** 2026-02-16
-**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%)
+**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%), Phase 4 Complete (100%)
 
 ---
 
@@ -17,9 +17,9 @@ This document outlines the development roadmap for the web-manga project, tracki
 | 1 | Foundation & UI Framework | Weeks 1-2 | Complete | 100% |
 | 2 | Core Components & State | Weeks 3-4 | Complete | 100% |
 | 3 | Manga API Integration | Weeks 5-6 | Complete | 100% |
-| 4 | Advanced Features | Weeks 7-10 | In Progress | 30% |
-| 5 | User Features & Profile | Weeks 11-14 | Pending | 0% |
-| 6 | Mobile & Optimization | Weeks 15+ | Pending | 0% |
+| 4 | File Upload & Media | Weeks 7 | Complete | 100% |
+| 5 | Advanced Features | Weeks 8-11 | Pending | 0% |
+| 6 | User Features & Profile | Weeks 12-15 | Pending | 0% |
 
 ---
 
@@ -218,66 +218,104 @@ This document outlines the development roadmap for the web-manga project, tracki
 
 ---
 
-## Phase 4: Advanced Features & Refinements
+## Phase 4: File Upload & Media (COMPLETE)
 
-**Timeline:** Weeks 7-10
-**Target Status:** In Progress
+**Timeline:** Week 7
+**Status:** 100% Complete ✓
+**Completed:** 2026-02-16
+**Estimated Effort:** 40 hours
+
+### Objectives
+- [x] Implement file upload components
+- [x] Create manga and chapter creation/edit forms
+- [x] Integrate with backend upload endpoint
+- [x] Add image preview and progress tracking
+
+### Completed Features
+- [x] ImageUploader component (single image with preview)
+- [x] ChapterPageUploader component (drag-and-drop, multi-image, reorder)
+- [x] UploadProgress component (progress bar with percentage)
+- [x] MangaForm component (create/edit with genre selector)
+- [x] ChapterForm component (create/edit with pages upload)
+- [x] GenreSelector component (multi-select dropdown)
+- [x] attachment-api-service.ts with progress tracking
+- [x] Protected routes: /manga/create, /manga/:id/edit, /manga/:id/chapters/create, /chapters/:id/edit
+- [x] react-dropzone 15.x integration
+- [x] Upload error handling & retry logic
+
+### Deliverables
+- Upload components directory with 3 components
+- Form components for manga/chapter creation
+- Attachment API service
+- Protected form pages
+- Error & success notifications
+
+### Acceptance Criteria
+- [x] Single image upload functional
+- [x] Multi-image drag-and-drop working
+- [x] Reorder images in chapter upload
+- [x] Progress bar updates during upload
+- [x] File size validation enforced
+- [x] Form validation complete
+- [x] Protected routes restrict access
+- [x] Error messages clear and helpful
+
+### Dependencies Met
+- Phase 3: API integration complete ✓
+- Backend upload endpoints available ✓
+
+**Next**: → Phase 5: Advanced Features & Bookmarks
+
+---
+
+## Phase 5: Advanced Features & Bookmarks
+
+**Timeline:** Weeks 8-11
+**Target Status:** Pending
 **Estimated Effort:** 80 hours
 
 ### Objectives
-- Implement advanced search and filtering
-- Add bookmarking and reading history
-- Refine user experience
+- Add bookmarking system
+- Implement reading history tracking
+- Refine user experience with filters
 
 ### Key Features
-- [ ] Advanced search (filters, sorting)
-- [ ] Bookmarking system
-- [ ] Reading history tracking & persistence
+- [ ] Bookmark create/delete
+- [ ] Reading history persistence
 - [ ] User library management
+- [ ] Advanced search filters
 - [ ] Theme switching (dark/light mode)
 - [ ] Custom hooks for data fetching
-- [ ] Infinite scroll pagination
-- [ ] Optimistic updates for mutations
 
-### Technical Considerations
-- [ ] Image lazy loading
-- [ ] Preload adjacent pages
-- [ ] Optimize for mobile scrolling
-- [ ] Touch gesture support
-- [ ] Keyboard shortcuts
+### Planned Components
+- [ ] BookmarkButton component
+- [ ] ReadingHistoryPanel component
+- [ ] UserLibraryPage
+- [ ] AdvancedSearchForm
 
 ### API Endpoints Needed
 ```
-GET  /api/manga/:id/chapter/:num         - Chapter pages
-GET  /api/manga/:id/chapter/:num/pages   - Page details
-POST /api/reading-history                - Save progress
-GET  /api/reading-history/:userId        - Get history
-POST /api/bookmarks                      - Save bookmark
+POST   /api/bookmarks                   - Save bookmark
+DELETE /api/bookmarks/:id               - Remove bookmark
+GET    /api/bookmarks/:userId           - List bookmarks
+POST   /api/reading-history             - Save progress
+GET    /api/reading-history/:userId     - Get history
 ```
 
-### Deliverables
-- ReaderPage component
-- PageViewer component
-- ChapterNavigation component
-- Reading controls UI
-- Progress tracking system
-
 ### Acceptance Criteria
-- [ ] Images load and display correctly
-- [ ] Smooth scrolling performance
-- [ ] Touch gestures work on mobile
-- [ ] Progress saved automatically
-- [ ] Zoom/pan functional
-- [ ] Keyboard navigation works
+- [ ] Bookmark CRUD working
+- [ ] Reading history auto-saved
+- [ ] History persists across sessions
+- [ ] Bookmarks synced across devices
+- [ ] All filters functional
 
 ### Dependencies
-- Phase 1-3 completion
-- Image optimization strategy
-- Reading progress API
+- Phase 4: File upload complete ✓
+- Backend bookmark/history endpoints
 
 ### Risk Assessment
-- **Medium-High:** Performance critical
-- **Mitigation:** Extensive performance testing, image optimization
+- **Low:** Bookmark/history features are isolated
+- **Mitigation:** Early testing, data validation
 
 ---
 
@@ -432,20 +470,20 @@ GET    /api/user/reading-stats     - Reading statistics
 ### Q1 2026
 - **Week 1-2:** Phase 1 (Foundation)
 - **Week 3-4:** Phase 2 (Components)
-- **Week 5-8:** Phase 3 (Browse)
-- **Week 9-12:** Phase 4 (Reader)
-- **Status:** Foundation & UI complete, browsing partial
+- **Week 5-6:** Phase 3 (API Integration)
+- **Week 7:** Phase 4 (File Upload & Media)
+- **Status:** Foundation, components, API, file upload complete
 
 ### Q2 2026
-- **Week 1-4:** Phase 4 (Reader Completion)
-- **Week 5-8:** Phase 5 (Auth & Library)
-- **Week 9-12:** Phase 5 (Features & Polish)
-- **Status:** Core MVP features complete
+- **Week 1-4:** Phase 5 (Advanced Features & Bookmarks)
+- **Week 5-8:** Phase 6 (User Features & Profile)
+- **Week 9-12:** Phase 6 (Polish & Optimization)
+- **Status:** Core feature set complete
 
 ### Q3 2026
-- **Week 1-4:** Phase 6a (Community)
-- **Week 5-8:** Phase 6b (Discovery)
-- **Week 9-12:** Phase 6c (PWA)
+- **Week 1-4:** Phase 6a (Community Features)
+- **Week 5-8:** Phase 6b (Discovery & Recommendations)
+- **Week 9-12:** Phase 6c (PWA & Offline)
 - **Status:** Advanced features in progress
 
 ### Q4 2026

@@ -4,12 +4,12 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~7,200+ across 85+ source files
-**Source Directories:** 35+ directories
+**Current Lines of Code:** ~8,500+ across 95+ source files
+**Source Directories:** 40+ directories
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
 **Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
-**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%) - Full API integration with Redux, loading skeletons, real data fetching
+**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%), Phase 4 Complete (100%) - File upload, image processing, manga/chapter forms
 
 ---
 
@@ -302,6 +302,7 @@ src/                              # All styling via MUI sx props
 │   ├── manga-api.ts             # Manga CRUD + search/trending queries
 │   ├── chapter-api.ts           # Chapter fetching and listing
 │   ├── genre-api.ts             # Genre management & filtering
+│   ├── attachment-api-service.ts # File upload + progress tracking (Phase 4)
 │   └── token-manager.ts         # Access/refresh token management
 │
 ├── store/
@@ -480,12 +481,24 @@ npm run build  # Test production build
 - [x] ReaderPage retrieves chapters from API
 - [x] 19 frontend tests all passing
 
-### Not Yet Implemented (Phase 4+)
+### Phase 4 Implemented (100% - File Upload & Forms)
+- [x] ImageUploader component (single image upload with preview)
+- [x] ChapterPageUploader component (multi-image drag-and-drop with reorder)
+- [x] UploadProgress component (progress bar with percentage)
+- [x] MangaForm component (create/edit with upload)
+- [x] ChapterForm component (create/edit with chapter pages)
+- [x] GenreSelector component (multi-select for genres)
+- [x] Protected routes: /manga/create, /manga/:id/edit, /manga/:id/chapters/create, /chapters/:id/edit
+- [x] attachment-api-service.ts with upload function + progress tracking
+- [x] react-dropzone 15.x integration
+
+### Not Yet Implemented (Phase 5+)
 - [ ] Theme switching (dark/light mode) - infrastructure ready
-- [ ] Unit tests for new Redux slices
-- [ ] Custom hooks for API data fetching
+- [ ] Bookmarks & reading history UI
+- [ ] User library management
 - [ ] Infinite scroll / pagination UI
 - [ ] Optimistic updates for mutations
+- [ ] Custom hooks for API data fetching
 
 ---
 
@@ -515,7 +528,31 @@ npm run build  # Test production build
 - `src/types/api-types/` — Request/response DTOs
 - Updated components: SearchBar, HomePage, MangaDetailPage, ReaderPage
 
-**Next Phase:** Phase 4 (Advanced Search, Bookmarks, Reading History)
+---
+
+## Phase 4 Summary: File Upload & Media Implementation
+
+**Status:** 100% Complete (Feb 16, 2026)
+
+**What Was Built:**
+- ImageUploader component (single image + file input + preview)
+- ChapterPageUploader component (drag-and-drop, multi-image, reorder with react-dropzone)
+- UploadProgress component (visual progress bar with percentage)
+- MangaForm component (create/edit manga with genre selector + cover upload)
+- ChapterForm component (create/edit with chapter pages upload)
+- GenreSelector component (multi-select dropdown)
+- attachment-api-service.ts (upload function + axios progress events)
+- Protected routes: /manga/create, /manga/:id/edit, /manga/:id/chapters/create, /chapters/:id/edit
+- Upload error handling + retry logic
+
+**Key Files:**
+- `src/components/upload/` — ImageUploader, ChapterPageUploader, UploadProgress
+- `src/components/manga/` — MangaForm, ChapterForm, GenreSelector
+- `src/pages/manga/` — MangaCreatePage, MangaEditPage, ChapterCreatePage, ChapterEditPage
+- `src/services/attachment-api-service.ts` — Upload API calls
+- Updated routing in App.tsx
+
+**Next Phase:** Phase 5 (Bookmarks, Reading History, Advanced Features)
 
 See `project-roadmap.md` for detailed timeline and dependencies.
 
