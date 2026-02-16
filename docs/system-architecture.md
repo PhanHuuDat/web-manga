@@ -4,7 +4,7 @@
 
 Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux Toolkit, and React Router, providing a fast, responsive reading experience. The architecture emphasizes modularity, type safety, performance, and component reusability.
 
-**Status:** Phase 1 Foundation complete (100%) with UI framework established. Phase 2 in progress (60%) - auth UI, comment system, manga detail, and reader components implemented.
+**Status:** Phase 1-6 complete (100%) with full feature implementation including anti-leak image scrambling. Auth system, comment system, manga detail, reader with scrambled page descrambling, file upload, view tracking, and CI/CD fully implemented.
 
 ---
 
@@ -96,6 +96,7 @@ Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux 
 
 - **Reader Components:**
   - `VerticalReader.tsx`, `HorizontalReader.tsx` - Reading modes
+  - `ScrambledPageCanvas.tsx` - Canvas-based image descrambler with IntersectionObserver (Phase 6)
   - `ReaderToolbar.tsx` - Controls (zoom, fullscreen, mode)
   - `ReaderProgress.tsx` - Progress bar with scroll tracking
 
@@ -103,11 +104,11 @@ Web-Manga is built as a **Single Page Application (SPA)** using React 19, Redux 
   - `Badge.tsx`, `GlassCard.tsx`, `IconButton.tsx`
   - `PasswordField.tsx`, `StatusBadge.tsx`, `ErrorBoundary.tsx`
 
-**Planned Components (Phase 2+ Remaining):**
-- API service layer
-- Additional Redux slices (manga, auth, ui, reading)
-- Theme switcher component
-- LoadingSpinner, Toast notifications
+**Phase 6 Additions:**
+- ScrambledPageCanvas component for anti-leak image descrambling
+- image-descrambler.ts utility with mulberry32 PRNG implementation
+- Anti-leak CSS (user-select, context-menu disabled) on ReaderPage
+- Lazy loading + IntersectionObserver for performance
 
 **Technology:** React 19 functional components with hooks
 
@@ -443,7 +444,7 @@ User scrolls/navigates → Update page state
 
 ## Security Architecture
 
-### Authentication Flow (Planned)
+### Authentication Flow
 ```
 User Login Form
         ↓
@@ -458,6 +459,27 @@ Store in secure cookie/localStorage
 Include in API requests (Authorization header)
 ```
 
+### Anti-Leak Image Descrambling (Phase 6)
+```
+User views chapter page
+        ↓
+ScrambledPageCanvas receives scrambled image + seed
+        ↓
+Mulberry32 PRNG generates deterministic tile order
+        ↓
+Fisher-Yates descramble (reverse of 8x8 tile shuffle)
+        ↓
+Canvas renders descrambled image
+        ↓
+Context menu & screenshot disabled via CSS
+```
+
+**Features:**
+- Deterministic descrambling (same seed always produces same image)
+- Cross-platform parity: frontend/backend use identical mulberry32 PRNG
+- Lazy loading: only descrambles visible images
+- Transparent to users: no speed penalty
+
 ### Security Headers
 - Content Security Policy (CSP)
 - X-Frame-Options
@@ -469,6 +491,7 @@ Include in API requests (Authorization header)
 - XSS prevention (React auto-escapes)
 - CSRF protection via tokens
 - Input validation & sanitization
+- Image scrambling prevents visual spoiler leakage
 
 ---
 

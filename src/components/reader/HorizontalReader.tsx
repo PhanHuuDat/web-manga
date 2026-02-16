@@ -6,6 +6,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import type { ChapterPageDto } from '../../types/chapter-api-types';
 import { useTranslation } from 'react-i18next';
+import ScrambledPageCanvas from './ScrambledPageCanvas';
 
 interface HorizontalReaderProps {
   pages: ChapterPageDto[];
@@ -78,18 +79,45 @@ function HorizontalReader({ pages, zoom, onPageChange }: HorizontalReaderProps) 
           p: 2,
         }}
       >
-        <Box
-          component="img"
-          src={pages[currentPage]?.imageUrl}
-          alt={`Page ${currentPage + 1}`}
-          sx={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            objectFit: 'contain',
-            transform: `scale(${zoom / 100})`,
-            transition: 'transform 0.3s ease',
-          }}
-        />
+        {(() => {
+          const page = pages[currentPage];
+          if (!page) return null;
+
+          if (page.scrambleSeed != null && page.scrambleGridSize != null) {
+            return (
+              <Box
+                sx={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  transform: `scale(${zoom / 100})`,
+                  transition: 'transform 0.3s ease',
+                }}
+              >
+                <ScrambledPageCanvas
+                  imageUrl={page.imageUrl}
+                  gridSize={page.scrambleGridSize}
+                  seed={page.scrambleSeed}
+                  alt={`Page ${currentPage + 1}`}
+                />
+              </Box>
+            );
+          }
+
+          return (
+            <Box
+              component="img"
+              src={page.imageUrl}
+              alt={`Page ${currentPage + 1}`}
+              sx={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+                transform: `scale(${zoom / 100})`,
+                transition: 'transform 0.3s ease',
+              }}
+            />
+          );
+        })()}
       </Box>
 
       {/* Next button */}

@@ -94,7 +94,19 @@ function ReaderPage() {
   }
 
   return (
-    <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
+    <Box
+      sx={{
+        bgcolor: 'background.default',
+        minHeight: '100vh',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        '& img, & canvas': {
+          pointerEvents: 'none',
+          userSelect: 'none',
+        },
+      }}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       {/* Toolbar */}
       <ReaderToolbar
         title={chapter.mangaTitle}

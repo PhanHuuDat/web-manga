@@ -4,12 +4,12 @@
 
 Web-Manga is a React + TypeScript + Vite single-page application for reading and managing manga. The codebase uses modern development practices with type safety, fast refresh, and optimized builds.
 
-**Current Lines of Code:** ~9,000+ across 100+ source files
-**Source Directories:** 42+ directories
+**Current Lines of Code:** ~11,000+ across 110+ source files
+**Source Directories:** 45+ directories
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
 **Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
-**Status:** Phase 1 Complete (100%), Phase 2 Complete (100%), Phase 3 Complete (100%), Phase 4 Complete (100%), Phase 5 Complete (100%) - File upload, view tracking integration, GitHub Actions CI/CD
+**Status:** Phase 1-6 Complete (100%) - File upload, view tracking integration, GitHub Actions CI/CD, chapter page anti-leak scrambling
 
 ---
 
@@ -247,6 +247,7 @@ src/                              # All styling via MUI sx props
 │   └── reader/                  # Reader components
 │       ├── VerticalReader.tsx   # Vertical reading mode
 │       ├── HorizontalReader.tsx # Horizontal reading mode
+│       ├── ScrambledPageCanvas.tsx # Canvas descrambler (Phase 6)
 │       ├── ReaderToolbar.tsx    # Reader controls
 │       └── ReaderProgress.tsx   # Progress bar
 │
@@ -294,7 +295,8 @@ src/                              # All styling via MUI sx props
 │
 ├── utils/                       # Utility functions
 │   ├── format-relative-time.ts  # Relative time formatter
-│   └── format-number.ts         # Number formatter
+│   ├── format-number.ts         # Number formatter
+│   └── image-descrambler.ts     # Mulberry32 PRNG + Fisher-Yates descramble (Phase 6)
 │
 ├── services/                      # API & business logic
 │   ├── api-client.ts              # Axios instance with interceptors
@@ -504,7 +506,17 @@ npm run build  # Test production build
 - [x] ESLint, TypeScript, Vitest in CI pipeline
 - [x] Coverage reports generation
 
-### Not Yet Implemented (Phase 6+)
+### Phase 6 Implemented (100% - Chapter Page Anti-Leak Scrambling)
+- [x] ScrambledPageCanvas component with canvas-based descrambling
+- [x] image-descrambler.ts utility (mulberry32 PRNG + Fisher-Yates unscramble)
+- [x] LazyLoadedScrambledImage wrapper (IntersectionObserver)
+- [x] Anti-leak CSS on ReaderPage (user-select none, context menu disabled)
+- [x] ReaderPage integrated with scrambled page rendering
+- [x] Backward compatible: handles null ScrambleSeed/ScrambleGridSize
+- [x] 10 frontend tests for descrambling logic
+- [x] 2 integration tests for GetChapter response handling
+
+### Not Yet Implemented (Phase 7+)
 - [ ] Theme switching (dark/light mode) - infrastructure ready
 - [ ] Bookmarks & reading history UI
 - [ ] User library management
@@ -581,7 +593,27 @@ npm run build  # Test production build
 - Updated MangaDetailPage and ReaderPage
 - `web-manga/.github/workflows/ci.yml` — CI/CD pipeline
 
-**Next Phase:** Phase 6 (Advanced Features, Bookmarks, Reading History)
+## Phase 6 Summary: Chapter Page Anti-Leak Scrambling
+
+**Status:** 100% Complete (Feb 17, 2026)
+
+**What Was Built:**
+- ScrambledPageCanvas component for canvas-based image descrambling
+- image-descrambler.ts utility with mulberry32 PRNG implementation
+- LazyLoadedScrambledImage wrapper with IntersectionObserver
+- Anti-leak CSS on ReaderPage (user-select: none, context-menu: disabled)
+- Backend integration with nullable ScrambleSeed/ScrambleGridSize
+- 8x8 tile Fisher-Yates descrambling matching backend algorithm
+- Deterministic cross-platform descrambling
+
+**Key Files:**
+- `src/components/reader/ScrambledPageCanvas.tsx` — Canvas descrambler component
+- `src/utils/image-descrambler.ts` — Mulberry32 PRNG + unscramble logic
+- Updated ReaderPage with anti-leak styling
+- `src/components/reader/LazyLoadedScrambledImage.tsx` — Lazy loading wrapper
+- 10 new unit tests, 2 integration tests
+
+**Next Phase:** Phase 7 (Bookmarks, Reading History, Advanced Features)
 
 See `project-roadmap.md` for detailed timeline and dependencies.
 

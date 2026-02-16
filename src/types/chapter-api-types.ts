@@ -5,6 +5,8 @@ export interface ChapterPageDto {
   id: string;
   pageNumber: number;
   imageUrl: string;
+  scrambleSeed: number | null;
+  scrambleGridSize: number | null;
 }
 
 /** Matches backend ChapterDetailDto record. */

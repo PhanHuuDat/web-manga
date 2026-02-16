@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import type { ChapterPageDto } from '../../types/chapter-api-types';
+import ScrambledPageCanvas from './ScrambledPageCanvas';
 
 interface VerticalReaderProps {
   pages: ChapterPageDto[];
@@ -64,57 +65,68 @@ function VerticalReader({ pages, zoom, onPageChange }: VerticalReaderProps) {
             transition: 'max-width 0.3s ease',
           }}
         >
-          <Box
-            component="img"
-            src={page.imageUrl}
-            alt={`Page ${page.pageNumber}`}
-            loading="lazy"
-            sx={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              opacity: 0,
-              transition: 'opacity 0.3s',
-            }}
-            onLoad={(e) => {
-              const target = e.target as HTMLImageElement;
-              const parent = target.parentElement;
-              target.style.opacity = '1';
-              const placeholder = parent?.querySelector('.loading-placeholder') as HTMLElement;
-              if (placeholder) {
-                placeholder.style.opacity = '0';
-              }
-            }}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              const parent = target.parentElement;
-              target.style.opacity = '0.5';
-              const placeholder = parent?.querySelector('.loading-placeholder') as HTMLElement;
-              if (placeholder) {
-                placeholder.style.opacity = '0';
-              }
-            }}
-          />
-          {/* Loading placeholder */}
-          <Box
-            className="loading-placeholder"
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              bgcolor: 'background.paper',
-              opacity: 1,
-              transition: 'opacity 0.3s',
-              pointerEvents: 'none',
-            }}
-          >
-            <CircularProgress />
-          </Box>
+          {page.scrambleSeed != null && page.scrambleGridSize != null ? (
+            <ScrambledPageCanvas
+              imageUrl={page.imageUrl}
+              gridSize={page.scrambleGridSize}
+              seed={page.scrambleSeed}
+              alt={`Page ${page.pageNumber}`}
+            />
+          ) : (
+            <>
+              <Box
+                component="img"
+                src={page.imageUrl}
+                alt={`Page ${page.pageNumber}`}
+                loading="lazy"
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  opacity: 0,
+                  transition: 'opacity 0.3s',
+                }}
+                onLoad={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  const parent = target.parentElement;
+                  target.style.opacity = '1';
+                  const placeholder = parent?.querySelector('.loading-placeholder') as HTMLElement;
+                  if (placeholder) {
+                    placeholder.style.opacity = '0';
+                  }
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  const parent = target.parentElement;
+                  target.style.opacity = '0.5';
+                  const placeholder = parent?.querySelector('.loading-placeholder') as HTMLElement;
+                  if (placeholder) {
+                    placeholder.style.opacity = '0';
+                  }
+                }}
+              />
+              {/* Loading placeholder */}
+              <Box
+                className="loading-placeholder"
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  bgcolor: 'background.paper',
+                  opacity: 1,
+                  transition: 'opacity 0.3s',
+                  pointerEvents: 'none',
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            </>
+          )}
         </Box>
       ))}
     </Box>
