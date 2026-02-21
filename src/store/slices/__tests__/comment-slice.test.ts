@@ -1,4 +1,3 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import commentReducer, {
   fetchComments,
@@ -8,17 +7,9 @@ import commentReducer, {
   setReplyingTo,
   clearError,
 } from '../comment-slice';
-import { commentApi } from '../../../services/api/comment-api-service';
-import type { RootState } from '../../index';
+import '../../../services/api/comment-api-service';
 
 vi.mock('../../../services/api/comment-api-service');
-
-function createStore(preloadedState?: Partial<RootState>) {
-  return configureStore({
-    reducer: { comments: commentReducer },
-    preloadedState: preloadedState as RootState,
-  });
-}
 
 describe('comment-slice', () => {
   beforeEach(() => {

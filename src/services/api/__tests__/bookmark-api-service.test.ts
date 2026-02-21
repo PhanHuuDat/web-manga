@@ -4,7 +4,7 @@ import apiClient from '../axios-instance';
 
 vi.mock('../axios-instance');
 
-const mockApiClient = apiClient as any;
+const mockApiClient = vi.mocked(apiClient);
 
 describe('bookmark-api-service', () => {
   beforeEach(() => {
@@ -146,7 +146,7 @@ describe('bookmark-api-service', () => {
     it('removes bookmark by id', async () => {
       mockApiClient.delete.mockResolvedValue({});
 
-      const result = await bookmarkApi.remove('bookmark-1');
+      await bookmarkApi.remove('bookmark-1');
 
       expect(mockApiClient.delete).toHaveBeenCalledWith('/api/bookmarks/bookmark-1');
     });

@@ -7,7 +7,7 @@ import bookmarkReducer, {
   selectIsBookmarked,
   selectIsToggling,
 } from '../bookmark-slice';
-import { bookmarkApi } from '../../../services/api/bookmark-api-service';
+import '../../../services/api/bookmark-api-service';
 import type { RootState } from '../../index';
 
 vi.mock('../../../services/api/bookmark-api-service');

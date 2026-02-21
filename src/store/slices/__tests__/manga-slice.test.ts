@@ -14,8 +14,9 @@ import mangaReducer, {
   selectTrendingManga,
   selectMangaSearch,
 } from '../manga-slice';
-import { mangaApi } from '../../../services/api/manga-api-service';
+import '../../../services/api/manga-api-service';
 import type { RootState } from '../../index';
+import type { MangaDto, MangaDetailDto, ChapterDto } from '../../../types/manga-api-types';
 
 vi.mock('../../../services/api/manga-api-service');
 
@@ -48,8 +49,8 @@ describe('manga-slice', () => {
     it('clears selected manga and chapters', () => {
       const prevState = {
         list: { data: [], loading: false, error: null, loaded: false, page: 1, pageSize: 20, totalCount: 0, hasNext: false },
-        selected: { data: { id: '1', title: 'Test' } as any, loading: false, error: null },
-        chapters: { data: [{ id: 'ch1' }] as any, loading: false, error: null, page: 1, totalCount: 1, hasNext: false },
+        selected: { data: { id: '1', title: 'Test' } as MangaDetailDto, loading: false, error: null },
+        chapters: { data: [{ id: 'ch1' }] as ChapterDto[], loading: false, error: null, page: 1, totalCount: 1, hasNext: false },
         trending: { data: [], loading: false, error: null, loaded: false },
         search: { data: [], loading: false, error: null, query: '', totalCount: 0, hasNext: false },
       };
@@ -66,7 +67,7 @@ describe('manga-slice', () => {
         selected: { data: null, loading: false, error: null },
         chapters: { data: [], loading: false, error: null, page: 1, totalCount: 0, hasNext: false },
         trending: { data: [], loading: false, error: null, loaded: false },
-        search: { data: [{ id: '1', title: 'Found' }] as any, loading: false, error: null, query: 'test', totalCount: 1, hasNext: false },
+        search: { data: [{ id: '1', title: 'Found' }] as MangaDto[], loading: false, error: null, query: 'test', totalCount: 1, hasNext: false },
       };
       const state = mangaReducer(prevState, clearSearch());
       expect(state.search.data).toEqual([]);
@@ -223,7 +224,7 @@ describe('manga-slice', () => {
     it('selectMangaList returns list state', () => {
       const store = createStore({
         manga: {
-          list: { data: [{ id: '1' }] as any, loading: false, error: null, loaded: true, page: 1, pageSize: 20, totalCount: 1, hasNext: false },
+          list: { data: [{ id: '1' }] as MangaDto[], loading: false, error: null, loaded: true, page: 1, pageSize: 20, totalCount: 1, hasNext: false },
           selected: { data: null, loading: false, error: null },
           chapters: { data: [], loading: false, error: null, page: 1, totalCount: 0, hasNext: false },
           trending: { data: [], loading: false, error: null, loaded: false },
@@ -240,7 +241,7 @@ describe('manga-slice', () => {
       const store = createStore({
         manga: {
           list: { data: [], loading: false, error: null, loaded: false, page: 1, pageSize: 20, totalCount: 0, hasNext: false },
-          selected: { data: selectedData as any, loading: false, error: null },
+          selected: { data: selectedData as MangaDetailDto, loading: false, error: null },
           chapters: { data: [], loading: false, error: null, page: 1, totalCount: 0, hasNext: false },
           trending: { data: [], loading: false, error: null, loaded: false },
           search: { data: [], loading: false, error: null, query: '', totalCount: 0, hasNext: false },
@@ -255,7 +256,7 @@ describe('manga-slice', () => {
         manga: {
           list: { data: [], loading: false, error: null, loaded: false, page: 1, pageSize: 20, totalCount: 0, hasNext: false },
           selected: { data: null, loading: false, error: null },
-          chapters: { data: [{ id: 'ch1' }] as any, loading: false, error: null, page: 1, totalCount: 1, hasNext: false },
+          chapters: { data: [{ id: 'ch1' }] as ChapterDto[], loading: false, error: null, page: 1, totalCount: 1, hasNext: false },
           trending: { data: [], loading: false, error: null, loaded: false },
           search: { data: [], loading: false, error: null, query: '', totalCount: 0, hasNext: false },
         },
@@ -270,7 +271,7 @@ describe('manga-slice', () => {
           list: { data: [], loading: false, error: null, loaded: false, page: 1, pageSize: 20, totalCount: 0, hasNext: false },
           selected: { data: null, loading: false, error: null },
           chapters: { data: [], loading: false, error: null, page: 1, totalCount: 0, hasNext: false },
-          trending: { data: [{ id: '1' }] as any, loading: false, error: null, loaded: true },
+          trending: { data: [{ id: '1' }] as MangaDto[], loading: false, error: null, loaded: true },
           search: { data: [], loading: false, error: null, query: '', totalCount: 0, hasNext: false },
         },
       });
@@ -286,7 +287,7 @@ describe('manga-slice', () => {
           selected: { data: null, loading: false, error: null },
           chapters: { data: [], loading: false, error: null, page: 1, totalCount: 0, hasNext: false },
           trending: { data: [], loading: false, error: null, loaded: false },
-          search: { data: [{ id: '1' }] as any, loading: false, error: null, query: 'test', totalCount: 1, hasNext: false },
+          search: { data: [{ id: '1' }] as MangaDto[], loading: false, error: null, query: 'test', totalCount: 1, hasNext: false },
         },
       });
       const search = selectMangaSearch(store.getState());

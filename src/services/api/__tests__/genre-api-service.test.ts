@@ -4,7 +4,7 @@ import apiClient from '../axios-instance';
 
 vi.mock('../axios-instance');
 
-const mockApiClient = apiClient as any;
+const mockApiClient = vi.mocked(apiClient);
 
 describe('genre-api-service', () => {
   beforeEach(() => {

@@ -4,7 +4,7 @@ import apiClient from '../axios-instance';
 
 vi.mock('../axios-instance');
 
-const mockApiClient = apiClient as any;
+const mockApiClient = vi.mocked(apiClient);
 
 describe('comment-api-service', () => {
   beforeEach(() => {
@@ -100,7 +100,7 @@ describe('comment-api-service', () => {
         },
       });
 
-      const result = await commentApi.list({ chapterId: 'ch1' });
+      await commentApi.list({ chapterId: 'ch1' });
 
       expect(mockApiClient.get).toHaveBeenCalledWith('/api/comments', {
         params: { chapterId: 'ch1' },
@@ -118,7 +118,7 @@ describe('comment-api-service', () => {
         },
       });
 
-      const result = await commentApi.list({ chapterId: 'ch1', pageNumber: 5 });
+      await commentApi.list({ chapterId: 'ch1', pageNumber: 5 });
 
       expect(mockApiClient.get).toHaveBeenCalledWith('/api/comments', {
         params: { chapterId: 'ch1', pageNumber: 5 },
@@ -143,7 +143,7 @@ describe('comment-api-service', () => {
       const updateData = { content: 'Updated comment' };
       mockApiClient.put.mockResolvedValue({});
 
-      const result = await commentApi.update('c1', updateData);
+      await commentApi.update('c1', updateData);
 
       expect(mockApiClient.put).toHaveBeenCalledWith('/api/comments/c1', updateData);
     });
@@ -153,7 +153,7 @@ describe('comment-api-service', () => {
     it('deletes comment', async () => {
       mockApiClient.delete.mockResolvedValue({});
 
-      const result = await commentApi.remove('c1');
+      await commentApi.remove('c1');
 
       expect(mockApiClient.delete).toHaveBeenCalledWith('/api/comments/c1');
     });

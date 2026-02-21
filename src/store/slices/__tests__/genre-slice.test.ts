@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import genreReducer, { fetchGenres, selectGenres } from '../genre-slice';
-import { genreApi } from '../../../services/api/genre-api-service';
+import '../../../services/api/genre-api-service';
 import type { RootState } from '../../index';
 
 vi.mock('../../../services/api/genre-api-service');

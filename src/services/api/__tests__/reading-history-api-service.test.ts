@@ -4,7 +4,7 @@ import apiClient from '../axios-instance';
 
 vi.mock('../axios-instance');
 
-const mockApiClient = apiClient as any;
+const mockApiClient = vi.mocked(apiClient);
 
 describe('reading-history-api-service', () => {
   beforeEach(() => {
@@ -147,7 +147,7 @@ describe('reading-history-api-service', () => {
     it('clears reading history for manga', async () => {
       mockApiClient.delete.mockResolvedValue({});
 
-      const result = await readingHistoryApi.clear('m1');
+      await readingHistoryApi.clear('m1');
 
       expect(mockApiClient.delete).toHaveBeenCalledWith('/api/reading-history/m1');
     });

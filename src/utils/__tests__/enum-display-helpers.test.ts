@@ -53,7 +53,7 @@ describe('enum-display-helpers', () => {
     });
 
     it('returns null for undefined input', () => {
-      expect(getBadgeLabel(undefined as any)).toBeNull();
+      expect(getBadgeLabel(undefined as unknown as number)).toBeNull();
     });
 
     it('returns null for unknown badge', () => {

@@ -5,7 +5,7 @@ import chapterReducer, {
   clearChapter,
   selectSelectedChapter,
 } from '../chapter-slice';
-import { chapterApi } from '../../../services/api/chapter-api-service';
+import '../../../services/api/chapter-api-service';
 import type { RootState } from '../../index';
 
 vi.mock('../../../services/api/chapter-api-service');

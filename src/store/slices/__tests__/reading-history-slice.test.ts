@@ -7,7 +7,7 @@ import readingHistoryReducer, {
   saveReadingProgress,
   selectResumePoint,
 } from '../reading-history-slice';
-import { readingHistoryApi } from '../../../services/api/reading-history-api-service';
+import '../../../services/api/reading-history-api-service';
 import type { RootState } from '../../index';
 
 vi.mock('../../../services/api/reading-history-api-service');
