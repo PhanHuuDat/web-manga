@@ -78,7 +78,7 @@ Create footer matching reference design.
 ```json
 {
   "footer": {
-    "description": "MangaVoid is your premium destination for high-quality manga reading.",
+    "description": "LuvManga is your premium destination for high-quality manga reading.",
     "navigation": "Navigation",
     "support": "Support",
     "nav": {
@@ -101,7 +101,7 @@ Create footer matching reference design.
 ```json
 {
   "footer": {
-    "description": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao.",
+    "description": "LuvManga là điểm đến cao cấp để đọc manga chất lượng cao.",
     "navigation": "Điều hướng",
     "support": "Hỗ trợ",
     "nav": {

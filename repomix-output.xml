@@ -2330,7 +2330,7 @@ function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
             variant="h4"
             sx={{ fontWeight: 800, mb: 1, color: 'primary.main' }}
           >
-            MangaVoid
+            LuvManga
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
             {title}
@@ -5249,7 +5249,7 @@ export function getMangaDetail(slug: string): MangaDetail | undefined {
     "facebook": "Facebook"
   },
   "register": {
-    "title": "Join MangaVoid",
+    "title": "Join LuvManga",
     "subtitle": "Create your account and start reading",
     "username": "Username",
     "email": "Email",
@@ -5407,7 +5407,7 @@ export function getMangaDetail(slug: string): MangaDetail | undefined {
     "facebook": "Facebook"
   },
   "register": {
-    "title": "Tham gia MangaVoid",
+    "title": "Tham gia LuvManga",
     "subtitle": "Tạo tài khoản và bắt đầu đọc truyện",
     "username": "Tên người dùng",
     "email": "Email",
@@ -7623,7 +7623,7 @@ src/
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>MangaVoid - Homepage Mockup</title>
+  <title>LuvManga - Homepage Mockup</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet"/>
@@ -8047,7 +8047,7 @@ src/
         <span class="text-xl font-display font-extrabold text-white glow-blue">MANGAVOID</span>
       </div>
       <p class="text-gray-400 text-sm max-w-sm leading-relaxed">
-        MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.
+        LuvManga là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.
       </p>
       <div class="flex gap-4">
         <a class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-neon-blue transition-colors border border-white/10 cursor-pointer">
@@ -9915,7 +9915,7 @@ Create footer matching reference design.
 ```json
 {
   "footer": {
-    "description": "MangaVoid is your premium destination for high-quality manga reading.",
+    "description": "LuvManga is your premium destination for high-quality manga reading.",
     "navigation": "Navigation",
     "support": "Support",
     "nav": {
@@ -9938,7 +9938,7 @@ Create footer matching reference design.
 ```json
 {
   "footer": {
-    "description": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao.",
+    "description": "LuvManga là điểm đến cao cấp để đọc manga chất lượng cao.",
     "navigation": "Điều hướng",
     "support": "Hỗ trợ",
     "nav": {
@@ -12870,7 +12870,7 @@ declare module 'i18next' {
   "chapter_one": "{{count}} chapter",
   "chapter_other": "{{count}} chapters",
   "footer": {
-    "description": "MangaVoid is your premium destination for high-quality manga reading.",
+    "description": "LuvManga is your premium destination for high-quality manga reading.",
     "navigation": "Navigation",
     "support": "Support",
     "nav": {
@@ -12921,7 +12921,7 @@ declare module 'i18next' {
     "welcomeBack": "Welcome Back",
     "loginSubtitle": "Login to access your library and continue reading",
     "createAccount": "Create Account",
-    "registerSubtitle": "Join MangaVoid to start your manga journey",
+    "registerSubtitle": "Join LuvManga to start your manga journey",
     "orContinueWith": "Or continue with",
     "continueWithGoogle": "Continue with Google",
     "continueWithFacebook": "Continue with Facebook",
@@ -13013,7 +13013,7 @@ declare module 'i18next' {
   "chapter_one": "{{count}} chương",
   "chapter_other": "{{count}} chương",
   "footer": {
-    "description": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao.",
+    "description": "LuvManga là điểm đến cao cấp để đọc manga chất lượng cao.",
     "navigation": "Điều hướng",
     "support": "Hỗ trợ",
     "nav": {
@@ -13064,7 +13064,7 @@ declare module 'i18next' {
     "welcomeBack": "Chào mừng trở lại",
     "loginSubtitle": "Đăng nhập để truy cập thư viện và tiếp tục đọc",
     "createAccount": "Tạo tài khoản",
-    "registerSubtitle": "Tham gia MangaVoid để bắt đầu hành trình manga",
+    "registerSubtitle": "Tham gia LuvManga để bắt đầu hành trình manga",
     "orContinueWith": "Hoặc tiếp tục với",
     "continueWithGoogle": "Tiếp tục với Google",
     "continueWithFacebook": "Tiếp tục với Facebook",
@@ -14598,7 +14598,7 @@ export type AppDispatch = typeof store.dispatch;
 <file path="src/theme/theme.ts">
 import { createTheme } from '@mui/material/styles';
 
-// MangaVoid Dark Theme - Reference design colors
+// LuvManga Dark Theme - Reference design colors
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -17445,7 +17445,7 @@ test-results/
                       "textGrowth": "fixed-width-height",
                       "width": "fill_container",
                       "height": 17,
-                      "content": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.",
+                      "content": "LuvManga là điểm đến cao cấp để đọc manga chất lượng cao. Trải nghiệm những bộ truyện hay nhất với giao diện tối tối ưu.",
                       "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "normal"
@@ -19151,7 +19151,7 @@ Defined in `src/styles/variables.css` for easy theming:
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <title>MangaVoid - Premium Manga Reader</title>
+    <title>LuvManga - Premium Manga Reader</title>
   </head>
   <body>
     <div id="root"></div>
