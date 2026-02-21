@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-// MangaVoid Dark Theme - Reference design colors
+// LuvManga Dark Theme - Reference design colors
 const theme = createTheme({
   palette: {
     mode: 'dark',

@@ -34,7 +34,7 @@
   "chapter_one": "{{count}} chương",
   "chapter_other": "{{count}} chương",
   "footer": {
-    "description": "MangaVoid là điểm đến cao cấp để đọc manga chất lượng cao.",
+    "description": "LuvManga là điểm đến cao cấp để đọc manga chất lượng cao.",
     "navigation": "Điều hướng",
     "support": "Hỗ trợ",
     "nav": {
@@ -85,7 +85,7 @@
     "welcomeBack": "Chào mừng trở lại",
     "loginSubtitle": "Đăng nhập để truy cập thư viện và tiếp tục đọc",
     "createAccount": "Tạo tài khoản",
-    "registerSubtitle": "Tham gia MangaVoid để bắt đầu hành trình manga",
+    "registerSubtitle": "Tham gia LuvManga để bắt đầu hành trình manga",
     "orContinueWith": "Hoặc tiếp tục với",
     "continueWithGoogle": "Tiếp tục với Google",
     "continueWithFacebook": "Tiếp tục với Facebook",

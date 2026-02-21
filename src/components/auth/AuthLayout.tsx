@@ -37,7 +37,7 @@ function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
             variant="h4"
             sx={{ fontWeight: 800, mb: 1, color: 'primary.main' }}
           >
-            MangaVoid
+            LuvManga
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
             {title}

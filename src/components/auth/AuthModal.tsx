@@ -101,7 +101,7 @@ function AuthModal() {
         {/* Header */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
           <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: 'primary.main' }}>
-            MangaVoid
+            LuvManga
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
             {t(isLogin ? 'login.title' : 'register.title')}

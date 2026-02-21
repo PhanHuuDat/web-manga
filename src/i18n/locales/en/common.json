@@ -34,7 +34,7 @@
   "chapter_one": "{{count}} chapter",
   "chapter_other": "{{count}} chapters",
   "footer": {
-    "description": "MangaVoid is your premium destination for high-quality manga reading.",
+    "description": "LuvManga is your premium destination for high-quality manga reading.",
     "navigation": "Navigation",
     "support": "Support",
     "nav": {
@@ -85,7 +85,7 @@
     "welcomeBack": "Welcome Back",
     "loginSubtitle": "Login to access your library and continue reading",
     "createAccount": "Create Account",
-    "registerSubtitle": "Join MangaVoid to start your manga journey",
+    "registerSubtitle": "Join LuvManga to start your manga journey",
     "orContinueWith": "Or continue with",
     "continueWithGoogle": "Continue with Google",
     "continueWithFacebook": "Continue with Facebook",
