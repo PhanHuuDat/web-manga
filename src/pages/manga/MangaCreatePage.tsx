@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import MangaForm from '../../components/manga/MangaForm';
@@ -8,6 +8,8 @@ import type { CreateMangaRequest, UpdateMangaRequest } from '../../types/manga-a
 
 function MangaCreatePage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,7 +18,7 @@ function MangaCreatePage() {
     setError(null);
     try {
       const id = await mangaApi.create(data as CreateMangaRequest);
-      navigate(`/manga/${id}`);
+      navigate(isAdmin ? '/admin/manga' : `/manga/${id}`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to create manga.';
       setError(msg);

@@ -15,13 +15,15 @@ import viAuth from './locales/vi/auth.json';
 import viManga from './locales/vi/manga.json';
 import viReader from './locales/vi/reader.json';
 import viComment from './locales/vi/comment.json';
+import enAdmin from './locales/en/admin.json';
+import viAdmin from './locales/vi/admin.json';
 
 // Import types for augmentation
 import './i18n-types';
 
 const resources = {
-  en: { common: enCommon, home: enHome, auth: enAuth, manga: enManga, reader: enReader, comment: enComment },
-  vi: { common: viCommon, home: viHome, auth: viAuth, manga: viManga, reader: viReader, comment: viComment },
+  en: { common: enCommon, home: enHome, auth: enAuth, manga: enManga, reader: enReader, comment: enComment, admin: enAdmin },
+  vi: { common: viCommon, home: viHome, auth: viAuth, manga: viManga, reader: viReader, comment: viComment, admin: viAdmin },
 };
 
 i18n

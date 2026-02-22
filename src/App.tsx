@@ -1,4 +1,5 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import { Box, Typography, Button } from '@mui/material';
 import { Home } from '@mui/icons-material';
 import ErrorBoundary from './components/common/ErrorBoundary';
@@ -21,17 +22,34 @@ import ReadingHistoryPage from './pages/reading-history/ReadingHistoryPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import SearchResultsPage from './pages/search/SearchResultsPage';
 
+// Redirects old public CRUD routes to their /admin/* equivalents
+function RedirectToAdmin() {
+  const location = useLocation();
+  const adminPath = location.pathname.replace(/^\/(manga|chapters)/, '/admin/$1');
+  return <Navigate to={adminPath} replace />;
+}
+
+// Lazy-loaded admin bundle — kept out of main chunk for performance
+const AdminRoute = lazy(() => import('./components/admin/AdminRoute'));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
+const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage'));
+const AdminMangaListPage = lazy(() => import('./pages/admin/AdminMangaListPage'));
+const AdminChapterListPage = lazy(() => import('./pages/admin/AdminChapterListPage'));
+const AdminUserListPage = lazy(() => import('./pages/admin/AdminUserListPage'));
+const AdminCommentListPage = lazy(() => import('./pages/admin/AdminCommentListPage'));
+
 function App() {
   return (
     <ErrorBoundary>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/manga/create" element={<ProtectedRoute><MangaCreatePage /></ProtectedRoute>} />
+          {/* Redirect old CRUD routes to admin */}
+          <Route path="/manga/create" element={<ProtectedRoute><RedirectToAdmin /></ProtectedRoute>} />
           <Route path="/manga/:slug" element={<MangaDetailPage />} />
-          <Route path="/manga/:id/edit" element={<ProtectedRoute><MangaEditPage /></ProtectedRoute>} />
-          <Route path="/manga/:id/chapters/create" element={<ProtectedRoute><ChapterCreatePage /></ProtectedRoute>} />
-          <Route path="/chapters/:id/edit" element={<ProtectedRoute><ChapterEditPage /></ProtectedRoute>} />
+          <Route path="/manga/:id/edit" element={<ProtectedRoute><RedirectToAdmin /></ProtectedRoute>} />
+          <Route path="/manga/:id/chapters/create" element={<ProtectedRoute><RedirectToAdmin /></ProtectedRoute>} />
+          <Route path="/chapters/:id/edit" element={<ProtectedRoute><RedirectToAdmin /></ProtectedRoute>} />
           <Route path="/bookmarks" element={<ProtectedRoute><BookmarkListPage /></ProtectedRoute>} />
           <Route path="/history" element={<ProtectedRoute><ReadingHistoryPage /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
@@ -47,6 +65,55 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
+
+        {/* Admin routes — lazy loaded, role-gated */}
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={null}>
+              <AdminRoute />
+            </Suspense>
+          }
+        >
+          <Route
+            element={
+              <Suspense fallback={null}>
+                <AdminLayout />
+              </Suspense>
+            }
+          >
+            <Route
+              index
+              element={
+                <Suspense fallback={null}>
+                  <AdminDashboardPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="manga"
+              element={
+                <Suspense fallback={null}>
+                  <AdminMangaListPage />
+                </Suspense>
+              }
+            />
+            <Route path="manga/create" element={<MangaCreatePage />} />
+            <Route path="manga/:id/edit" element={<MangaEditPage />} />
+            <Route
+              path="manga/:id/chapters"
+              element={
+                <Suspense fallback={null}>
+                  <AdminChapterListPage />
+                </Suspense>
+              }
+            />
+            <Route path="manga/:id/chapters/create" element={<ChapterCreatePage />} />
+            <Route path="chapters/:id/edit" element={<ChapterEditPage />} />
+            <Route path="users" element={<Suspense fallback={null}><AdminUserListPage /></Suspense>} />
+            <Route path="comments" element={<Suspense fallback={null}><AdminCommentListPage /></Suspense>} />
+          </Route>
+        </Route>
 
         {/* 404 catch-all */}
         <Route

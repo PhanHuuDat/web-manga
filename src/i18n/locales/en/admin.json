@@ -1,0 +1,80 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "manga": "Manga",
+    "users": "Users",
+    "comments": "Comments",
+    "backToSite": "Back to Site"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalManga": "Total Manga",
+    "totalChapters": "Total Chapters",
+    "totalUsers": "Total Users",
+    "totalComments": "Total Comments",
+    "newUsers7d": "New Users (7 days)"
+  },
+  "manga": {
+    "title": "Manga Management",
+    "createNew": "Create New",
+    "chapters": "Chapters",
+    "noManga": "No manga found",
+    "deleteTitle": "Delete Manga",
+    "deleteMessage": "Are you sure you want to delete this manga? This action cannot be undone.",
+    "chapterList": "Chapter List",
+    "addChapter": "Add Chapter",
+    "noChapters": "No chapters found",
+    "deleteChapterTitle": "Delete Chapter",
+    "deleteChapterMessage": "Are you sure you want to delete this chapter?"
+  },
+  "users": {
+    "title": "User Management",
+    "editRoles": "Edit Roles",
+    "roleUpdated": "User roles updated",
+    "statusUpdated": "User status updated",
+    "noUsers": "No users found",
+    "allRoles": "All Roles"
+  },
+  "comments": {
+    "title": "Comment Moderation",
+    "viewFull": "View Full Comment",
+    "deleted": "Deleted",
+    "active": "Active",
+    "noComments": "No comments found",
+    "deleteTitle": "Delete Comment",
+    "deleteMessage": "Are you sure you want to delete this comment?"
+  },
+  "common": {
+    "search": "Search...",
+    "filter": "Filter",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "noResults": "No results found",
+    "forbidden": "You do not have permission to access this page",
+    "status": "Status",
+    "ongoing": "Ongoing",
+    "completed": "Completed",
+    "hiatus": "Hiatus",
+    "allStatuses": "All Statuses"
+  },
+  "table": {
+    "title": "Title",
+    "chapters": "Chapters",
+    "createdDate": "Created Date",
+    "username": "Username",
+    "email": "Email",
+    "roles": "Roles",
+    "content": "Content",
+    "author": "Author",
+    "mangaTitle": "Manga",
+    "pages": "Pages",
+    "views": "Views",
+    "chapterNumber": "Chapter",
+    "publishedAt": "Published",
+    "cover": "Cover",
+    "joined": "Joined"
+  }
+}

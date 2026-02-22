@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -11,6 +11,8 @@ import type { ChapterDetailDto, CreateChapterRequest, UpdateChapterRequest } fro
 function ChapterEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
   const [chapter, setChapter] = useState<ChapterDetailDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +33,7 @@ function ChapterEditPage() {
     setError(null);
     try {
       await chapterApi.update(id, data as UpdateChapterRequest);
-      navigate(`/manga/${chapter.mangaSeriesId}`);
+      navigate(isAdmin ? `/admin/manga/${chapter.mangaSeriesId}/chapters` : `/manga/${chapter.mangaSeriesId}`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to update chapter.';
       setError(msg);

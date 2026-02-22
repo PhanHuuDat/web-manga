@@ -1,0 +1,80 @@
+{
+  "sidebar": {
+    "dashboard": "Tổng quan",
+    "manga": "Manga",
+    "users": "Người dùng",
+    "comments": "Bình luận",
+    "backToSite": "Về trang chính"
+  },
+  "dashboard": {
+    "title": "Tổng quan",
+    "totalManga": "Tổng Manga",
+    "totalChapters": "Tổng Chapter",
+    "totalUsers": "Tổng người dùng",
+    "totalComments": "Tổng bình luận",
+    "newUsers7d": "Người dùng mới (7 ngày)"
+  },
+  "manga": {
+    "title": "Quản lý Manga",
+    "createNew": "Tạo mới",
+    "chapters": "Chapter",
+    "noManga": "Không tìm thấy manga",
+    "deleteTitle": "Xóa Manga",
+    "deleteMessage": "Bạn có chắc chắn muốn xóa manga này? Hành động này không thể hoàn tác.",
+    "chapterList": "Danh sách Chapter",
+    "addChapter": "Thêm Chapter",
+    "noChapters": "Không tìm thấy chapter",
+    "deleteChapterTitle": "Xóa Chapter",
+    "deleteChapterMessage": "Bạn có chắc chắn muốn xóa chapter này?"
+  },
+  "users": {
+    "title": "Quản lý người dùng",
+    "editRoles": "Chỉnh sửa quyền",
+    "roleUpdated": "Đã cập nhật quyền người dùng",
+    "statusUpdated": "Đã cập nhật trạng thái người dùng",
+    "noUsers": "Không tìm thấy người dùng",
+    "allRoles": "Tất cả quyền"
+  },
+  "comments": {
+    "title": "Kiểm duyệt bình luận",
+    "viewFull": "Xem chi tiết",
+    "deleted": "Đã xóa",
+    "active": "Đang hoạt động",
+    "noComments": "Không tìm thấy bình luận",
+    "deleteTitle": "Xóa bình luận",
+    "deleteMessage": "Bạn có chắc chắn muốn xóa bình luận này?"
+  },
+  "common": {
+    "search": "Tìm kiếm...",
+    "filter": "Bộ lọc",
+    "actions": "Thao tác",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "noResults": "Không tìm thấy kết quả",
+    "forbidden": "Bạn không có quyền truy cập trang này",
+    "status": "Trạng thái",
+    "ongoing": "Đang tiến hành",
+    "completed": "Hoàn thành",
+    "hiatus": "Tạm ngưng",
+    "allStatuses": "Tất cả trạng thái"
+  },
+  "table": {
+    "title": "Tiêu đề",
+    "chapters": "Chapter",
+    "createdDate": "Ngày tạo",
+    "username": "Tên đăng nhập",
+    "email": "Email",
+    "roles": "Quyền",
+    "content": "Nội dung",
+    "author": "Tác giả",
+    "mangaTitle": "Manga",
+    "pages": "Trang",
+    "views": "Lượt xem",
+    "chapterNumber": "Chapter",
+    "publishedAt": "Ngày đăng",
+    "cover": "Bìa",
+    "joined": "Ngày tham gia"
+  }
+}

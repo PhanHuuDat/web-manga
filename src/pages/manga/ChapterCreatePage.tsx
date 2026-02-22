@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
@@ -10,6 +10,8 @@ import type { CreateChapterRequest, UpdateChapterRequest } from '../../types/cha
 function ChapterCreatePage() {
   const { id: mangaId } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +28,7 @@ function ChapterCreatePage() {
     setError(null);
     try {
       await chapterApi.create(data as CreateChapterRequest);
-      navigate(`/manga/${mangaId}`);
+      navigate(isAdmin ? `/admin/manga/${mangaId}/chapters` : `/manga/${mangaId}`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to create chapter.';
       setError(msg);

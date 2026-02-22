@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -11,6 +11,8 @@ import type { MangaDetailDto, CreateMangaRequest, UpdateMangaRequest } from '../
 function MangaEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
   const [manga, setManga] = useState<MangaDetailDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +33,7 @@ function MangaEditPage() {
     setError(null);
     try {
       await mangaApi.update(id, data as UpdateMangaRequest);
-      navigate(`/manga/${id}`);
+      navigate(isAdmin ? '/admin/manga' : `/manga/${id}`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Failed to update manga.';
       setError(msg);

@@ -4,6 +4,7 @@ import type enAuth from './locales/en/auth.json';
 import type enManga from './locales/en/manga.json';
 import type enReader from './locales/en/reader.json';
 import type enComment from './locales/en/comment.json';
+import type enAdmin from './locales/en/admin.json';
 
 export type CommonTranslations = typeof enCommon;
 export type HomeTranslations = typeof enHome;
@@ -11,6 +12,7 @@ export type AuthTranslations = typeof enAuth;
 export type MangaTranslations = typeof enManga;
 export type ReaderTranslations = typeof enReader;
 export type CommentTranslations = typeof enComment;
+export type AdminTranslations = typeof enAdmin;
 
 export type TranslationResources = {
   common: CommonTranslations;
@@ -19,6 +21,7 @@ export type TranslationResources = {
   manga: MangaTranslations;
   reader: ReaderTranslations;
   comment: CommentTranslations;
+  admin: AdminTranslations;
 };
 
 // Augment i18next types for type-safe translations
