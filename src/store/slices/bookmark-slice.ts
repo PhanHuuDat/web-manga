@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { bookmarkApi } from '../../services/api/bookmark-api-service';
 import { extractError } from '../../utils/extract-api-error';
 import type { BookmarkDto } from '../../types/bookmark-api-types';
-import type { RootState } from '../index';
 import { logoutThunk } from './auth-slice';
+import { makeSelectIsBookmarked, makeSelectIsToggling } from '../selectors/bookmark-selectors';
 
 interface BookmarkState {
   list: {
@@ -111,10 +111,10 @@ const bookmarkSlice = createSlice({
   },
 });
 
-export const selectIsBookmarked = (mangaId: string) => (state: RootState) =>
-  state.bookmark.bookmarkedIds[mangaId] ?? false;
-
-export const selectIsToggling = (mangaId: string) => (state: RootState) =>
-  state.bookmark.toggling[mangaId] ?? false;
+// Memoized selector factories (re-exported from selectors module)
+export { makeSelectIsBookmarked, makeSelectIsToggling };
+// Backward-compat aliases
+export const selectIsBookmarked = makeSelectIsBookmarked;
+export const selectIsToggling = makeSelectIsToggling;
 
 export default bookmarkSlice.reducer;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   Box, Typography, Chip, Select, MenuItem, Skeleton, Pagination,
@@ -66,7 +66,7 @@ export default function SearchResultsPage() {
     }
   }, [currentPage, totalPages, searchParams, navigate]);
 
-  const updateParam = (key: string, value: string) => {
+  const updateParam = useCallback((key: string, value: string) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
       if (value) next.set(key, value);
@@ -74,16 +74,16 @@ export default function SearchResultsPage() {
       next.delete('page'); // Reset page on filter change
       return next;
     });
-  };
+  }, [setSearchParams]);
 
-  const handlePageChange = (_: unknown, page: number) => {
+  const handlePageChange = useCallback((_: unknown, page: number) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
       if (page > 1) next.set('page', String(page));
       else next.delete('page');
       return next;
     });
-  };
+  }, [setSearchParams]);
 
   const selectSx = {
     height: 36, bgcolor: '#1a1e2e', borderRadius: 2,

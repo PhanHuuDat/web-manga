@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import {
   Box, Typography, Avatar, TextField, IconButton, Chip,
   Card, CardContent, Skeleton, Snackbar, Alert, CircularProgress,
@@ -7,11 +7,13 @@ import {
   Edit, Save, Close, CameraAlt,
   Bookmark, History, ChatBubbleOutline, VerifiedUser,
 } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectCurrentUser, getCurrentUserThunk } from '../../store/slices/auth-slice';
 import { userApi, type UserStatsResponse } from '../../services/api/user-api-service';
 
 export default function ProfilePage() {
+  const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectCurrentUser);
 
@@ -77,11 +79,11 @@ export default function ProfilePage() {
     );
   }
 
-  const statCards = [
-    { icon: <Bookmark sx={{ fontSize: 20 }} />, label: 'Bookmarks', value: stats?.bookmarkCount ?? 0 },
-    { icon: <History sx={{ fontSize: 20 }} />, label: 'Read', value: stats?.historyCount ?? 0 },
-    { icon: <ChatBubbleOutline sx={{ fontSize: 20 }} />, label: 'Comments', value: stats?.commentCount ?? 0 },
-  ];
+  const statCards = useMemo(() => [
+    { icon: <Bookmark sx={{ fontSize: 20 }} />, label: t('profile.bookmarks', 'Bookmarks'), value: stats?.bookmarkCount ?? 0 },
+    { icon: <History sx={{ fontSize: 20 }} />, label: t('profile.read', 'Read'), value: stats?.historyCount ?? 0 },
+    { icon: <ChatBubbleOutline sx={{ fontSize: 20 }} />, label: t('profile.comments', 'Comments'), value: stats?.commentCount ?? 0 },
+  ], [t, stats]);
 
   return (
     <Box sx={{ maxWidth: 640, mx: 'auto', p: { xs: 2, sm: 4 } }}>

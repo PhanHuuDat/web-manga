@@ -13,8 +13,18 @@ interface VerticalReaderProps {
 function VerticalReader({ pages, zoom, onPageChange }: VerticalReaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Stable ref to latest onPageChange — avoids recreating IntersectionObserver
+  // on every Redux update that passes a new function reference
+  const onPageChangeRef = useRef(onPageChange);
   useEffect(() => {
-    if (!onPageChange) return;
+    onPageChangeRef.current = onPageChange;
+  }, [onPageChange]);
+
+  // Re-register observers only when the number of pages changes (new chapter load),
+  // not on every Redux re-render. The callback reads page number from the DOM
+  // data-page attribute, so it does not need page content from the closure.
+  useEffect(() => {
+    if (!onPageChangeRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,7 +34,7 @@ function VerticalReader({ pages, zoom, onPageChange }: VerticalReaderProps) {
               entry.target.getAttribute('data-page') || '1',
               10
             );
-            onPageChange(pageNumber);
+            onPageChangeRef.current?.(pageNumber);
           }
         });
       },
@@ -40,7 +50,7 @@ function VerticalReader({ pages, zoom, onPageChange }: VerticalReaderProps) {
     return () => {
       pageElements?.forEach((el) => observer.unobserve(el));
     };
-  }, [onPageChange, pages]);
+  }, [pages.length]);
 
   return (
     <Box

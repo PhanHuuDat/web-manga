@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,6 +8,13 @@ import SectionHeader from '../common/SectionHeader';
 import MangaListCard from '../manga/MangaListCard';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchMangaList, selectMangaList } from '../../store/slices/manga-slice';
+
+const viewAllButtonSx = {
+  color: 'primary.main',
+  fontSize: 12,
+  fontWeight: 600,
+  '&:hover': { bgcolor: 'rgba(59,130,246,0.1)' },
+} as const;
 
 function LatestMangaSection() {
   const { t } = useTranslation('home');
@@ -21,26 +28,22 @@ function LatestMangaSection() {
     }
   }, [dispatch, loaded]);
 
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = useCallback((newPage: number) => {
     dispatch(fetchMangaList({ page: newPage, pageSize: 10 }));
-  };
+  }, [dispatch]);
 
-  const ViewAllButton = (
-    <Button
-      sx={{
-        color: 'primary.main',
-        fontSize: 12,
-        fontWeight: 600,
-        '&:hover': { bgcolor: 'rgba(59,130,246,0.1)' },
-      }}
-    >
+  const ViewAllButton = useMemo(() => (
+    <Button sx={viewAllButtonSx}>
       {t('latest.viewAll')} →
     </Button>
-  );
+  ), [t]);
 
   // Build visible page numbers
-  const visiblePages: number[] = [];
-  for (let i = 1; i <= Math.min(3, totalPages); i++) visiblePages.push(i);
+  const visiblePages = useMemo<number[]>(() => {
+    const pages: number[] = [];
+    for (let i = 1; i <= Math.min(3, totalPages); i++) pages.push(i);
+    return pages;
+  }, [totalPages]);
 
   return (
     <Box>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
@@ -12,6 +12,9 @@ import type { AdminStatsDto } from '../../types/admin-api-types';
 // Stat key type derived from AdminStatsDto keys mapped by dashboard
 type StatKey = 'totalManga' | 'totalChapters' | 'totalUsers' | 'totalComments' | 'newUsersLast7Days';
 
+const gridSx = { display: 'flex', flexWrap: 'wrap', gap: 3 } as const;
+const cardWrapSx = { flex: '1 1 200px', minWidth: 0 } as const;
+
 function AdminDashboardPage() {
   const { t } = useTranslation('admin');
   const [stats, setStats] = useState<AdminStatsDto | null>(null);
@@ -21,14 +24,14 @@ function AdminDashboardPage() {
     adminApi.getStats().then(setStats).catch(() => setError('Failed to load stats'));
   }, []);
 
-  // Build stat cards inside the component so t() is available for labels
-  const statCards: Array<{ key: StatKey; icon: ReactNode; label: string; color: string }> = [
+  // Memoized — only recreates when language changes
+  const statCards = useMemo<Array<{ key: StatKey; icon: ReactNode; label: string; color: string }>>(() => [
     { key: 'totalManga', icon: <MenuBook />, label: t('dashboard.totalManga'), color: '#3b82f6' },
     { key: 'totalChapters', icon: <Layers />, label: t('dashboard.totalChapters'), color: '#a855f7' },
     { key: 'totalUsers', icon: <People />, label: t('dashboard.totalUsers'), color: '#22c55e' },
     { key: 'totalComments', icon: <Comment />, label: t('dashboard.totalComments'), color: '#f59e0b' },
     { key: 'newUsersLast7Days', icon: <TrendingUp />, label: t('dashboard.newUsers7d'), color: '#ef4444' },
-  ];
+  ], [t]);
 
   return (
     <Box>
@@ -38,21 +41,9 @@ function AdminDashboardPage() {
           {error}
         </Alert>
       )}
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 3,
-        }}
-      >
+      <Box sx={gridSx}>
         {statCards.map((card) => (
-          <Box
-            key={card.key}
-            sx={{
-              flex: '1 1 200px',
-              minWidth: 0,
-            }}
-          >
+          <Box key={card.key} sx={cardWrapSx}>
             <AdminStatCard
               icon={card.icon}
               label={card.label}

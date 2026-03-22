@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react';
 import { Box, Avatar, Typography, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import type { Comment, ReactionType } from '../../types/comment-types';
@@ -15,7 +16,22 @@ interface CommentItemProps {
   onDislike?: (commentId: string) => void;
 }
 
-export default function CommentItem({
+// Static sx objects hoisted to module level — no depth/compact dependency
+const sxFlex1 = { flex: 1, minWidth: 0 };
+const sxHeader = { display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 };
+const sxMaxDepthBadge = {
+  px: 1,
+  py: 0.25,
+  bgcolor: 'rgba(255, 255, 255, 0.05)',
+  borderRadius: 1,
+};
+const sxMaxDepthText = {
+  fontSize: 9,
+  fontFamily: 'JetBrains Mono, monospace',
+  color: '#64748b',
+};
+
+function CommentItem({
   comment,
   depth = 0,
   maxDepth = 3,
@@ -30,6 +46,18 @@ export default function CommentItem({
   const avatarSize = compact ? 28 : depth > 0 ? 32 : 40;
   const indentPx = depth * 24;
   const canReply = depth < maxDepth - 1;
+
+  const handleLike = useCallback(() => {
+    onLike?.(comment.id);
+  }, [onLike, comment.id]);
+
+  const handleDislike = useCallback(() => {
+    onDislike?.(comment.id);
+  }, [onDislike, comment.id]);
+
+  const handleReply = useCallback(() => {
+    onReply?.(comment.id, comment.username);
+  }, [onReply, comment.id, comment.username]);
 
   return (
     <Box>
@@ -63,9 +91,9 @@ export default function CommentItem({
           {comment.username.slice(0, 2).toUpperCase()}
         </Avatar>
 
-        <Box sx={{ flex: 1, minWidth: 0 }}>
+        <Box sx={sxFlex1}>
           {/* Header: username + timestamp */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+          <Box sx={sxHeader}>
             <Typography
               sx={{
                 fontSize: compact ? 11 : depth > 0 ? 12 : 13,
@@ -108,14 +136,14 @@ export default function CommentItem({
               dislikes={comment.dislikes}
               userReaction={userReaction}
               compact={compact}
-              onLike={() => onLike?.(comment.id)}
-              onDislike={() => onDislike?.(comment.id)}
+              onLike={handleLike}
+              onDislike={handleDislike}
             />
 
             {canReply && onReply && (
               <Button
                 size="small"
-                onClick={() => onReply(comment.id, comment.username)}
+                onClick={handleReply}
                 aria-label={`Reply to ${comment.username}`}
                 sx={{
                   minWidth: 'auto',
@@ -136,21 +164,8 @@ export default function CommentItem({
 
             {/* Max depth indicator */}
             {depth === maxDepth - 1 && (
-              <Box
-                sx={{
-                  px: 1,
-                  py: 0.25,
-                  bgcolor: 'rgba(255, 255, 255, 0.05)',
-                  borderRadius: 1,
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: 9,
-                    fontFamily: 'JetBrains Mono, monospace',
-                    color: '#64748b',
-                  }}
-                >
+              <Box sx={sxMaxDepthBadge}>
+                <Typography sx={sxMaxDepthText}>
                   // max_depth
                 </Typography>
               </Box>
@@ -179,3 +194,5 @@ export default function CommentItem({
     </Box>
   );
 }
+
+export default memo(CommentItem);

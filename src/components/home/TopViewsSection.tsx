@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -23,7 +23,7 @@ function TopViewsSection() {
   const { data, loading } = useAppSelector(selectTrendingManga);
 
   // Use trending data for all tabs (backend doesn't support period filtering yet)
-  const rankedData = data.slice(0, 3).map(toRanked);
+  const rankedData = useMemo(() => data.slice(0, 3).map(toRanked), [data]);
 
   const tabs: ViewPeriod[] = ['daily', 'weekly', 'monthly'];
 

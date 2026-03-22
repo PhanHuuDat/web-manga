@@ -17,10 +17,6 @@ function Navbar() {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  const handleSearch = (query: string) => {
-    console.log('Searching for:', query);
-  };
-
   return (
     <AppBar
       position="sticky"
@@ -76,7 +72,7 @@ function Navbar() {
 
           {/* SearchBar - hidden on mobile */}
           <Box sx={{ flex: 1, display: { xs: 'none', md: 'block' }, maxWidth: 500 }}>
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar />
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -10,6 +10,26 @@ import { ChapterCommentSidebar, PageCommentModal } from '../../components/commen
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchChapterDetail, clearChapter, selectSelectedChapter } from '../../store/slices/chapter-slice';
 import { useViewTracker } from '../../hooks/use-view-tracker';
+
+// Static sx objects hoisted to module level to avoid recreation on every render
+const rootBoxSx = {
+  bgcolor: 'background.default',
+  minHeight: '100vh',
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  '& img, & canvas': {
+    pointerEvents: 'none',
+    userSelect: 'none',
+  },
+} as const;
+
+const loadingBoxSx = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh',
+  bgcolor: 'background.default',
+} as const;
 
 function ReaderPage() {
   const { mangaSlug: mangaId, chapterSlug: chapterId } = useParams<{
@@ -45,7 +65,7 @@ function ReaderPage() {
     };
   }, []);
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     if (mangaId) {
       navigate(`/manga/${mangaId}`);
     } else if (chapter) {
@@ -53,21 +73,21 @@ function ReaderPage() {
     } else {
       navigate('/');
     }
-  };
+  }, [navigate, mangaId, chapter]);
 
-  const handleModeToggle = () => {
+  const handleModeToggle = useCallback(() => {
     setMode((prev) => (prev === 'vertical' ? 'horizontal' : 'vertical'));
-  };
+  }, []);
 
-  const handleZoomIn = () => {
+  const handleZoomIn = useCallback(() => {
     setZoom((prev) => Math.min(prev + 10, 200));
-  };
+  }, []);
 
-  const handleZoomOut = () => {
+  const handleZoomOut = useCallback(() => {
     setZoom((prev) => Math.max(prev - 10, 50));
-  };
+  }, []);
 
-  const handleFullscreenToggle = () => {
+  const handleFullscreenToggle = useCallback(() => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
       setIsFullscreen(true);
@@ -75,38 +95,38 @@ function ReaderPage() {
       document.exitFullscreen();
       setIsFullscreen(false);
     }
-  };
+  }, []);
+
+  const handleCommentToggle = useCallback(() => {
+    setSidebarOpen((prev) => !prev);
+  }, []);
+
+  const handlePageModalOpen = useCallback(() => {
+    setPageModalOpen(true);
+  }, []);
+
+  const handleSidebarClose = useCallback(() => {
+    setSidebarOpen(false);
+  }, []);
+
+  const handlePageModalClose = useCallback(() => {
+    setPageModalOpen(false);
+  }, []);
+
+  const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+  }, []);
 
   if (loading || !chapter) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          bgcolor: 'background.default',
-        }}
-      >
+      <Box sx={loadingBoxSx}>
         <CircularProgress />
       </Box>
     );
   }
 
   return (
-    <Box
-      sx={{
-        bgcolor: 'background.default',
-        minHeight: '100vh',
-        userSelect: 'none',
-        WebkitUserSelect: 'none',
-        '& img, & canvas': {
-          pointerEvents: 'none',
-          userSelect: 'none',
-        },
-      }}
-      onContextMenu={(e) => e.preventDefault()}
-    >
+    <Box sx={rootBoxSx} onContextMenu={handleContextMenu}>
       {/* Toolbar */}
       <ReaderToolbar
         title={chapter.mangaTitle}
@@ -119,8 +139,8 @@ function ReaderPage() {
         onZoomIn={handleZoomIn}
         onZoomOut={handleZoomOut}
         onFullscreenToggle={handleFullscreenToggle}
-        onCommentToggle={() => setSidebarOpen((prev) => !prev)}
-        onPageComment={() => setPageModalOpen(true)}
+        onCommentToggle={handleCommentToggle}
+        onPageComment={handlePageModalOpen}
       />
 
       {/* Reader content */}
@@ -151,7 +171,7 @@ function ReaderPage() {
         chapterId={chapter.id}
         mangaId={chapter.mangaSeriesId}
         mangaTitle={chapter.mangaTitle}
-        onClose={() => setSidebarOpen(false)}
+        onClose={handleSidebarClose}
       />
 
       {/* Page comment modal */}
@@ -164,7 +184,7 @@ function ReaderPage() {
         mangaTitle={chapter.mangaTitle}
         chapterTitle={`Chapter ${chapter.chapterNumber}`}
         totalPages={chapter.pages.length}
-        onClose={() => setPageModalOpen(false)}
+        onClose={handlePageModalClose}
       />
     </Box>
   );

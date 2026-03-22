@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { Box, Typography, Chip, IconButton, Drawer, SwipeableDrawer, useMediaQuery, useTheme } from '@mui/material';
 import { Close, ChatBubbleOutline } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,17 @@ import {
   toggleCommentReaction,
 } from '../../store/slices/comment-slice';
 import { selectIsAuthenticated } from '../../store/slices/auth-slice';
+import {
+  selectChapterComments,
+  selectUserReactionsForComments,
+  selectCommentsLoading,
+  selectCommentsSubmitting,
+} from '../../store/selectors/comment-selectors';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
+
+// Stable no-op for optional onOpen prop — avoids new function reference each render
+const NOOP = () => {};
 
 interface ChapterCommentSidebarProps {
   chapterId: string;
@@ -33,10 +42,18 @@ export default function ChapterCommentSidebar({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const comments = useAppSelector((state) => state.comments.chapterComments[chapterId] || []);
-  const userReactions = useAppSelector((state) => state.comments.userReactions);
-  const loading = useAppSelector((state) => state.comments.loading);
-  const submitting = useAppSelector((state) => state.comments.submitting);
+  const selectComments = useMemo(() => selectChapterComments(chapterId), [chapterId]);
+  const comments = useAppSelector(selectComments);
+
+  const commentIds = useMemo(
+    () => comments.flatMap((c) => [c.id, ...(c.replies?.map((r) => r.id) ?? [])]),
+    [comments],
+  );
+  const selectReactions = useMemo(() => selectUserReactionsForComments(commentIds), [commentIds]);
+  const userReactions = useAppSelector(selectReactions);
+
+  const loading = useAppSelector(selectCommentsLoading);
+  const submitting = useAppSelector(selectCommentsSubmitting);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   useEffect(() => {
@@ -45,34 +62,43 @@ export default function ChapterCommentSidebar({
     }
   }, [dispatch, chapterId, isOpen]);
 
-  const handleSubmit = async (content: string) => {
-    const result = await dispatch(createComment({ content, chapterId, mangaSeriesId: mangaId }));
-    if (createComment.fulfilled.match(result)) {
-      dispatch(fetchComments({ chapterId }));
-    }
-  };
+  const handleSubmit = useCallback(
+    async (content: string) => {
+      const result = await dispatch(createComment({ content, chapterId, mangaSeriesId: mangaId }));
+      if (createComment.fulfilled.match(result)) {
+        dispatch(fetchComments({ chapterId }));
+      }
+    },
+    [dispatch, chapterId, mangaId],
+  );
 
-  const handleLike = (commentId: string) => {
-    dispatch(
-      toggleCommentReaction({
-        commentId,
-        reaction: 'like',
-        context: 'chapter',
-        targetId: chapterId,
-      }),
-    );
-  };
+  const handleLike = useCallback(
+    (commentId: string) => {
+      dispatch(
+        toggleCommentReaction({
+          commentId,
+          reaction: 'like',
+          context: 'chapter',
+          targetId: chapterId,
+        }),
+      );
+    },
+    [dispatch, chapterId],
+  );
 
-  const handleDislike = (commentId: string) => {
-    dispatch(
-      toggleCommentReaction({
-        commentId,
-        reaction: 'dislike',
-        context: 'chapter',
-        targetId: chapterId,
-      }),
-    );
-  };
+  const handleDislike = useCallback(
+    (commentId: string) => {
+      dispatch(
+        toggleCommentReaction({
+          commentId,
+          reaction: 'dislike',
+          context: 'chapter',
+          targetId: chapterId,
+        }),
+      );
+    },
+    [dispatch, chapterId],
+  );
 
   const sidebarContent = (
     <Box
@@ -168,7 +194,7 @@ export default function ChapterCommentSidebar({
         anchor="bottom"
         open={isOpen}
         onClose={onClose}
-        onOpen={onOpen || (() => {})}
+        onOpen={onOpen ?? NOOP}
         disableSwipeToOpen
         PaperProps={{
           sx: {

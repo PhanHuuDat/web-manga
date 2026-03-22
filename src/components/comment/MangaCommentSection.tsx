@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { Box, Typography, Chip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -9,6 +9,13 @@ import {
   setReplyingTo,
 } from '../../store/slices/comment-slice';
 import { selectIsAuthenticated } from '../../store/slices/auth-slice';
+import {
+  selectMangaComments,
+  selectUserReactionsForComments,
+  selectCommentsLoading,
+  selectCommentsSubmitting,
+  selectCommentsReplyingTo,
+} from '../../store/selectors/comment-selectors';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
 
@@ -21,75 +28,98 @@ export default function MangaCommentSection({ mangaId }: MangaCommentSectionProp
   const { t } = useTranslation('comment');
   const dispatch = useAppDispatch();
 
-  const comments = useAppSelector((state) => state.comments.mangaComments[mangaId] || []);
-  const userReactions = useAppSelector((state) => state.comments.userReactions);
-  const loading = useAppSelector((state) => state.comments.loading);
-  const submitting = useAppSelector((state) => state.comments.submitting);
-  const replyingTo = useAppSelector((state) => state.comments.replyingTo);
+  const selectComments = useMemo(() => selectMangaComments(mangaId), [mangaId]);
+  const comments = useAppSelector(selectComments);
+
+  const commentIds = useMemo(
+    () => comments.flatMap((c) => [c.id, ...(c.replies?.map((r) => r.id) ?? [])]),
+    [comments],
+  );
+  const selectReactions = useMemo(() => selectUserReactionsForComments(commentIds), [commentIds]);
+  const userReactions = useAppSelector(selectReactions);
+
+  const loading = useAppSelector(selectCommentsLoading);
+  const submitting = useAppSelector(selectCommentsSubmitting);
+  const replyingTo = useAppSelector(selectCommentsReplyingTo);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   useEffect(() => {
     dispatch(fetchComments({ mangaSeriesId: mangaId }));
   }, [dispatch, mangaId]);
 
-  const handleSubmit = async (content: string) => {
-    const result = await dispatch(
-      createComment({
-        content,
-        mangaSeriesId: mangaId,
-        parentId: replyingTo || undefined,
-      }),
-    );
-    if (createComment.fulfilled.match(result)) {
-      dispatch(fetchComments({ mangaSeriesId: mangaId }));
-    }
-  };
+  const handleSubmit = useCallback(
+    async (content: string) => {
+      const result = await dispatch(
+        createComment({
+          content,
+          mangaSeriesId: mangaId,
+          parentId: replyingTo || undefined,
+        }),
+      );
+      if (createComment.fulfilled.match(result)) {
+        dispatch(fetchComments({ mangaSeriesId: mangaId }));
+      }
+    },
+    [dispatch, mangaId, replyingTo],
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleReply = (commentId: string, _username: string) => {
-    dispatch(setReplyingTo(commentId));
-  };
+  const handleReply = useCallback(
+    (commentId: string, _username: string) => {
+      dispatch(setReplyingTo(commentId));
+    },
+    [dispatch],
+  );
 
-  const handleCancelReply = () => {
+  const handleCancelReply = useCallback(() => {
     dispatch(setReplyingTo(null));
-  };
+  }, [dispatch]);
 
-  const handleLike = (commentId: string) => {
-    dispatch(
-      toggleCommentReaction({
-        commentId,
-        reaction: 'like',
-        context: 'manga',
-        targetId: mangaId,
-      }),
-    );
-  };
+  const handleLike = useCallback(
+    (commentId: string) => {
+      dispatch(
+        toggleCommentReaction({
+          commentId,
+          reaction: 'like',
+          context: 'manga',
+          targetId: mangaId,
+        }),
+      );
+    },
+    [dispatch, mangaId],
+  );
 
-  const handleDislike = (commentId: string) => {
-    dispatch(
-      toggleCommentReaction({
-        commentId,
-        reaction: 'dislike',
-        context: 'manga',
-        targetId: mangaId,
-      }),
-    );
-  };
+  const handleDislike = useCallback(
+    (commentId: string) => {
+      dispatch(
+        toggleCommentReaction({
+          commentId,
+          reaction: 'dislike',
+          context: 'manga',
+          targetId: mangaId,
+        }),
+      );
+    },
+    [dispatch, mangaId],
+  );
 
   // Find username of the comment being replied to
-  const findUsername = (id: string): string | undefined => {
-    const findInComments = (list: typeof comments): string | undefined => {
-      for (const c of list) {
-        if (c.id === id) return c.username;
-        if (c.replies) {
-          const found = findInComments(c.replies);
-          if (found) return found;
+  const findUsername = useCallback(
+    (id: string): string | undefined => {
+      const findInComments = (list: typeof comments): string | undefined => {
+        for (const c of list) {
+          if (c.id === id) return c.username;
+          if (c.replies) {
+            const found = findInComments(c.replies);
+            if (found) return found;
+          }
         }
-      }
-      return undefined;
-    };
-    return findInComments(comments);
-  };
+        return undefined;
+      };
+      return findInComments(comments);
+    },
+    [comments],
+  );
 
   const replyingToUsername = replyingTo ? findUsername(replyingTo) : undefined;
   const totalComments = comments.reduce((acc, c) => acc + 1 + (c.replyCount || 0), 0);

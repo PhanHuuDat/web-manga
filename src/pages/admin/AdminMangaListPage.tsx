@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
@@ -36,14 +36,15 @@ function AdminMangaListPage() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<SeriesStatus | ''>('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // true on mount — shows skeleton until first fetch resolves
   const [error, setError] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<MangaDto | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const fetchManga = useCallback(() => {
-    setLoading(true);
-    setError(null);
+  // setState only inside async callbacks to avoid synchronous setState-in-effect lint error
+  useEffect(() => {
+    let cancelled = false;
     mangaApi
       .list({
         page: page + 1,
@@ -52,18 +53,15 @@ function AdminMangaListPage() {
         status: statusFilter !== '' ? statusFilter : undefined,
       })
       .then((res) => {
-        setManga(res.data);
-        setTotalCount(res.totalCount);
+        if (!cancelled) { setLoading(false); setError(null); setManga(res.data); setTotalCount(res.totalCount); }
       })
-      .catch(() => setError('Failed to load manga'))
-      .finally(() => setLoading(false));
-  }, [page, search, statusFilter]);
+      .catch(() => { if (!cancelled) { setLoading(false); setError('Failed to load manga'); } });
+    return () => { cancelled = true; };
+  }, [page, search, statusFilter, refreshKey]);
 
-  useEffect(() => {
-    fetchManga();
-  }, [fetchManga]);
-
+  // Set loading=true in event handlers (not in effect) to avoid cascading renders
   const handleSearchChange = useCallback((val: string) => {
+    setLoading(true);
     setSearch(val);
     setPage(0);
   }, []);
@@ -75,17 +73,18 @@ function AdminMangaListPage() {
       .delete(deleteTarget.id)
       .then(() => {
         setDeleteTarget(null);
-        fetchManga();
+        setLoading(true);
+        setRefreshKey((k) => k + 1);
       })
       .catch(() => setError('Failed to delete manga'))
       .finally(() => setDeleting(false));
   };
 
-  const STATUS_LABEL: Record<number, string> = {
+  const STATUS_LABEL = useMemo<Record<number, string>>(() => ({
     0: t('common.ongoing'),
     1: t('common.completed'),
     2: t('common.hiatus'),
-  };
+  }), [t]);
 
   const headerAction = (
     <Button
@@ -109,7 +108,7 @@ function AdminMangaListPage() {
         <Select
           size="small"
           value={statusFilter}
-          onChange={(e) => { setStatusFilter(e.target.value as SeriesStatus | ''); setPage(0); }}
+          onChange={(e) => { setLoading(true); setStatusFilter(e.target.value as SeriesStatus | ''); setPage(0); }}
           displayEmpty
           sx={{
             minWidth: 140,
@@ -203,7 +202,7 @@ function AdminMangaListPage() {
           page={page}
           rowsPerPage={PAGE_SIZE}
           rowsPerPageOptions={[PAGE_SIZE]}
-          onPageChange={(_, newPage) => setPage(newPage)}
+          onPageChange={(_, newPage) => { setLoading(true); setPage(newPage); }}
           sx={{ color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.1)' }}
         />
       </TableContainer>
