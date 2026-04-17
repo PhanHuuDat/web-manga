@@ -63,9 +63,8 @@ export default function MangaCommentSection({ mangaId }: MangaCommentSectionProp
     [dispatch, mangaId, replyingTo],
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleReply = useCallback(
-    (commentId: string, _username: string) => {
+    (commentId: string) => {
       dispatch(setReplyingTo(commentId));
     },
     [dispatch],

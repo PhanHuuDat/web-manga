@@ -25,6 +25,7 @@ function UserRoleEditDialog({ open, user, onClose, onSave, loading = false }: Us
   const [selectedRoles, setSelectedRoles] = useState<Set<string>>(new Set());
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (user) setSelectedRoles(new Set(user.roles));
   }, [user]);
 
