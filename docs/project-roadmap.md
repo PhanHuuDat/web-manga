@@ -113,7 +113,8 @@ This document outlines the development roadmap for the web-manga project, tracki
 - [x] Manga components (MangaInfo, ChapterList)
 - [x] Reader components (VerticalReader, HorizontalReader, ReaderToolbar, ReaderProgress)
 - [x] Redux slice for comments (comment-slice.ts)
-- [x] i18n namespaces (auth, manga, reader, comment)
+- [x] i18n namespaces (common, home, auth, manga, reader, comment, admin) — 8 namespaces
+- [x] Full component translation wiring (35+ components using useTranslation hook)
 - [x] Utility functions (format-relative-time, format-number)
 - [ ] Additional Redux slices (manga, auth, ui, reading) - pending
 - [ ] Theme context and switching (dark/light mode) - pending

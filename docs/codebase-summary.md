@@ -9,7 +9,8 @@ Web-Manga is a React + TypeScript + Vite single-page application for reading and
 **TypeScript Coverage:** 100%
 **Build Tool:** Vite 7.2.4
 **Styling:** Material UI v7 + Emotion (Deep Ocean Blue theme)
-**Status:** Phase 1-6 Complete (100%) - File upload, view tracking integration, GitHub Actions CI/CD, chapter page anti-leak scrambling
+**Internationalization:** 8 namespaces (en/vi): common, home, auth, manga, reader, comment, admin
+**Status:** Phase 1-6 Complete (100%) - File upload, view tracking integration, GitHub Actions CI/CD, chapter page anti-leak scrambling, i18n localization (EN/VI)
 
 ---
 
@@ -262,17 +263,17 @@ src/                              # All styling via MUI sx props
 │       └── ReaderPage.tsx       # Chapter reader page
 │
 ├── i18n/
-│   ├── i18n-config.ts           # i18next setup with namespaces
+│   ├── i18n-config.ts           # i18next setup with 8 namespaces
 │   ├── i18n-types.ts            # TypeScript types for translations
 │   └── locales/                 # Translation JSON files
 │       ├── en/                  # English
 │       │   ├── common.json, home.json
 │       │   ├── auth.json, manga.json
-│       │   ├── reader.json, comment.json
+│       │   ├── reader.json, comment.json, admin.json
 │       └── vi/                  # Vietnamese
 │           ├── common.json, home.json
 │           ├── auth.json, manga.json
-│           ├── reader.json, comment.json
+│           ├── reader.json, comment.json, admin.json
 │
 ├── theme/
 │   └── theme.ts                 # MUI createTheme with Deep Ocean Blue palette
@@ -440,8 +441,9 @@ npm run build  # Test production build
 - [x] Navigation UI (Navbar, SearchBar, UserMenu, GenreDropdown)
 - [x] HomePage with 12 genre grid (mobile-first responsive)
 - [x] Layout wrapper with dynamic Outlet
-- [x] **Internationalization (i18n)** - English & Vietnamese support
+- [x] **Internationalization (i18n)** - English & Vietnamese support (8 namespaces: common, home, auth, manga, reader, comment, admin)
 - [x] LanguageSwitcher component for language selection
+- [x] Full component translation wiring (35+ components using useTranslation hook)
 - [x] Accessibility features (focus states, aria labels)
 - [x] TypeScript strict mode 100% coverage
 - [x] ESLint configuration with React/Hooks plugins
