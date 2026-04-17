@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, Skeleton, Button } from '@mui/material';
 import { Delete, PlayArrow } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchReadingHistory, clearHistory } from '../../store/slices/reading-history-slice';
 
 export default function ReadingHistoryPage() {
+  const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const { data, loading, totalCount } = useAppSelector((state) => state.readingHistory.list);
 
@@ -21,7 +23,7 @@ export default function ReadingHistoryPage() {
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
       <Typography variant="h4" sx={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, color: '#f1f5f9', mb: 3 }}>
-        Reading History ({totalCount})
+        {t('history.title', { count: totalCount })}
       </Typography>
 
       {loading ? (
@@ -30,7 +32,7 @@ export default function ReadingHistoryPage() {
         ))
       ) : data.length === 0 ? (
         <Typography sx={{ color: '#94a3b8', textAlign: 'center', mt: 8 }}>
-          No reading history yet. Start reading some manga!
+          {t('history.empty')}
         </Typography>
       ) : (
         <List>
@@ -47,7 +49,7 @@ export default function ReadingHistoryPage() {
                     startIcon={<PlayArrow />}
                     sx={{ color: '#3b82f6', textTransform: 'none' }}
                   >
-                    Continue
+                    {t('history.continue')}
                   </Button>
                   <IconButton onClick={() => dispatch(clearHistory(item.mangaSeriesId))} sx={{ color: '#f43f5e' }}>
                     <Delete fontSize="small" />
@@ -71,7 +73,7 @@ export default function ReadingHistoryPage() {
                 }
                 secondary={
                   <Typography sx={{ color: '#94a3b8', fontSize: 13 }}>
-                    Ch. {item.chapterNumber} &middot; Page {item.lastPageNumber} &middot; {formatTime(item.lastReadAt)}
+                    {t('history.chapter', { number: item.chapterNumber })} &middot; {t('history.page', { number: item.lastPageNumber })} &middot; {formatTime(item.lastReadAt)}
                   </Typography>
                 }
               />

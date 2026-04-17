@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -8,6 +9,7 @@ import { chapterApi } from '../../services/api/chapter-api-service';
 import type { CreateChapterRequest, UpdateChapterRequest } from '../../types/chapter-api-types';
 
 function ChapterCreatePage() {
+  const { t } = useTranslation('manga');
   const { id: mangaId } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,7 +20,7 @@ function ChapterCreatePage() {
   if (!mangaId) {
     return (
       <Box sx={{ p: 3 }}>
-        <Alert severity="error">Manga ID is required.</Alert>
+        <Alert severity="error">{t('pages.mangaIdRequired')}</Alert>
       </Box>
     );
   }
@@ -30,7 +32,7 @@ function ChapterCreatePage() {
       await chapterApi.create(data as CreateChapterRequest);
       navigate(isAdmin ? `/admin/manga/${mangaId}/chapters` : `/manga/${mangaId}`);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Failed to create chapter.';
+      const msg = err instanceof Error ? err.message : t('pages.failedCreateChapter');
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -40,7 +42,7 @@ function ChapterCreatePage() {
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
-        Add Chapter
+        {t('pages.addChapter')}
       </Typography>
       <ChapterForm
         mode="create"

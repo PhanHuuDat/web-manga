@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,6 +10,7 @@ import { chapterApi } from '../../services/api/chapter-api-service';
 import type { ChapterDetailDto, CreateChapterRequest, UpdateChapterRequest } from '../../types/chapter-api-types';
 
 function ChapterEditPage() {
+  const { t } = useTranslation('manga');
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,9 +25,9 @@ function ChapterEditPage() {
     chapterApi
       .get(id)
       .then(setChapter)
-      .catch(() => setError('Failed to load chapter.'))
+      .catch(() => setError(t('pages.failedLoadChapter')))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, t]);
 
   const handleSubmit = async (data: CreateChapterRequest | UpdateChapterRequest) => {
     if (!id || !chapter) return;
@@ -35,7 +37,7 @@ function ChapterEditPage() {
       await chapterApi.update(id, data as UpdateChapterRequest);
       navigate(isAdmin ? `/admin/manga/${chapter.mangaSeriesId}/chapters` : `/manga/${chapter.mangaSeriesId}`);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Failed to update chapter.';
+      const msg = err instanceof Error ? err.message : t('pages.failedUpdateChapter');
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -53,7 +55,7 @@ function ChapterEditPage() {
   if (!chapter) {
     return (
       <Box sx={{ p: 3 }}>
-        <Alert severity="error">Chapter not found.</Alert>
+        <Alert severity="error">{t('pages.chapterNotFound')}</Alert>
       </Box>
     );
   }
@@ -61,7 +63,7 @@ function ChapterEditPage() {
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
-        Edit Chapter {chapter.chapterNumber}
+        {t('pages.editChapter', { number: chapter.chapterNumber })}
       </Typography>
       <ChapterForm
         mode="edit"
