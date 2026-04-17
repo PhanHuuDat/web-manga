@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -55,6 +56,7 @@ const metaBoxSx = { display: 'flex', alignItems: 'center', gap: 2, mt: 'auto' } 
 const metaTextSx = { fontSize: 11, color: 'text.disabled' } as const;
 
 function MangaListCard({ manga }: MangaListCardProps) {
+  const { t } = useTranslation('manga');
   const statusLabel = getStatusLabel(manga.status);
 
   return (
@@ -80,8 +82,8 @@ function MangaListCard({ manga }: MangaListCardProps) {
 
         {/* Meta */}
         <Box sx={metaBoxSx}>
-          <Typography sx={metaTextSx}>Ch. {manga.totalChapters}</Typography>
-          <Typography sx={metaTextSx}>{formatNumber(manga.views)} views</Typography>
+          <Typography sx={metaTextSx}>{t('listCard.chapters', { count: manga.totalChapters })}</Typography>
+          <Typography sx={metaTextSx}>{formatNumber(manga.views)} {t('listCard.views')}</Typography>
         </Box>
       </Box>
     </Box>

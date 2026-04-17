@@ -31,5 +31,28 @@
     "hot": "HOT",
     "new": "NEW",
     "top": "TOP"
+  },
+  "pages": {
+    "createManga": "Create Manga",
+    "editManga": "Edit: {{title}}",
+    "addChapter": "Add Chapter",
+    "editChapter": "Edit Chapter {{number}}",
+    "mangaIdRequired": "Manga ID is required.",
+    "failedCreate": "Failed to create manga.",
+    "failedCreateChapter": "Failed to create chapter.",
+    "failedUpdate": "Failed to update manga.",
+    "failedUpdateChapter": "Failed to update chapter.",
+    "failedLoad": "Failed to load manga.",
+    "failedLoadChapter": "Failed to load chapter.",
+    "mangaNotFound": "Manga not found.",
+    "chapterNotFound": "Chapter not found."
+  },
+  "bookmarkButton": {
+    "add": "Bookmark",
+    "remove": "Remove bookmark"
+  },
+  "listCard": {
+    "views": "views",
+    "chapters": "Ch. {{count}}"
   }
 }

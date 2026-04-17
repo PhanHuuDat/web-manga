@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,6 +10,7 @@ import { mangaApi } from '../../services/api/manga-api-service';
 import type { MangaDetailDto, CreateMangaRequest, UpdateMangaRequest } from '../../types/manga-api-types';
 
 function MangaEditPage() {
+  const { t } = useTranslation('manga');
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,9 +25,9 @@ function MangaEditPage() {
     mangaApi
       .get(id)
       .then(setManga)
-      .catch(() => setError('Failed to load manga.'))
+      .catch(() => setError(t('pages.failedLoad')))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, t]);
 
   const handleSubmit = async (data: CreateMangaRequest | UpdateMangaRequest) => {
     if (!id) return;
@@ -35,7 +37,7 @@ function MangaEditPage() {
       await mangaApi.update(id, data as UpdateMangaRequest);
       navigate(isAdmin ? '/admin/manga' : `/manga/${id}`);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Failed to update manga.';
+      const msg = err instanceof Error ? err.message : t('pages.failedUpdate');
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -53,7 +55,7 @@ function MangaEditPage() {
   if (!manga) {
     return (
       <Box sx={{ p: 3 }}>
-        <Alert severity="error">Manga not found.</Alert>
+        <Alert severity="error">{t('pages.mangaNotFound')}</Alert>
       </Box>
     );
   }
@@ -61,7 +63,7 @@ function MangaEditPage() {
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
-        Edit: {manga.title}
+        {t('pages.editManga', { title: manga.title })}
       </Typography>
       <MangaForm
         mode="edit"

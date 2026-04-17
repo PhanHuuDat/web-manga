@@ -31,5 +31,11 @@
   "activeUsers": {
     "title": "Active Users",
     "level": "Lv. {{level}}"
+  },
+  "continueReading": {
+    "title": "Continue Reading",
+    "viewAll": "View All",
+    "chapter": "Ch. {{number}}",
+    "page": "P. {{number}}"
   }
 }

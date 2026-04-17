@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -20,11 +21,14 @@ interface UserRoleEditDialogProps {
 }
 
 function UserRoleEditDialog({ open, user, onClose, onSave, loading = false }: UserRoleEditDialogProps) {
-  const [selectedRoles, setSelectedRoles] = useState<Set<string>>(new Set());
+  const { t } = useTranslation('admin');
+  const [prevUser, setPrevUser] = useState(user);
+  const [selectedRoles, setSelectedRoles] = useState<Set<string>>(() => new Set(user?.roles ?? []));
 
-  useEffect(() => {
-    if (user) setSelectedRoles(new Set(user.roles));
-  }, [user]);
+  if (user !== prevUser) {
+    setPrevUser(user);
+    setSelectedRoles(new Set(user?.roles ?? []));
+  }
 
   const handleToggle = (role: string) => {
     setSelectedRoles((prev) => {
@@ -52,7 +56,7 @@ function UserRoleEditDialog({ open, user, onClose, onSave, loading = false }: Us
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle sx={{ color: '#f1f5f9', bgcolor: '#1a1e2e' }}>
-        Edit Roles — {user?.username}
+        {t('users.editRolesTitle', { username: user?.username })}
       </DialogTitle>
       <DialogContent sx={{ bgcolor: '#1a1e2e' }}>
         <FormGroup>
@@ -75,10 +79,10 @@ function UserRoleEditDialog({ open, user, onClose, onSave, loading = false }: Us
       </DialogContent>
       <DialogActions sx={{ bgcolor: '#1a1e2e', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <Button onClick={onClose} disabled={loading} sx={{ color: '#94a3b8' }}>
-          Cancel
+          {t('common.cancel')}
         </Button>
         <Button onClick={handleSave} variant="contained" disabled={loading} sx={{ bgcolor: '#3b82f6' }}>
-          {loading ? 'Saving...' : 'Save'}
+          {loading ? t('common.saving') : t('common.save')}
         </Button>
       </DialogActions>
     </Dialog>

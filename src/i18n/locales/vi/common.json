@@ -73,6 +73,18 @@
     "progress": "Tiến độ đọc",
     "pages": "trang"
   },
+  "bookmark": {
+    "myBookmarks": "Thư mục của tôi ({{count}})",
+    "empty": "Chưa có thư mục. Hãy duyệt manga và đánh dấu yêu thích!",
+    "remove": "Xóa"
+  },
+  "history": {
+    "title": "Lịch sử đọc ({{count}})",
+    "empty": "Chưa có lịch sử đọc. Bắt đầu đọc manga ngay!",
+    "continue": "Tiếp tục",
+    "chapter": "Ch. {{number}}",
+    "page": "Tr. {{number}}"
+  },
   "auth": {
     "email": "Email",
     "password": "Mật khẩu",

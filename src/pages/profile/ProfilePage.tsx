@@ -70,6 +70,12 @@ export default function ProfilePage() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  const statCards = useMemo(() => [
+    { icon: <Bookmark sx={{ fontSize: 20 }} />, label: t('profile.bookmarks', 'Bookmarks'), value: stats?.bookmarkCount ?? 0 },
+    { icon: <History sx={{ fontSize: 20 }} />, label: t('profile.read', 'Read'), value: stats?.historyCount ?? 0 },
+    { icon: <ChatBubbleOutline sx={{ fontSize: 20 }} />, label: t('profile.comments', 'Comments'), value: stats?.commentCount ?? 0 },
+  ], [t, stats]);
+
   if (!user) {
     return (
       <Box sx={{ p: 4 }}>
@@ -78,12 +84,6 @@ export default function ProfilePage() {
       </Box>
     );
   }
-
-  const statCards = useMemo(() => [
-    { icon: <Bookmark sx={{ fontSize: 20 }} />, label: t('profile.bookmarks', 'Bookmarks'), value: stats?.bookmarkCount ?? 0 },
-    { icon: <History sx={{ fontSize: 20 }} />, label: t('profile.read', 'Read'), value: stats?.historyCount ?? 0 },
-    { icon: <ChatBubbleOutline sx={{ fontSize: 20 }} />, label: t('profile.comments', 'Comments'), value: stats?.commentCount ?? 0 },
-  ], [t, stats]);
 
   return (
     <Box sx={{ maxWidth: 640, mx: 'auto', p: { xs: 2, sm: 4 } }}>

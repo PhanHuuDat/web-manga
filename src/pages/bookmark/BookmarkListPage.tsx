@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, Typography, Grid, Card, CardMedia, CardContent, CardActions, Button, Skeleton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchBookmarks, toggleBookmark } from '../../store/slices/bookmark-slice';
 
 export default function BookmarkListPage() {
+  const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const { data, loading, totalCount } = useAppSelector((state) => state.bookmark.list);
 
@@ -16,7 +18,7 @@ export default function BookmarkListPage() {
   return (
     <Box sx={{ maxWidth: 1200, mx: 'auto', p: 3 }}>
       <Typography variant="h4" sx={{ fontFamily: 'Outfit, sans-serif', fontWeight: 700, color: '#f1f5f9', mb: 3 }}>
-        My Bookmarks ({totalCount})
+        {t('bookmark.myBookmarks', { count: totalCount })}
       </Typography>
 
       {loading ? (
@@ -29,7 +31,7 @@ export default function BookmarkListPage() {
         </Grid>
       ) : data.length === 0 ? (
         <Typography sx={{ color: '#94a3b8', textAlign: 'center', mt: 8 }}>
-          No bookmarks yet. Browse manga and bookmark your favorites!
+          {t('bookmark.empty')}
         </Typography>
       ) : (
         <Grid container spacing={2}>
@@ -68,7 +70,7 @@ export default function BookmarkListPage() {
                     onClick={() => dispatch(toggleBookmark(bm.mangaSeriesId))}
                     sx={{ color: '#f43f5e', textTransform: 'none', fontSize: 12 }}
                   >
-                    Remove
+                    {t('bookmark.remove')}
                   </Button>
                 </CardActions>
               </Card>

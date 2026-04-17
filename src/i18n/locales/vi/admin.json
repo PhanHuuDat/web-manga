@@ -30,6 +30,7 @@
   "users": {
     "title": "Quản lý người dùng",
     "editRoles": "Chỉnh sửa quyền",
+    "editRolesTitle": "Chỉnh sửa quyền — {{username}}",
     "roleUpdated": "Đã cập nhật quyền người dùng",
     "statusUpdated": "Đã cập nhật trạng thái người dùng",
     "noUsers": "Không tìm thấy người dùng",
@@ -42,7 +43,14 @@
     "active": "Đang hoạt động",
     "noComments": "Không tìm thấy bình luận",
     "deleteTitle": "Xóa bình luận",
-    "deleteMessage": "Bạn có chắc chắn muốn xóa bình luận này?"
+    "deleteMessage": "Bạn có chắc chắn muốn xóa bình luận này?",
+    "commentBy": "Bình luận bởi {{username}}",
+    "mangaLabel": "Manga:",
+    "dateLabel": "Ngày:"
+  },
+  "topBar": {
+    "title": "Quản trị",
+    "toggleSidebar": "mở/đóng thanh bên"
   },
   "common": {
     "search": "Tìm kiếm...",
@@ -52,6 +60,9 @@
     "delete": "Xóa",
     "save": "Lưu",
     "cancel": "Hủy",
+    "close": "Đóng",
+    "deleting": "Đang xóa...",
+    "saving": "Đang lưu...",
     "noResults": "Không tìm thấy kết quả",
     "forbidden": "Bạn không có quyền truy cập trang này",
     "status": "Trạng thái",

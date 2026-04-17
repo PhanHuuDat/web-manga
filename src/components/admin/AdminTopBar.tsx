@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +16,7 @@ interface AdminTopBarProps {
 }
 
 function AdminTopBar({ onMenuClick, sidebarOpen }: AdminTopBarProps) {
+  const { t } = useTranslation('admin');
   const user = useAppSelector(selectCurrentUser);
 
   const displayName = user?.displayName ?? user?.username ?? 'Admin';
@@ -45,7 +47,7 @@ function AdminTopBar({ onMenuClick, sidebarOpen }: AdminTopBarProps) {
           edge="start"
           onClick={onMenuClick}
           sx={{ color: '#94a3b8', mr: 1, display: { md: 'none' } }}
-          aria-label="toggle sidebar"
+          aria-label={t('topBar.toggleSidebar')}
         >
           <MenuIcon />
         </IconButton>
@@ -60,7 +62,7 @@ function AdminTopBar({ onMenuClick, sidebarOpen }: AdminTopBarProps) {
             flexGrow: 1,
           }}
         >
-          Admin
+          {t('topBar.title')}
         </Typography>
 
         {/* User info */}

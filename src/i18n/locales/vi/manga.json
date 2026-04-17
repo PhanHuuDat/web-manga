@@ -31,5 +31,28 @@
     "hot": "HOT",
     "new": "MỚI",
     "top": "TOP"
+  },
+  "pages": {
+    "createManga": "Tạo Manga",
+    "editManga": "Chỉnh sửa: {{title}}",
+    "addChapter": "Thêm Chapter",
+    "editChapter": "Chỉnh sửa Chapter {{number}}",
+    "mangaIdRequired": "Thiếu ID Manga.",
+    "failedCreate": "Tạo manga thất bại.",
+    "failedCreateChapter": "Tạo chapter thất bại.",
+    "failedUpdate": "Cập nhật manga thất bại.",
+    "failedUpdateChapter": "Cập nhật chapter thất bại.",
+    "failedLoad": "Tải manga thất bại.",
+    "failedLoadChapter": "Tải chapter thất bại.",
+    "mangaNotFound": "Không tìm thấy manga.",
+    "chapterNotFound": "Không tìm thấy chapter."
+  },
+  "bookmarkButton": {
+    "add": "Đánh dấu",
+    "remove": "Xóa khỏi thư mục"
+  },
+  "listCard": {
+    "views": "lượt xem",
+    "chapters": "Ch. {{count}}"
   }
 }

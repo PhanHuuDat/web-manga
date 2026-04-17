@@ -1,6 +1,7 @@
 import { IconButton, CircularProgress, Tooltip } from '@mui/material';
 import { Bookmark, BookmarkBorder } from '@mui/icons-material';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
   toggleBookmark,
@@ -15,6 +16,7 @@ interface BookmarkButtonProps {
 }
 
 export default function BookmarkButton({ mangaId, size = 'medium' }: BookmarkButtonProps) {
+  const { t } = useTranslation('manga');
   const dispatch = useAppDispatch();
   const isBookmarked = useAppSelector(selectIsBookmarked(mangaId));
   const isToggling = useAppSelector(selectIsToggling(mangaId));
@@ -33,7 +35,7 @@ export default function BookmarkButton({ mangaId, size = 'medium' }: BookmarkBut
   };
 
   return (
-    <Tooltip title={isBookmarked ? 'Remove bookmark' : 'Bookmark'}>
+    <Tooltip title={isBookmarked ? t('bookmarkButton.remove') : t('bookmarkButton.add')}>
       <IconButton
         onClick={handleToggle}
         disabled={isToggling}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -22,6 +23,7 @@ function AdminDeleteConfirmDialog({
   onCancel,
   loading = false,
 }: AdminDeleteConfirmDialogProps) {
+  const { t } = useTranslation('admin');
   return (
     <Dialog open={open} onClose={onCancel}>
       <DialogTitle>{title}</DialogTitle>
@@ -30,10 +32,10 @@ function AdminDeleteConfirmDialog({
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel} disabled={loading}>
-          Cancel
+          {t('common.cancel')}
         </Button>
         <Button onClick={onConfirm} color="error" variant="contained" disabled={loading}>
-          {loading ? 'Deleting...' : 'Delete'}
+          {loading ? t('common.deleting') : t('common.delete')}
         </Button>
       </DialogActions>
     </Dialog>

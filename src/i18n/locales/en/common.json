@@ -73,6 +73,18 @@
     "progress": "Reading Progress",
     "pages": "pages"
   },
+  "bookmark": {
+    "myBookmarks": "My Bookmarks ({{count}})",
+    "empty": "No bookmarks yet. Browse manga and bookmark your favorites!",
+    "remove": "Remove"
+  },
+  "history": {
+    "title": "Reading History ({{count}})",
+    "empty": "No reading history yet. Start reading some manga!",
+    "continue": "Continue",
+    "chapter": "Ch. {{number}}",
+    "page": "Page {{number}}"
+  },
   "auth": {
     "email": "Email",
     "password": "Password",
