@@ -31,5 +31,11 @@
   "activeUsers": {
     "title": "Đang Hoạt Động",
     "level": "Cấp {{level}}"
+  },
+  "continueReading": {
+    "title": "Tiếp tục đọc",
+    "viewAll": "Xem tất cả",
+    "chapter": "Ch. {{number}}",
+    "page": "Tr. {{number}}"
   }
 }

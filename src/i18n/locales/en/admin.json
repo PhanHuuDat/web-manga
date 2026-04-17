@@ -30,6 +30,7 @@
   "users": {
     "title": "User Management",
     "editRoles": "Edit Roles",
+    "editRolesTitle": "Edit Roles — {{username}}",
     "roleUpdated": "User roles updated",
     "statusUpdated": "User status updated",
     "noUsers": "No users found",
@@ -42,7 +43,14 @@
     "active": "Active",
     "noComments": "No comments found",
     "deleteTitle": "Delete Comment",
-    "deleteMessage": "Are you sure you want to delete this comment?"
+    "deleteMessage": "Are you sure you want to delete this comment?",
+    "commentBy": "Comment by {{username}}",
+    "mangaLabel": "Manga:",
+    "dateLabel": "Date:"
+  },
+  "topBar": {
+    "title": "Admin",
+    "toggleSidebar": "toggle sidebar"
   },
   "common": {
     "search": "Search...",
@@ -52,6 +60,9 @@
     "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
+    "close": "Close",
+    "deleting": "Deleting...",
+    "saving": "Saving...",
     "noResults": "No results found",
     "forbidden": "You do not have permission to access this page",
     "status": "Status",
