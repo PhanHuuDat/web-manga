@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -22,12 +22,13 @@ interface UserRoleEditDialogProps {
 
 function UserRoleEditDialog({ open, user, onClose, onSave, loading = false }: UserRoleEditDialogProps) {
   const { t } = useTranslation('admin');
-  const [selectedRoles, setSelectedRoles] = useState<Set<string>>(new Set());
+  const [prevUser, setPrevUser] = useState(user);
+  const [selectedRoles, setSelectedRoles] = useState<Set<string>>(() => new Set(user?.roles ?? []));
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (user) setSelectedRoles(new Set(user.roles));
-  }, [user]);
+  if (user !== prevUser) {
+    setPrevUser(user);
+    setSelectedRoles(new Set(user?.roles ?? []));
+  }
 
   const handleToggle = (role: string) => {
     setSelectedRoles((prev) => {

@@ -41,9 +41,7 @@ interface AdminSidebarProps {
 function NavItemButton({ item, collapsed, active }: { item: AdminNavItem; collapsed: boolean; active: boolean }) {
   const Icon = item.icon;
   const { t } = useTranslation('admin');
-  // labelKey is a dynamic string from config — cast to any to bypass strict i18next key types
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const label = t(item.labelKey as any);
+  const label = (t as (key: string) => string)(item.labelKey);
 
   const button = (
     <ListItemButton

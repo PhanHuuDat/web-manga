@@ -2,7 +2,8 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Icon from '@mui/material/Icon';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import type { TextFieldProps } from '@mui/material/TextField';
 
 type PasswordFieldProps = Omit<TextFieldProps, 'type'>;
@@ -29,9 +30,9 @@ function PasswordField({ ...props }: PasswordFieldProps) {
                 size="small"
                 sx={{ color: 'text.secondary' }}
               >
-                <Icon sx={{ fontSize: 20 }}>
-                  {showPassword ? 'visibility_off' : 'visibility'}
-                </Icon>
+                {showPassword
+                  ? <VisibilityOff sx={{ fontSize: 20 }} />
+                  : <Visibility sx={{ fontSize: 20 }} />}
               </IconButton>
             </InputAdornment>
           ),

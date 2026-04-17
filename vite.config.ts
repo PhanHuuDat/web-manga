@@ -6,6 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0',
+    watch: {
+      // Required for HMR to work on Windows Docker volume mounts
+      usePolling: true,
+    },
   },
   test: {
     globals: true,

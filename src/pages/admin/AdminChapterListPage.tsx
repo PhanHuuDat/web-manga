@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
@@ -23,6 +23,20 @@ import type { ChapterDto } from '../../types/manga-api-types';
 
 const PAGE_SIZE = 20;
 
+type FetchState = { loading: boolean; error: string | null; chapters: ChapterDto[]; totalCount: number };
+type FetchAction =
+  | { type: 'start' }
+  | { type: 'success'; chapters: ChapterDto[]; totalCount: number }
+  | { type: 'error'; message: string };
+
+function fetchReducer(state: FetchState, action: FetchAction): FetchState {
+  switch (action.type) {
+    case 'start': return { ...state, loading: true, error: null };
+    case 'success': return { loading: false, error: null, chapters: action.chapters, totalCount: action.totalCount };
+    case 'error': return { ...state, loading: false, error: action.message };
+  }
+}
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
@@ -33,38 +47,27 @@ function AdminChapterListPage() {
   const { t } = useTranslation('admin');
 
   const [mangaTitle, setMangaTitle] = useState<string>('');
-  const [chapters, setChapters] = useState<ChapterDto[]>([]);
-  const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<ChapterDto | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [refreshToken, setRefreshToken] = useState(0);
+  const [{ loading, error, chapters, totalCount }, dispatch] = useReducer(fetchReducer, {
+    loading: false, error: null, chapters: [], totalCount: 0,
+  });
 
-  // Fetch manga title once
   useEffect(() => {
     if (!mangaId) return;
     mangaApi.get(mangaId).then((m) => setMangaTitle(m.title)).catch(() => {});
   }, [mangaId]);
 
-  const fetchChapters = useCallback(() => {
+  useEffect(() => {
     if (!mangaId) return;
-    setLoading(true);
-    setError(null);
+    dispatch({ type: 'start' });
     mangaApi
       .getChapters(mangaId, { page: page + 1, pageSize: PAGE_SIZE })
-      .then((res) => {
-        setChapters(res.data);
-        setTotalCount(res.totalCount);
-      })
-      .catch(() => setError('Failed to load chapters'))
-      .finally(() => setLoading(false));
-  }, [mangaId, page]);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchChapters();
-  }, [fetchChapters]);
+      .then((res) => dispatch({ type: 'success', chapters: res.data, totalCount: res.totalCount }))
+      .catch(() => dispatch({ type: 'error', message: 'Failed to load chapters' }));
+  }, [mangaId, page, refreshToken]);
 
   const handleDelete = () => {
     if (!deleteTarget) return;
@@ -73,9 +76,9 @@ function AdminChapterListPage() {
       .delete(deleteTarget.id)
       .then(() => {
         setDeleteTarget(null);
-        fetchChapters();
+        setRefreshToken((n) => n + 1);
       })
-      .catch(() => setError('Failed to delete chapter'))
+      .catch(() => dispatch({ type: 'error', message: 'Failed to delete chapter' }))
       .finally(() => setDeleting(false));
   };
 
